@@ -1,9 +1,9 @@
 import React from "react";
 import './Footer.css'
 import ExternalLinks from "../../routes/ExternalLinks";
-import footerInstagramIcon from "../../assets/icons/instagram_logo_white.png";
-import footerWhatsappIcon from "../../assets/icons/whatsapp_logo_white.png";
-import footerTelegramIcon from "../../assets/icons/telegram_logo_white.png";
+import footerInstagramIcon from "../../assets/icons/socials/instagram_logo_white.png";
+import footerWhatsappIcon from "../../assets/icons/socials/whatsapp_logo_white.png";
+import footerTelegramIcon from "../../assets/icons/socials/telegram_logo_white.png";
 import {RoutePaths} from "../../routes/RoutePaths";
 
 

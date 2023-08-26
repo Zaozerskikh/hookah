@@ -1,0 +1,58 @@
+.floating-clouds-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: -170px;
+    height: 248px;
+}
+
+.bottom-floating-clouds-container {
+    overflow: hidden;
+    width: 635px;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    background: repeat-x;
+}
+
+.top-floating-clouds-container {
+    overflow: hidden;
+    width: 635px;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    background: repeat-x;
+    margin-bottom: 8px;
+}
+
+.bottom-floating-clouds-container .floating-clouds-image {
+    animation: scrollAnimationBottom 40s linear infinite;
+    width: 1270px;
+}
+
+.top-floating-clouds-container .floating-clouds-image {
+    animation: scrollAnimationTop 30s linear infinite;
+    width: 1270px;
+    background: repeat-x;
+}
+
+@keyframes scrollAnimationBottom {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-635px, 0, 0);
+    }
+}
+
+@keyframes scrollAnimationTop {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-635px, 0, 0);
+    }
+}

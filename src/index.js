@@ -7,6 +7,8 @@ import './assets/fonts/unbounded/Unbounded-300.ttf';
 import './assets/fonts/unbounded/Unbounded-400.ttf';
 import './assets/fonts/monsterrat/Montserrat-300.ttf'
 import './assets/fonts/monsterrat/Montserrat-400.ttf'
+import './assets/fonts/monsterrat/Montserrat-500.ttf'
+import './assets/fonts/monsterrat/Montserrat-700.ttf'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,7 +1,71 @@
 .homepage-container {
-    align-items: center;
-    justify-content: center;
+    margin: 64px 64px 112px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+}
+
+.homepage-container .clouds-and-text-container {
     display: flex;
     flex-direction: row;
-    height: 400px;
+    height: 248px;
+    width: 100%;
 }
+
+.homepage-container .clouds-and-text-container .greetings-container {
+    background-color: black;
+    width: calc(100% - 500px);
+    padding: 32px;
+    height: calc(100% - 64px);
+    border-radius: 32px;
+    z-index: 3;
+}
+
+.homepage-container .clouds-and-text-container .greetings-container .greetings-header {
+    font-family: Monsterrat-700, serif;
+    font-size: 28px;
+    line-height: 40.32px;
+    color: white;
+}
+
+.homepage-container .clouds-and-text-container .greetings-container .greetings-text {
+    font-family: Monsterrat-500, serif;
+    font-size: 22px;
+    line-height: 31.68px;
+    color: white;
+    font-weight: lighter;
+}
+
+.homepage-container .partners-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage-container .partners-header {
+    font-family: Monsterrat-700, serif;
+    font-size: 28px;
+    line-height: 40.32px;
+    color: black;
+}
+
+.homepage-container .partners-container .partners-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 64px;
+    width: 100%;
+}
+
+.homepage-container .partners-container .partners-logo-container .partner-logo-image {
+    height: 160px;
+    width: 160px;
+}
+
+.shop {
+    height: 300px;
+}
+

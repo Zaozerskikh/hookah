@@ -2,9 +2,9 @@ import React from "react";
 import './MenuPanel.css'
 import mainLogoCloudIcon from './../../assets/icons/main_logo_cloud.png'
 import mainLogoHookahIcon from './../../assets/icons/main_logo_hookah.png'
-import mainLogoInstagramIcon from './../../assets/icons/instagram_logo_black.png'
-import mainLogoWhatsappIcon from './../../assets/icons/whatsapp_logo_black.png'
-import mainLogoTelegramIcon from './../../assets/icons/telegram_logo_black.png'
+import mainLogoInstagramIcon from '../../assets/icons/socials/instagram_logo_black.png'
+import mainLogoWhatsappIcon from '../../assets/icons/socials/whatsapp_logo_black.png'
+import mainLogoTelegramIcon from '../../assets/icons/socials/telegram_logo_black.png'
 import {Link} from "react-router-dom";
 import {RoutePaths} from "../../routes/RoutePaths";
 import ExternalLinks from "../../routes/ExternalLinks";
