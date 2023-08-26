@@ -1,0 +1,103 @@
+.footer {
+    height: 292px;
+    background-color: black;
+    padding: 64px 88px 64px 88px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer .section {
+    color: white;
+    width: 224px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer .section .header {
+    color: #CFD5DB;
+    font-family: Unbounded-400, serif;
+    font-size: 18px;
+    margin-bottom: 32px;
+    line-height: 22.32px;
+}
+
+.footer .section .catalog-item-text {
+    font-family: Unbounded-300, serif;
+    color: #CFD5DB;
+    font-size: 16px;
+    margin-bottom: 8px;
+    padding: 0;
+    line-height: 22.32px;
+}
+
+.footer .section .delivery-info-text {
+    padding: 0;
+    margin: 0;
+    font-family: Monsterrat-400, serif;
+    font-weight: lighter;
+    font-size: 12px;
+    line-height: 17.04px;
+    color: #EAEBF0;
+}
+
+.footer .section .return-text {
+    font-family: Monsterrat-400, serif;
+    font-size: 12px;
+    line-height: 17.04px;
+    color: #EAEBF0;
+}
+
+.footer .section .return-paragraph {
+    position: relative;
+    padding: 0 0 0 15px;
+    margin: 0;
+    font-family: Monsterrat-400, serif;
+    font-size: 12px;
+    line-height: 17.04px;
+    color: #EAEBF0;
+}
+
+.footer .section .return-paragraph::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    margin-left: 5px;
+}
+
+.footer .section .socials-wrapper {
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer .section .footer-logo-social {
+    width: 32px;
+    height: 32px;
+}
+
+.footer .section .menu-link {
+    text-decoration: none;
+    outline: none;
+    background-color: transparent;
+    height: 32px;
+
+}
+
+.footer .section .menu-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+}
+
+.footer .section .copyright {
+    font-size: 12px;
+    line-height: 14.88px;
+    color: #909398;
+    position: absolute;
+    top: 272px;
+    font-family: Unbounded-300, serif;
+}

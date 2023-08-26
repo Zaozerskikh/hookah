@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+    font-family: "Unbounded-300";
+    src: local("Unbounded-300"),
+    url("./assets/fonts/unbounded/Unbounded-300.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Unbounded-400";
+    src: local("Unbounded-400"),
+    url("./assets/fonts/unbounded/Unbounded-400.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Monsterrat-400";
+    src: local("Monsterrat-400"),
+    url('./assets/fonts/monsterrat/Montserrat-400.ttf') format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Monsterrat-300";
+    src: local("Monsterrat-300"),
+    url('./assets/fonts/monsterrat/Montserrat-300.ttf') format("truetype");
+    font-weight: normal;
+}
+

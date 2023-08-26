@@ -1,0 +1,7 @@
+.homepage-container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    height: 400px;
+}
