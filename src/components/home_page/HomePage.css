@@ -1,9 +1,9 @@
 .homepage-container {
+    gap: 128px;
     margin: 64px 64px 112px;
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 600px;
 }
 
 .homepage-container .clouds-and-text-container {
@@ -63,9 +63,5 @@
 .homepage-container .partners-container .partners-logo-container .partner-logo-image {
     height: 160px;
     width: 160px;
-}
-
-.shop {
-    height: 300px;
 }
 
