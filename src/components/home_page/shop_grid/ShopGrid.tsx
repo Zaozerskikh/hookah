@@ -1,14 +1,14 @@
 import React from "react";
 import './ShopGrid.css'
-import ProductCard from "../home_page/product_card/ProductCard";
-import darkSide_FallingStar_base from './../../assets/icons/products/darkSide_FallingStar_base.png'
-import darkSide_IGranny_base from './../../assets/icons/products/darkSide_Igranny_base.png'
-import darkSide_BnPapa_base from './../../assets/icons/products/darkSide_BnPapa_base.png'
-import darkSide_Supernova_base from './../../assets/icons/products/darkSide_SuperNova_base.png'
-import darkSide_SpaceIchi_base from './../../assets/icons/products/darkSide_SpaceIchi_base.png'
-import darkSide_KaleeGrap_base from './../../assets/icons/products/darkSide_KaleeGrap_base.png'
-import darkSide_Hola_base from './../../assets/icons/products/darkSide_Hola_base.png'
-import darkSide_Skyline_base from './../../assets/icons/products/darkSide_Skyline_base.png'
+import ProductCard from "../product_card/ProductCard";
+import darkSide_FallingStar_base from '../../../assets/icons/products/darkSide_FallingStar_base.png'
+import darkSide_IGranny_base from '../../../assets/icons/products/darkSide_Igranny_base.png'
+import darkSide_BnPapa_base from '../../../assets/icons/products/darkSide_BnPapa_base.png'
+import darkSide_Supernova_base from '../../../assets/icons/products/darkSide_SuperNova_base.png'
+import darkSide_SpaceIchi_base from '../../../assets/icons/products/darkSide_SpaceIchi_base.png'
+import darkSide_KaleeGrap_base from '../../../assets/icons/products/darkSide_KaleeGrap_base.png'
+import darkSide_Hola_base from '../../../assets/icons/products/darkSide_Hola_base.png'
+import darkSide_Skyline_base from '../../../assets/icons/products/darkSide_Skyline_base.png'
 
 
 const ShopGrid: React.FC = () => {

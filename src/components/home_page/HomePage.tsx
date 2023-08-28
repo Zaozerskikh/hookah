@@ -6,7 +6,8 @@ import elementLogo from './../../assets/icons/partners/element_logo.png'
 import fumariLogo from './../../assets/icons/partners/fumari_logo.png'
 import musthaveLogo from './../../assets/icons/partners/musthave_logo.png'
 import tangiersLogo from './../../assets/icons/partners/tangiers_logo.png'
-import ShopGrid from "../shop_grid/ShopGrid";
+import ShopGrid from "./shop_grid/ShopGrid";
+import NewsSection from "./news_section/NewsSection";
 
 const HomePage: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const HomePage: React.FC = () => {
         <FloatingClouds/>
       </div>
       <ShopGrid/>
+      <NewsSection/>
       <div className="partners-container">
         <span className="partners-header">Our partners ❤️</span>
         <div className="partners-logo-container">

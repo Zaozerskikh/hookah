@@ -29,7 +29,7 @@
 }
 
 .bottom-floating-clouds-container .floating-clouds-image {
-    animation: scrollAnimationBottom 40s linear infinite;
+    animation: scrollAnimationBottom 45s linear infinite;
     width: 1270px;
 }
 
