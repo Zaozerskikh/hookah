@@ -6,10 +6,12 @@
 
 .shop {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 304px);
+    grid-template-columns: repeat(auto-fill, max(304px, 100%/9));
     row-gap: 48px;
     column-gap: 16px;
-    justify-content: space-between;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
 }
 
 .shop-container .tobacco-link {

@@ -41,6 +41,9 @@ const CounterButton: React.FC<CounterButtonProps> =
       alignItems: 'center',
       justifyContent: 'space-between',
       display: 'flex',
+      transition: "all .5s ease",
+      WebkitTransition: "all .5s ease",
+      MozTransition: "all .5s ease",
       ...wrapperStyle
     }
 
@@ -52,7 +55,16 @@ const CounterButton: React.FC<CounterButtonProps> =
       border: 'none',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      transition: "all .5s ease",
+      WebkitTransition: "all .5s ease",
+      MozTransition: "all .5s ease",
+    }
+
+    const iconStyle = {
+      transition: "all .2s ease",
+      WebkitTransition: "all .2s ease",
+      MozTransition: "all .2s ease",
     }
 
     return(
@@ -67,8 +79,8 @@ const CounterButton: React.FC<CounterButtonProps> =
             src={isDark ? whiteMinusIcon : blackMinusIcon}
             alt="minus-icon"
             style={isMinusHovered
-              ? {height: '28px', width: '28px'}
-              : {height: '24px', width: '24px'}
+              ? {height: '28px', width: '28px', cursor: 'pointer', ...iconStyle}
+              : {height: '24px', width: '24px', ...iconStyle}
             }
           />
         </button>
@@ -82,8 +94,8 @@ const CounterButton: React.FC<CounterButtonProps> =
           <img
             src={isDark ? whitePlusIcon : blackPlusIcon}
             style={isPlusHovered
-              ? {height: '30px', width: '30px'}
-              : {height: '24px', width: '24px'}
+              ? {height: '30px', width: '30px', cursor: 'pointer', ...iconStyle}
+              : {height: '24px', width: '24px', ...iconStyle}
             }
             alt="plus-icon"
           />

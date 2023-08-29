@@ -12,6 +12,7 @@ const StandardButton: React.FC<StandardButtonProps> =
   const [isHovered, setHovered] = useState(false);
 
   const parsedButtonStyle = {
+    cursor: isHovered ? 'pointer' : undefined,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -19,6 +20,9 @@ const StandardButton: React.FC<StandardButtonProps> =
     borderRadius: '12px',
     border: 'none',
     outline: 'none',
+    transition: "all .5s ease",
+    WebkitTransition: "all .5s ease",
+    MozTransition: "all .5s ease",
     ...buttonStyle
   }
 
@@ -27,6 +31,9 @@ const StandardButton: React.FC<StandardButtonProps> =
     fontFamily: 'Monsterrat-600, serif',
     fontSize: '22px',
     lineHeight: '31.68px',
+    transition: "all .5s ease",
+    WebkitTransition: "all .5s ease",
+    MozTransition: "all .5s ease",
     ...textStyle
   }
 

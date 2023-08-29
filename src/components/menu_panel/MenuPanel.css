@@ -13,12 +13,6 @@
     line-height: 35.81px;
 }
 
-.menu-panel-container .home-link-text {
-    font-family: Unbounded-400, serif;
-    font-size: 25px;
-    line-height: 31px;
-}
-
 .menu-panel-container .link-text {
     font-family: Unbounded-300, serif;
     font-size: 25px;
@@ -52,12 +46,10 @@
 
 .menu-panel-container .links {
     height: 31px;
-    width: 544px;
-    align-self: center;
+    width: 550px !important;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    gap: 35px !important;
+    align-self: center;
 }
 
 .menu-panel-container .socials {
@@ -72,19 +64,27 @@
 .menu-panel-container .menu-link {
     text-decoration: none;
     outline: none;
+    color: black;
     background-color: transparent;
     height: 32px;
+    font-family: Unbounded-300, serif;
+    font-size: 25px;
+    line-height: 31px;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
 }
 
-.menu-panel-container .menu-button {
-    background-color: transparent;
-    border: none;
+.menu-panel-container .curr-menu-link {
+    text-decoration: none;
     outline: none;
+    color: black;
+    background-color: transparent;
     height: 32px;
-    padding: 0;
-    margin: 0;
-}
-
-.menu-panel-container .menu-button:hover {
-    cursor: pointer;
+    font-family: Unbounded-400, serif;
+    font-size: 25px;
+    line-height: 31px;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
 }

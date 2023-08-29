@@ -18,7 +18,7 @@
     color: #CFD5DB;
     font-family: Unbounded-400, serif;
     font-size: 18px;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
     line-height: 22.32px;
 }
 
@@ -81,21 +81,20 @@
     outline: none;
     background-color: transparent;
     height: 32px;
-}
-
-.footer .section .menu-button {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    height: 32px;
+    font-family: Unbounded-300, serif;
+    color: #CFD5DB;
+    font-size: 16px;
+    margin-bottom: 8px;
     padding: 0;
-    margin: 0;
+    line-height: 22.32px;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
 }
 
-.footer .section .menu-button:hover {
-    cursor: pointer;
+.footer .section .menu-link:hover {
+    color: white;
 }
-
 
 .footer .section .copyright {
     font-size: 12px;
@@ -104,4 +103,13 @@
     position: absolute;
     top: 272px;
     font-family: Unbounded-300, serif;
+    text-decoration: none;
+    text-underline: none;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+}
+
+.footer .section .copyright:hover {
+    color: white;
 }

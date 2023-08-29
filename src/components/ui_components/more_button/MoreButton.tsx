@@ -15,6 +15,7 @@ const MoreButton: React.FC<MoreButtonProps> =
     const [isHovered, setHovered] = useState(false);
 
     const parsedButtonStyle = {
+      cursor: isHovered ? 'pointer' : undefined,
       width: '64px',
       height: '48px',
       color: '#EAEBF0',
@@ -25,6 +26,9 @@ const MoreButton: React.FC<MoreButtonProps> =
       alignItems: 'center',
       justifyContent: 'center',
       gap: '10px',
+      transition: "all .5s ease",
+      WebkitTransition: "all .5s ease",
+      MozTransition: "all .5s ease",
       ...buttonStyle
     }
 
@@ -33,12 +37,22 @@ const MoreButton: React.FC<MoreButtonProps> =
       fontFamily: 'Monsterrat-600, serif',
       fontSize: '22px',
       lineHeight: '31.68px',
+      transition: "all .5s ease",
+      WebkitTransition: "all .5s ease",
+      MozTransition: "all .5s ease",
       ...textStyle
     }
 
     const parsedIconStyle = {
       height: '24px',
       width: '24px',
+      position: 'absolute' as 'absolute',
+      top: '12px',
+      right: '12px',
+      zIndex: '9999 !important',
+      transition: "all .5s ease",
+      WebkitTransition: "all .5s ease",
+      MozTransition: "all .5s ease",
       ...iconStyle
     }
 
@@ -47,20 +61,28 @@ const MoreButton: React.FC<MoreButtonProps> =
         onClick={onClickAction}
         onMouseLeave={() => setHovered(false)}
         onMouseEnter={() => setHovered(true)}
-        style={ !isHovered ? parsedButtonStyle : {
+        style={ !isHovered ? {...parsedButtonStyle, position: 'relative'} : {
           ...parsedButtonStyle,
-          backgroundColor: "black"
+          backgroundColor: "#CFD5DB",
         }}
       >
         {showText && (
-          <span style={!isHovered ? parsedTextStyle : {...parsedTextStyle, color: 'white'}}>Read more</span>
+          <span style={parsedTextStyle}>Read more</span>
         )}
-        <img
-          className="more-icon"
-          src={!isHovered ? blackMoreIcon : whiteMoreIcon}
-          alt="more-icon"
-          style={!isHovered ? parsedIconStyle : {...parsedIconStyle, width: '32px'}}
-        />
+        <div style={{position: "relative", height: '48px', width: '48px',}}>
+          <img
+            className="more-icon"
+            src={blackMoreIcon}
+            alt="more-icon"
+            style={{...parsedIconStyle, opacity: isHovered ? 0 : 1}}
+          />
+          <img
+            className="more-icon"
+            src={whiteMoreIcon}
+            alt="more-icon"
+            style={{...parsedIconStyle, width: '32px', opacity: isHovered ? 1 : 0, right: isHovered ? '9px' : '12px'}}
+          />
+        </div>
       </button>
     )
   }

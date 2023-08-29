@@ -1,10 +1,14 @@
 import React from "react";
 import './Footer.css'
 import ExternalLinks from "../../routes/ExternalLinks";
-import footerInstagramIcon from "../../assets/icons/socials/instagram_logo_white.png";
-import footerWhatsappIcon from "../../assets/icons/socials/whatsapp_logo_white.png";
-import footerTelegramIcon from "../../assets/icons/socials/telegram_logo_white.png";
+import instagramWhiteIcon from "../../assets/icons/socials/instagram_logo_white.png";
+import whatsappWhiteIcon from "../../assets/icons/socials/whatsapp_logo_white.png";
+import telegramWhiteIcon from "../../assets/icons/socials/telegram_logo_white.png";
+import instagramGreyIcon from "../../assets/icons/socials/instagram_logo_ffffff.png";
+import whatsappGreyIcon from "../../assets/icons/socials/whatsapp_logo_ffffff.png";
+import telegramGreyIcon from "../../assets/icons/socials/telegram_logo_ffffff.png";
 import {RoutePaths} from "../../routes/RoutePaths";
+import SocialLink from "../ui_components/social_link/SocialLink";
 
 
 const Footer: React.FC = () => {
@@ -13,24 +17,16 @@ const Footer: React.FC = () => {
       <div className="section">
         <span className="header">catalog</span>
         <a href={RoutePaths.TOBACCO} className="menu-link">
-          <button className="menu-button">
-            <span className="catalog-item-text">tobacco</span>
-          </button>
+          tobacco
         </a>
         <a href={RoutePaths.ACCESSORIES} className="menu-link">
-          <button className="menu-button">
-            <span className="catalog-item-text">accessories</span>
-          </button>
+          accessories
         </a>
         <a href={RoutePaths.NEWS} className="menu-link">
-          <button className="menu-button">
-            <span className="catalog-item-text">news</span>
-          </button>
+          news
         </a>
         <a href={RoutePaths.ABOUT} className="menu-link">
-          <button className="menu-button">
-            <span className="catalog-item-text">about</span>
-          </button>
+          about
         </a>
       </div>
       <div className="section">
@@ -56,23 +52,23 @@ const Footer: React.FC = () => {
       </div>
       <div className="section">
         <div className="socials-wrapper">
-          <a href={ExternalLinks.INSTAGRAM} rel="noreferrer" target="_blank" className="menu-link">
-            <button className="menu-button">
-              <img src={footerInstagramIcon} alt="main-logo-instagram" className="footer-logo-social"/>
-            </button>
-          </a>
-          <a href={ExternalLinks.WHATSAPP} rel="noreferrer" target="_blank" className="menu-link">
-            <button className="menu-button">
-              <img src={footerWhatsappIcon} alt="main-logo-whatsapp" className="footer-logo-social"/>
-            </button>
-          </a>
-          <a href={ExternalLinks.TELEGRAM} rel="noreferrer" target="_blank" className="menu-link">
-            <button className="menu-button">
-              <img src={footerTelegramIcon} alt="main-logo-telegram" className="footer-logo-social"/>
-            </button>
-          </a>
+          <SocialLink
+            commonIcon={instagramWhiteIcon}
+            hoveredIcon={instagramGreyIcon}
+            link={ExternalLinks.INSTAGRAM}
+          />
+          <SocialLink
+            commonIcon={whatsappWhiteIcon}
+            hoveredIcon={whatsappGreyIcon}
+            link={ExternalLinks.WHATSAPP}
+          />
+          <SocialLink
+            commonIcon={telegramWhiteIcon}
+            hoveredIcon={telegramGreyIcon}
+            link={ExternalLinks.TELEGRAM}
+          />
         </div>
-        <span className="copyright">designed by Gleb Kossov</span>
+        <a href="https://www.glebkossov.ru/" target="_blank" className="copyright" rel="noreferrer">designed by Gleb Kossov</a>
       </div>
     </div>
   )

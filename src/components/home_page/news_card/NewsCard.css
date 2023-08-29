@@ -13,6 +13,10 @@
     border-radius: 24px 24px 0 0;
 }
 
+.news-card-container .news-image:hover {
+    cursor: pointer;
+}
+
 .news-card-container .news-card-text-container {
     display: flex;
     flex-direction: column;
@@ -24,6 +28,10 @@
     font-size: 22px;
     line-height: 31.68px;
     color: black;
+}
+
+.news-card-container .news-card-text-container .news-card-header:hover {
+    cursor: pointer;
 }
 
 .news-card-container .news-card-text-container .news-card-description-line {

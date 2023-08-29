@@ -59,9 +59,19 @@ const ProductCard: React.FC<ProductCardProps> =
           <img className="detailed-view-image" src={image} alt="detailed-img"/>
         </div>
       </div>
-      <img src={image} alt={name} className="product-image" />
+      <img
+        src={image}
+        alt={name}
+        className="product-image"
+        onClick={() => setDetailedViewOpened(true)}
+      />
       <div className="product-card-text">
-        <span className="product-name">{`${brand} - ${name} (${line.toLowerCase()}) ${weight}G`}</span>
+        <span
+          className="product-name"
+          onClick={() => setDetailedViewOpened(true)}
+        >
+          {`${brand} - ${name} (${line.toLowerCase()}) ${weight}G`}
+        </span>
         <span className="product-description">{description}</span>
         <span className="product-price">${price.toFixed(2)}</span>
       </div>
