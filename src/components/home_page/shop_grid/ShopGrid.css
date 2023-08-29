@@ -1,7 +1,22 @@
+.shop-container {
+    gap: 64px;
+    display: flex;
+    flex-direction: column;
+}
+
 .shop {
     display: grid;
     grid-template-columns: repeat(auto-fill, 304px);
     row-gap: 48px;
     column-gap: 16px;
     justify-content: space-between;
+}
+
+.shop-container .tobacco-link {
+    outline: none;
+    text-decoration: none;
+    text-underline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

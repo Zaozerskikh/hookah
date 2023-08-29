@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './assets/fonts/unbounded/Unbounded-300.ttf';
 import './assets/fonts/unbounded/Unbounded-400.ttf';
+import './assets/fonts/unbounded/Unbounded-700.ttf';
 import './assets/fonts/monsterrat/Montserrat-300.ttf'
 import './assets/fonts/monsterrat/Montserrat-400.ttf'
 import './assets/fonts/monsterrat/Montserrat-500.ttf'

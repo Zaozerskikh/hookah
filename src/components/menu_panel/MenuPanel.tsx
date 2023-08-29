@@ -1,7 +1,7 @@
 import React from "react";
 import './MenuPanel.css'
-import mainLogoCloudIcon from './../../assets/icons/main_logo_cloud.png'
-import mainLogoHookahIcon from './../../assets/icons/main_logo_hookah.png'
+import mainLogoCloudIcon from '../../assets/icons/decorations/main_logo_cloud.png'
+import mainLogoHookahIcon from '../../assets/icons/decorations/main_logo_hookah.png'
 import mainLogoInstagramIcon from '../../assets/icons/socials/instagram_logo_black.png'
 import mainLogoWhatsappIcon from '../../assets/icons/socials/whatsapp_logo_black.png'
 import mainLogoTelegramIcon from '../../assets/icons/socials/telegram_logo_black.png'
@@ -42,17 +42,17 @@ const MenuPanel: React.FC = () => {
         </Link>
       </div>
       <div className="socials">
-        <a href={ExternalLinks.INSTAGRAM} className="menu-link">
+        <a href={ExternalLinks.INSTAGRAM} rel="noreferrer" target="_blank" className="menu-link">
           <button className="menu-button">
             <img src={mainLogoInstagramIcon} alt="main-logo-instagram" className="main-logo-social"/>
           </button>
         </a>
-        <a href={ExternalLinks.WHATSAPP} className="menu-link">
+        <a href={ExternalLinks.WHATSAPP} rel="noreferrer" target="_blank" className="menu-link">
           <button className="menu-button">
             <img src={mainLogoWhatsappIcon} alt="main-logo-whatsapp" className="main-logo-social"/>
           </button>
         </a>
-        <a href={ExternalLinks.TELEGRAM} className="menu-link">
+        <a href={ExternalLinks.TELEGRAM} rel="noreferrer" target="_blank" className="menu-link">
           <button className="menu-button">
             <img src={mainLogoTelegramIcon} alt="main-logo-telegram" className="main-logo-social"/>
           </button>

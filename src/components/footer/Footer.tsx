@@ -56,17 +56,17 @@ const Footer: React.FC = () => {
       </div>
       <div className="section">
         <div className="socials-wrapper">
-          <a href={ExternalLinks.INSTAGRAM} className="menu-link">
+          <a href={ExternalLinks.INSTAGRAM} rel="noreferrer" target="_blank" className="menu-link">
             <button className="menu-button">
               <img src={footerInstagramIcon} alt="main-logo-instagram" className="footer-logo-social"/>
             </button>
           </a>
-          <a href={ExternalLinks.WHATSAPP} className="menu-link">
+          <a href={ExternalLinks.WHATSAPP} rel="noreferrer" target="_blank" className="menu-link">
             <button className="menu-button">
               <img src={footerWhatsappIcon} alt="main-logo-whatsapp" className="footer-logo-social"/>
             </button>
           </a>
-          <a href={ExternalLinks.TELEGRAM} className="menu-link">
+          <a href={ExternalLinks.TELEGRAM} rel="noreferrer" target="_blank" className="menu-link">
             <button className="menu-button">
               <img src={footerTelegramIcon} alt="main-logo-telegram" className="footer-logo-social"/>
             </button>

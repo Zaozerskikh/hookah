@@ -38,29 +38,3 @@
     bottom: 0;
     left: 0;
 }
-
-.news-card-container .read-more-button-container .read-more-button {
-    width: 200px;
-    height: 48px;
-    padding: 12px 20px 12px 20px;
-    color: #EAEBF0;
-    border-radius: 24px;
-    border: none;
-    outline: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.news-card-container .read-more-button-container .read-more-button .read-more-text {
-    color: black;
-    font-family: Monsterrat-600, serif;
-    font-size: 22px;
-    line-height: 31.68px;
-    text-align: center;
-}
-
-.news-card-container .read-more-button-container .read-more-button .more-icon {
-    width: 24px;
-    height: 24px;
-}

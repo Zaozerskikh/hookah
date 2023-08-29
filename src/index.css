@@ -29,6 +29,13 @@ code {
 }
 
 @font-face {
+    font-family: "Unbounded-700";
+    src: local("Unbounded-700"),
+    url("./assets/fonts/unbounded/Unbounded-700.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
     font-family: "Monsterrat-400";
     src: local("Monsterrat-400"),
     url('./assets/fonts/monsterrat/Montserrat-400.ttf') format("truetype");

@@ -1,7 +1,6 @@
 import React from "react";
 import './NewsCard.css'
-import moreIcon from './../../../assets/icons/product_card/more_icon.png'
-
+import MoreButton from "../../ui_components/more_button/MoreButton";
 
 interface NewsCardProps {
   image: string;
@@ -24,10 +23,13 @@ const NewsCard: React.FC<NewsCardProps> = ({image, name, description}) => {
         </div>
       </div>
       <div className="read-more-button-container">
-        <button className="read-more-button">
-          <span className="read-more-text">Read more</span>
-          <img className="more-icon" src={moreIcon} alt="more-icon"/>
-        </button>
+        <MoreButton showText={true} buttonStyle={{
+          width: '210px',
+          height: '48px',
+          padding: '12px 20px 12px 20px',
+          color: '#EAEBF0',
+          borderRadius: '24px',
+        }}/>
       </div>
     </div>
   )

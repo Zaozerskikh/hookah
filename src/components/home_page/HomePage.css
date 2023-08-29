@@ -19,7 +19,7 @@
     padding: 32px;
     height: calc(100% - 64px);
     border-radius: 32px;
-    z-index: 3;
+    z-index: 1;
 }
 
 .homepage-container .clouds-and-text-container .greetings-container .greetings-header {

@@ -6,6 +6,7 @@ import guideToCoconutImage from './../../../assets/icons/news/guide_to_coconut_i
 import howToChooseHookahImage from './../../../assets/icons/news/how_to_choose_hookah_icon.png'
 import {RoutePaths} from "../../../routes/RoutePaths";
 import {Link} from "react-router-dom";
+import StandardButton from "../../ui_components/standart_button/StandartButton";
 
 const NewsSection: React.FC = () => {
   return(
@@ -28,9 +29,13 @@ const NewsSection: React.FC = () => {
         />
       </div>
       <Link to={RoutePaths.NEWS} className="news-link">
-        <button className="all-news-button">
-          <span className="link-text">All news</span>
-        </button>
+        <StandardButton
+          text="All news"
+          buttonStyle={{
+            width: '224px',
+            height: '60px',
+          }}
+        />
       </Link>
     </div>
   )

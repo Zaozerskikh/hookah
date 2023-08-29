@@ -1,4 +1,3 @@
-import './App.css';
 import React from "react";
 import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import MenuPanel from "./components/menu_panel/MenuPanel";

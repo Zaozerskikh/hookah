@@ -81,7 +81,6 @@
     outline: none;
     background-color: transparent;
     height: 32px;
-
 }
 
 .footer .section .menu-button {
@@ -92,6 +91,11 @@
     padding: 0;
     margin: 0;
 }
+
+.footer .section .menu-button:hover {
+    cursor: pointer;
+}
+
 
 .footer .section .copyright {
     font-size: 12px;
