@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/hookah/static/css/main.bec6feae.css",
-    "main.js": "/hookah/static/js/main.c1dd75b1.js",
+    "main.css": "/hookah/static/css/main.00edcef3.css",
+    "main.js": "/hookah/static/js/main.9215ce0a.js",
     "static/js/787.c274760c.chunk.js": "/hookah/static/js/787.c274760c.chunk.js",
     "static/media/choosing_hookah_bowl_icon.png": "/hookah/static/media/choosing_hookah_bowl_icon.fb4c7cbd2fc7c46f1afe.png",
     "static/media/guide_to_coconut_icon.png": "/hookah/static/media/guide_to_coconut_icon.26141c9a1760018e8774.png",
@@ -22,20 +22,20 @@
     "static/media/Montserrat-300.ttf": "/hookah/static/media/Montserrat-300.6fcc9263a21be961d246.ttf",
     "static/media/Montserrat-700.ttf": "/hookah/static/media/Montserrat-700.2c155811b35513d5beaa.ttf",
     "static/media/Montserrat-400.ttf": "/hookah/static/media/Montserrat-400.ceb11275ab638627a643.ttf",
+    "static/media/floating_clouds.png": "/hookah/static/media/floating_clouds.f686dc9a075df30794a5.png",
     "static/media/musthave_logo.png": "/hookah/static/media/musthave_logo.162b388212ca73ec2c3c.png",
-    "static/media/floating_clouds.png": "/hookah/static/media/floating_clouds.a33c2b3f5556c89c9c3a.png",
     "static/media/fumari_logo.png": "/hookah/static/media/fumari_logo.e3dfbe448179133a93eb.png",
     "static/media/element_logo.png": "/hookah/static/media/element_logo.397a92fdb50f2c473b43.png",
     "static/media/close_button_icon.png": "/hookah/static/media/close_button_icon.d9b59ca83a015121b37a.png",
     "static/media/darkside_logo.png": "/hookah/static/media/darkside_logo.ce2d1eaa4ddbe5a1ab7a.png",
     "static/media/instagram_logo_black.png": "/hookah/static/media/instagram_logo_black.7c90a78377d0d9eab47a.png",
     "index.html": "/hookah/index.html",
-    "main.bec6feae.css.map": "/hookah/static/css/main.bec6feae.css.map",
-    "main.c1dd75b1.js.map": "/hookah/static/js/main.c1dd75b1.js.map",
+    "main.00edcef3.css.map": "/hookah/static/css/main.00edcef3.css.map",
+    "main.9215ce0a.js.map": "/hookah/static/js/main.9215ce0a.js.map",
     "787.c274760c.chunk.js.map": "/hookah/static/js/787.c274760c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bec6feae.css",
-    "static/js/main.c1dd75b1.js"
+    "static/css/main.00edcef3.css",
+    "static/js/main.9215ce0a.js"
   ]
 }
