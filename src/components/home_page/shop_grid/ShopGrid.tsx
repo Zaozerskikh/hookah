@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './ShopGrid.css'
 import ProductCard from "../product_card/ProductCard";
 import darkSide_FallingStar_base from '../../../assets/icons/products/darkSide_FallingStar_base.png'
@@ -15,88 +15,106 @@ import StandardButton from "../../ui_components/standart_button/StandartButton";
 
 
 const ShopGrid: React.FC = () => {
+  const [padding, setPadding] = useState(88.00)
+  useEffect(() => {
+    const handleResize = () => {
+      setPadding(Math.max((window.innerWidth - 2560 - 178) / 2, 0))
+    }
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [])
+
   return(
     <div className="shop-container">
-      <div className="shop">
-        <ProductCard
-          name="Falling star"
-          brand="DarkSide"
-          line="Base"
-          weight={30}
-          price={7.99}
-          description="Mango, joghurt"
-          image={darkSide_FallingStar_base}
-          fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
-        <ProductCard
-          name="I Granny"
-          brand="DarkSide"
-          line="Base"
-          weight={30}
-          price={7.99}
-          description="Mango, joghurt"
-          image={darkSide_IGranny_base}
-          fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        />
-        <ProductCard
-          name="Bnpapa"
-          brand="DarkSide"
-          line="Base"
-          weight={30}
-          price={7.99}
-          description="Mango, joghurt"
-          image={darkSide_BnPapa_base}
-          fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        />
-        <ProductCard
-          name="Supernova"
-          brand="DarkSide"
-          line="Base"
-          weight={30}
-          price={7.99}
-          description="Mango, joghurt"
-          image={darkSide_Supernova_base}
-          fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        />
-        <ProductCard
-          name="Space Ichi"
-          brand="DarkSide"
-          line="Base"
-          weight={30}
-          price={7.99}
-          description="Mango, joghurt"
-          image={darkSide_SpaceIchi_base}
-          fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        />
-        <ProductCard
-          name="Kalee grap"
-          brand="DarkSide"
-          line="Base"
-          weight={30}
-          price={7.99}
-          description="Mango, joghurt"
-          image={darkSide_KaleeGrap_base}
-          fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        />
-        <ProductCard
-          name="Hola"
-          brand="DarkSide"
-          line="Base"
-          weight={30}
-          price={7.99}
-          description="Mango, joghurt"
-          image={darkSide_Hola_base}
-          fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        />
-        <ProductCard
-          name="Skyline"
-          brand="DarkSide"
-          line="Base"
-          weight={30}
-          price={7.99}
-          description="Mango, joghurt"
-          image={darkSide_Skyline_base}
-          fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        />
+      <div
+        style={{
+          paddingLeft: padding,
+          paddingRight: padding
+        }}
+      >
+        <div className="shop">
+          <ProductCard
+            name="Falling star"
+            brand="DarkSide"
+            line="Base"
+            weight={30}
+            price={7.99}
+            description="Mango, joghurt"
+            image={darkSide_FallingStar_base}
+            fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
+          <ProductCard
+            name="I Granny"
+            brand="DarkSide"
+            line="Base"
+            weight={30}
+            price={7.99}
+            description="Mango, joghurt"
+            image={darkSide_IGranny_base}
+            fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          />
+          <ProductCard
+            name="Bnpapa"
+            brand="DarkSide"
+            line="Base"
+            weight={30}
+            price={7.99}
+            description="Mango, joghurt"
+            image={darkSide_BnPapa_base}
+            fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          />
+          <ProductCard
+            name="Supernova"
+            brand="DarkSide"
+            line="Base"
+            weight={30}
+            price={7.99}
+            description="Mango, joghurt"
+            image={darkSide_Supernova_base}
+            fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          />
+          <ProductCard
+            name="Space Ichi"
+            brand="DarkSide"
+            line="Base"
+            weight={30}
+            price={7.99}
+            description="Mango, joghurt"
+            image={darkSide_SpaceIchi_base}
+            fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          />
+          <ProductCard
+            name="Kalee grap"
+            brand="DarkSide"
+            line="Base"
+            weight={30}
+            price={7.99}
+            description="Mango, joghurt"
+            image={darkSide_KaleeGrap_base}
+            fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          />
+          <ProductCard
+            name="Hola"
+            brand="DarkSide"
+            line="Base"
+            weight={30}
+            price={7.99}
+            description="Mango, joghurt"
+            image={darkSide_Hola_base}
+            fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          />
+          <ProductCard
+            name="Skyline"
+            brand="DarkSide"
+            line="Base"
+            weight={30}
+            price={7.99}
+            description="Mango, joghurt"
+            image={darkSide_Skyline_base}
+            fullDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          />
+        </div>
       </div>
       <Link to={RoutePaths.TOBACCO} className="tobacco-link">
         <StandardButton

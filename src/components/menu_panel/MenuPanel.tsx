@@ -8,15 +8,12 @@ import mainLogoTelegramIcon from '../../assets/icons/socials/telegram_logo_black
 import instagramGreyIcon from "../../assets/icons/socials/instagram_logo_smokegrey.png";
 import whatsappGreyIcon from "../../assets/icons/socials/whatsapp_logo_smokegrey.png";
 import telegramGreyIcon from "../../assets/icons/socials/telegram_logo__smokegrey.png";
-import {Link, useLocation} from "react-router-dom";
 import {RoutePaths} from "../../routes/RoutePaths";
 import ExternalLinks from "../../routes/ExternalLinks";
 import SocialLink from "../ui_components/social_link/SocialLink";
+import HeaderLink from "../ui_components/HeaderLink/HeaderLink";
 
 const MenuPanel: React.FC = () => {
-  const location = useLocation();
-  const currPath = location.pathname;
-
   return(
     <div className="menu-panel-container">
       <div className="logo">
@@ -26,26 +23,26 @@ const MenuPanel: React.FC = () => {
         <img src={mainLogoHookahIcon} alt="main-logo-hookah" className="main-logo-hookah"/>
       </div>
       <div className="links">
-        <div style={{minWidth: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <Link to={RoutePaths.HOME} className={currPath === RoutePaths.HOME ? 'curr-menu-link' : 'menu-link'}>
-            Home
-          </Link>
-        </div>
-        <div style={{minWidth: '132px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <Link to={RoutePaths.TOBACCO} className={currPath === RoutePaths.TOBACCO ? 'curr-menu-link' : 'menu-link'}>
-            Tobacco
-          </Link>
-        </div>
-        <div style={{minWidth: '86px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <Link to={RoutePaths.NEWS} className={currPath === RoutePaths.NEWS ? 'curr-menu-link' : 'menu-link'}>
-            News
-          </Link>
-        </div>
-        <div style={{minWidth: '135px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <Link to={RoutePaths.ABOUT} className={currPath === RoutePaths.ABOUT ? 'curr-menu-link' : 'menu-link'}>
-            About us
-          </Link>
-        </div>
+        <HeaderLink
+          link={RoutePaths.HOME}
+          text="Home"
+          wrapperWidth={90}
+        />
+        <HeaderLink
+          link={RoutePaths.TOBACCO}
+          text="Tobacco"
+          wrapperWidth={132}
+        />
+        <HeaderLink
+          link={RoutePaths.NEWS}
+          text="News"
+          wrapperWidth={86}
+        />
+        <HeaderLink
+          link={RoutePaths.ABOUT}
+          text="About us"
+          wrapperWidth={135}
+        />
       </div>
       <div className="socials">
         <SocialLink

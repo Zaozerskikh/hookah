@@ -1,0 +1,29 @@
+.menu-panel-container .menu-link {
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: transparent;
+    height: 32px;
+    font-family: Unbounded-300, serif;
+    font-size: 25px;
+    line-height: 31px;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    z-index: 33;
+}
+
+.menu-panel-container .curr-menu-link {
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: transparent;
+    height: 32px;
+    font-family: Unbounded-400, serif;
+    font-size: 25px;
+    line-height: 31px;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    z-index: 33;
+}

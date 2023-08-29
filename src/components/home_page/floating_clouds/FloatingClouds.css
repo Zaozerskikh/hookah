@@ -2,16 +2,16 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     position: absolute;
     top: 0;
+    left: 100px !important;
     right: -170px;
     height: 248px;
 }
 
 .bottom-floating-clouds-container {
     overflow: hidden;
-    width: 635px;
+    width: 5080px;
     height: 120px;
     display: flex;
     flex-direction: row;
@@ -20,7 +20,7 @@
 
 .top-floating-clouds-container {
     overflow: hidden;
-    width: 635px;
+    width: 5080px;
     height: 120px;
     display: flex;
     flex-direction: row;
@@ -29,13 +29,13 @@
 }
 
 .bottom-floating-clouds-container .floating-clouds-image {
-    animation: scrollAnimationBottom 45s linear infinite;
-    width: 1270px;
+    animation: scrollAnimationBottom 200s linear infinite;
+    width: 10160px;
 }
 
 .top-floating-clouds-container .floating-clouds-image {
-    animation: scrollAnimationTop 30s linear infinite;
-    width: 1270px;
+    animation: scrollAnimationTop 120s linear infinite;
+    width: 10160px;
     background: repeat-x;
 }
 
@@ -44,7 +44,7 @@
         transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translate3d(-635px, 0, 0);
+        transform: translate3d(-5080px, 0, 0);
     }
 }
 
@@ -53,6 +53,6 @@
         transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translate3d(-635px, 0, 0);
+        transform: translate3d(-5080px, 0, 0);
     }
 }

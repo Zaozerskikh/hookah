@@ -13,6 +13,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="homepage-container">
       <div className="clouds-and-text-container">
+        <div className="left-tricky-div"/>
         <div className="greetings-container">
           <div className="greetings-header">
             👋 Welcome to Hookah.pt

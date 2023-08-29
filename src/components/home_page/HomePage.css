@@ -13,13 +13,25 @@
     width: 100%;
 }
 
+.homepage-container .clouds-and-text-container .left-tricky-div {
+    position: absolute;
+    left: -88px;
+    color: #FFFFFF;
+    background-color: #FFFFFF;
+    z-index: 1 !important;
+    height: 248px;
+    width: 300px;
+}
+
+
 .homepage-container .clouds-and-text-container .greetings-container {
+    position: absolute;
     background-color: black;
-    width: calc(100% - 500px);
+    width: 756px;
     padding: 32px;
-    height: calc(100% - 64px);
+    height: calc(248px - 64px);
     border-radius: 32px;
-    z-index: 1;
+    z-index: 2;
 }
 
 .homepage-container .clouds-and-text-container .greetings-container .greetings-header {

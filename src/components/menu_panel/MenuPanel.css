@@ -11,6 +11,8 @@
     font-family: Unbounded-400, serif;
     font-size: 29px;
     line-height: 35.81px;
+    user-select: none;
+    pointer-events: none;
 }
 
 .menu-panel-container .link-text {
@@ -22,12 +24,16 @@
 .menu-panel-container .main-logo-cloud {
     width: 32px;
     height: 32px;
+    user-select: none;
+    pointer-events: none;
 }
 
 .menu-panel-container .main-logo-hookah {
     margin-top: 12px;
     width: 32px;
     height: 44px;
+    user-select: none;
+    pointer-events: none;
 }
 
 .menu-panel-container .main-logo-social {
@@ -59,32 +65,4 @@
     align-items: center;
     justify-content: space-between;
     display: flex;
-}
-
-.menu-panel-container .menu-link {
-    text-decoration: none;
-    outline: none;
-    color: black;
-    background-color: transparent;
-    height: 32px;
-    font-family: Unbounded-300, serif;
-    font-size: 25px;
-    line-height: 31px;
-    transition: all .5s ease;
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-}
-
-.menu-panel-container .curr-menu-link {
-    text-decoration: none;
-    outline: none;
-    color: black;
-    background-color: transparent;
-    height: 32px;
-    font-family: Unbounded-400, serif;
-    font-size: 25px;
-    line-height: 31px;
-    transition: all .5s ease;
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
 }
