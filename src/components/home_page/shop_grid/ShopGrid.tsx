@@ -20,6 +20,8 @@ const ShopGrid: React.FC = () => {
     const handleResize = () => {
       setPadding(Math.max((window.innerWidth - 2560 - 178) / 2, 0))
     }
+
+    handleResize()
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);

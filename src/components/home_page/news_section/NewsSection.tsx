@@ -14,6 +14,8 @@ const NewsSection: React.FC = () => {
     const handleResize = () => {
         setPadding(Math.max((window.innerWidth - 1248 - 178) / 2, 88))
     }
+
+    handleResize()
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
