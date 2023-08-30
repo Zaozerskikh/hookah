@@ -27,7 +27,7 @@
 .homepage-container .clouds-and-text-container .greetings-container {
     position: absolute;
     background-color: black;
-    width: 756px;
+    width: 786px;
     padding: 32px;
     height: calc(248px - 64px);
     border-radius: 32px;
@@ -42,7 +42,7 @@
 }
 
 .homepage-container .clouds-and-text-container .greetings-container .greetings-text {
-    font-family: Monsterrat-500, serif;
+    font-family: Monsterrat-400, serif;
     font-size: 22px;
     line-height: 31.68px;
     color: white;
@@ -67,7 +67,8 @@
 .homepage-container .partners-container .partners-logo-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 118px;
     margin-top: 64px;
     width: 100%;
 }

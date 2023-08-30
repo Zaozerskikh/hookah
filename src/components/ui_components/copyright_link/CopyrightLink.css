@@ -1,0 +1,18 @@
+.copyright-link {
+    font-size: 12px;
+    line-height: 14.88px;
+    color: #909398;
+    position: absolute;
+    top: 272px;
+    font-family: Unbounded-300, serif;
+    text-decoration: none;
+    text-underline: none;
+    z-index: 33 !important;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+}
+
+.copyright-link:hover {
+    color: white;
+}

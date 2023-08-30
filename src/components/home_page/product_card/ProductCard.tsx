@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import './ProductCard.css';
-import closeIcon from './../../../assets/icons/product_card/close_button_icon.png'
 import MoreButton from "../../ui_components/more_button/MoreButton";
 import StandardButton from "../../ui_components/standart_button/StandartButton";
 import CounterButton from "../../ui_components/counter_button/CounterButton";
+import CloseButton from "../../ui_components/close_button/CloseButton";
 
 interface ProductCardProps {
   name: string;
@@ -19,18 +19,13 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> =
   ({ name, brand,line, weight, description, price, image , fullDescription}) => {
   const [purchasedCount, setPurchasedCount] = useState<number>(0);
-  const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false)
+  const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
 
   return (
     <div className="product-card-container">
       <div className={`detailed-view-container ${isDetailedViewOpened ? 'open' : ''}`}>
         <div className="detailed-view-card">
-          <button
-            className="close-button"
-            onClick={() => setDetailedViewOpened(false)}
-          >
-            <img className="close-icon" src={closeIcon} alt="close-icon"/>
-          </button>
+          <CloseButton onClickAction={() => setDetailedViewOpened(false)}/>
           <div className="detailed-view-text-container">
             <span className="detailed-view-header">{`${brand} - ${name}`}</span>
             <div className="detailed-view-description-container">
@@ -70,9 +65,12 @@ const ProductCard: React.FC<ProductCardProps> =
           className="product-name"
           onClick={() => setDetailedViewOpened(true)}
         >
-          {`${brand} - ${name} (${line.toLowerCase()}) ${weight}G`}
+          {`${brand} – ${name} (${line.toLowerCase()}) ${weight}G`}
         </span>
-        <span className="product-description">{description}</span>
+        <span
+          onClick={() => setDetailedViewOpened(true)}
+          className="product-description">{description}
+        </span>
         <span className="product-price">${price.toFixed(2)}</span>
       </div>
       <div className="button-container">

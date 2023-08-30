@@ -12,16 +12,19 @@ import {RoutePaths} from "../../routes/RoutePaths";
 import ExternalLinks from "../../routes/ExternalLinks";
 import SocialLink from "../ui_components/social_link/SocialLink";
 import HeaderLink from "../ui_components/HeaderLink/HeaderLink";
+import {Link} from "react-router-dom";
 
 const MenuPanel: React.FC = () => {
   return(
     <div className="menu-panel-container">
-      <div className="logo">
-        <span className="hookah-text">h</span>
-        <img src={mainLogoCloudIcon} alt="main-logo-cloud" className="main-logo-cloud"/>
-        <span className="hookah-text">kah.p</span>
-        <img src={mainLogoHookahIcon} alt="main-logo-hookah" className="main-logo-hookah"/>
-      </div>
+      <Link to={RoutePaths.HOME} className="home-link">
+        <div className="logo">
+          <span className="hookah-text">h</span>
+          <img src={mainLogoCloudIcon} alt="main-logo-cloud" className="main-logo-cloud"/>
+          <span className="hookah-text">kah.p</span>
+          <img src={mainLogoHookahIcon} alt="main-logo-hookah" className="main-logo-hookah"/>
+        </div>
+      </Link>
       <div className="links">
         <HeaderLink
           link={RoutePaths.HOME}

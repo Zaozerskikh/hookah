@@ -22,6 +22,7 @@ const NewsSection: React.FC = () => {
     };
   }, [])
 
+
   return(
     <div className="news-section-container">
       <div

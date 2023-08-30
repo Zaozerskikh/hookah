@@ -11,6 +11,7 @@ function App() {
           <MenuPanel/>
           <Routes>
               <Route path="/" element={<Navigate to={RoutePaths.HOME} />} />
+              <Route path="/hookah" element={<Navigate to={RoutePaths.HOME} />} />
               <Route path={RoutePaths.HOME} element={<HomePage />} />
           </Routes>
           <Footer/>

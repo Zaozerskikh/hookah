@@ -3,7 +3,8 @@
     background-color: black;
     padding: 64px 88px 64px 88px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 96px;
 }
 
 .footer .section {
@@ -74,42 +75,4 @@
 .footer .section .footer-logo-social {
     width: 32px;
     height: 32px;
-}
-
-.footer .section .menu-link {
-    text-decoration: none;
-    outline: none;
-    background-color: transparent;
-    height: 32px;
-    font-family: Unbounded-300, serif;
-    color: #CFD5DB;
-    font-size: 16px;
-    margin-bottom: 8px;
-    padding: 0;
-    line-height: 22.32px;
-    transition: all .5s ease;
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-}
-
-.footer .section .menu-link:hover {
-    color: white;
-}
-
-.footer .section .copyright {
-    font-size: 12px;
-    line-height: 14.88px;
-    color: #909398;
-    position: absolute;
-    top: 272px;
-    font-family: Unbounded-300, serif;
-    text-decoration: none;
-    text-underline: none;
-    transition: all .5s ease;
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-}
-
-.footer .section .copyright:hover {
-    color: white;
 }

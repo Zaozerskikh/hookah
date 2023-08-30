@@ -13,9 +13,8 @@
 }
 
 .news-section-container .news-section-cards-wrapper {
-    max-width: 1248px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, max(400px, 100%/4));
+    grid-template-columns: repeat(auto-fill, 400px);
     grid-template-rows: unset;
     row-gap: 48px;
     column-gap: 16px;

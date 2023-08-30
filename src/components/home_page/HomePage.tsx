@@ -8,10 +8,12 @@ import musthaveLogo from './../../assets/icons/partners/musthave_logo.png'
 import tangiersLogo from './../../assets/icons/partners/tangiers_logo.png'
 import ShopGrid from "./shop_grid/ShopGrid";
 import NewsSection from "./news_section/NewsSection";
+import Warning from "./warning_modal/Warning";
 
 const HomePage: React.FC = () => {
   return (
     <div className="homepage-container">
+      <Warning />
       <div className="clouds-and-text-container">
         <div className="left-tricky-div"/>
         <div className="greetings-container">

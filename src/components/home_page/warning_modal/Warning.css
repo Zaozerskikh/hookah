@@ -1,0 +1,62 @@
+.warning-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    z-index: -9998 !important;
+    opacity: 0;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.warning-container.open {
+    z-index: 9998 !important;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: opacity 0.3s;
+}
+
+.warning-container .warning-card {
+    background-color: black;
+    border-radius: 32px;
+    padding: 32px;
+    width: 530px;
+    height: 183px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 50px;
+}
+
+.warning-container .warning-card .warning-header {
+    font-family: Unbounded-700, serif;
+    font-size: 25px;
+    line-height: 36px;
+    text-decoration: none;
+    outline: none;
+    color: white;
+}
+
+.warning-container .warning-card .warning-block {
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 530px;
+    align-items: center;
+}
+
+.warning-container .warning-card .warning-block  .warning-text {
+    font-family: Monsterrat-400, serif;
+    font-size: 16px;
+    line-height: 23.04px;
+    color: #EAEBF0;
+    text-align: left;
+    width: 530px;
+}

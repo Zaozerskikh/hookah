@@ -4,14 +4,16 @@ import whiteMoreIcon from "../../../assets/icons/product_card/white_more_icon.pn
 
 interface MoreButtonProps {
   showText: boolean;
+  text? : string;
   onClickAction? : (...args: any) => any
   buttonStyle? : React.CSSProperties
   textStyle? : React.CSSProperties
+  iconWrapperStyle ? : React.CSSProperties,
   iconStyle? : React.CSSProperties
 }
 
 const MoreButton: React.FC<MoreButtonProps> =
-  ({ showText, buttonStyle, textStyle, iconStyle, onClickAction }) => {
+  ({ showText, text, buttonStyle, textStyle, iconStyle, iconWrapperStyle, onClickAction }) => {
     const [isHovered, setHovered] = useState(false);
 
     const parsedButtonStyle = {
@@ -67,20 +69,20 @@ const MoreButton: React.FC<MoreButtonProps> =
         }}
       >
         {showText && (
-          <span style={parsedTextStyle}>Read more</span>
+          <span style={parsedTextStyle}>{text ? text : 'Read more'}</span>
         )}
-        <div style={{position: "relative", height: '48px', width: '48px',}}>
+        <div style={{position: "relative", height: '48px', width: '48px', ...iconWrapperStyle}}>
           <img
             className="more-icon"
             src={blackMoreIcon}
             alt="more-icon"
-            style={{...parsedIconStyle, opacity: isHovered ? 0 : 1}}
+            style={{opacity: isHovered ? 0 : 1, ...parsedIconStyle}}
           />
           <img
             className="more-icon"
             src={whiteMoreIcon}
             alt="more-icon"
-            style={{...parsedIconStyle, width: '32px', opacity: isHovered ? 1 : 0, right: isHovered ? '9px' : '12px'}}
+            style={{opacity: isHovered ? 1 : 0, right: '12px', ...parsedIconStyle, width: '32px'}}
           />
         </div>
       </button>

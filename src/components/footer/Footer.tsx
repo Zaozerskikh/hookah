@@ -9,6 +9,8 @@ import whatsappGreyIcon from "../../assets/icons/socials/whatsapp_logo_ffffff.pn
 import telegramGreyIcon from "../../assets/icons/socials/telegram_logo_ffffff.png";
 import {RoutePaths} from "../../routes/RoutePaths";
 import SocialLink from "../ui_components/social_link/SocialLink";
+import CopyrightLink from "../ui_components/copyright_link/CopyrightLink";
+import FooterLink from "../ui_components/footer_link/FooterLink";
 
 
 const Footer: React.FC = () => {
@@ -16,18 +18,22 @@ const Footer: React.FC = () => {
     <div className="footer">
       <div className="section">
         <span className="header">catalog</span>
-        <a href={RoutePaths.TOBACCO} className="menu-link">
-          tobacco
-        </a>
-        <a href={RoutePaths.ACCESSORIES} className="menu-link">
-          accessories
-        </a>
-        <a href={RoutePaths.NEWS} className="menu-link">
-          news
-        </a>
-        <a href={RoutePaths.ABOUT} className="menu-link">
-          about
-        </a>
+        <FooterLink
+          text="tobacco"
+          link={RoutePaths.TOBACCO}
+        />
+        <FooterLink
+          text="accessories"
+          link={RoutePaths.ACCESSORIES}
+        />
+        <FooterLink
+          text="news"
+          link={RoutePaths.NEWS}
+        />
+        <FooterLink
+          text="about"
+          link={RoutePaths.ABOUT}
+        />
       </div>
       <div className="section">
         <span className="header">delivery</span>
@@ -68,7 +74,7 @@ const Footer: React.FC = () => {
             link={ExternalLinks.TELEGRAM}
           />
         </div>
-        <a href="https://www.glebkossov.ru/" target="_blank" className="copyright" rel="noreferrer">designed by Gleb Kossov</a>
+        <CopyrightLink/>
       </div>
     </div>
   )

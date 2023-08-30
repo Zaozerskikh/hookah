@@ -7,6 +7,20 @@
     justify-content: space-between;
 }
 
+.menu-panel-container .home-link {
+    font-family: Unbounded-400, serif;
+    font-size: 29px;
+    line-height: 35.81px;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    z-index: 999 !important;
+}
+
+.menu-panel-container .home-link:hover {
+    cursor: pointer;
+}
+
 .menu-panel-container .hookah-text {
     font-family: Unbounded-400, serif;
     font-size: 29px;
