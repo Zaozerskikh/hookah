@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './HomePage.css'
 import FloatingClouds from "./floating_clouds/FloatingClouds";
 import darksideLogo from './../../assets/icons/partners/darkside_logo.png'
@@ -8,12 +8,22 @@ import musthaveLogo from './../../assets/icons/partners/musthave_logo.png'
 import tangiersLogo from './../../assets/icons/partners/tangiers_logo.png'
 import ShopGrid from "./shop_grid/ShopGrid";
 import NewsSection from "./news_section/NewsSection";
-import Warning from "./warning_modal/Warning";
 
 const HomePage: React.FC = () => {
+  const [partnersGap, setPartnersGap] = useState(118)
+  useEffect(() => {
+    const handleResize = () => {
+      setPartnersGap(Math.min(118, Math.max((window.innerWidth - 176 - 800) / 5, 32)));
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  })
   return (
     <div className="homepage-container">
-      <Warning />
       <div className="clouds-and-text-container">
         <div className="left-tricky-div"/>
         <div className="greetings-container">
@@ -30,7 +40,17 @@ const HomePage: React.FC = () => {
       <NewsSection/>
       <div className="partners-container">
         <span className="partners-header">Our partners ❤️</span>
-        <div className="partners-logo-container">
+        <div
+          className="partners-logo-container"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: `${partnersGap}px`,
+            marginTop: '64px',
+            width: '100%'
+          }}
+        >
           <img src={darksideLogo} alt="darksideLogo" className="partner-logo-image" />
           <img src={musthaveLogo} alt="musthaveLogo" className="partner-logo-image" />
           <img src={elementLogo} alt="elementLogo" className="partner-logo-image" />

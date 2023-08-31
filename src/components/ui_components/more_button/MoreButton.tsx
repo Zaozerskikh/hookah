@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import blackMoreIcon from "../../../assets/icons/product_card/black_more_icon.png";
-import whiteMoreIcon from "../../../assets/icons/product_card/white_more_icon.png";
+import blackMoreIconArrow from "../../../assets/icons/product_card/black_more_icon.png";
+import blackMoreIconBase from "../../../assets/icons/product_card/black_more_icon_base.png";
 
 interface MoreButtonProps {
   showText: boolean;
@@ -74,15 +74,15 @@ const MoreButton: React.FC<MoreButtonProps> =
         <div style={{position: "relative", height: '48px', width: '48px', ...iconWrapperStyle}}>
           <img
             className="more-icon"
-            src={blackMoreIcon}
+            src={blackMoreIconArrow}
             alt="more-icon"
-            style={{opacity: isHovered ? 0 : 1, ...parsedIconStyle}}
+            style={{opacity: 1, ...parsedIconStyle}}
           />
           <img
             className="more-icon"
-            src={whiteMoreIcon}
+            src={blackMoreIconBase}
             alt="more-icon"
-            style={{opacity: isHovered ? 1 : 0, right: '12px', ...parsedIconStyle, width: '32px'}}
+            style={{opacity: 1, right: '12px', ...parsedIconStyle, width: isHovered ? '32px' : '24px'}}
           />
         </div>
       </button>

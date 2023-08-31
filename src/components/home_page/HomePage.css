@@ -64,15 +64,6 @@
     color: black;
 }
 
-.homepage-container .partners-container .partners-logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 118px;
-    margin-top: 64px;
-    width: 100%;
-}
-
 .homepage-container .partners-container .partners-logo-container .partner-logo-image {
     height: 160px;
     width: 160px;

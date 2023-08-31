@@ -1,14 +1,9 @@
 import React from "react";
 import './NewsCard.css'
 import MoreButton from "../../ui_components/more_button/MoreButton";
+import {NewsInfo} from "../../../content/News";
 
-interface NewsCardProps {
-  image: string;
-  name: string;
-  description: string;
-}
-
-const NewsCard: React.FC<NewsCardProps> = ({image, name, description}) => {
+const NewsCard: React.FC<NewsInfo> = ({image, name, description}) => {
   const handleClick = () => {
     console.log('sxc')
   }

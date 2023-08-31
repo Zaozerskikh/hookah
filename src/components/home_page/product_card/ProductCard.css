@@ -83,7 +83,7 @@
 }
 
 .product-card-container .detailed-view-container.open {
-    z-index: 9999 !important;
+    z-index: 1000 !important;
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.8);
     transition: opacity 0.3s;
@@ -108,13 +108,13 @@
     font-family: Unbounded-700, serif;
     font-size: 25px;
     line-height: 36px;
+    margin-bottom: 24px;
 }
 
 .product-card-container .detailed-view-container .detailed-view-card .detailed-view-text-container {
     margin: 32px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
 }
 
 .product-card-container .detailed-view-container .detailed-view-card .detailed-view-image {
@@ -127,6 +127,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    margin-bottom: 24px;
 }
 
 .detailed-view-description-container .detailed-view-brand-line {
@@ -151,6 +152,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
+    margin-bottom: 8px;
 }
 
 .product-card-container .detailed-view-container .detailed-view-text-container .detailed-button-container .detailed-buy-now-button {
@@ -177,8 +179,82 @@
 }
 
 .detailed-full-description {
+    width: 460px !important;
+    height: 266px !important;
+    display: block;
     font-family: Monsterrat-400, serif;
     font-size: 16px;
     line-height: 23.04px;
     color: #EAEBF0;
+}
+
+.thumb-y {
+    position: relative;
+    display: flex;
+    background: #CFD5DB !important;
+    left: 0;
+    bottom: 0;
+    border-radius: 3px;
+    width: 6px !important;
+    z-index: 9999!important;
+}
+
+.track-y {
+    right: -10px !important;
+    top: 30px !important;
+    height: calc(100% - 50px) !important;
+    width: 20px !important;
+    display: flex;
+    justify-content: right;
+}
+
+.containerwrapper {
+    border: 3px solid black;
+    width: 500px;
+    height: 500px;
+    font-size: 30px;
+    font-family: calibri, serif;
+    overflow: hidden;
+}
+
+.containerwrapper:before {
+    content: '';
+    position: absolute;
+    bottom: 32px;
+    background: linear-gradient(to bottom, transparent, black);
+    height: 40px;
+    width: 460px;
+    pointer-events: none;
+    z-index: 9999 !important;
+}
+
+.containerwrapper:after {
+    content: '';
+    position: absolute;
+    top: 234px;
+    background: linear-gradient(to top, transparent, black);
+    height: 40px;
+    width: 460px;
+    pointer-events: none;
+    z-index: 9999 !important;
+}
+
+.test:before {
+    content: '';
+    width: 100%;
+    height: 16px;
+    display: inline-block;
+}
+
+.test:after {
+    content: '';
+    width: 100%;
+    height: 30px;
+    display: inline-block;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }

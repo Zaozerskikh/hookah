@@ -1,12 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 import './Warning.css'
 import MoreButton from "../../ui_components/more_button/MoreButton";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../redux/Store";
+import {toggleWarning} from "../../../redux/warning_reducer/WarningReducer";
 
 const Warning: React.FC = () => {
-  const [closed, setClosed] = useState(false)
+  const isWarningShown = useSelector((state: RootState) => state.warning.isShown);
+  const dispatch = useDispatch();
 
   return(
-    <div className={`warning-container ${!closed ? 'open' : ''}`}>
+    <div className={`warning-container ${isWarningShown? 'open' : ''}`}>
       <div className="warning-card">
         <span className="warning-header">
           By clicking Enter you certify that you are 18 years of age or older
@@ -16,7 +20,7 @@ const Warning: React.FC = () => {
             Smoking harms your health and kills you!
           </span>
           <MoreButton
-            onClickAction={() => setClosed(true)}
+            onClickAction={() => dispatch(toggleWarning())}
             showText={true}
             text="Enter"
             buttonStyle={{

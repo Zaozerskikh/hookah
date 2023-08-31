@@ -1,5 +1,5 @@
 .footer {
-    height: 292px;
+    min-height: 292px;
     background-color: black;
     padding: 64px 88px 64px 88px;
     display: flex;

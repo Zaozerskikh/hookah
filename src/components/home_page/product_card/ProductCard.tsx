@@ -4,19 +4,10 @@ import MoreButton from "../../ui_components/more_button/MoreButton";
 import StandardButton from "../../ui_components/standart_button/StandartButton";
 import CounterButton from "../../ui_components/counter_button/CounterButton";
 import CloseButton from "../../ui_components/close_button/CloseButton";
+import {ProductInfo} from "../../../content/Products";
+import Scrollbar from "react-scrollbars-custom";
 
-interface ProductCardProps {
-  name: string;
-  brand: string;
-  line: string;
-  weight: number;
-  description: string;
-  fullDescription: string;
-  price: number;
-  image: string;
-}
-
-const ProductCard: React.FC<ProductCardProps> =
+const ProductCard: React.FC<ProductInfo> =
   ({ name, brand,line, weight, description, price, image , fullDescription}) => {
   const [purchasedCount, setPurchasedCount] = useState<number>(0);
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
@@ -49,7 +40,25 @@ const ProductCard: React.FC<ProductCardProps> =
                 <span className="buy-now-text">Buy now</span>
               </button>
             </div>
-            <div className="detailed-full-description">{fullDescription}</div>
+            <div className="containerwrapper">
+              <Scrollbar
+                className="detailed-full-description"
+                thumbYProps={{
+                  renderer: (props) => {
+                    const { elementRef, ...restProps } = props;
+                    return <span {...restProps} ref={elementRef} className="thumb-y" />;
+                  },
+                }}
+                trackYProps={{
+                  renderer: (props) => {
+                    const { elementRef, ...restProps } = props;
+                    return <span {...restProps} ref={elementRef} className="track-y" />;
+                  },
+                }}
+              >
+                <span className="test">{fullDescription}</span>
+              </Scrollbar>
+            </div>
           </div>
           <img className="detailed-view-image" src={image} alt="detailed-img"/>
         </div>
