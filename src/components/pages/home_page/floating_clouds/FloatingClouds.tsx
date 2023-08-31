@@ -1,6 +1,6 @@
 import React from 'react';
 import './FloatingClouds.css';
-import floatingClouds from '../../../assets/icons/decorations/floating_clouds.png'
+import floatingClouds from '../../../../assets/icons/decorations/floating_clouds.png'
 
 const FloatingClouds: React.FC = () => {
   return (

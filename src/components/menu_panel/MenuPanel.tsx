@@ -11,7 +11,7 @@ import telegramGreyIcon from "../../assets/icons/socials/telegram_logo__smokegre
 import {RoutePaths} from "../../routes/RoutePaths";
 import ExternalLinks from "../../routes/ExternalLinks";
 import SocialLink from "../ui_components/social_link/SocialLink";
-import HeaderLink from "../ui_components/HeaderLink/HeaderLink";
+import HeaderLink from "./header_link/HeaderLink";
 import {Link} from "react-router-dom";
 
 const MenuPanel: React.FC = () => {

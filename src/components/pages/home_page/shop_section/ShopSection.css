@@ -2,17 +2,8 @@
     gap: 64px;
     display: flex;
     flex-direction: column;
-}
-
-.shop {
-    max-width: 2544px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, max(304px, 100%/9));
-    row-gap: 48px;
-    column-gap: 16px;
-    justify-content: center;
-    justify-items: center;
     align-items: center;
+    justify-content: center;
 }
 
 .shop-container .tobacco-link {

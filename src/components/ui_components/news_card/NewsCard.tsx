@@ -1,18 +1,28 @@
 import React from "react";
 import './NewsCard.css'
-import MoreButton from "../../ui_components/more_button/MoreButton";
-import {NewsInfo} from "../../../content/News";
+import MoreButton from "../more_button/MoreButton";
+import {useNavigate} from "react-router-dom";
+import {RoutePaths} from "../../../routes/RoutePaths";
 
-const NewsCard: React.FC<NewsInfo> = ({image, name, description}) => {
-  const handleClick = () => {
-    console.log('sxc')
+interface NewsCardProps {
+  newsId: string;
+  image: string;
+  name: string;
+  description: string;
+}
+
+const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description}) => {
+  const navigate = useNavigate();
+
+  const openNews = () => {
+    navigate(RoutePaths.NEWS_DETAILED.replace(':id', newsId));
   }
 
   return(
-    <div className="news-card-container">
-      <img src={image} alt={name} className="news-image" onClick={handleClick}/>
+    <div className="news-card-container" onClick={openNews}>
+      <img src={image} alt={name} className="news-image" onClick={openNews}/>
       <div className="news-card-text-container">
-        <span className="news-card-header" onClick={handleClick}>{name}</span>
+        <span className="news-card-header" onClick={openNews}>{name}</span>
         <div className="news-card-description-wrapper">
           {description.split('\\n').map((line, idx) => (
             <div key={idx} className="news-card-description-line">
@@ -31,7 +41,7 @@ const NewsCard: React.FC<NewsInfo> = ({image, name, description}) => {
             color: '#EAEBF0',
             borderRadius: '24px',
           }}
-          onClickAction={handleClick}
+          onClickAction={openNews}
         />
       </div>
     </div>

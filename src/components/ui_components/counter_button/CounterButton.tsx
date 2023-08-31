@@ -62,9 +62,9 @@ const CounterButton: React.FC<CounterButtonProps> =
     }
 
     const iconStyle = {
-      transition: "all .2s ease",
-      WebkitTransition: "all .2s ease",
-      MozTransition: "all .2s ease",
+      transition: "all 0.1s ease",
+      WebkitTransition: "all 0.1s ease",
+      MozTransition: "all 0.1s ease",
     }
 
     return(

@@ -7,6 +7,10 @@
     position: relative;
 }
 
+.news-card-container:hover {
+    cursor: pointer;
+}
+
 .news-card-container .news-image {
     width: 400px;
     height: 300px;

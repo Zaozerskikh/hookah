@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import './ProductCard.css';
-import MoreButton from "../../ui_components/more_button/MoreButton";
-import StandardButton from "../../ui_components/standart_button/StandartButton";
-import CounterButton from "../../ui_components/counter_button/CounterButton";
-import CloseButton from "../../ui_components/close_button/CloseButton";
+import MoreButton from "../more_button/MoreButton";
+import StandardButton from "../standart_button/StandartButton";
+import CounterButton from "../counter_button/CounterButton";
+import CloseButton from "../close_button/CloseButton";
 import {ProductInfo} from "../../../content/Products";
 import Scrollbar from "react-scrollbars-custom";
 
@@ -16,7 +16,7 @@ const ProductCard: React.FC<ProductInfo> =
     <div className="product-card-container">
       <div className={`detailed-view-container ${isDetailedViewOpened ? 'open' : ''}`}>
         <div className="detailed-view-card">
-          <CloseButton onClickAction={() => setDetailedViewOpened(false)}/>
+          <CloseButton onClickAction={() => setDetailedViewOpened(false)} iconSize={20}/>
           <div className="detailed-view-text-container">
             <span className="detailed-view-header">{`${brand} - ${name}`}</span>
             <div className="detailed-view-description-container">

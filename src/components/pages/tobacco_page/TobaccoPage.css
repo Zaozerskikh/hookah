@@ -1,0 +1,9 @@
+.tobacco-page-wrapper {
+    margin: 34px 88px;
+}
+
+.tobacco-page-wrapper .tags-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}

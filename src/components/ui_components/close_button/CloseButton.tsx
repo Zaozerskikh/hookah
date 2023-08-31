@@ -1,18 +1,24 @@
 import React, {useState} from "react";
-import closeIcon from "../../../assets/icons/product_card/close_button_icon.png";
-import extendedCloseIcon from "../../../assets/icons/product_card/extended_close_button_icon.png";
+import blackCloseIcon from "../../../assets/icons/product_card/close_button_icon.png";
+import extendedBlackCloseIcon from "../../../assets/icons/product_card/extended_close_button_icon.png";
+import whiteCloseIcon from "../../../assets/icons/product_card/close_button_icon_white.png";
+import whiteExtendedCloseIcon from "../../../assets/icons/product_card/extended_close_button_icon_white.png";
+
 
 interface CloseButtonProps {
-  onClickAction: (...args: any) => any;
+  isDark ? : boolean,
+  buttonStyle? : React.CSSProperties;
+  iconSize: number;
+  onClickAction : (...args: any) => any;
 }
 
-const CloseButton: React.FC<CloseButtonProps> = ({onClickAction}) => {
+const CloseButton: React.FC<CloseButtonProps> =
+  ({onClickAction, buttonStyle, iconSize, isDark}) => {
   const [isHovered, setHovered] = useState(false)
 
   return(
     <button
       style={{
-        padding: !isHovered ? '14px' : '12px',
         position: 'absolute',
         top: '-64px',
         right: '0',
@@ -20,14 +26,17 @@ const CloseButton: React.FC<CloseButtonProps> = ({onClickAction}) => {
         height: '48px',
         display: 'flex',
         placeContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: '36px',
         border: 'none',
         outline: 'none',
-        backgroundColor: !isHovered ? 'white' : '#e2e5e7',
+        backgroundColor: !isHovered ? (isDark ? 'black' : 'white') : (isDark ? 'grey' : '#e2e5e7'),
         cursor: isHovered ? 'pointer' : undefined,
-        transition: "all .5s ease",
-        WebkitTransition: "all .5s ease",
-        MozTransition: "all .5s ease",
+        transition: "all 0.5s ease",
+        WebkitTransition: "all 0.5s ease",
+        MozTransition: "all 0.5s ease",
+        ...buttonStyle
       }}
       onClick={onClickAction}
       onMouseEnter={() => setHovered(true)}
@@ -35,13 +44,16 @@ const CloseButton: React.FC<CloseButtonProps> = ({onClickAction}) => {
     >
       <img
         style={{
-          width: isHovered ? '24px' : '20px',
-          height: isHovered ? '24px' : '20px',
-          transition: "all .5s ease",
-          WebkitTransition: "all .5s ease",
-          MozTransition: "all .5s ease",
+          width: isHovered ? iconSize * 1.2 : iconSize,
+          height: isHovered ? iconSize * 1.2 : iconSize,
+          transition: "all 0.1s ease",
+          WebkitTransition: "all 0.1s ease",
+          MozTransition: "all 0.1s ease",
         }}
-        src={isHovered ? extendedCloseIcon : closeIcon}
+        src={isHovered
+          ? (isDark ? whiteExtendedCloseIcon : extendedBlackCloseIcon)
+          : (isDark ? whiteCloseIcon : blackCloseIcon)
+        }
         alt="close-icon"/>
     </button>
   )

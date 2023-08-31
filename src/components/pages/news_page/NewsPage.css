@@ -1,0 +1,28 @@
+.news-page-container {
+    width: calc(100% - 176px);
+    margin: 34px 88px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 34px;
+    padding-bottom: 128px;
+}
+
+.news-page-container .news-grid-wrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.news-page-container .news-page-header {
+    width: 100%;
+    text-align: left;
+    color: #000;
+    font-family: Monsterrat-500, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+}

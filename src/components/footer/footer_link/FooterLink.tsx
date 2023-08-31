@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import './FooterLink.css'
-import mainLogoWhite from './../../../assets/icons/decorations/main_logo_cloud.png'
+import mainLogoWhite from '../../../assets/icons/decorations/main_logo_cloud.png'
 import {Link} from "react-router-dom";
 
 interface FooterLinkProps {

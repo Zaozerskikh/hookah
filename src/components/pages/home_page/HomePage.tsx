@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import './HomePage.css'
 import FloatingClouds from "./floating_clouds/FloatingClouds";
-import darksideLogo from './../../assets/icons/partners/darkside_logo.png'
-import elementLogo from './../../assets/icons/partners/element_logo.png'
-import fumariLogo from './../../assets/icons/partners/fumari_logo.png'
-import musthaveLogo from './../../assets/icons/partners/musthave_logo.png'
-import tangiersLogo from './../../assets/icons/partners/tangiers_logo.png'
-import ShopGrid from "./shop_grid/ShopGrid";
+import darksideLogo from '../../../assets/icons/partners/darkside_logo.png'
+import elementLogo from '../../../assets/icons/partners/element_logo.png'
+import fumariLogo from '../../../assets/icons/partners/fumari_logo.png'
+import musthaveLogo from '../../../assets/icons/partners/musthave_logo.png'
+import tangiersLogo from '../../../assets/icons/partners/tangiers_logo.png'
+import ShopSection from "./shop_section/ShopSection";
 import NewsSection from "./news_section/NewsSection";
 
 const HomePage: React.FC = () => {
@@ -22,6 +22,11 @@ const HomePage: React.FC = () => {
       window.removeEventListener('resize', handleResize);
     };
   })
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  })
+
   return (
     <div className="homepage-container">
       <div className="clouds-and-text-container">
@@ -36,7 +41,7 @@ const HomePage: React.FC = () => {
         </div>
         <FloatingClouds/>
       </div>
-      <ShopGrid/>
+      <ShopSection/>
       <NewsSection/>
       <div className="partners-container">
         <span className="partners-header">Our partners ❤️</span>

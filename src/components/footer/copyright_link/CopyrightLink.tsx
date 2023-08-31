@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import './CopyrightLink.css'
-import mainLogoGrey from './../../../assets/icons/decorations/main_logo_cloud_grey.png'
+import mainLogoGrey from '../../../assets/icons/decorations/main_logo_cloud_grey.png'
 
 const CopyrightLink: React.FC = () => {
   const [isHovered, setHovered] = useState(false)

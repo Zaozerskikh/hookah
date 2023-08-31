@@ -9,8 +9,8 @@ import whatsappGreyIcon from "../../assets/icons/socials/whatsapp_logo_ffffff.pn
 import telegramGreyIcon from "../../assets/icons/socials/telegram_logo_ffffff.png";
 import {RoutePaths} from "../../routes/RoutePaths";
 import SocialLink from "../ui_components/social_link/SocialLink";
-import CopyrightLink from "../ui_components/copyright_link/CopyrightLink";
-import FooterLink from "../ui_components/footer_link/FooterLink";
+import CopyrightLink from "./copyright_link/CopyrightLink";
+import FooterLink from "./footer_link/FooterLink";
 
 
 const Footer: React.FC = () => {
