@@ -8,10 +8,10 @@ import {Products} from "../../../../content/Products";
 
 
 const ShopSection: React.FC = () => {
-  const [countCardsInRow, setCountCardsInRow] = useState((window.innerWidth - 178) / 320)
+  const [countCardsInRow, setCountCardsInRow] = useState(Math.floor((window.innerWidth - 180) / 320 - 0.0001))
   useEffect(() => {
     const handleResize = () => {
-      setCountCardsInRow(Math.floor((window.innerWidth - 178) / 320))
+      setCountCardsInRow(Math.floor((window.innerWidth - 180) / 320 - 0.0001))
     }
 
     handleResize()

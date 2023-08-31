@@ -18,12 +18,23 @@ const NewsPage: React.FC = () => {
     };
   }, [])
 
-  useEffect(() => {
+  useState(() => {
     window.scrollTo({ top: 0 });
   })
 
   return(
-    <div className="news-page-container">
+    <div
+      className="news-page-container"
+      style={{
+        margin: '34px 88px',
+        display: 'inline-flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '34px',
+        paddingBottom: '128px',
+        minHeight: `${window.innerHeight - 500 - 200}px`
+      }}
+    >
       <span className="news-page-header">
         📰 We publish our latest news, upcoming events and special offers
       </span>

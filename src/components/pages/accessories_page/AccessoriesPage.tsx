@@ -1,8 +1,8 @@
 import './AccessoriesPage.css'
-import React, {useEffect} from "react";
+import React, {useState} from "react";
 
 const AccessoriesPage: React.FC = () => {
-  useEffect(() => {
+  useState(() => {
     window.scrollTo({ top: 0 });
   })
 

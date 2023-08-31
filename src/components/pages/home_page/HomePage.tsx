@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
     };
   })
 
-  useEffect(() => {
+  useState(() => {
     window.scrollTo({ top: 0 });
   })
 

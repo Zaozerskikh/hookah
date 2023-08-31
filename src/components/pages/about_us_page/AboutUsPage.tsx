@@ -1,8 +1,8 @@
 import './AboutUsPage.css'
-import React, {useEffect} from "react";
+import React, {useState} from "react";
 
 const AboutUsPage: React.FC = () => {
-  useEffect(() => {
+  useState(() => {
     window.scrollTo({ top: 0 });
   })
 

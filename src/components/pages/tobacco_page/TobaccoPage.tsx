@@ -1,5 +1,5 @@
 import './TobaccoPage.css'
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import SearchTag from "./search_tag/SearchTag";
 import CloseButton from "../../ui_components/close_button/CloseButton";
 
@@ -10,7 +10,7 @@ const TobaccoPage: React.FC = () => {
   const [tangiersTagActive, setTangiersTagActive] = useState(false)
   const [fumariTagActive, setFumariTagActive] = useState(false)
 
-  useEffect(() => {
+  useState(() => {
     window.scrollTo({ top: 0 });
   })
 
