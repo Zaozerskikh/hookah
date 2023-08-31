@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/hookah/static/css/main.8cc1c4f1.css",
-    "main.js": "/hookah/static/js/main.f87508e1.js",
+    "main.css": "/hookah/static/css/main.1b073fb9.css",
+    "main.js": "/hookah/static/js/main.0d4ca771.js",
     "static/js/787.c274760c.chunk.js": "/hookah/static/js/787.c274760c.chunk.js",
     "static/media/choosing_hookah_bowl_icon.png": "/hookah/static/media/choosing_hookah_bowl_icon.fb4c7cbd2fc7c46f1afe.png",
     "static/media/guide_to_coconut_icon.png": "/hookah/static/media/guide_to_coconut_icon.26141c9a1760018e8774.png",
@@ -31,12 +31,12 @@
     "static/media/darkside_logo.png": "/hookah/static/media/darkside_logo.ce2d1eaa4ddbe5a1ab7a.png",
     "static/media/instagram_logo_black.png": "/hookah/static/media/instagram_logo_black.7c90a78377d0d9eab47a.png",
     "index.html": "/hookah/index.html",
-    "main.8cc1c4f1.css.map": "/hookah/static/css/main.8cc1c4f1.css.map",
-    "main.f87508e1.js.map": "/hookah/static/js/main.f87508e1.js.map",
+    "main.1b073fb9.css.map": "/hookah/static/css/main.1b073fb9.css.map",
+    "main.0d4ca771.js.map": "/hookah/static/js/main.0d4ca771.js.map",
     "787.c274760c.chunk.js.map": "/hookah/static/js/787.c274760c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8cc1c4f1.css",
-    "static/js/main.f87508e1.js"
+    "static/css/main.1b073fb9.css",
+    "static/js/main.0d4ca771.js"
   ]
 }
