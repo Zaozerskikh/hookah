@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/hookah/static/css/main.1b073fb9.css",
-    "main.js": "/hookah/static/js/main.0d4ca771.js",
+    "main.css": "/hookah/static/css/main.a7713ce4.css",
+    "main.js": "/hookah/static/js/main.d4497a29.js",
     "static/js/787.c274760c.chunk.js": "/hookah/static/js/787.c274760c.chunk.js",
+    "static/media/news-5.png": "/hookah/static/media/news-5.6c6942cfaf5918f8fa1a.png",
     "static/media/choosing_hookah_bowl_icon.png": "/hookah/static/media/choosing_hookah_bowl_icon.fb4c7cbd2fc7c46f1afe.png",
     "static/media/guide_to_coconut_icon.png": "/hookah/static/media/guide_to_coconut_icon.26141c9a1760018e8774.png",
     "static/media/darkSide_FallingStar_base.png": "/hookah/static/media/darkSide_FallingStar_base.89e4d14ef7ba6a0416e2.png",
@@ -12,6 +13,7 @@
     "static/media/darkSide_KaleeGrap_base.png": "/hookah/static/media/darkSide_KaleeGrap_base.1b25a763773d862eb4ba.png",
     "static/media/darkSide_BnPapa_base.png": "/hookah/static/media/darkSide_BnPapa_base.aeb43494d50f253a433c.png",
     "static/media/darkSide_Igranny_base.png": "/hookah/static/media/darkSide_Igranny_base.b63f13d7a55430d63a4a.png",
+    "static/media/carring_for_hookah_bowl.png": "/hookah/static/media/carring_for_hookah_bowl.3ffeb26b8099c054b2fa.png",
     "static/media/darkSide_SpaceIchi_base.png": "/hookah/static/media/darkSide_SpaceIchi_base.c69f338a79435cc4658b.png",
     "static/media/darkSide_Skyline_base.png": "/hookah/static/media/darkSide_Skyline_base.1f8a81d2688a676ee9dc.png",
     "static/media/Unbounded-700.ttf": "/hookah/static/media/Unbounded-700.0c54d6e100bb5ec11f3a.ttf",
@@ -26,17 +28,19 @@
     "static/media/musthave_logo.png": "/hookah/static/media/musthave_logo.162b388212ca73ec2c3c.png",
     "static/media/fumari_logo.png": "/hookah/static/media/fumari_logo.e3dfbe448179133a93eb.png",
     "static/media/element_logo.png": "/hookah/static/media/element_logo.397a92fdb50f2c473b43.png",
+    "static/media/extended_close_button_icon_white.png": "/hookah/static/media/extended_close_button_icon_white.85dfb7deea8f5e0eae38.png",
     "static/media/extended_close_button_icon.png": "/hookah/static/media/extended_close_button_icon.7607d98d6dbe75892ece.png",
     "static/media/close_button_icon.png": "/hookah/static/media/close_button_icon.d9b59ca83a015121b37a.png",
+    "static/media/close_button_icon_white.png": "/hookah/static/media/close_button_icon_white.609ab1511dd74bdd90c5.png",
     "static/media/darkside_logo.png": "/hookah/static/media/darkside_logo.ce2d1eaa4ddbe5a1ab7a.png",
     "static/media/instagram_logo_black.png": "/hookah/static/media/instagram_logo_black.7c90a78377d0d9eab47a.png",
     "index.html": "/hookah/index.html",
-    "main.1b073fb9.css.map": "/hookah/static/css/main.1b073fb9.css.map",
-    "main.0d4ca771.js.map": "/hookah/static/js/main.0d4ca771.js.map",
+    "main.a7713ce4.css.map": "/hookah/static/css/main.a7713ce4.css.map",
+    "main.d4497a29.js.map": "/hookah/static/js/main.d4497a29.js.map",
     "787.c274760c.chunk.js.map": "/hookah/static/js/787.c274760c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1b073fb9.css",
-    "static/js/main.0d4ca771.js"
+    "static/css/main.a7713ce4.css",
+    "static/js/main.d4497a29.js"
   ]
 }
