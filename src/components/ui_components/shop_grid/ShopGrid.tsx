@@ -11,7 +11,7 @@ import {Consts} from "../../../content/Consts";
 
 interface ShopGridProps {
   showAllCatalogButton: boolean;
-  products: ProductInfo[]
+  products: ProductInfo[],
 }
 
 const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products}) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './MenuPanel.css'
 import mainLogoInstagramIcon from '../../assets/icons/socials/instagram_logo_black.png'
 import mainLogoWhatsappIcon from '../../assets/icons/socials/whatsapp_logo_black.png'
@@ -17,13 +17,21 @@ import {RootState} from "../../redux/Store";
 
 const MenuPanel: React.FC = () => {
   const gridState = useSelector((state: RootState) => state.grid)
+  const [prevMargin, setPrevMargin] = useState(88)
+
+  useEffect(() => {
+    if (gridState.isEnabled && gridState.gridWidth > 1260) {
+      setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
+    }
+
+  }, [gridState, prevMargin])
 
   return(
     <div
       className="menu-panel-container"
       style={{
-        marginLeft: gridState.isEnabled ? `${(gridState.windowWidth - gridState.gridWidth) / 2}px` : 88,
-        marginRight: gridState.isEnabled ? `${(gridState.windowWidth - gridState.gridWidth) / 2}px` : 88
+        marginLeft: gridState.isEnabled && gridState.gridWidth > 1260 ? `${(gridState.windowWidth - gridState.gridWidth) / 2}px` : prevMargin,
+        marginRight: gridState.isEnabled && gridState.gridWidth > 1260 ? `${(gridState.windowWidth - gridState.gridWidth) / 2}px` : prevMargin
       }}
     >
       <Link to={RoutePaths.HOME} className="home-link">

@@ -3,13 +3,18 @@ import React, {useEffect, useState} from "react";
 import SearchTag from "./search_tag/SearchTag";
 import CloseButton from "../../ui_components/close_button/CloseButton";
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
-import {Products} from "../../../content/Products";
+import {ProductBrand, ProductInfo, Products} from "../../../content/Products";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import ZoomButton from "./zoom_button/ZoomButton";
 import SearchInputField from "./search_input_field/SearchInputField";
+import LoadingIcon from "../../ui_components/loading/LoadingIcon";
 
 const TobaccoPage: React.FC = () => {
+  // main content management
+  const [isLoading, setLoading] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState(Products)
+
   // search field
   const [searchString, setSearchString] = useState('');
   const onSearchStringChanged = (value: string) => {
@@ -17,7 +22,27 @@ const TobaccoPage: React.FC = () => {
   };
 
   const filterBySearchString = () => {
-    console.log('filter by search string: ' + searchString)
+    setLoading(true)
+    setTimeout(() => {
+      const namesMatches = Products
+        .filter(product => product.name.toLowerCase().includes(searchString.toLowerCase()))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      const brandMatches = Products
+        .filter(product =>
+          product.brand.toLowerCase().includes(searchString.toLowerCase()) &&
+          !namesMatches.some(nm => nm.productId === product.productId))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      const descriptionMatches = Products
+        .filter(product =>
+          product.description.toLowerCase().includes(searchString.toLowerCase()) &&
+          ![...namesMatches, ...brandMatches].some(nm => nm.productId === product.productId))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      setFilteredProducts([...namesMatches, ...brandMatches, ...descriptionMatches])
+      setLoading(false)
+    }, 500)
   }
 
   // tags
@@ -28,37 +53,78 @@ const TobaccoPage: React.FC = () => {
   const [fumariTagActive, setFumariTagActive] = useState(false)
   const [accessoriesTagActive, setAccessoriesTagActive] = useState(false)
 
-  const filterByTags = () => {
-    console.log('filter by tags')
-  }
-
   useEffect(() => {
+    const filterByTags = () => {
+      setLoading(true)
+      if (!(darkSideTagActive || musthaveTagActive || elementSideTagActive || tangiersTagActive || fumariTagActive || accessoriesTagActive)) {
+        setFilteredProducts(Products)
+        setLoading(false)
+      } else {
+        const brandsToSearch = []
+        if (darkSideTagActive) {
+          brandsToSearch.push(ProductBrand.DARKSIDE)
+        }
+
+        if (fumariTagActive) {
+          brandsToSearch.push(ProductBrand.FUMARI)
+        }
+
+        if (elementSideTagActive) {
+          brandsToSearch.push(ProductBrand.ELEMENTS)
+        }
+
+        if (tangiersTagActive) {
+          brandsToSearch.push(ProductBrand.TANGIERS)
+        }
+
+        if (musthaveTagActive) {
+          brandsToSearch.push(ProductBrand.MUSTHAVE)
+        }
+
+        let filtered: ProductInfo[] = []
+        brandsToSearch.map(brand => {
+          filtered = [...filtered, ...Products.filter(p => p.brand === brand)]
+        })
+
+        setFilteredProducts(filtered)
+        setTimeout(() => {
+          setLoading(false)
+        }, 1000)
+      }
+    }
+
     filterByTags()
   }, [
     darkSideTagActive, musthaveTagActive, elementSideTagActive,
     tangiersTagActive, fumariTagActive, accessoriesTagActive
   ])
 
-  // scroll
+  // window & scroll
   useState(() => {
     window.scrollTo({ top: 0 });
   })
 
-  // window
   const gridState = useSelector((state: RootState) => state.grid)
+  const [prevMargin, setPrevMargin] = useState(88)
+
+  useEffect(() => {
+    if (gridState.isEnabled && gridState.gridWidth > 1260) {
+      setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
+    }
+  }, [gridState, prevMargin])
 
   return(
     <div
       className="tobacco-page-wrapper"
       style={{
-        minHeight: `${window.innerHeight - 580}px`
+        minHeight: `${window.innerHeight - 572}px`
       }}
     >
       <div
         className="tags-container"
         style={{
           position: 'relative',
-          margin: `0px ${(gridState.windowWidth - gridState.gridWidth) / 2}px`
+          margin: gridState.gridWidth < 1260 ? `0px ${prevMargin}px` :`0px ${(gridState.windowWidth - gridState.gridWidth) / 2}px`
         }}
       >
         <SearchTag
@@ -116,11 +182,25 @@ const TobaccoPage: React.FC = () => {
           iconSize={12}
           isDark={true}
         />
-        <SearchInputField onInputChange={onSearchStringChanged}/>
+        <SearchInputField onInputChange={onSearchStringChanged} onEnterAction={filterBySearchString}/>
         <ZoomButton onClickAction={filterBySearchString}/>
       </div>
-
-      <ShopGrid showAllCatalogButton={false} products={Products} />
+      {isLoading
+        ? (
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: `${window.innerHeight - 645}px`
+            }}
+          >
+            <LoadingIcon/>
+          </div>
+        )
+        : <ShopGrid showAllCatalogButton={false} products={filteredProducts} />}
     </div>
   )
 }

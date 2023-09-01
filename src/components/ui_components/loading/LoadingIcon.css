@@ -1,0 +1,54 @@
+.loading-container .loading-bottom-floating-clouds-container {
+    position: absolute;
+    left: 0;
+    bottom: 36px;
+    overflow: hidden;
+    width: 635px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    background: repeat-x;
+}
+
+.loading-container .loading-top-floating-clouds-container {
+    position: absolute;
+    left: -60px;
+    top: 36px;
+    overflow: hidden;
+    width: 635px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    background: repeat-x;
+    margin-bottom: 8px;
+}
+
+.loading-bottom-floating-clouds-container .loading-floating-clouds-image {
+    animation:  loadingScrollAnimationBottom 12s linear infinite;
+    width: 5080px;
+    background: repeat-x;
+}
+
+.loading-top-floating-clouds-container .loading-floating-clouds-image {
+    animation: loadingScrollAnimationTop 8s linear infinite;
+    width: 5080px;
+    background: repeat-x;
+}
+
+@keyframes loadingScrollAnimationBottom {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-635px, 0, 0);
+    }
+}
+
+@keyframes loadingScrollAnimationTop {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-635px, 0, 0);
+    }
+}

@@ -2,8 +2,9 @@ import React, {useState} from "react";
 
 interface SearchInputFieldProps {
   onInputChange: (value: string) => void;
+  onEnterAction : () => void
 }
-const SearchInputField: React.FC<SearchInputFieldProps> = ({ onInputChange}) => {
+const SearchInputField: React.FC<SearchInputFieldProps> = ({ onInputChange, onEnterAction }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState('')
 
@@ -17,6 +18,12 @@ const SearchInputField: React.FC<SearchInputFieldProps> = ({ onInputChange}) => 
     <input
       type="text"
       placeholder="Find your flavour"
+      onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+        console.log('ddd')
+        if (e.key === 'Enter') {
+          onEnterAction();
+        }
+      }}
       style={{
         overflow: 'hidden',
         position: "absolute",

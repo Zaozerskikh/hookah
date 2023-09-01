@@ -7,6 +7,14 @@ import darkSide_KaleeGrap_base from './../assets/icons/products/darkSide_KaleeGr
 import darkSide_Hola_base from './../assets/icons/products/darkSide_Hola_base.png'
 import darkSide_Skyline_base from './../assets/icons/products/darkSide_Skyline_base.png'
 
+export const ProductBrand = {
+  DARKSIDE: 'DarkSide',
+  FUMARI: 'Fumari',
+  ELEMENTS: 'Elements',
+  MUSTHAVE : 'MustHave',
+  TANGIERS: 'Tangiers',
+}
+
 export interface ProductInfo {
   productId: string,
   name: string;
@@ -23,7 +31,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '1',
     name: 'Falling star',
-    brand: 'DarkSide',
+    brand: ProductBrand.DARKSIDE,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',
@@ -34,7 +42,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '2',
     name: 'I Granny',
-    brand: 'DarkSide',
+    brand: ProductBrand.FUMARI,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',
@@ -45,7 +53,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '3',
     name: 'Bnpapa',
-    brand: 'DarkSide',
+    brand: ProductBrand.ELEMENTS,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',
@@ -56,7 +64,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '4',
     name: 'Supernova',
-    brand: 'DarkSide',
+    brand: ProductBrand.TANGIERS,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',
@@ -67,7 +75,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '5',
     name: 'Space Ichi',
-    brand: 'DarkSide',
+    brand: ProductBrand.MUSTHAVE,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',
@@ -78,7 +86,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '6',
     name: 'Kalee grap',
-    brand: 'DarkSide',
+    brand: ProductBrand.DARKSIDE,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',
@@ -89,7 +97,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '7',
     name: 'Hola',
-    brand: 'DarkSide',
+    brand: ProductBrand.DARKSIDE,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',
@@ -100,7 +108,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '8',
     name: 'Skyline',
-    brand: 'DarkSide',
+    brand: ProductBrand.DARKSIDE,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',

@@ -57,7 +57,7 @@ const HomePage: React.FC = () => {
         </div>
         <FloatingClouds/>
       </div>
-      <ShopGrid products={Products} showAllCatalogButton={true}/>
+      <ShopGrid products={Products} showAllCatalogButton={true} />
       <NewsSection/>
       <div className="partners-container">
         <span className="partners-header">Our partners ❤️</span>
