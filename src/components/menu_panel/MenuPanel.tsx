@@ -17,21 +17,37 @@ import {RootState} from "../../redux/Store";
 
 const MenuPanel: React.FC = () => {
   const gridState = useSelector((state: RootState) => state.grid)
-  const [prevMargin, setPrevMargin] = useState(88)
+  const [prevWidth, setWidth] = useState(window.innerWidth)
+  const [onLoadAction, setOnLoadAction] = useState(0)
+  const [prevMargin, setPrevMargin] = useState((gridState.windowWidth - gridState.gridWidth) / 2)
 
   useEffect(() => {
-    if (gridState.isEnabled && gridState.gridWidth > 1260) {
+    const handleResize = () => {
+      if (window.innerWidth !== prevWidth && gridState.isEnabled && gridState.gridWidth > 1260) {
+        console.log(prevWidth, window.innerWidth)
+        setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
+        setWidth(window.innerWidth)
+      }
+    }
+
+    if (onLoadAction === 0) {
+      setOnLoadAction(1)
       setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
     }
 
-  }, [gridState, prevMargin])
+    handleResize()
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [gridState, onLoadAction, prevMargin, prevWidth])
 
   return(
     <div
       className="menu-panel-container"
       style={{
-        marginLeft: gridState.isEnabled && gridState.gridWidth > 1260 ? `${(gridState.windowWidth - gridState.gridWidth) / 2}px` : prevMargin,
-        marginRight: gridState.isEnabled && gridState.gridWidth > 1260 ? `${(gridState.windowWidth - gridState.gridWidth) / 2}px` : prevMargin
+        marginLeft: prevMargin,
+        marginRight: prevMargin
       }}
     >
       <Link to={RoutePaths.HOME} className="home-link">
