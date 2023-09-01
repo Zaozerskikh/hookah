@@ -6,14 +6,20 @@ import elementLogo from '../../../assets/icons/partners/element_logo.png'
 import fumariLogo from '../../../assets/icons/partners/fumari_logo.png'
 import musthaveLogo from '../../../assets/icons/partners/musthave_logo.png'
 import tangiersLogo from '../../../assets/icons/partners/tangiers_logo.png'
-import ShopSection from "./shop_section/ShopSection";
+import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
 import NewsSection from "./news_section/NewsSection";
+import {Products} from "../../../content/Products";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../redux/Store";
+import {Consts} from "../../../content/Consts";
 
 const HomePage: React.FC = () => {
   const [partnersGap, setPartnersGap] = useState(118)
+  const gridState = useSelector((state: RootState) => state.grid)
+
   useEffect(() => {
     const handleResize = () => {
-      setPartnersGap(Math.min(118, Math.max((window.innerWidth - 176 - 800) / 5, 32)));
+      setPartnersGap(Math.min(118, Math.max((window.innerWidth - Consts.MIN_SIDE_MARGIN * 2 - 800) / 5, 32)));
     }
 
     handleResize()
@@ -30,18 +36,28 @@ const HomePage: React.FC = () => {
   return (
     <div className="homepage-container">
       <div className="clouds-and-text-container">
-        <div className="left-tricky-div"/>
-        <div className="greetings-container">
+        <div
+          className="left-tricky-div"
+          style={{
+            width: `${(gridState.windowWidth - gridState.gridWidth - Consts.MIN_SIDE_MARGIN * 2) / 2 + 300}px`
+          }}
+        />
+        <div
+          className="greetings-container"
+          style={{
+            left: `${(gridState.windowWidth - gridState.gridWidth - Consts.MIN_SIDE_MARGIN * 2) / 2 - 5}px`,
+          }}
+        >
           <div className="greetings-header">
             👋 Welcome to Hookah.pt
           </div>
           <p className="greetings-text">
-            Our premium tobacco shop is your way to hookah pleasure in Portugal. Hookah.pt is the first online store offering a wide selection of quality hookah tobaccos from DarkSide, MustHave, Element, Tangiers and other brands delivered right to your door.
+            Our premium tobacco shop is your way to hookah pleasure in Portugal. Hookah.pt is the first online store offering a wide selection of quality hookah tobaccos from DarkSide, MustHave, Element, Tangiers, Fumari, and other brands delivered right to your door.
           </p>
         </div>
         <FloatingClouds/>
       </div>
-      <ShopSection/>
+      <ShopGrid products={Products} showAllCatalogButton={true}/>
       <NewsSection/>
       <div className="partners-container">
         <span className="partners-header">Our partners ❤️</span>

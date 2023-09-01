@@ -1,7 +1,3 @@
-.news-page-container {
-    width: calc(100% - 176px);
-}
-
 .news-page-container .news-grid-wrapper {
     position: relative;
     display: flex;

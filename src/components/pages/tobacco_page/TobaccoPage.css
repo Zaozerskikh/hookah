@@ -1,9 +1,20 @@
 .tobacco-page-wrapper {
-    margin: 34px 88px;
+    margin: 34px 0;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 .tobacco-page-wrapper .tags-container {
     display: flex;
     flex-direction: row;
     gap: 8px;
+}
+
+.tobacco-page-wrapper .tags-container .search-zoom-button {
+    display: flex;
+    height: 31px;
+    padding: 4px 8px;
+    align-items: center;
+    gap: 10px;
 }

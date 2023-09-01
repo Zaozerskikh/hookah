@@ -1,6 +1,5 @@
 .menu-panel-container {
     height: 80px;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -57,7 +56,6 @@
 
 .menu-panel-container .logo {
     height: 32px;
-    margin-left: 88px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -74,7 +72,6 @@
 
 .menu-panel-container .socials {
     height: 32px;
-    margin-right: 88px;
     width: 160px;
     align-items: center;
     justify-content: space-between;

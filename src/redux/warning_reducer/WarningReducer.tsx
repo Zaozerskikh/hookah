@@ -1,4 +1,4 @@
-interface WarningState {
+export interface WarningState {
   isShown: boolean;
 }
 
