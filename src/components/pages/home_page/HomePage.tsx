@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import './HomePage.css'
 import FloatingClouds from "./floating_clouds/FloatingClouds";
 import darksideLogo from '../../../assets/icons/partners/darkside_logo.png'
@@ -14,20 +14,8 @@ import {RootState} from "../../../redux/Store";
 import {Consts} from "../../../content/Consts";
 
 const HomePage: React.FC = () => {
-  const [partnersGap, setPartnersGap] = useState(118)
   const gridState = useSelector((state: RootState) => state.grid)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setPartnersGap(Math.min(118, Math.max((window.innerWidth - Consts.MIN_SIDE_MARGIN * 2 - 800) / 5, 32)));
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  })
+  const menuMargin = useSelector((state: RootState) => state.menu.margin)
 
   useState(() => {
     window.scrollTo({ top: 0 });
@@ -66,10 +54,11 @@ const HomePage: React.FC = () => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            gap: `${partnersGap}px`,
+            justifyContent: 'space-between',
+            marginLeft: `${menuMargin}px`,
+            marginRight: `${menuMargin}px`,
             marginTop: '64px',
-            width: '100%'
+            width: `calc(100% - ${menuMargin}px - ${menuMargin}px)`
           }}
         >
           <img src={darksideLogo} alt="darksideLogo" className="partner-logo-image" />

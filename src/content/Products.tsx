@@ -86,7 +86,7 @@ export const Products: ProductInfo[] = [
   {
     productId: '6',
     name: 'Kalee grap',
-    brand: ProductBrand.DARKSIDE,
+    brand: ProductBrand.FUMARI,
     line: 'Base',
     weight: 30,
     description: 'Mango, joghurt',

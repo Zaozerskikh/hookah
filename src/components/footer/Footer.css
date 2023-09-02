@@ -1,9 +1,8 @@
 .footer {
     min-height: 292px;
     background-color: black;
-    padding: 64px 88px 64px 88px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 96px;
 }
 

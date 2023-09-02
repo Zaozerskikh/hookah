@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './ProductCard.css';
 import MoreButton from "../more_button/MoreButton";
 import StandardButton from "../standart_button/StandartButton";
@@ -6,11 +6,19 @@ import CounterButton from "../counter_button/CounterButton";
 import CloseButton from "../close_button/CloseButton";
 import {ProductInfo} from "../../../content/Products";
 import Scrollbar from "react-scrollbars-custom";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../redux/Store";
+import {decrementProductCount, incrementProductCount} from "../../../redux/cart_reducer/CartReducer";
 
 const ProductCard: React.FC<ProductInfo> =
-  ({ name, brand,line, weight, description, price, image , fullDescription}) => {
-  const [purchasedCount, setPurchasedCount] = useState<number>(0);
+  ({ productId, name, brand,line, weight, description, price, image , fullDescription}) => {
+  const purchasedCount = useSelector((state: RootState) => state.cart[productId]);
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(purchasedCount)
+  }, [purchasedCount])
 
   return (
     <div className="product-card-container">
@@ -33,8 +41,8 @@ const ProductCard: React.FC<ProductInfo> =
               <CounterButton
                 counterState={purchasedCount}
                 isDark={true}
-                onPlusClickAction={() => setPurchasedCount(purchasedCount + 1)}
-                onMinusClickAction={() => setPurchasedCount(purchasedCount - 1 > -1 ? purchasedCount - 1 : 0)}
+                onPlusClickAction={() => dispatch(incrementProductCount(productId))}
+                onMinusClickAction={() => dispatch(decrementProductCount(productId))}
               />
               <button className="detailed-buy-now-button">
                 <span className="buy-now-text">Buy now</span>
@@ -80,14 +88,14 @@ const ProductCard: React.FC<ProductInfo> =
           onClick={() => setDetailedViewOpened(true)}
           className="product-description">{description}
         </span>
-        <span className="product-price">${price.toFixed(2)}</span>
+        <span className="product-price">{price.toFixed(2)}€</span>
       </div>
       <div className="button-container">
         {purchasedCount === 0
           ? (
             <StandardButton
               text="Buy"
-              onClickAction={() => setPurchasedCount(purchasedCount + 1)}
+              onClickAction={() => dispatch(incrementProductCount(productId))}
               buttonStyle={{
                 width: '148px',
                 height: '48px',
@@ -99,8 +107,12 @@ const ProductCard: React.FC<ProductInfo> =
             <CounterButton
               counterState={purchasedCount}
               isDark={false}
-              onPlusClickAction={() => setPurchasedCount(purchasedCount + 1)}
-              onMinusClickAction={() => setPurchasedCount(purchasedCount - 1)}
+              onPlusClickAction={() => {
+                dispatch(incrementProductCount(productId))
+              }}
+              onMinusClickAction={() => {
+                dispatch(decrementProductCount(productId))
+              }}
             />
           )
         }

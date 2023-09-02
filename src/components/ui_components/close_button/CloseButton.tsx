@@ -31,7 +31,7 @@ const CloseButton: React.FC<CloseButtonProps> =
         borderRadius: '36px',
         border: 'none',
         outline: 'none',
-        backgroundColor: !isHovered ? (isDark ? 'black' : 'white') : (isDark ? 'grey' : '#e2e5e7'),
+        backgroundColor: !isHovered ? (isDark ? 'black' : 'white') : (isDark ? '#2C2D2E' : '#e2e5e7'),
         cursor: isHovered ? 'pointer' : undefined,
         transition: "all 0.5s ease",
         WebkitTransition: "all 0.5s ease",

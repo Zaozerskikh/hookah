@@ -10,15 +10,18 @@ const initialState: WarningState = {
   isShown: true
 };
 
-export const toggleWarning = () => ({ type: WarningActionTypes.TOGGLE });
+export const setIsWarningShown = (isShown: boolean) => ({
+  type: WarningActionTypes.TOGGLE ,
+  payload: isShown
+});
 
 const warningReducer = (
   state = initialState,
-  action: ReturnType<typeof toggleWarning>
+  action: ReturnType<typeof setIsWarningShown>
 ): WarningState => {
   switch (action.type) {
     case WarningActionTypes.TOGGLE:
-      return { ...state, isShown: !state.isShown };
+      return { ...state, isShown: action.payload};
     default:
       return state;
   }

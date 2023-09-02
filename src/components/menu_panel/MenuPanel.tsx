@@ -11,28 +11,27 @@ import {RoutePaths} from "../../routes/RoutePaths";
 import ExternalLinks from "../../routes/ExternalLinks";
 import SocialLink from "../ui_components/social_link/SocialLink";
 import HeaderLink from "./header_link/HeaderLink";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/Store";
 
 const MenuPanel: React.FC = () => {
   const gridState = useSelector((state: RootState) => state.grid)
-  const [prevWidth, setWidth] = useState(window.innerWidth)
-  const [onLoadAction, setOnLoadAction] = useState(0)
+  const [prevWidth, setWidth] = useState(0)
   const [prevMargin, setPrevMargin] = useState((gridState.windowWidth - gridState.gridWidth) / 2)
+  const location = useLocation()
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth !== prevWidth && gridState.isEnabled && gridState.gridWidth > 1260) {
-        console.log(prevWidth, window.innerWidth)
         setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
         setWidth(window.innerWidth)
       }
-    }
 
-    if (onLoadAction === 0) {
-      setOnLoadAction(1)
-      setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
+      if (location.pathname === RoutePaths.HOME) {
+        setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
+        setWidth(window.innerWidth)
+      }
     }
 
     handleResize()
@@ -40,7 +39,7 @@ const MenuPanel: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [gridState, onLoadAction, prevMargin, prevWidth])
+  }, [gridState.gridWidth, gridState.isEnabled, gridState.windowWidth, location.pathname, prevMargin, prevWidth])
 
   return(
     <div
