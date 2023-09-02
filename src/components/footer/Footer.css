@@ -2,7 +2,7 @@
     min-height: 292px;
     background-color: black;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 96px;
 }
 

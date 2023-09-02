@@ -4,8 +4,6 @@ import SearchTag from "./search_tag/SearchTag";
 import CloseButton from "../../ui_components/close_button/CloseButton";
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
 import {ProductBrand, ProductInfo, Products} from "../../../content/Products";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../redux/Store";
 import ZoomButton from "./zoom_button/ZoomButton";
 import SearchInputField from "./search_input_field/SearchInputField";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
@@ -104,44 +102,17 @@ const TobaccoPage: React.FC = () => {
     window.scrollTo({ top: 0 });
   })
 
-  const gridState = useSelector((state: RootState) => state.grid)
-  const [prevWidth, setWidth] = useState(window.innerWidth)
-  const [onLoadAction, setOnLoadAction] = useState(0)
-  const [prevMargin, setPrevMargin] = useState((gridState.windowWidth - gridState.gridWidth) / 2)
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth !== prevWidth && gridState.isEnabled && gridState.gridWidth > 1260) {
-        console.log(prevWidth, window.innerWidth)
-        setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
-        setWidth(window.innerWidth)
-      }
-    }
-
-    if (onLoadAction !== 1) {
-      setOnLoadAction(1)
-      setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [gridState, onLoadAction, prevMargin, prevWidth])
-
   return(
     <div
       className="tobacco-page-wrapper"
       style={{
-        minHeight: `${window.innerHeight - 572}px`
+        minHeight: `${window.innerHeight - 500}px`
       }}
     >
       <div
         className="tags-container"
         style={{
           position: 'relative',
-          margin: `0px ${prevMargin}px`
         }}
       >
         <SearchTag

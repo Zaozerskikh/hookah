@@ -16,9 +16,20 @@ const ProductCard: React.FC<ProductInfo> =
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(purchasedCount)
-  }, [purchasedCount])
+    useEffect(() => {
+      if (isDetailedViewOpened) {
+        document.body.style.overflowX = 'hidden';
+        document.body.style.overflowY = 'hidden';
+      } else {
+        document.body.style.overflowX = 'hidden';
+        document.body.style.overflowY = 'scroll';
+      }
+
+      return () => {
+        document.body.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
+      };
+    }, [isDetailedViewOpened]);
 
   return (
     <div className="product-card-container">

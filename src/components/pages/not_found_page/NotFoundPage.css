@@ -1,0 +1,23 @@
+.not-found-text {
+    color: #CFD5DB;
+    font-family: Monsterrat-700, serif;
+    font-size: 28px;
+    font-style: normal;
+    line-height: 144%;
+    position: absolute;
+    left: 88px;
+    top: 300px
+}
+
+.dorry-text {
+    color: #000;
+    font-family: Monsterrat-500, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+    width: 611px;
+    height: 64px;
+    position: absolute;
+    left: 88px;
+    top: 370px;
+}

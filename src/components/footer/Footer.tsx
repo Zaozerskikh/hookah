@@ -11,18 +11,17 @@ import {RoutePaths} from "../../routes/RoutePaths";
 import SocialLink from "../ui_components/social_link/SocialLink";
 import CopyrightLink from "./copyright_link/CopyrightLink";
 import FooterLink from "./footer_link/FooterLink";
-import {useSelector} from "react-redux";
-import {RootState} from "../../redux/Store";
 
 
 const Footer: React.FC = () => {
-  const menuMargin = useSelector((state: RootState) => state.menu.margin)
-
   return(
     <div
       className="footer"
       style={{
-        padding: `64px ${menuMargin}px 64px ${menuMargin}px`
+        padding: `64px 88px 64px 88px`,
+        width: 'calc(100% - 176px)',
+        position: "absolute",
+        bottom: '-420px'
       }}
     >
       <div className="section">

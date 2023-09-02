@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import './MenuPanel.css'
 import mainLogoInstagramIcon from '../../assets/icons/socials/instagram_logo_black.png'
 import mainLogoWhatsappIcon from '../../assets/icons/socials/whatsapp_logo_black.png'
@@ -11,42 +11,18 @@ import {RoutePaths} from "../../routes/RoutePaths";
 import ExternalLinks from "../../routes/ExternalLinks";
 import SocialLink from "../ui_components/social_link/SocialLink";
 import HeaderLink from "./header_link/HeaderLink";
-import {Link, useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {RootState} from "../../redux/Store";
+import {Link} from "react-router-dom";
 
 const MenuPanel: React.FC = () => {
-  const gridState = useSelector((state: RootState) => state.grid)
-  const [prevWidth, setWidth] = useState(0)
-  const [prevMargin, setPrevMargin] = useState((gridState.windowWidth - gridState.gridWidth) / 2)
-  const location = useLocation()
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth !== prevWidth && gridState.isEnabled && gridState.gridWidth > 1260) {
-        setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
-        setWidth(window.innerWidth)
-      }
-
-      if (location.pathname === RoutePaths.HOME) {
-        setPrevMargin((gridState.windowWidth - gridState.gridWidth) / 2)
-        setWidth(window.innerWidth)
-      }
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [gridState.gridWidth, gridState.isEnabled, gridState.windowWidth, location.pathname, prevMargin, prevWidth])
-
   return(
     <div
       className="menu-panel-container"
       style={{
-        marginLeft: prevMargin,
-        marginRight: prevMargin
+        width: 'calc(100% - 176px)',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems:'center',
+        justifyContent: 'space-between',
       }}
     >
       <Link to={RoutePaths.HOME} className="home-link">

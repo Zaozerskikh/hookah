@@ -1,3 +1,3 @@
 export const Consts = {
-  MIN_SIDE_MARGIN: 40
+  MIN_SIDE_MARGIN: 88
 }

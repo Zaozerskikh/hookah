@@ -3,8 +3,6 @@ import './NewsCard.css'
 import MoreButton from "../more_button/MoreButton";
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
-import {setShopGridSize} from "../../../redux/shop_grid_size_reducer/ShopGridSizeReducer";
-import {useDispatch} from "react-redux";
 
 interface NewsCardProps {
   newsId: string;
@@ -15,10 +13,8 @@ interface NewsCardProps {
 
 const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description}) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
 
   const openNews = () => {
-    dispatch(setShopGridSize(0, 0,false, 0, 0))
     navigate(RoutePaths.NEWS_DETAILED.replace(':id', newsId));
   }
 

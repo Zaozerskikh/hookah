@@ -9,14 +9,8 @@ import tangiersLogo from '../../../assets/icons/partners/tangiers_logo.png'
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
 import NewsSection from "./news_section/NewsSection";
 import {Products} from "../../../content/Products";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../redux/Store";
-import {Consts} from "../../../content/Consts";
 
 const HomePage: React.FC = () => {
-  const gridState = useSelector((state: RootState) => state.grid)
-  const menuMargin = useSelector((state: RootState) => state.menu.margin)
-
   useState(() => {
     window.scrollTo({ top: 0 });
   })
@@ -27,14 +21,13 @@ const HomePage: React.FC = () => {
         <div
           className="left-tricky-div"
           style={{
-            width: `${(gridState.windowWidth - gridState.gridWidth - Consts.MIN_SIDE_MARGIN * 2) / 2 + 300}px`
+            width: "6000px",
+            position: 'absolute',
+            left: '-5500px'
           }}
         />
         <div
           className="greetings-container"
-          style={{
-            left: `${(gridState.windowWidth - gridState.gridWidth - Consts.MIN_SIDE_MARGIN * 2) / 2 - 5}px`,
-          }}
         >
           <div className="greetings-header">
             👋 Welcome to Hookah.pt
@@ -54,11 +47,9 @@ const HomePage: React.FC = () => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            marginLeft: `${menuMargin}px`,
-            marginRight: `${menuMargin}px`,
+            justifyContent: 'center',
             marginTop: '64px',
-            width: `calc(100% - ${menuMargin}px - ${menuMargin}px)`
+            gap: '88px',
           }}
         >
           <img src={darksideLogo} alt="darksideLogo" className="partner-logo-image" />
