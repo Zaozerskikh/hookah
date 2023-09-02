@@ -102,7 +102,7 @@ const ProductCard: React.FC<ProductInfo> =
         <span className="product-price">{price.toFixed(2)}€</span>
       </div>
       <div className="button-container">
-        {purchasedCount === 0
+        {purchasedCount === 0 || !purchasedCount
           ? (
             <StandardButton
               text="Buy"
