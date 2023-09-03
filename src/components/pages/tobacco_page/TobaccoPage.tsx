@@ -11,6 +11,7 @@ import PageNumberButton from "./page_number_button/PageNumberButton";
 import MoreButton from "../../ui_components/more_button/MoreButton";
 
 export const PRODUCTS_COUNT_ON_A_PAGE = 4;
+const PAGES_BEFORE_MORE_BUTTON = 5;
 
 const TobaccoPage: React.FC = () => {
   // main content management
@@ -18,7 +19,7 @@ const TobaccoPage: React.FC = () => {
   const [filteredProducts, setFilteredProducts] = useState(Products)
   const [currPageNumber, setCurrPageNumber] = useState(1)
   const [totalPageCount, setTotalPageCount] = useState(0)
-  const [currLastPageNumberShown, setCurrLastPageNumberShown] = useState(5)
+  const [currLastPageNumberShown, setCurrLastPageNumberShown] = useState(PAGES_BEFORE_MORE_BUTTON)
 
   useEffect(() => {
     setTotalPageCount(Math.ceil(filteredProducts.length / PRODUCTS_COUNT_ON_A_PAGE))
@@ -33,7 +34,7 @@ const TobaccoPage: React.FC = () => {
   const filterBySearchString = () => {
     setLoading(true)
     setCurrPageNumber(1)
-    setCurrLastPageNumberShown(5)
+    setCurrLastPageNumberShown(PAGES_BEFORE_MORE_BUTTON)
 
     setTimeout(() => {
       const namesMatches = Products
@@ -69,8 +70,9 @@ const TobaccoPage: React.FC = () => {
     const filterByTags = () => {
       setLoading(true)
       setCurrPageNumber(1)
-      setCurrLastPageNumberShown(5)
-      if (!(darkSideTagActive || musthaveTagActive || elementSideTagActive || tangiersTagActive || fumariTagActive || accessoriesTagActive)) {
+      setCurrLastPageNumberShown(PAGES_BEFORE_MORE_BUTTON)
+      if (!(darkSideTagActive || musthaveTagActive || elementSideTagActive ||
+        tangiersTagActive || fumariTagActive || accessoriesTagActive)) {
         setFilteredProducts(Products)
         setLoading(false)
       } else {
@@ -251,15 +253,19 @@ const TobaccoPage: React.FC = () => {
                         borderRadius: '16px',
                         paddingRight: '0px',
                         paddingLeft: '-5px',
-                        opacity: currLastPageNumberShown > 5 ? 1 : 0
+                        opacity: currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON ? 1 : 0
                       }}
                       iconStyle={{
                         right: '4px'
                       }}
                       iconShift={3}
                       onClickAction={() => {
-                        if (currLastPageNumberShown > 5) {
-                          setCurrLastPageNumberShown(currLastPageNumberShown - 5)
+                        if (currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON) {
+                          if (currLastPageNumberShown === totalPageCount) {
+                            setCurrLastPageNumberShown(currLastPageNumberShown - (totalPageCount % PAGES_BEFORE_MORE_BUTTON))
+                          } else {
+                            setCurrLastPageNumberShown(currLastPageNumberShown - PAGES_BEFORE_MORE_BUTTON)
+                          }
                         }
                       }}
                     />
@@ -286,9 +292,9 @@ const TobaccoPage: React.FC = () => {
                         flexWrap: 'nowrap',
                         flexShrink: '0',
                         alignItems: 'center',
-                        justifyContent: currLastPageNumberShown === 5 && currLastPageNumberShown > totalPageCount ? 'center' : 'flex-start',
+                        justifyContent: currLastPageNumberShown === PAGES_BEFORE_MORE_BUTTON && currLastPageNumberShown > totalPageCount ? 'center' : 'flex-start',
                         position: "absolute",
-                        left: 48 * (-currLastPageNumberShown) + 5 * 48,
+                        left: 48 * (-currLastPageNumberShown) + PAGES_BEFORE_MORE_BUTTON * 48,
                         transition: "all .5s ease",
                         WebkitTransition: "all .5s ease",
                         MozTransition: "all .5s ease",
@@ -330,10 +336,12 @@ const TobaccoPage: React.FC = () => {
                       }}
                       iconShift={3}
                       onClickAction={() => {
-                        console.log(currLastPageNumberShown)
-                        console.log(totalPageCount)
                         if (currLastPageNumberShown < totalPageCount) {
-                          setCurrLastPageNumberShown(currLastPageNumberShown + 5)
+                          if (totalPageCount - currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON) {
+                            setCurrLastPageNumberShown(currLastPageNumberShown + PAGES_BEFORE_MORE_BUTTON)
+                          } else {
+                            setCurrLastPageNumberShown(totalPageCount)
+                          }
                         }
                       }}
                     />
