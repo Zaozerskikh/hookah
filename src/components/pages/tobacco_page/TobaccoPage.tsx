@@ -21,7 +21,7 @@ const TobaccoPage: React.FC = () => {
   const [currLastPageNumberShown, setCurrLastPageNumberShown] = useState(5)
 
   useEffect(() => {
-    setTotalPageCount(filteredProducts.length / PRODUCTS_COUNT_ON_A_PAGE)
+    setTotalPageCount(Math.ceil(filteredProducts.length / PRODUCTS_COUNT_ON_A_PAGE))
   }, [filteredProducts])
 
   // search field
@@ -32,6 +32,9 @@ const TobaccoPage: React.FC = () => {
 
   const filterBySearchString = () => {
     setLoading(true)
+    setCurrPageNumber(1)
+    setCurrLastPageNumberShown(5)
+
     setTimeout(() => {
       const namesMatches = Products
         .filter(product => product.name.toLowerCase().includes(searchString.toLowerCase()))
@@ -65,6 +68,8 @@ const TobaccoPage: React.FC = () => {
   useEffect(() => {
     const filterByTags = () => {
       setLoading(true)
+      setCurrPageNumber(1)
+      setCurrLastPageNumberShown(5)
       if (!(darkSideTagActive || musthaveTagActive || elementSideTagActive || tangiersTagActive || fumariTagActive || accessoriesTagActive)) {
         setFilteredProducts(Products)
         setLoading(false)
@@ -325,6 +330,8 @@ const TobaccoPage: React.FC = () => {
                       }}
                       iconShift={3}
                       onClickAction={() => {
+                        console.log(currLastPageNumberShown)
+                        console.log(totalPageCount)
                         if (currLastPageNumberShown < totalPageCount) {
                           setCurrLastPageNumberShown(currLastPageNumberShown + 5)
                         }

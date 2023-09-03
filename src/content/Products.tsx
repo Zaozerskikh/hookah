@@ -10,11 +10,14 @@ import musthaveFrosty from '../assets/icons/products/musthave/musthave_frosty.jp
 import musthaveMirlic from '../assets/icons/products/musthave/musthave_mirlic.jpg'
 import musthaveSpaceForce from '../assets/icons/products/musthave/musthave_space_force.jpg'
 import musthaveSpaceInviders from '../assets/icons/products/musthave/musthave_space_invaders.jpg'
+import fumariCaramel from '../assets/icons/products/fumari/fumari_caramella_kiss.jpg'
+import placeholder from '../assets/icons/products/tobacco_placeholder.png'
+
 
 export const ProductBrand = {
   DARKSIDE: 'DarkSide',
   FUMARI: 'Fumari',
-  ELEMENTS: 'Elements',
+  ELEMENTS: 'Element',
   MUSTHAVE : 'MustHave',
   TANGIERS: 'Tangiers',
 }
@@ -164,6 +167,149 @@ export const Products: ProductInfo[] = [
     price: 39.99,
     image: musthaveMirlic
   },
+  {
+    productId: '13',
+    name: 'Caramella Kiss',
+    brand: ProductBrand.FUMARI,
+    line: 'Base',
+    weight: 50,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 11.99,
+    image: fumariCaramel
+  },
+  {
+    productId: '14',
+    name: 'C96 Cane Mint',
+    brand: ProductBrand.TANGIERS,
+    line: 'noir',
+    weight: 250,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 79.99,
+    image: placeholder
+  },
+  {
+    productId: '15',
+    name: ' C78 Horchata',
+    brand: ProductBrand.TANGIERS,
+    line: 'Noir',
+    weight: 250,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 79.99,
+    image: placeholder
+  },
+  {
+    productId: '16',
+    name: 'C38 Kashmir Peach',
+    brand: ProductBrand.TANGIERS,
+    line: 'Noir',
+    weight: 250,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 79.99,
+    image: placeholder
+  },
+  {
+    productId: '17',
+    name: 'C87 Kiwi',
+    brand: ProductBrand.TANGIERS,
+    line: 'Noir',
+    weight: 250,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 79.99,
+    image: placeholder
+  },
+  {
+    productId: '18',
+    name: 'C58 Welsh Cream',
+    brand: ProductBrand.TANGIERS,
+    line: 'noir',
+    weight: 250,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 79.99,
+    image: placeholder
+  },
+  {
+    productId: '19',
+    name: 'C34 Breakfast Cereal',
+    brand: ProductBrand.TANGIERS,
+    line: 'Noir',
+    weight: 250,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 79.99,
+    image: placeholder
+  },
+  {
+    productId: '20',
+    name: 'Amazon',
+    brand: ProductBrand.ELEMENTS,
+    line: 'Agua',
+    weight: 40,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 12.99,
+    image: placeholder
+  },
+  {
+    productId: '21',
+    name: 'Mississippi',
+    brand: ProductBrand.ELEMENTS,
+    line: 'Agua',
+    weight: 40,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 12.99,
+    image: placeholder
+  },
+  {
+    productId: '22',
+    name: 'Amazon',
+    brand: ProductBrand.ELEMENTS,
+    line: 'Agua',
+    weight: 40,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 12.99,
+    image: placeholder
+  },
+  {
+    productId: '23',
+    name: 'Mississippi',
+    brand: ProductBrand.ELEMENTS,
+    line: 'Agua',
+    weight: 40,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 12.99,
+    image: placeholder
+  },
+  {
+    productId: '24',
+    name: 'Amazon',
+    brand: ProductBrand.ELEMENTS,
+    line: 'Amur',
+    weight: 40,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 12.99,
+    image: placeholder
+  },
+  {
+    productId: '25',
+    name: 'Mississippi',
+    brand: ProductBrand.ELEMENTS,
+    line: 'Mekong',
+    weight: 40,
+    description: 'Mango, joghurt',
+    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    price: 12.99,
+    image: placeholder
+  },
 ]
 
-export const productsOnTheMain: string[] = ['1', '2', '4', '5', '9', '10', '11', '12']
+export const productsOnTheMain: string[] = ['1', '2', '4', '5', '9', '10', '13', '20']

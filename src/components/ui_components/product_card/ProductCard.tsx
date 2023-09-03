@@ -93,7 +93,7 @@ const ProductCard: React.FC<ProductInfo> =
           className="product-name"
           onClick={() => setDetailedViewOpened(true)}
         >
-          {`${brand} – ${name} (${line.toLowerCase()}) ${weight}G`}
+          {`${brand} – ${name} (${line}) ${weight}G`}
         </span>
         <span
           onClick={() => setDetailedViewOpened(true)}
