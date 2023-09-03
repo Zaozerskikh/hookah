@@ -16,7 +16,7 @@ const CartButton: React.FC = () => {
       style={{
         cursor: isHovered ? 'pointer' : undefined,
         position: "fixed",
-        right: Object.values(cartState).reduce((acc, value) => acc + value, 0) === 0 ? '-88px' : '0',
+        right: Object.values(cartState).reduce((acc, value) => acc + value, 0) === 0 ? '-88px' : '20px',
         boxShadow: '0px 0px 10px #9093984D',
         top: '186px',
         width: '82px',

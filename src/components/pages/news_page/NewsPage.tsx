@@ -19,6 +19,7 @@ const NewsPage: React.FC = () => {
         alignItems: 'center',
         gap: '34px',
         paddingBottom: '128px',
+        minWidth: '1264px'
      }}
     >
       <span

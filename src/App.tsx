@@ -14,6 +14,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "./redux/Store";
 import CartButton from "./components/ui_components/cart_button/CartButton";
 import NotFoundPage from "./components/pages/not_found_page/NotFoundPage";
+import DeliveryPolicyPage from "./components/pages/delivery_policy_page/DeliveryPolicyPage";
 
 const App: React.FC = () => {
   const isWarningShown = useSelector((state: RootState) => state.warning.isShown)
@@ -22,7 +23,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setMinHeight(window.innerHeight - 420)
+      setMinHeight(Math.max(window.innerHeight - 420))
     }
 
     window.addEventListener('resize', handleResize);
@@ -37,7 +38,7 @@ const App: React.FC = () => {
       document.body.style.overflowY = 'hidden';
     } else {
       document.body.style.overflowX = 'hidden';
-      document.body.style.overflowY = 'scroll';
+      document.body.style.overflowY = 'auto';
     }
 
     return () => {
@@ -79,6 +80,7 @@ const App: React.FC = () => {
             <Route path={RoutePaths.NEWS_DETAILED} element={<DetailedNewsPage />} />
             <Route path={RoutePaths.ACCESSORIES} element={<AccessoriesPage />} />
             <Route path={RoutePaths.ABOUT} element={<AboutUsPage />} />
+            <Route path={RoutePaths.DELIVERY_POLICY} element={<DeliveryPolicyPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>

@@ -1,0 +1,15 @@
+.block-container .block-header {
+    color: #000;
+    font-family: Unbounded-400, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+}
+
+.block-container .block-text{
+    color: #000;
+    font-family: Monsterrat-400, serif;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 144%;
+}

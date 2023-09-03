@@ -46,8 +46,9 @@ const HomePage: React.FC = () => {
           className="partners-logo-container"
           style={{
             display: 'flex',
+            width: '100%',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             marginTop: '64px',
             gap: '88px',
           }}

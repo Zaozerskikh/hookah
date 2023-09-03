@@ -1,0 +1,71 @@
+.about-animation-container {
+    transform: rotate(315deg);
+}
+.about-animation-container .about-animation-bottom-floating-clouds-container {
+    overflow: hidden;
+    width: 635px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    background: repeat-x;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    margin-right: 100px;
+}
+
+.about-animation-container .about-animation-top-floating-clouds-container {
+    overflow: hidden;
+    width: 635px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    background: repeat-x;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+
+.about-animation-bottom-floating-clouds-container .about-animation-floating-clouds-image {
+    animation:  aboutScrollAnimationBottom 40s linear infinite;
+    width: 5080px;
+    background: repeat-x;
+    margin-right: 100px;
+}
+
+.about-animation-top-floating-clouds-container .about-animation-floating-clouds-image {
+    animation: aboutScrollAnimationTop 30s linear infinite;
+    width: 5080px;
+    background: repeat-x;
+}
+
+@keyframes aboutScrollAnimationBottom {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-635px, 0, 0);
+    }
+}
+
+@keyframes aboutScrollAnimationTop {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-635px, 0, 0);
+    }
+}
+
+.about-animation-container .hookah-wrapper {
+    margin-left: 20px;
+    margin-top: 10px;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    transform: rotate(45deg);
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 340px;
+}

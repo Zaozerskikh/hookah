@@ -11,6 +11,7 @@ const NotFoundPage: React.FC = () => {
     <div
       style={{
         width: '100%',
+        minHeight: '700px',
         position: 'relative',
       }}
     >
@@ -33,14 +34,15 @@ const NotFoundPage: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          top: '-88px',
-          right: '0',
+          top: '-180px',
+          right: '-115px',
           zIndex: -9998,
         }}
       >
-        <svg width="713" height="715" viewBox="0 0 713 715" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fillRule="evenodd" clipRule="evenodd" d="M557.686 440.694C556.569 510.504 529.376 579.975 476.107 633.244C367.287 742.063 190.855 742.063 82.0355 633.244C-26.7842 524.424 -26.7842 347.992 82.0356 239.173C135.309 185.899 204.786 158.706 274.602 157.593C275.719 87.7832 302.912 18.3127 356.181 -34.9563C465.001 -143.776 641.432 -143.776 750.252 -34.9563C859.072 73.8634 859.072 250.295 750.252 359.115C696.979 412.388 627.501 439.581 557.686 440.694Z" fill="#CFD5DB" fillOpacity="0.19"/>
+        <svg width="832" height="832" viewBox="0 0 832 832" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fillRule="evenodd" clipRule="evenodd" d="M557.686 557.694C556.569 627.504 529.376 696.975 476.107 750.243C367.287 859.063 190.855 859.063 82.0355 750.244C-26.7842 641.424 -26.7842 464.992 82.0356 356.172C135.309 302.899 204.786 275.706 274.602 274.593C275.719 204.783 302.912 135.313 356.181 82.0436C465.001 -26.7762 641.432 -26.7762 750.252 82.0436C859.072 190.863 859.072 367.295 750.252 476.115C696.979 529.388 627.501 556.581 557.686 557.694Z" fill="#CFD5DB" fillOpacity="0.19"/>
         </svg>
+
       </div>
       <div style={{ marginLeft: `88px`, marginTop: '100px'}}>
         <svg width="411" height="141" viewBox="0 0 411 141" fill="none" xmlns="http://www.w3.org/2000/svg">

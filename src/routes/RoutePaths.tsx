@@ -4,5 +4,6 @@ export const RoutePaths = {
   ACCESSORIES: '/accessories',
   NEWS: '/news',
   NEWS_DETAILED: '/news/:id',
-  ABOUT: '/about'
+  ABOUT: '/about',
+  DELIVERY_POLICY: '/delivery'
 }

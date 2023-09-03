@@ -1,0 +1,42 @@
+.about-us-container {
+    min-width: 1264px;
+    margin: 34px 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+
+.about-us-container .main-text-and-logo-container {
+    display: flex;
+    flex-direction: row;
+    gap: 128px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.about-us-container .main-text-container {
+    color: #000;
+    font-family: Monsterrat-400, serif;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 144%;
+    max-width: 808px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.about-us-container .socials-container {
+    width: 160px;
+    gap: 32px;
+    display: flex;
+}
+
+.about-us-container .about-header {
+    color: #000;
+    font-family: Monsterrat-700, serif;
+    font-size: 32px;
+    font-style: normal;
+    line-height: 144%;
+}
+
