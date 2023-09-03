@@ -10,10 +10,11 @@ interface MoreButtonProps {
   textStyle? : React.CSSProperties
   iconWrapperStyle ? : React.CSSProperties,
   iconStyle? : React.CSSProperties
+  iconShift ? : number
 }
 
 const MoreButton: React.FC<MoreButtonProps> =
-  ({ showText, text, buttonStyle, textStyle, iconStyle, iconWrapperStyle, onClickAction }) => {
+  ({ showText, text, buttonStyle, textStyle, iconStyle, iconWrapperStyle, onClickAction, iconShift }) => {
     const [isHovered, setHovered] = useState(false);
 
     const parsedButtonStyle = {
@@ -82,7 +83,7 @@ const MoreButton: React.FC<MoreButtonProps> =
             className="more-icon"
             src={blackMoreIconBase}
             alt="more-icon"
-            style={{opacity: 1, right: '12px', ...parsedIconStyle, width: isHovered ? '32px' : '24px'}}
+            style={{opacity: 1, right: '12px', ...parsedIconStyle, width: isHovered ? iconShift ? `calc(24px + ${iconShift}px` : '32px' : '24px'}}
           />
         </div>
       </button>

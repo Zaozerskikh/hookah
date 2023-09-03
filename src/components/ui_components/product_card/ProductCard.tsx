@@ -12,7 +12,7 @@ import {decrementProductCount, incrementProductCount} from "../../../redux/cart_
 
 const ProductCard: React.FC<ProductInfo> =
   ({ productId, name, brand,line, weight, description, price, image , fullDescription}) => {
-  const purchasedCount = useSelector((state: RootState) => state.cart[productId]);
+  const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
   const dispatch = useDispatch();
 
@@ -102,7 +102,7 @@ const ProductCard: React.FC<ProductInfo> =
         <span className="product-price">{price.toFixed(2)}€</span>
       </div>
       <div className="button-container">
-        {purchasedCount === 0 || !purchasedCount
+        {purchasedCount === 0
           ? (
             <StandardButton
               text="Buy"

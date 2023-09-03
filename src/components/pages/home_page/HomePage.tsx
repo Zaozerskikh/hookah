@@ -8,7 +8,7 @@ import musthaveLogo from '../../../assets/icons/partners/musthave_logo.png'
 import tangiersLogo from '../../../assets/icons/partners/tangiers_logo.png'
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
 import NewsSection from "./news_section/NewsSection";
-import {Products} from "../../../content/Products";
+import {Products, productsOnTheMain} from "../../../content/Products";
 
 const HomePage: React.FC = () => {
   useState(() => {
@@ -38,7 +38,14 @@ const HomePage: React.FC = () => {
         </div>
         <FloatingClouds/>
       </div>
-      <ShopGrid products={Products} showAllCatalogButton={true} />
+      <ShopGrid
+        products={productsOnTheMain.map(productId =>
+          Products.find(product =>
+            product.productId === productId
+          )
+        )}
+        showAllCatalogButton={true}
+      />
       <NewsSection/>
       <div className="partners-container">
         <span className="partners-header">Our partners ❤️</span>

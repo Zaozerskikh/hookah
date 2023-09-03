@@ -7,11 +7,22 @@ import {ProductBrand, ProductInfo, Products} from "../../../content/Products";
 import ZoomButton from "./zoom_button/ZoomButton";
 import SearchInputField from "./search_input_field/SearchInputField";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
+import PageNumberButton from "./page_number_button/PageNumberButton";
+import MoreButton from "../../ui_components/more_button/MoreButton";
+
+export const PRODUCTS_COUNT_ON_A_PAGE = 4;
 
 const TobaccoPage: React.FC = () => {
   // main content management
   const [isLoading, setLoading] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(Products)
+  const [currPageNumber, setCurrPageNumber] = useState(1)
+  const [totalPageCount, setTotalPageCount] = useState(0)
+  const [currLastPageNumberShown, setCurrLastPageNumberShown] = useState(5)
+
+  useEffect(() => {
+    setTotalPageCount(filteredProducts.length / PRODUCTS_COUNT_ON_A_PAGE)
+  }, [filteredProducts])
 
   // search field
   const [searchString, setSearchString] = useState('');
@@ -188,7 +199,144 @@ const TobaccoPage: React.FC = () => {
             <LoadingIcon/>
           </div>
         )
-        : <ShopGrid showAllCatalogButton={false} products={filteredProducts} />}
+        : (
+          <div>
+            <ShopGrid
+              showAllCatalogButton={false}
+              products={filteredProducts.slice(
+                (currPageNumber - 1) * PRODUCTS_COUNT_ON_A_PAGE,
+                currPageNumber * PRODUCTS_COUNT_ON_A_PAGE
+              )}
+            />
+            {
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  marginTop: '64px',
+                  marginBottom: '128px'
+                }}
+              >
+                <div
+                  style={{
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '16px',
+                    width: '320px',
+                  }}
+                >
+                  <div
+                    style={{
+                      transform: 'rotate(180deg)',
+                      position: "absolute",
+                      left: 0,
+                      display: 'flex',
+                    }}
+                  >
+                    <MoreButton
+                      showText={false}
+                      buttonStyle={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '16px',
+                        paddingRight: '0px',
+                        paddingLeft: '-5px',
+                        opacity: currLastPageNumberShown > 5 ? 1 : 0
+                      }}
+                      iconStyle={{
+                        right: '4px'
+                      }}
+                      iconShift={3}
+                      onClickAction={() => {
+                        if (currLastPageNumberShown > 5) {
+                          setCurrLastPageNumberShown(currLastPageNumberShown - 5)
+                        }
+                      }}
+                    />
+                  </div>
+                  <div
+                    className="static-number-window"
+                    style={{
+                      width: '224px',
+                      height: '32px',
+                      position: 'relative',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      overflow: 'hidden'
+                    }}
+                  >
+                    <div
+                      className="dynamic-number-row"
+                      style={{
+                        display: "flex",
+                        flexDirection: 'row',
+                        gap: '16px',
+                        width: '224px',
+                        flexWrap: 'nowrap',
+                        flexShrink: '0',
+                        alignItems: 'center',
+                        justifyContent: currLastPageNumberShown === 5 && currLastPageNumberShown > totalPageCount ? 'center' : 'flex-start',
+                        position: "absolute",
+                        left: 48 * (-currLastPageNumberShown) + 5 * 48,
+                        transition: "all .5s ease",
+                        WebkitTransition: "all .5s ease",
+                        MozTransition: "all .5s ease",
+                      }}
+                    >
+                      {
+                        totalPageCount > 1 && Array.from(
+                          { length: totalPageCount },
+                          (_, i) => i + 1
+                        ).map((num, idx) => (
+                          <PageNumberButton
+                            pageNumber={num}
+                            isActive={currPageNumber === num}
+                            onClickAction={() => setCurrPageNumber(num)}
+                            key={idx}
+                          />
+                        ))
+                      }
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: 0,
+                    }}
+                  >
+                    <MoreButton
+                      showText={false}
+                      buttonStyle={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '16px',
+                        paddingRight: '0px',
+                        paddingLeft: '-5px',
+                        opacity: currLastPageNumberShown < totalPageCount ? 1 : 0
+                      }}
+                      iconStyle={{
+                        right: '4px'
+                      }}
+                      iconShift={3}
+                      onClickAction={() => {
+                        if (currLastPageNumberShown < totalPageCount) {
+                          setCurrLastPageNumberShown(currLastPageNumberShown + 5)
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        )
+      }
     </div>
   )
 }
