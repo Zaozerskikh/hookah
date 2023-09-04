@@ -207,17 +207,23 @@
 }
 
 .product-card-container .detailed-view-container .containerwrapper {
-    border: 3px solid black;
+    position: relative;
     width: 500px;
     height: 500px;
-    font-size: 30px;
+    overflow: hidden;
+}
+
+.product-card-container .detailed-view-container .containerwrapper.nogradient {
+    position: relative;
+    width: 500px;
+    height: 500px;
     overflow: hidden;
 }
 
 .product-card-container .detailed-view-container .containerwrapper:before {
     content: '';
     position: absolute;
-    bottom: 33px;
+    bottom: 0;
     background: linear-gradient(to bottom, transparent, black);
     height: 25px;
     width: 460px;
@@ -228,7 +234,7 @@
 .product-card-container .detailed-view-container .containerwrapper:after {
     content: '';
     position: absolute;
-    top: 234px;
+    top: -5px;
     background: linear-gradient(to top, transparent, black);
     height: 40px;
     width: 460px;

@@ -4,7 +4,7 @@ import MoreButton from "../more_button/MoreButton";
 import StandardButton from "../standart_button/StandartButton";
 import CounterButton from "../counter_button/CounterButton";
 import CloseButton from "../close_button/CloseButton";
-import {ProductInfo} from "../../../content/Products";
+import {ProductInfo, productsWithLongDescription} from "../../../content/Products";
 import Scrollbar from "react-scrollbars-custom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
@@ -67,7 +67,7 @@ const ProductCard: React.FC<ProductInfo> =
                 <span className="buy-now-text">Buy now</span>
               </button>
             </div>
-            <div className="containerwrapper">
+            <div className={`containerwrapper${productsWithLongDescription.find(p => p === productId) ? '' : 'nogradient'}`}>
               <Scrollbar
                 className="detailed-full-description"
                 thumbYProps={{
@@ -101,7 +101,7 @@ const ProductCard: React.FC<ProductInfo> =
           className="product-name"
           onClick={() => setDetailedViewOpened(true)}
           style={{
-            fontSize: `${name.length > 14 ? 18 : 22}px`
+            fontSize: `${name.length > 20 ? 18 : 22}px`
           }}
         >
           {`${brand} – ${name} (${line}) ${weight}G`}
