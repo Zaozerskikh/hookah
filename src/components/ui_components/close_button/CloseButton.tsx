@@ -8,12 +8,13 @@ import whiteExtendedCloseIcon from "../../../assets/icons/product_card/extended_
 interface CloseButtonProps {
   isDark ? : boolean,
   buttonStyle? : React.CSSProperties;
+  changeColorOnHover : boolean
   iconSize: number;
   onClickAction : (...args: any) => any;
 }
 
 const CloseButton: React.FC<CloseButtonProps> =
-  ({onClickAction, buttonStyle, iconSize, isDark}) => {
+  ({onClickAction, buttonStyle, iconSize, isDark, changeColorOnHover}) => {
   const [isHovered, setHovered] = useState(false)
 
   return(
@@ -31,7 +32,11 @@ const CloseButton: React.FC<CloseButtonProps> =
         borderRadius: '36px',
         border: 'none',
         outline: 'none',
-        backgroundColor: !isHovered ? (isDark ? 'black' : 'white') : (isDark ? '#2C2D2E' : '#e2e5e7'),
+        backgroundColor: !isHovered
+          ? (isDark ? 'black' : 'white')
+          : (isDark
+            ? !changeColorOnHover ? 'black' : '#2C2D2E'
+            : !changeColorOnHover ? 'white' : '#e2e5e7'),
         cursor: isHovered ? 'pointer' : undefined,
         transition: "all 0.5s ease",
         WebkitTransition: "all 0.5s ease",

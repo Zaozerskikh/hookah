@@ -9,9 +9,10 @@ interface NewsCardProps {
   image: string;
   name: string;
   description: string;
+  shortNameInCard: string,
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description}) => {
+const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description, shortNameInCard}) => {
   const navigate = useNavigate();
 
   const openNews = () => {
@@ -22,7 +23,7 @@ const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description}) =>
     <div className="news-card-container" onClick={openNews}>
       <img src={image} alt={name} className="news-image" onClick={openNews}/>
       <div className="news-card-text-container">
-        <span className="news-card-header" onClick={openNews}>{name}</span>
+        <span className="news-card-header" onClick={openNews} dangerouslySetInnerHTML={{ __html:  shortNameInCard}}/>
         <div className="news-card-description-wrapper">
           {description.split('\\n').map((line, idx) => (
             <div key={idx} className="news-card-description-line">

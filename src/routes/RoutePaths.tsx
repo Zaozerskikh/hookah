@@ -5,5 +5,6 @@ export const RoutePaths = {
   NEWS: '/news',
   NEWS_DETAILED: '/news/:id',
   ABOUT: '/about',
-  DELIVERY_POLICY: '/delivery'
+  DELIVERY_POLICY: '/delivery',
+  TEST_404: '/404'
 }

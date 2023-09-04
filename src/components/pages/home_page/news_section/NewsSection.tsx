@@ -13,6 +13,7 @@ const NewsSection: React.FC = () => {
         {
           News.map((news, idx) => (
             <NewsCard
+              shortNameInCard={news.shortNameInCard}
               key={idx}
               newsId={news.newsId}
               image={news.image}

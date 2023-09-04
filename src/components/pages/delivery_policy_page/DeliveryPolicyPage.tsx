@@ -24,7 +24,7 @@ const Blocks: BlockProps[] = [
   },
   {
     headerText: 'CTT Partnership 🚗',
-    mainText: 'At Hookah PT, we’ve chosen <a href="https://www.ctt.pt/">CTT</a> as our delivery partner because of their renowned reliability </br>and extensive network. With CTT’s expertise in logistics, your tobacco order is in safe hands </br> from the moment you place it to the moment it arrives at your doorstep.'
+    mainText: 'At Hookah PT, we’ve chosen <a href="https://www.ctt.pt/" target="_blank" rel="noreferrer">CTT</a> as our delivery partner because of their renowned reliability </br>and extensive network. With CTT’s expertise in logistics, your tobacco order is in safe hands </br> from the moment you place it to the moment it arrives at your doorstep.'
   },
   {
     headerText: 'Real-Time Tracking 🔦',

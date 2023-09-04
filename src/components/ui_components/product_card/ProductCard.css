@@ -30,7 +30,6 @@
 
 .product-card-container .product-card-text .product-name {
     font-family: Monsterrat-600, serif;
-    font-size: 22px;
     line-height: 31.68px;
     color: black;
     text-align: center;
@@ -85,7 +84,6 @@
 .product-card-container .detailed-view-container.open {
     z-index: 1000 !important;
     opacity: 1;
-    background-color: rgba(0, 0, 0, 0.8);
     transition: opacity 0.3s;
 }
 
@@ -213,7 +211,6 @@
     width: 500px;
     height: 500px;
     font-size: 30px;
-    font-family: calibri, serif;
     overflow: hidden;
 }
 

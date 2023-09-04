@@ -19,6 +19,7 @@
     font-size: 25px;
     font-style: normal;
     line-height: 144%;
+    max-width: 840px;
 }
 
 .detailed-news-container .header-container .header-date {
@@ -42,3 +43,6 @@
     line-height: 144%;
 }
 
+b {
+  font-family: Monsterrat-500, serif;
+}

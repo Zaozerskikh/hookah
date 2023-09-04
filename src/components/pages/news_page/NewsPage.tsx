@@ -50,6 +50,7 @@ const NewsPage: React.FC = () => {
                 image={news.image}
                 name={news.name}
                 description={news.description}
+                shortNameInCard={news.shortNameInCard}
               />
             ))
           }

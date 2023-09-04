@@ -13,31 +13,39 @@ import {decrementProductCount, incrementProductCount} from "../../../redux/cart_
 const ProductCard: React.FC<ProductInfo> =
   ({ productId, name, brand,line, weight, description, price, image , fullDescription}) => {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
+  const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
+
   const dispatch = useDispatch();
 
-    useEffect(() => {
-      if (isDetailedViewOpened) {
-        document.body.style.overflowX = 'hidden';
-        document.body.style.overflowY = 'hidden';
-      } else {
-        document.body.style.overflowX = 'hidden';
-        document.body.style.overflowY = 'scroll';
-      }
-
-      return () => {
-        document.body.style.overflowY = 'auto';
-        document.body.style.overflowX = 'hidden';
-      };
-    }, [isDetailedViewOpened]);
+  useEffect(() => {
+    if (isDetailedViewOpened) {
+      document.body.style.overflowX = 'hidden';
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowX = 'hidden';
+      document.body.style.overflowY = 'scroll';
+    }
+    return () => {
+      document.body.style.overflowY = 'auto';
+      document.body.style.overflowX = 'hidden';
+    };
+  }, [isDetailedViewOpened]);
 
   return (
     <div className="product-card-container">
-      <div className={`detailed-view-container ${isDetailedViewOpened ? 'open' : ''}`}>
+      <div
+        className={`detailed-view-container ${isDetailedViewOpened ? 'open' : ''}`}
+        style={{
+          backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.8)' : 'transparent'
+        }}
+      >
         <div className="detailed-view-card">
-          <CloseButton onClickAction={() => setDetailedViewOpened(false)} iconSize={20}/>
+          <CloseButton onClickAction={() => setDetailedViewOpened(false)} iconSize={20} changeColorOnHover={true}/>
           <div className="detailed-view-text-container">
-            <span className="detailed-view-header">{`${brand} - ${name}`}</span>
+            <span className="detailed-view-header">
+              {`${brand} - ${name}`}
+            </span>
             <div className="detailed-view-description-container">
               <div>
                 <span className="detailed-view-brand-line-info">Brand: </span>
@@ -92,6 +100,9 @@ const ProductCard: React.FC<ProductInfo> =
         <span
           className="product-name"
           onClick={() => setDetailedViewOpened(true)}
+          style={{
+            fontSize: `${name.length > 14 ? 18 : 22}px`
+          }}
         >
           {`${brand} – ${name} (${line}) ${weight}G`}
         </span>

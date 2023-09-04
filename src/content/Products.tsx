@@ -224,7 +224,7 @@ export const Products: ProductInfo[] = [
   },
   {
     productId: '18',
-    name: 'C58 Welsh Cream',
+    name: 'C34 It\'s Like That One Breakfast Cereal',
     brand: ProductBrand.TANGIERS,
     line: 'noir',
     weight: 250,
@@ -312,4 +312,4 @@ export const Products: ProductInfo[] = [
   },
 ]
 
-export const productsOnTheMain: string[] = ['1', '2', '4', '5', '9', '10', '13', '20']
+export const productsOnTheMain: string[] = ['1', '2', '4', '5', '9', '10', '18', '20']

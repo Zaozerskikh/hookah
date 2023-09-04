@@ -187,7 +187,7 @@ const TobaccoPage: React.FC = () => {
           }}
           iconSize={12}
           isDark={true}
-        />
+         changeColorOnHover={true}/>
         <SearchInputField onInputChange={onSearchStringChanged} onEnterAction={filterBySearchString}/>
         <ZoomButton onClickAction={filterBySearchString}/>
       </div>
@@ -243,6 +243,8 @@ const TobaccoPage: React.FC = () => {
                       position: "absolute",
                       left: 0,
                       display: 'flex',
+                      marginLeft: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
+                      zIndex: '10',
                     }}
                   >
                     <MoreButton
@@ -253,7 +255,7 @@ const TobaccoPage: React.FC = () => {
                         borderRadius: '16px',
                         paddingRight: '0px',
                         paddingLeft: '-5px',
-                        opacity: currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON ? 1 : 0
+                        opacity: currPageNumber > 1 ? 1 : 0
                       }}
                       iconStyle={{
                         right: '4px'
@@ -261,11 +263,11 @@ const TobaccoPage: React.FC = () => {
                       iconShift={3}
                       onClickAction={() => {
                         if (currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON) {
-                          if (currLastPageNumberShown === totalPageCount) {
-                            setCurrLastPageNumberShown(currLastPageNumberShown - (totalPageCount % PAGES_BEFORE_MORE_BUTTON))
-                          } else {
-                            setCurrLastPageNumberShown(currLastPageNumberShown - PAGES_BEFORE_MORE_BUTTON)
-                          }
+                          setCurrLastPageNumberShown(currLastPageNumberShown - 1)
+                        }
+
+                        if (currPageNumber > 1) {
+                          setCurrPageNumber(currPageNumber - 1)
                         }
                       }}
                     />
@@ -329,7 +331,9 @@ const TobaccoPage: React.FC = () => {
                         borderRadius: '16px',
                         paddingRight: '0px',
                         paddingLeft: '-5px',
-                        opacity: currLastPageNumberShown < totalPageCount ? 1 : 0
+                        marginRight: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
+                        opacity: currPageNumber < totalPageCount ? 1 : 0,
+                        zIndex: '10',
                       }}
                       iconStyle={{
                         right: '4px'
@@ -337,11 +341,11 @@ const TobaccoPage: React.FC = () => {
                       iconShift={3}
                       onClickAction={() => {
                         if (currLastPageNumberShown < totalPageCount) {
-                          if (totalPageCount - currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON) {
-                            setCurrLastPageNumberShown(currLastPageNumberShown + PAGES_BEFORE_MORE_BUTTON)
-                          } else {
-                            setCurrLastPageNumberShown(totalPageCount)
-                          }
+                          setCurrLastPageNumberShown(currLastPageNumberShown + 1)
+                        }
+
+                        if (currPageNumber < totalPageCount) {
+                          setCurrPageNumber(currPageNumber + 1)
                         }
                       }}
                     />

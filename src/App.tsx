@@ -81,6 +81,7 @@ const App: React.FC = () => {
             <Route path={RoutePaths.ACCESSORIES} element={<AccessoriesPage />} />
             <Route path={RoutePaths.ABOUT} element={<AboutUsPage />} />
             <Route path={RoutePaths.DELIVERY_POLICY} element={<DeliveryPolicyPage />} />
+            <Route path={RoutePaths.TEST_404} element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
