@@ -15,6 +15,7 @@ import {RootState} from "./redux/Store";
 import CartButton from "./components/ui_components/cart_button/CartButton";
 import NotFoundPage from "./components/pages/not_found_page/NotFoundPage";
 import DeliveryPolicyPage from "./components/pages/delivery_policy_page/DeliveryPolicyPage";
+import FinalCheckoutPage from "./components/pages/final_checkout_page/FinalCheckoutPage";
 
 const App: React.FC = () => {
   const isWarningShown = useSelector((state: RootState) => state.warning.isShown)
@@ -81,6 +82,7 @@ const App: React.FC = () => {
             <Route path={RoutePaths.ACCESSORIES} element={<AccessoriesPage />} />
             <Route path={RoutePaths.ABOUT} element={<AboutUsPage />} />
             <Route path={RoutePaths.DELIVERY_POLICY} element={<DeliveryPolicyPage />} />
+            <Route path={RoutePaths.FINAL_CHECKOUT} element={<FinalCheckoutPage />} />
             <Route path={RoutePaths.TEST_404} element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

@@ -13,7 +13,7 @@ import {setIsCheckoutWindowShown} from "../../../redux/product_detailed_view_red
 import StandardButton from "../standart_button/StandartButton";
 import MoreButton from "../more_button/MoreButton";
 import {RoutePaths} from "../../../routes/RoutePaths";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const CartButton: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)
@@ -24,6 +24,7 @@ const CartButton: React.FC = () => {
   const warningState = useSelector((state: RootState) => state.warning)
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isHovered, setHovered] = useState(false)
+  const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -173,7 +174,7 @@ const CartButton: React.FC = () => {
               }}
               onClickAction={() => {
                 dispatch(setIsCheckoutWindowShown(false))
-                navigate(RoutePaths.TEST_404)
+                navigate(RoutePaths.FINAL_CHECKOUT)
               }}
             />
           </div>
@@ -184,7 +185,7 @@ const CartButton: React.FC = () => {
         style={{
           cursor: isHovered ? 'pointer' : undefined,
           position: "fixed",
-          right: isCheckoutOpened || warningState.isShown ||  Object
+          right: location.pathname === RoutePaths.FINAL_CHECKOUT || isCheckoutOpened || warningState.isShown || Object
             .values(cartState)
             .reduce((acc, value) => acc + value, 0) === 0 ? '-88px' : '20px',
           boxShadow: '0px 0px 10px #9093984D',

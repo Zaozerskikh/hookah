@@ -41,6 +41,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 32px;
+    margin-top: 32px;
 }
 
 .checkout-container .checkout-card .order-header {

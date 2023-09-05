@@ -9,6 +9,8 @@ import Scrollbar from "react-scrollbars-custom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import {decrementProductCount, incrementProductCount} from "../../../redux/cart_reducer/CartReducer";
+import {useNavigate} from "react-router-dom";
+import {RoutePaths} from "../../../routes/RoutePaths";
 
 const ProductCard: React.FC<ProductInfo> =
   ({ productId, name, brand,line, weight, description, price, image , fullDescription}) => {
@@ -17,6 +19,7 @@ const ProductCard: React.FC<ProductInfo> =
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (isDetailedViewOpened) {
@@ -63,7 +66,15 @@ const ProductCard: React.FC<ProductInfo> =
                 onPlusClickAction={() => dispatch(incrementProductCount(productId))}
                 onMinusClickAction={() => dispatch(decrementProductCount(productId))}
               />
-              <button className="detailed-buy-now-button">
+              <button
+                className="detailed-buy-now-button"
+                onClick={() => {
+                  if (purchasedCount === 0) {
+                    dispatch(incrementProductCount(productId))
+                  }
+                  navigate(RoutePaths.TEST_404)
+                }}
+              >
                 <span className="buy-now-text">Buy now</span>
               </button>
             </div>

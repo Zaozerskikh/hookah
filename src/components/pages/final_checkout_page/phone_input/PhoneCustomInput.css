@@ -1,0 +1,41 @@
+.phone-number-wrapper {
+    border-width: 2px !important;
+    border-style: solid;
+    border-radius: 10px;
+    width: 566px;
+    height: 44px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.PhoneInputCountry {
+    border: none !important;
+}
+
+.PhoneInputCountrySelect {
+    border: none !important;
+}
+
+.PhoneInputCountryIcon {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: white !important;
+    margin-bottom: 2px !important;
+}
+
+.PhoneInputCountrySelectArrow {
+    color: black !important;
+    font-weight: bold;
+}
+
+.invalid-phone-hint {
+    position: absolute;
+    top: -15px;
+    color: #FF4572;
+    font-family: Monsterrat-500, serif;
+    font-size: 11px;
+    font-style: normal;
+    line-height: 144%;
+}
