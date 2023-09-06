@@ -19,6 +19,7 @@ const NewsSection: React.FC = () => {
               image={news.image}
               name={news.name}
               description={news.description}
+              date={news.date}
             />
           ))
         }

@@ -6,12 +6,12 @@
     border-width: 2px !important;
     border-style: solid;
     border-radius: 10px;
-    width: 598px;
+    width: 100%;
 }
 
 .custom-input-field-wrapper .MuiOutlinedInput-notchedOutline {
     border-width: 0 !important;
-    width: 598px !important;
+    width: 100% !important;
     padding: 0 !important;
 }
 
@@ -38,7 +38,13 @@
 .input:-webkit-autofill {
     animation-name: onAutoFillStart;
     background-color: white;
-    transition: background-color 50000s ease-in-out 0s;
+    box-shadow: 0 0 0 1000px white inset;
+    font-family: Monsterrat-500, serif !important;
+}
+
+.input:-webkit-autofill:focus {
+    animation-name: onAutoFillStart;
+    background-color: white;
     box-shadow: 0 0 0 1000px white inset;
     font-family: Monsterrat-500, serif !important;
 }

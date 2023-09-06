@@ -51,6 +51,7 @@ const NewsPage: React.FC = () => {
                 name={news.name}
                 description={news.description}
                 shortNameInCard={news.shortNameInCard}
+                date={news.date}
               />
             ))
           }

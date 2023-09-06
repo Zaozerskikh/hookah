@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductInfo> =
                   if (purchasedCount === 0) {
                     dispatch(incrementProductCount(productId))
                   }
-                  navigate(RoutePaths.TEST_404)
+                  navigate(RoutePaths.FINAL_CHECKOUT)
                 }}
               >
                 <span className="buy-now-text">Buy now</span>

@@ -7,6 +7,7 @@ import whitePlusIcon from "../../../assets/icons/product_card/white_plus_icon.pn
 interface CounterButtonProps {
   counterState: number
   isDark: boolean
+  isFramed ? : boolean
   onPlusClickAction? : (...args: any) => any
   onMinusClickAction? : (...args: any) => any
   wrapperStyle? : React.CSSProperties,
@@ -16,7 +17,7 @@ interface CounterButtonProps {
 const CounterButton: React.FC<CounterButtonProps> =
   ({ counterState, isDark,
      onPlusClickAction, onMinusClickAction,
-     counterStyle , wrapperStyle}) => {
+     counterStyle , wrapperStyle, isFramed}) => {
     const [isPlusHovered, setPlusHovered] = useState(false);
     const [isMinusHovered, setMinusHovered] = useState(false);
 
@@ -29,13 +30,13 @@ const CounterButton: React.FC<CounterButtonProps> =
     }
 
     const parsedWrapperStyle = {
-      width: !isDark ? '138px' : '133px',
-      height: !isDark ? '24px' : '19.8px',
+      width: !isDark && !isFramed ? '138px' : '133px',
+      height: !isDark && !isFramed ? '24px' : '19.8px',
       borderRadius: '24px',
-      backgroundColor: !isDark ? '#EAEBF0' : 'black',
-      borderWidth: isDark ? '2.5px' : undefined,
-      borderStyle: isDark ? 'solid' : undefined,
-      borderColor: isDark ? 'white' : undefined,
+      backgroundColor: isDark ? 'black' : isFramed ? 'white' : '#EAEBF0',
+      borderWidth: isDark || isFramed ? '2.5px' : undefined,
+      borderStyle: isDark || isFramed? 'solid' : undefined,
+      borderColor: isDark ? 'white' : isFramed ? 'black' : undefined,
       outline: 'none',
       padding: '12px 5px',
       alignItems: 'center',

@@ -1,0 +1,112 @@
+.all-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.all-input-wrapper .delivery-info {
+    color: #000;
+    font-family: Monsterrat-400, serif;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 144%;
+}
+
+.header {
+    color: #000;
+    font-family: Monsterrat-700, serif;
+    font-size: 32px;
+    font-style: normal;
+    line-height: 144%;
+}
+
+.payment-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 600px;
+}
+
+.payment-info-wrapper .payment-line-wrapper .static-info {
+    color: #909398;
+    font-family: Unbounded-400, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+}
+
+.payment-info-wrapper .payment-line-wrapper .black-info {
+    color: black;
+    font-family: Unbounded-400, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+}
+
+.payment-info-wrapper .payment-line-wrapper .green-info {
+    color: #7BECB6;
+    font-family: Unbounded-400, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+}
+
+.final-checkout-page-wrapper .order-item-container {
+    width: 600px;
+    height: 141px !important;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    position: relative;
+}
+
+.final-checkout-page-wrapper .order-item-container .order-item-info-container {
+    width: 401px;
+    height: 141px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.final-checkout-page-wrapper .order-item-container .order-item-info-container .order-item-header {
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23px;
+    text-align: left;
+}
+
+.final-checkout-page-wrapper .order-item-container .order-item-info-container .order-item-price {
+    color: #909398;
+    font-family: Monsterrat-400, serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 144%;
+}
+
+.final-checkout-page-wrapper .order-item-container .order-item-info-container .total-item-amount {
+    color: #000;
+    text-align: right;
+    font-family: Monsterrat-500, serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 144%;
+}
+
+.final-checkout-page-wrapper .order-item-container .order-item-info-container .buttons-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 401px;
+    height: 48px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
