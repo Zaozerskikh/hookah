@@ -169,7 +169,7 @@ const FinalCheckoutPage: React.FC = () => {
                 }}
               >
                 <CustomInput
-                  placeholderText="promocode"
+                  placeholderText="Promo code"
                   invalidTextHint="Invalid or expired code"
                   onInputChange={(text) => setPromocode(text)}
                   validationFunc={() => false}

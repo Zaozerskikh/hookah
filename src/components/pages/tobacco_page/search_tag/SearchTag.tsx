@@ -18,7 +18,7 @@ const SearchTag: React.FC<SearchTagProps> = ({ name , isActive, onActiveChanged}
       className="search-tag-button"
       style={{
         cursor: isHovered ? 'pointer' : undefined,
-        borderColor: isActive ? 'black' : '#EAEBF0',
+        borderColor: isActive ? 'black' : !isHovered ? '#EAEBF0' : '#CFD5DB',
         borderStyle: 'solid',
         display: 'flex',
         padding: '3px 16px',
@@ -26,7 +26,7 @@ const SearchTag: React.FC<SearchTagProps> = ({ name , isActive, onActiveChanged}
         gap: '10px',
         borderRadius: '16px',
         borderWidth: '2px',
-        background: '#EAEBF0',
+        background: !isHovered ? '#EAEBF0' : '#CFD5DB',
         transition: "all 0.5s ease",
         WebkitTransition: "all 0.5s ease",
         MozTransition: "all 0.5s ease",

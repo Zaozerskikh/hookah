@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 const Blocks: BlockProps[] = [
   {
-    headerText: 'Quick Delivery Times ⚡',
+    headerText: 'Quick Delivery Times ⏰',
     mainText: 'We understand that waiting for your tobacco is no fun. That’s why we’re dedicated to swift delivery times. On average, your tobacco products will arrive within 3 to 7 working days. For those in more remote areas, we’re committed to ensuring your order reaches you within 14 working days. We value your time and aim to provide a seamless delivery experience.'
   },
   {
@@ -41,7 +41,7 @@ const DeliveryPolicyPage: React.FC = () => {
 
   return(
     <div className="delivery-policy-container">
-      <div className="h1">Our delivery policy</div>
+      <div className="h1">🚚 Our Delivery Policy</div>
       <div style={{ display: "flex", flexDirection: 'column', gap: '8px'}}>
         <div className="h2">⚡ Fast and Reliable Tobacco Delivery Across Portugal</div>
         <div className="common-text">

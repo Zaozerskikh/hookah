@@ -56,7 +56,11 @@ const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPh
   return(
     <div
       style={{
-        position: 'relative'
+        position: 'relative',
+        marginTop: !(value && value.length > 9 && value.length < 16) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? '12px' : 0,
+        transition: "all .3s ease",
+        WebkitTransition: "all .3s ease",
+        MozTransition: "all .3s ease",
       }}
     >
       <div

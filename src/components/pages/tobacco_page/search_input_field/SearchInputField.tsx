@@ -2,15 +2,14 @@ import React, {useState} from "react";
 
 interface SearchInputFieldProps {
   onInputChange: (value: string) => void;
-  onEnterAction : () => void
+  onEnterAction : () => void;
+  inputValue: string;
 }
-const SearchInputField: React.FC<SearchInputFieldProps> = ({ onInputChange, onEnterAction }) => {
+const SearchInputField: React.FC<SearchInputFieldProps> = ({ inputValue, onInputChange, onEnterAction }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [value, setValue] = useState('')
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setValue(newValue);
     onInputChange(newValue);
   };
 
@@ -44,7 +43,7 @@ const SearchInputField: React.FC<SearchInputFieldProps> = ({ onInputChange, onEn
         border: 'none',
         borderRadius: '16px 0px 0px 16px',
       }}
-      value={value}
+      value={inputValue}
       onChange={handleInputChange}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}

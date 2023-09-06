@@ -22,7 +22,7 @@ const CustomInput: React.FC<CustomInputProps> =
     const [isActive, setIsActive] = useState(false)
     const [text, setText] = useState('')
     const [prevTextLen, setPrevTextLen] = useState(0)
-    const [padding, setPadding] = useState(0)
+    const [padding, setPadding] = useState(1)
     const [isActivated, setActivated] = useState(false)
     const inputRef = useRef<HTMLInputElement>();
 
@@ -54,7 +54,15 @@ const CustomInput: React.FC<CustomInputProps> =
     }, [padding])
 
     return(
-      <div className="custom-input-wrapper">
+      <div
+        className="custom-input-wrapper"
+        style={{
+          marginTop: !validationFunc(text) && ((isActivated && !isActive && !promocode) || isSubmitButtonClicked) ? '12px' : 0,
+          transition: "all .3s ease",
+          WebkitTransition: "all .3s ease",
+          MozTransition: "all .3s ease",
+        }}
+      >
         <div
           className="invalid-text-hint"
           style={{
@@ -97,7 +105,7 @@ const CustomInput: React.FC<CustomInputProps> =
                 setIsActive(true)
                 setPadding(11)
               } else if (e.animationName === 'mui-auto-fill-cancel'){
-                setPadding(0)
+                setPadding(1)
                 setIsActive(false)
               }
             }}
@@ -105,9 +113,9 @@ const CustomInput: React.FC<CustomInputProps> =
               if (padding === 11) {
                 inputRef.current.blur()
               }
-              setPadding(0)
+              setPadding(1)
             }}
-            onAnimationEndCapture={() => setPadding(0)}
+            onAnimationEndCapture={() => setPadding(1)}
             inputProps={{
               maxLength: multiline ? 150 : zipCode ? 8 : 30,
               style:

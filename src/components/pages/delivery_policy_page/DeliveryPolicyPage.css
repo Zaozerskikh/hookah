@@ -47,3 +47,7 @@ a {
     font-size: 20px;
     line-height: 29px;
 }
+
+a:hover {
+    color: #1355A7;
+}
