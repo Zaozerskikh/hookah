@@ -16,6 +16,9 @@ import CartButton from "./components/ui_components/cart_button/CartButton";
 import NotFoundPage from "./components/pages/not_found_page/NotFoundPage";
 import DeliveryPolicyPage from "./components/pages/delivery_policy_page/DeliveryPolicyPage";
 import FinalCheckoutPage from "./components/pages/final_checkout_page/FinalCheckoutPage";
+import loaderImg from './assets/icons/decorations/floating_loading_filled_clouds.png'
+import aboutImg from './assets/icons/decorations/floating_clouds_about_us.png'
+
 
 const App: React.FC = () => {
   const isWarningShown = useSelector((state: RootState) => state.warning.isShown)
@@ -31,6 +34,17 @@ const App: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  useEffect(() => {
+    [loaderImg, aboutImg].map(im => {
+      const img = new Image();
+      img.onload = () => {
+        console.log('initialized')
+      }
+      img.src = im
+      return undefined;
+    })
   }, []);
 
   useEffect(() => {

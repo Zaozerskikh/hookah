@@ -233,7 +233,9 @@ const TobaccoPage: React.FC = () => {
           }}
           iconSize={12}
           isDark={true}
-          changeColorOnHover={true}/>
+          changeColorOnHover={true}
+          onClickColor="#424446"
+        />
         <SearchInputField
           onInputChange={onSearchStringChanged}
           onEnterAction={filterBySearchString}

@@ -19,7 +19,8 @@ const initialState = storedState || initialProductMap;
 const CartActions = {
   INCREMENT_PRODUCT_COUNT: 'INCREMENT_PRODUCT_COUNT',
   DECREMENT_PRODUCT_COUNT: 'DECREMENT_PRODUCT_COUNT',
-  RESET_PRODUCT_COUNT: 'RESET_PRODUCT_COUNT'
+  RESET_PRODUCT_COUNT: 'RESET_PRODUCT_COUNT',
+  CLEAR_CART: 'CLEAR_CART'
 }
 
 export const incrementProductCount = (productId: string) => ({
@@ -35,6 +36,10 @@ export const decrementProductCount = (productId: string) => ({
 export const resetProductCount = (productId: string) => ({
   type: CartActions.RESET_PRODUCT_COUNT,
   productId: productId,
+});
+
+export const clearCart = () => ({
+  type: CartActions.CLEAR_CART,
 });
 
 type ProductActionTypes =
@@ -58,6 +63,9 @@ const cartReducer = (
       break;
     case CartActions.RESET_PRODUCT_COUNT:
       newState[action.productId] = 0;
+      break;
+    case CartActions.CLEAR_CART:
+      newState ={}
       break;
     default:
       break;

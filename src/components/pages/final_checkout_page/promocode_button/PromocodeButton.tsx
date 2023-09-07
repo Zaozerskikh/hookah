@@ -7,6 +7,8 @@ interface PromocodeButtonProps {
 
 const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction }) => {
   const [isHovered, setHovered] = useState(false)
+  const [isClicked, setClicked] = useState(false)
+
   return(
     <div
       style={{
@@ -14,7 +16,7 @@ const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction }) => {
         cursor: isHovered ? 'pointer' : undefined,
         width: '128px',
         height: '24px',
-        backgroundColor: isHovered ? "#CFD5DB" : '#EAEBF0',
+        backgroundColor: isClicked ? '#c7ccd3' : isHovered ? "#CFD5DB" : '#EAEBF0',
         transition: "all .5s ease",
         WebkitTransition: "all .5s ease",
         MozTransition: "all .5s ease",
@@ -27,6 +29,9 @@ const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={onClickAction}
+      onMouseDown={() => setClicked(true)}
+      onMouseUp={() => setClicked(false)}
+      onMouseOut={() => setClicked(false)}
     >
       <span
         style={{

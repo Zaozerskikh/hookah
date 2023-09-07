@@ -38,13 +38,24 @@ const ProductCard: React.FC<ProductInfo> =
   return (
     <div className="product-card-container">
       <div
-        className={`detailed-view-container ${isDetailedViewOpened ? 'open' : ''}`}
+        className={`detailed-view-container ${!isCheckoutOpened && isDetailedViewOpened ? 'open' : ''}`}
         style={{
-          backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.8)' : 'transparent'
+          backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent'
+        }}
+        onClick={(e) => {
+          e.preventDefault()
+          if (e.target === e.currentTarget) {
+            setDetailedViewOpened(false)
+          }
         }}
       >
         <div className="detailed-view-card">
-          <CloseButton onClickAction={() => setDetailedViewOpened(false)} iconSize={20} changeColorOnHover={true}/>
+          <CloseButton
+            onClickAction={() => setDetailedViewOpened(false)}
+            iconSize={20}
+            changeColorOnHover={true}
+            onClickColor="#d1d1d9"
+          />
           <div className="detailed-view-text-container">
             <span className="detailed-view-header">
               {`${brand} - ${name}`}

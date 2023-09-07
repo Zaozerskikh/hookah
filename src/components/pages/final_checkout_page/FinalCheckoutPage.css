@@ -27,6 +27,12 @@
     width: 600px;
 }
 
+.payment-info-wrapper .payment-line-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .payment-info-wrapper .payment-line-wrapper .static-info {
     color: #909398;
     font-family: Unbounded-400, serif;
@@ -95,6 +101,18 @@
     font-style: normal;
     font-weight: 500;
     line-height: 144%;
+}
+
+.final-checkout-page-wrapper .total-item-amount-without-discount {
+    color: #909398;
+    font-family: Unbounded-400, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+    text-decoration: line-through;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
 }
 
 .final-checkout-page-wrapper .order-item-container .order-item-info-container .buttons-wrapper {

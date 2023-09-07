@@ -9,6 +9,7 @@ interface CustomInputProps {
   isSubmitButtonClicked: boolean;
   multiline? : boolean;
   promocode ? : boolean;
+  dontExpandOnError ? : boolean;
   invalidTextHint ? : string;
   autoFocus ? : boolean
   onFocus ? : () => any
@@ -18,7 +19,7 @@ interface CustomInputProps {
 const CustomInput: React.FC<CustomInputProps> =
   ({ placeholderText, multiline, validationFunc, invalidTextHint,
      onInputChange, isSubmitButtonClicked , autoFocus,
-     promocode, onFocus, zipCode}) => {
+     promocode, onFocus, zipCode, dontExpandOnError}) => {
     const [isActive, setIsActive] = useState(false)
     const [text, setText] = useState('')
     const [prevTextLen, setPrevTextLen] = useState(0)
@@ -49,19 +50,16 @@ const CustomInput: React.FC<CustomInputProps> =
       setPrevTextLen(text.length)
     }, [prevTextLen, text, zipCode])
 
-    useEffect(() => {
-      console.log(padding)
-    }, [padding])
-
     return(
       <div
         className="custom-input-wrapper"
         style={{
-          marginTop: !validationFunc(text) && ((isActivated && !isActive && !promocode) || isSubmitButtonClicked) ? '12px' : 0,
+          marginTop: !validationFunc(text) && ((isActivated && !isActive && !promocode) || isSubmitButtonClicked) && !dontExpandOnError ? '12px' : 0,
           transition: "all .3s ease",
           WebkitTransition: "all .3s ease",
           MozTransition: "all .3s ease",
         }}
+        onClick={() => inputRef.current.focus()}
       >
         <div
           className="invalid-text-hint"

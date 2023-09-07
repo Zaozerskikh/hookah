@@ -24,6 +24,7 @@ const CartButton: React.FC = () => {
   const warningState = useSelector((state: RootState) => state.warning)
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isHovered, setHovered] = useState(false)
+  const [isClicked, setClicked] = useState(false)
   const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -60,6 +61,12 @@ const CartButton: React.FC = () => {
     <div>
       <div
         className={`checkout-container ${isCheckoutOpened ? 'opened' : ''}`}
+        onClick={(e) => {
+          e.preventDefault()
+          if (e.target === e.currentTarget) {
+            dispatch(setIsCheckoutWindowShown(false))
+          }
+        }}
       >
         <div
           className="checkout-card"
@@ -67,7 +74,12 @@ const CartButton: React.FC = () => {
             height: `${Math.min(actualCart.length * 117 + 150, 759, window.innerHeight - 200)}px`,
           }}
         >
-          <CloseButton onClickAction={() => dispatch(setIsCheckoutWindowShown(false))} iconSize={20} changeColorOnHover={true}/>
+          <CloseButton
+            onClickAction={() => dispatch(setIsCheckoutWindowShown(false))}
+            iconSize={20}
+            changeColorOnHover={true}
+            onClickColor="#d1d1d9"
+          />
           <div className="order-header">Your order</div>
           <div
             className="detailed-full-description-wrapper"
@@ -121,7 +133,9 @@ const CartButton: React.FC = () => {
                           isDark={true}
                           iconSize={16}
                           onClickAction={() => dispatch(resetProductCount(key))}
-                          changeColorOnHover={false}/>
+                          changeColorOnHover={true}
+                          onClickColor="#424446"
+                        />
                       </div>
                     )
                   })
@@ -192,7 +206,7 @@ const CartButton: React.FC = () => {
           top: '186px',
           width: '82px',
           height: '82px',
-          backgroundColor: isHovered ? '#CFD5DB' : '#EAEBF0',
+          backgroundColor: isClicked ? '#c7ccd3' : isHovered ? '#CFD5DB' : '#EAEBF0',
           border: 'none',
           borderRadius: '41px',
           transition: "all .2s ease",
@@ -203,6 +217,9 @@ const CartButton: React.FC = () => {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onClick={() => dispatch(setIsCheckoutWindowShown(true))}
+        onMouseDown={() => setClicked(true)}
+        onMouseUp={() => setClicked(false)}
+        onMouseOut={() => setClicked(false)}
       >
         <div
           style={{

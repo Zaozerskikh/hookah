@@ -10,13 +10,14 @@ interface StandardButtonProps {
 const StandardButton: React.FC<StandardButtonProps> =
   ({ text, buttonStyle, textStyle , onClickAction}) => {
   const [isHovered, setHovered] = useState(false);
+  const [isClicked, setClicked] = useState(false)
 
   const parsedButtonStyle = {
     cursor: isHovered ? 'pointer' : undefined,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
+    backgroundColor: isClicked ? '#c7ccd3' : isHovered ? '#CFD5DB' : 'black',
     borderRadius: '12px',
     border: 'none',
     outline: 'none',
@@ -27,7 +28,7 @@ const StandardButton: React.FC<StandardButtonProps> =
   }
 
   const parsedTextStyle = {
-    color: 'white',
+    color: !isHovered ? 'white' : 'black',
     fontFamily: 'Monsterrat-600, serif',
     fontSize: '22px',
     lineHeight: '31.68px',
@@ -39,12 +40,15 @@ const StandardButton: React.FC<StandardButtonProps> =
 
   return(
     <button
-      style={!isHovered ? parsedButtonStyle : {...parsedButtonStyle, backgroundColor: '#CFD5DB'}}
+      style={parsedButtonStyle}
       onClick={onClickAction}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onMouseDown={() => setClicked(true)}
+      onMouseUp={() => setClicked(false)}
+      onMouseOut={() => setClicked(false)}
     >
-      <span style={!isHovered ? parsedTextStyle : {...parsedTextStyle, color: 'black'}}>
+      <span style={parsedTextStyle}>
         {text}
       </span>
     </button>

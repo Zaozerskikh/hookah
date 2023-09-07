@@ -6,11 +6,12 @@ import flags from 'react-phone-number-input/flags'
 
 interface PhoneCustomInputProps {
   onChange: (number: string) => void;
+  validationFunc : (text: string) => boolean;
   isCheckoutButtonClicked: boolean;
   invalidPhoneHint: string;
 }
 
-const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPhoneHint, isCheckoutButtonClicked }) => {
+const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPhoneHint, isCheckoutButtonClicked , validationFunc}) => {
   const [value, setValue] = useState('+351 99-999-9999')
   const [isActive, setActive] = useState(false)
   const [isActivated, setActivated] = useState(false)
@@ -57,7 +58,7 @@ const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPh
     <div
       style={{
         position: 'relative',
-        marginTop: !(value && value.length > 9 && value.length < 16) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? '12px' : 0,
+        marginTop: !(validationFunc(value)) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? '12px' : 0,
         transition: "all .3s ease",
         WebkitTransition: "all .3s ease",
         MozTransition: "all .3s ease",
@@ -66,7 +67,7 @@ const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPh
       <div
         className="invalid-phone-hint"
         style={{
-          opacity: !(value && value.length > 9 && value.length < 16) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? 1 : 0,
+          opacity: !(validationFunc(value)) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? 1 : 0,
           transition: "all .1s ease",
           WebkitTransition: "all .1s ease",
           MozTransition: "all .1s ease",
@@ -84,7 +85,7 @@ const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPh
         }}
         onBlur={() => setActive(false)}
         style={{
-          borderColor: !(value && value.length > 9 && value.length < 16) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? '#FF4572' : '#EAEBF0'
+          borderColor: !(validationFunc(value)) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? '#FF4572' : '#EAEBF0'
         }}
       >
         <PhoneInput

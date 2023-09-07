@@ -5,17 +5,20 @@ import blackMoreIconBase from "../../../assets/icons/product_card/black_more_ico
 interface MoreButtonProps {
   showText: boolean;
   text? : string;
-  onClickAction? : (...args: any) => any
-  buttonStyle? : React.CSSProperties
-  textStyle? : React.CSSProperties
-  iconWrapperStyle ? : React.CSSProperties,
-  iconStyle? : React.CSSProperties
-  iconShift ? : number
+  onClickAction? : (...args: any) => any;
+  buttonStyle? : React.CSSProperties;
+  textStyle? : React.CSSProperties;
+  iconWrapperStyle ? : React.CSSProperties;
+  iconStyle? : React.CSSProperties;
+  iconShift ? : number;
+  dontShowIcon ? : boolean;
 }
 
 const MoreButton: React.FC<MoreButtonProps> =
-  ({ showText, text, buttonStyle, textStyle, iconStyle, iconWrapperStyle, onClickAction, iconShift }) => {
+  ({ showText, text, buttonStyle, textStyle,
+     iconStyle, iconWrapperStyle, onClickAction, iconShift , dontShowIcon}) => {
     const [isHovered, setHovered] = useState(false);
+    const [isClicked, setClicked] = useState(false)
 
     const parsedButtonStyle = {
       cursor: isHovered ? 'pointer' : undefined,
@@ -64,28 +67,39 @@ const MoreButton: React.FC<MoreButtonProps> =
         onClick={onClickAction}
         onMouseLeave={() => setHovered(false)}
         onMouseEnter={() => setHovered(true)}
-        style={ !isHovered ? {...parsedButtonStyle, position: 'relative'} : {
-          ...parsedButtonStyle,
-          backgroundColor: "#CFD5DB",
-        }}
+        onMouseDown={() => setClicked(true)}
+        onMouseUp={() => setClicked(false)}
+        onMouseOut={() => setClicked(false)}
+        style={isClicked
+          ? {...parsedButtonStyle, backgroundColor: '#c7ccd3'}
+          : !isHovered
+            ? {...parsedButtonStyle, position: 'relative'}
+            : {...parsedButtonStyle,
+              backgroundColor: "#CFD5DB",
+            }
+        }
       >
         {showText && (
           <span style={parsedTextStyle}>{text ? text : 'Read more'}</span>
         )}
-        <div style={{position: "relative", height: '48px', width: '48px', ...iconWrapperStyle}}>
-          <img
-            className="more-icon"
-            src={blackMoreIconArrow}
-            alt="more-icon"
-            style={{opacity: 1, ...parsedIconStyle}}
-          />
-          <img
-            className="more-icon"
-            src={blackMoreIconBase}
-            alt="more-icon"
-            style={{opacity: 1, right: '12px', ...parsedIconStyle, width: isHovered ? iconShift ? `calc(24px + ${iconShift}px` : '32px' : '24px'}}
-          />
-        </div>
+        {
+          !dontShowIcon && (
+            <div style={{position: "relative", height: '48px', width: '48px', ...iconWrapperStyle}}>
+              <img
+                className="more-icon"
+                src={blackMoreIconArrow}
+                alt="more-icon"
+                style={{opacity: 1, ...parsedIconStyle}}
+              />
+              <img
+                className="more-icon"
+                src={blackMoreIconBase}
+                alt="more-icon"
+                style={{opacity: 1, right: '12px', ...parsedIconStyle, width: isHovered ? iconShift ? `calc(24px + ${iconShift}px` : '32px' : '24px'}}
+              />
+            </div>
+          )
+        }
       </button>
     )
   }

@@ -4,18 +4,19 @@ import extendedBlackCloseIcon from "../../../assets/icons/product_card/extended_
 import whiteCloseIcon from "../../../assets/icons/product_card/close_button_icon_white.png";
 import whiteExtendedCloseIcon from "../../../assets/icons/product_card/extended_close_button_icon_white.png";
 
-
 interface CloseButtonProps {
   isDark ? : boolean,
   buttonStyle? : React.CSSProperties;
   changeColorOnHover : boolean
+  onClickColor : string;
   iconSize: number;
   onClickAction : (...args: any) => any;
 }
 
 const CloseButton: React.FC<CloseButtonProps> =
-  ({onClickAction, buttonStyle, iconSize, isDark, changeColorOnHover}) => {
+  ({onClickAction, buttonStyle, iconSize, isDark, changeColorOnHover, onClickColor}) => {
   const [isHovered, setHovered] = useState(false)
+  const [isClicked, setClicked] = useState(false)
 
   return(
     <button
@@ -32,7 +33,7 @@ const CloseButton: React.FC<CloseButtonProps> =
         borderRadius: '36px',
         border: 'none',
         outline: 'none',
-        backgroundColor: !isHovered
+        backgroundColor: isClicked ? onClickColor : !isHovered
           ? (isDark ? 'black' : 'white')
           : (isDark
             ? !changeColorOnHover ? 'black' : '#2C2D2E'
@@ -46,6 +47,9 @@ const CloseButton: React.FC<CloseButtonProps> =
       onClick={onClickAction}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onMouseDown={() => setClicked(true)}
+      onMouseUp={() => setClicked(false)}
+      onMouseOut={() => setClicked(false)}
     >
       <img
         style={{

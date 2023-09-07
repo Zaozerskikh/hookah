@@ -79,12 +79,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(2px) opacity(0);
 }
 
 .product-card-container .detailed-view-container.open {
     z-index: 1000 !important;
     opacity: 1;
     transition: opacity 0.3s;
+    backdrop-filter: blur(2px) opacity(1);
 }
 
 .product-card-container .detailed-view-container .detailed-view-card {
@@ -165,7 +167,7 @@
 
 .product-card-container .detailed-view-container .detailed-view-text-container .detailed-button-container .detailed-buy-now-button:hover {
     cursor: pointer;
-    background-color: #a2a5a9;
+    background-color: #E1E2E9;
     transition: background-color 0.5s;
 }
 

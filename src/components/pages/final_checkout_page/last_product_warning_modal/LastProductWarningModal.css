@@ -1,4 +1,4 @@
-.warning-container {
+.last-product-warning-container {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -16,7 +16,7 @@
     backdrop-filter: blur(2px) opacity(0);
 }
 
-.warning-container.open {
+.last-product-warning-container.open {
     z-index: 9998 !important;
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.7);
@@ -24,7 +24,7 @@
     backdrop-filter: blur(2px) opacity(1);
 }
 
-.warning-container .warning-card {
+.last-product-warning-container .last-product-warning-card {
     background-color: black;
     border-radius: 32px;
     padding: 32px;
@@ -37,28 +37,23 @@
     margin-bottom: 50px;
 }
 
-.warning-container .warning-card .warning-header {
+.last-product-warning-container .last-product-warning-header {
     font-family: Unbounded-700, serif;
     font-size: 25px;
     line-height: 36px;
     text-decoration: none;
     outline: none;
     color: white;
+    width: 100%;
+    text-align: left;
 }
 
-.warning-container .warning-card .warning-block {
-    gap: 24px;
-    display: flex;
-    flex-direction: column;
-    width: 530px;
-    align-items: center;
-}
-
-.warning-container .warning-card .warning-block  .warning-text {
+.last-product-warning-container .last-product-info-text {
+    color: #EAEBF0;
     font-family: Monsterrat-400, serif;
     font-size: 16px;
-    line-height: 23.04px;
-    color: #EAEBF0;
+    font-style: normal;
+    line-height: 144%;
+    width: 100%;
     text-align: left;
-    width: 530px;
 }
