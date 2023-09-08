@@ -278,7 +278,7 @@ const FinalCheckoutPage: React.FC = () => {
               </div>
               <div className="payment-line-wrapper">
                 <span className="static-info">Discount: </span>
-                <span className="green-info">{discount.toFixed(2)}€</span>
+                <span className={discount === 0 ? "black-info" : "green-info"}>{discount.toFixed(2)}€</span>
               </div>
               <div
                 className="payment-line-wrapper"

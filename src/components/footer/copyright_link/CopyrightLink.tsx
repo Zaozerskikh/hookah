@@ -1,13 +1,14 @@
 import React, {useState} from "react";
 import './CopyrightLink.css'
 import mainLogoGrey from '../../../assets/icons/decorations/main_logo_cloud_grey.png'
+import ExternalLinks from "../../../routes/ExternalLinks";
 
 const CopyrightLink: React.FC = () => {
   const [isHovered, setHovered] = useState(false)
 
   return(
     <a
-      href="https://www.glebkossov.ru/"
+      href={ExternalLinks.GLEB_KOSSOV_COPYRIGHT}
       target="_blank"
       className="copyright-link"
       rel="noreferrer"

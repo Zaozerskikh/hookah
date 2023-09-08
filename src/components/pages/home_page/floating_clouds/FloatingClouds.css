@@ -6,13 +6,14 @@
     top: 0;
     left: 100px !important;
     right: -170px;
-    height: 248px;
+    height: 324px;
+    width: 100%;
 }
 
 .bottom-floating-clouds-container {
     overflow: hidden;
-    width: 5080px;
-    height: 120px;
+    width: 2280px;
+    height: 156px;
     display: flex;
     flex-direction: row;
     background: repeat-x;
@@ -20,22 +21,20 @@
 
 .top-floating-clouds-container {
     overflow: hidden;
-    width: 5080px;
-    height: 120px;
+    width: 2280px;
+    height: 156px;
     display: flex;
     flex-direction: row;
-    background: repeat-x;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .bottom-floating-clouds-container .floating-clouds-image {
-    animation: scrollAnimationBottom 200s linear infinite;
-    width: 10160px;
+    animation: scrollAnimationBottom 85s linear infinite;
+    background: repeat-x;
 }
 
 .top-floating-clouds-container .floating-clouds-image {
-    animation: scrollAnimationTop 120s linear infinite;
-    width: 10160px;
+    animation: scrollAnimationTop 55s linear infinite;
     background: repeat-x;
 }
 
@@ -44,7 +43,7 @@
         transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translate3d(-5080px, 0, 0);
+        transform: translate3d(-2280px, 0, 0);
     }
 }
 
@@ -53,6 +52,6 @@
         transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translate3d(-5080px, 0, 0);
+        transform: translate3d(-2280px, 0, 0);
     }
 }

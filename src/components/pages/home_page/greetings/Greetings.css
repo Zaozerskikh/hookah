@@ -1,0 +1,43 @@
+.greetings-container {
+    position: absolute;
+    background-color: black;
+    width: 786px;
+    padding: 32px;
+    height: calc(324px - 64px);
+    border-radius: 32px;
+    z-index: 2;
+}
+
+.greetings-container .greetings-header {
+    font-family: Monsterrat-700, serif;
+    font-size: 28px;
+    line-height: 40.32px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.greetings-container .greetings-header h2 {
+    margin: 0;
+    padding: 0;
+    font-family: Monsterrat-700, serif;
+    font-size: 28px;
+    line-height: 40.32px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.greetings-container .greetings-text {
+    font-family: Monsterrat-400, serif;
+    font-size: 22px;
+    line-height: 31.68px;
+    color: white;
+    font-weight: lighter;
+}
+
+.greetings-container .header-buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}

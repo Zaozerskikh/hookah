@@ -9,6 +9,9 @@ import tangiersLogo from '../../../assets/icons/partners/tangiers_logo.png'
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
 import NewsSection from "./news_section/NewsSection";
 import {Products, productsOnTheMain} from "../../../content/Products";
+import PartnersLogo from "./partners_logo/PartnersLogo";
+import ExternalLinks from "../../../routes/ExternalLinks";
+import Greeting from "./greetings/Greeting";
 
 const HomePage: React.FC = () => {
   useState(() => {
@@ -26,17 +29,8 @@ const HomePage: React.FC = () => {
             left: '-5500px'
           }}
         />
-        <div
-          className="greetings-container"
-        >
-          <div className="greetings-header">
-            👋 Welcome to Hookah.pt
-          </div>
-          <p className="greetings-text">
-            Our premium tobacco shop is your way to hookah pleasure in Portugal. Hookah.pt is the first online store offering a wide selection of quality hookah tobaccos from DarkSide, MustHave, Element, Tangiers, Fumari, and other brands delivered right to your door.
-          </p>
-        </div>
-        <FloatingClouds/>
+        <Greeting />
+        <FloatingClouds />
       </div>
       <ShopGrid
         products={productsOnTheMain.map(productId =>
@@ -48,7 +42,9 @@ const HomePage: React.FC = () => {
       />
       <NewsSection/>
       <div className="partners-container">
-        <span className="partners-header">Our partners ❤️</span>
+        <span className="partners-header">
+          <h2>Our partners</h2> ❤️
+        </span>
         <div
           className="partners-logo-container"
           style={{
@@ -60,11 +56,11 @@ const HomePage: React.FC = () => {
             gap: '88px',
           }}
         >
-          <img src={darksideLogo} alt="darksideLogo" className="partner-logo-image" />
-          <img src={musthaveLogo} alt="musthaveLogo" className="partner-logo-image" />
-          <img src={elementLogo} alt="elementLogo" className="partner-logo-image" />
-          <img src={tangiersLogo} alt="tangiersLogo" className="partner-logo-image" />
-          <img src={fumariLogo} alt="fumariLogo" className="partner-logo-image" />
+          <PartnersLogo src={darksideLogo} url={ExternalLinks.DARKSIDE} />
+          <PartnersLogo src={musthaveLogo} url={ExternalLinks.MUSTHAVE} />
+          <PartnersLogo src={elementLogo} url={ExternalLinks.ELEMENT} />
+          <PartnersLogo src={tangiersLogo} url={ExternalLinks.TANGIERS} />
+          <PartnersLogo src={fumariLogo} url={ExternalLinks.FUMARI} />
         </div>
       </div>
     </div>

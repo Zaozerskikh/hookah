@@ -40,7 +40,6 @@ const TobaccoPage: React.FC = () => {
       setCurrLastPageNumberShown(PAGES_BEFORE_MORE_BUTTON)
 
       setTangiersTagActive(false)
-      setAccessoriesTagActive(false)
       setFumariTagActive(false)
       setMusthaveTagActive(false)
       setDarkSideTagActive(false)
@@ -76,7 +75,6 @@ const TobaccoPage: React.FC = () => {
   const [elementSideTagActive, setElementTagActive] = useState(false)
   const [tangiersTagActive, setTangiersTagActive] = useState(false)
   const [fumariTagActive, setFumariTagActive] = useState(false)
-  const [accessoriesTagActive, setAccessoriesTagActive] = useState(false)
 
   useEffect(() => {
     const filterByTags = () => {
@@ -87,7 +85,7 @@ const TobaccoPage: React.FC = () => {
         setCurrLastPageNumberShown(PAGES_BEFORE_MORE_BUTTON)
 
         if (!(darkSideTagActive || musthaveTagActive || elementSideTagActive ||
-          tangiersTagActive || fumariTagActive || accessoriesTagActive)) {
+          tangiersTagActive || fumariTagActive)) {
           setFilteredProducts(Products)
           setLoading(false)
         } else {
@@ -128,12 +126,11 @@ const TobaccoPage: React.FC = () => {
     filterByTags()
   }, [
     darkSideTagActive, musthaveTagActive, elementSideTagActive,
-    tangiersTagActive, fumariTagActive, accessoriesTagActive, useTags
+    tangiersTagActive, fumariTagActive, useTags
   ])
 
   const clearAll = () => {
     setTangiersTagActive(false)
-    setAccessoriesTagActive(false)
     setFumariTagActive(false)
     setMusthaveTagActive(false)
     setDarkSideTagActive(false)
@@ -201,14 +198,6 @@ const TobaccoPage: React.FC = () => {
             setFumariTagActive(!fumariTagActive)
           }}
         />
-        <SearchTag
-          name="Accessories"
-          isActive={accessoriesTagActive}
-          onActiveChanged={() => {
-            setUseTags(true)
-            setAccessoriesTagActive(!accessoriesTagActive)
-          }}
-        />
         <CloseButton
           onClickAction={() => {
             setDarkSideTagActive(false)
@@ -216,7 +205,6 @@ const TobaccoPage: React.FC = () => {
             setElementTagActive(false)
             setTangiersTagActive(false)
             setFumariTagActive(false)
-            setAccessoriesTagActive(false)
           }}
           buttonStyle={{
             position: 'relative',
@@ -229,7 +217,7 @@ const TobaccoPage: React.FC = () => {
             marginLeft: '16px',
             opacity:
               !darkSideTagActive && !elementSideTagActive && !tangiersTagActive &&
-              !fumariTagActive && !musthaveTagActive && !accessoriesTagActive ? 0 : 1
+              !fumariTagActive && !musthaveTagActive ? 0 : 1
           }}
           iconSize={12}
           isDark={true}

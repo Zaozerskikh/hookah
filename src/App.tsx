@@ -9,7 +9,6 @@ import NewsPage from "./components/pages/news_page/NewsPage";
 import DetailedNewsPage from "./components/pages/detailed_news_page/DetailedNewsPage";
 import TobaccoPage from "./components/pages/tobacco_page/TobaccoPage";
 import AboutUsPage from "./components/pages/about_us_page/AboutUsPage";
-import AccessoriesPage from "./components/pages/accessories_page/AccessoriesPage";
 import {useSelector} from "react-redux";
 import {RootState} from "./redux/Store";
 import CartButton from "./components/ui_components/cart_button/CartButton";
@@ -93,9 +92,14 @@ const App: React.FC = () => {
             <Route path={RoutePaths.TOBACCO} element={<TobaccoPage />} />
             <Route path={RoutePaths.NEWS} element={<NewsPage />} />
             <Route path={RoutePaths.NEWS_DETAILED} element={<DetailedNewsPage />} />
-            <Route path={RoutePaths.ACCESSORIES} element={<AccessoriesPage />} />
+            <Route path={RoutePaths.ACCESSORIES} element={<NotFoundPage />} />
             <Route path={RoutePaths.ABOUT} element={<AboutUsPage />} />
             <Route path={RoutePaths.DELIVERY_POLICY} element={<DeliveryPolicyPage />} />
+            <Route path={RoutePaths.DARKSIDE} element={<NotFoundPage />} />
+            <Route path={RoutePaths.MUSTHAVE} element={<NotFoundPage />} />
+            <Route path={RoutePaths.ELEMENT} element={<NotFoundPage />} />
+            <Route path={RoutePaths.TANGIERS} element={<NotFoundPage />} />
+            <Route path={RoutePaths.FUMARI} element={<NotFoundPage />} />
             <Route path={RoutePaths.FINAL_CHECKOUT} element={<FinalCheckoutPage />} />
             <Route path={RoutePaths.TEST_404} element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />

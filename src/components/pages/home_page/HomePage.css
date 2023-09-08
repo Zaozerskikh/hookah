@@ -9,7 +9,7 @@
 .homepage-container .clouds-and-text-container {
     display: flex;
     flex-direction: row;
-    height: 248px;
+    height: 324px;
     width: 100%;
 }
 
@@ -19,33 +19,7 @@
     color: #FFFFFF;
     background-color: #FFFFFF;
     z-index: 1 !important;
-    height: 248px;
-}
-
-
-.homepage-container .clouds-and-text-container .greetings-container {
-    position: absolute;
-    background-color: black;
-    width: 786px;
-    padding: 32px;
-    height: calc(248px - 64px);
-    border-radius: 32px;
-    z-index: 2;
-}
-
-.homepage-container .clouds-and-text-container .greetings-container .greetings-header {
-    font-family: Monsterrat-700, serif;
-    font-size: 28px;
-    line-height: 40.32px;
-    color: white;
-}
-
-.homepage-container .clouds-and-text-container .greetings-container .greetings-text {
-    font-family: Monsterrat-400, serif;
-    font-size: 22px;
-    line-height: 31.68px;
-    color: white;
-    font-weight: lighter;
+    height: 324px;
 }
 
 .homepage-container .partners-container {
@@ -61,10 +35,15 @@
     font-size: 28px;
     line-height: 40.32px;
     color: black;
+    display: flex;
+    flex-direction: row;
 }
 
-.homepage-container .partners-container .partners-logo-container .partner-logo-image {
-    height: 160px;
-    width: 160px;
+.homepage-container .partners-header h2{
+    font-family: Monsterrat-700, serif;
+    font-size: 28px;
+    line-height: 40.32px;
+    color: black;
+    margin: 0;
+    padding: 0;
 }
-
