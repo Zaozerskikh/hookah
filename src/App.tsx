@@ -17,7 +17,6 @@ import DeliveryPolicyPage from "./components/pages/delivery_policy_page/Delivery
 import FinalCheckoutPage from "./components/pages/final_checkout_page/FinalCheckoutPage";
 import loaderImg from './assets/icons/decorations/floating_loading_filled_clouds.png'
 import aboutImg from './assets/icons/decorations/floating_clouds_about_us.png'
-import Carousel from "./components/pages/home_page/greetings/carousel/Carousel";
 
 
 const App: React.FC = () => {
@@ -96,7 +95,7 @@ const App: React.FC = () => {
             <Route path={RoutePaths.ACCESSORIES} element={<NotFoundPage />} />
             <Route path={RoutePaths.ABOUT} element={<AboutUsPage />} />
             <Route path={RoutePaths.DELIVERY_POLICY} element={<DeliveryPolicyPage />} />
-            <Route path={RoutePaths.DARKSIDE} element={<Carousel items={['1', '2', '3']}/>} />
+            <Route path={RoutePaths.DARKSIDE} element={<NotFoundPage />} />
             <Route path={RoutePaths.MUSTHAVE} element={<NotFoundPage />} />
             <Route path={RoutePaths.ELEMENT} element={<NotFoundPage />} />
             <Route path={RoutePaths.TANGIERS} element={<NotFoundPage />} />
