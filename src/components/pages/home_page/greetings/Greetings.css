@@ -1,9 +1,10 @@
 .greetings-container {
     position: absolute;
     background-color: black;
+    overflow: hidden;
     width: 786px;
     padding: 32px;
-    height: calc(324px - 64px);
+    height: calc(356px - 64px);
     border-radius: 32px;
     z-index: 2;
 }
@@ -28,16 +29,41 @@
     flex-direction: row;
 }
 
+.greetings-container .header-buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    position: absolute;
+    left: 32px;
+    bottom: 32px;
+}
+
 .greetings-container .greetings-text {
     font-family: Monsterrat-400, serif;
     font-size: 22px;
     line-height: 31.68px;
     color: white;
     font-weight: lighter;
+    transition: transform 0.2s ease-in-out;
 }
 
-.greetings-container .header-buttons-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
+.greetings-container .greetings-text:hover {
+    cursor: pointer;
+    animation: rotateAnimation 0.5s linear;
+    transform-origin: center;
+}
+
+@keyframes rotateAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-1deg);
+    }
+    75% {
+        transform: rotate(2deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }

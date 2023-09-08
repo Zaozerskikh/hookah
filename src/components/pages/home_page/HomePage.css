@@ -9,7 +9,7 @@
 .homepage-container .clouds-and-text-container {
     display: flex;
     flex-direction: row;
-    height: 324px;
+    height: 356px;
     width: 100%;
 }
 
@@ -19,7 +19,7 @@
     color: #FFFFFF;
     background-color: #FFFFFF;
     z-index: 1 !important;
-    height: 324px;
+    height: 356px;
 }
 
 .homepage-container .partners-container {

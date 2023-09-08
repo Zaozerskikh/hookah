@@ -1,0 +1,28 @@
+.carousel-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 64px;
+    left: -968px;
+}
+
+.carousel-wrapper .carousel-item {
+    position: absolute;
+    width: 784px;
+    height: 160px;
+}
+
+
+.position0 {
+    transform: translate3d(0px, 0px, 0px);
+}
+
+.position1 {
+    transform: translate3d(800px, 0px, 0px);
+
+}
+
+.position2 {
+    transform: translate3d(1600px, 0px, 0px);
+}
+

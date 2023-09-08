@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './HomePage.css'
 import FloatingClouds from "./floating_clouds/FloatingClouds";
 import darksideLogo from '../../../assets/icons/partners/darkside_logo.png'
@@ -12,11 +12,20 @@ import {Products, productsOnTheMain} from "../../../content/Products";
 import PartnersLogo from "./partners_logo/PartnersLogo";
 import ExternalLinks from "../../../routes/ExternalLinks";
 import Greeting from "./greetings/Greeting";
+import {useMediaQuery} from "react-responsive";
 
 const HomePage: React.FC = () => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   useState(() => {
     window.scrollTo({ top: 0 });
   })
+
+  useEffect(() => {
+    console.log(isDesktopOrLaptop)
+  }, [isDesktopOrLaptop]);
 
   return (
     <div className="homepage-container">
