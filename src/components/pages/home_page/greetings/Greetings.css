@@ -53,3 +53,27 @@
 .greetings-container .greetings-text:hover {
     cursor: pointer;
 }
+
+.greetings-container:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to left, transparent, black);
+    height: 100%;
+    width: 32px;
+    pointer-events: none;
+    z-index: 9999 !important;
+}
+
+.greetings-container:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(to right, transparent, black);
+    height: 100%;
+    width: 32px;
+    pointer-events: none;
+    z-index: 9999 !important;
+}

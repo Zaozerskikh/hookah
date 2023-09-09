@@ -21,7 +21,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       if (!isSwipingPaused) {
         moveNext();
       }
-    }, 6000);
+    }, 8000);
     return () => {
       if (interval) {
         clearInterval(interval);
@@ -43,7 +43,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       : {};
 
     return {
-      transform: `translate3d(${xPos[index]}px, 0px, 0px)`,
+      transform: `translate3d(${-xPos[index]}px, 0px, 0px)`,
       ...transition,
     };
   };
@@ -72,7 +72,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
                   width: '784px'
                 }}
               >
-                <Boop>
+                <Boop rotation={6}>
                   <p className="greetings-text"
                      dangerouslySetInnerHTML={{
                        __html: item

@@ -1,6 +1,11 @@
 import { animated, useSpring } from 'react-spring';
 import React, {useEffect, useState} from "react";
-const Boop = ({ rotation = 6, timing = 150, children }) => {
+
+interface BoopProps {
+  rotation: number;
+  children: any;
+}
+const Boop: React.FC<BoopProps> = ({ rotation , children }) => {
   const [isBooped, setIsBooped] = useState(false);
   const [isHovered,setHovered] = useState(false);
   const [isInclined, setInclined] = useState(false)

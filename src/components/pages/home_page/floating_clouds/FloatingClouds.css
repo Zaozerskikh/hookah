@@ -4,9 +4,9 @@
     flex-direction: column;
     position: absolute;
     top: 0;
-    left: 200px !important;
+    left: 800px !important;
     height: 356px;
-    width: 100%;
+    width: 2484px;
 }
 
 .bottom-floating-clouds-container {
@@ -15,7 +15,6 @@
     height: 170px;
     display: flex;
     flex-direction: row;
-    background: repeat-x;
 }
 
 .top-floating-clouds-container {
@@ -28,29 +27,29 @@
 }
 
 .bottom-floating-clouds-container .floating-clouds-image {
-    animation: scrollAnimationBottom 120s linear infinite;
+    animation: scrollAnimationBottom 15s linear infinite;
     background: repeat-x;
 }
 
 .top-floating-clouds-container .floating-clouds-image {
-    animation: scrollAnimationTop 70s linear infinite;
+    animation: scrollAnimationTop 10s linear infinite;
     background: repeat-x;
 }
 
 @keyframes scrollAnimationBottom {
     0% {
-        transform: translate3d(0, 0, 0);
+        transform: translate(0, 0);
     }
     100% {
-        transform: translate3d(-2484px, 0, 0);
+        transform: translate(-310.5px, 0);
     }
 }
 
 @keyframes scrollAnimationTop {
     0% {
-        transform: translate3d(0, 0, 0);
+        transform: translate(0, 0);
     }
     100% {
-        transform: translate3d(-2484px, 0, 0);
+        transform: translate(-310.5px, 0);
     }
 }
