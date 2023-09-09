@@ -44,26 +44,12 @@
     line-height: 31.68px;
     color: white;
     font-weight: lighter;
-    transition: transform 0.2s ease-in-out;
+    display: block;
+    padding-block-start: 1em;
+    padding-block-end: 1em;
+    margin: 0;
 }
 
 .greetings-container .greetings-text:hover {
     cursor: pointer;
-    animation: rotateAnimation 0.5s linear;
-    transform-origin: center;
-}
-
-@keyframes rotateAnimation {
-    0% {
-        transform: rotate(0deg);
-    }
-    25% {
-        transform: rotate(-1deg);
-    }
-    75% {
-        transform: rotate(2deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
 }

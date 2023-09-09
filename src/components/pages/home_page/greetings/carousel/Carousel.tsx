@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./Carousel.css";
 import Boop from "../boop/Boop";
 
@@ -8,6 +8,7 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ items }) => {
   const [xPos, setXPos] = useState([0, 1000, 2000, 3000]);
+  const [isSwipingPaused, setIsSwipingPaused] = useState(false);
 
   const moveNext = () => {
     let newPositions = xPos.slice();
@@ -15,14 +16,28 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
     setXPos(newPositions);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isSwipingPaused) {
+        moveNext();
+      }
+    }, 6000);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  });
+
+
   const determineStyle = (index: number, showAnimation: boolean) => {
     const transition = showAnimation
       ? {
-        transition: 'transform 200ms linear',
-        WebkitTransition: 'transform 200ms linear',
-        MozTransition: 'transform 200ms linear',
-        msTransition: 'transform 200ms linear',
-        OTransition: 'transform 200ms linear',
+        transition: 'transform 300ms linear',
+        WebkitTransition: 'transform 300ms linear',
+        MozTransition: 'transform 300ms linear',
+        msTransition: 'transform 300ms linear',
+        OTransition: 'transform 300ms linear',
         opacity: 1,
       }
       : {};
@@ -34,7 +49,11 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
   };
 
   return (
-    <div className="carousel-wrapper">
+    <div
+      className="carousel-wrapper"
+      onMouseEnter={() => setIsSwipingPaused(true)}
+      onMouseLeave={() => setIsSwipingPaused(false)}
+    >
       {items.map((item, index) => {
         return (
           <div

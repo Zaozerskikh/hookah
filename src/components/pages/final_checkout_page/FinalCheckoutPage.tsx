@@ -78,10 +78,6 @@ const FinalCheckoutPage: React.FC = () => {
     setPromocodeButtonClicked(false)
   }, [])
 
-  useState(() => {
-    window.scrollTo({ top: 0 });
-  })
-
   useEffect(() => {
     if (checkoutResult === CheckoutState.SUCCESS && Object.keys(cartState).length !== 0) {
       dispatch(clearCart())
@@ -89,6 +85,7 @@ const FinalCheckoutPage: React.FC = () => {
   }, [dispatch, checkoutResult, cartState]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     if (checkoutResult === CheckoutState.ERROR) {
       setCheckoutButtonClicked(false)
     }

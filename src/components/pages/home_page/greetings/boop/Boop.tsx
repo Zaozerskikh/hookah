@@ -1,28 +1,38 @@
 import { animated, useSpring } from 'react-spring';
-import React, {useState} from "react";
-const Boop = ({ rotation = 4, timing = 150, children }) => {
+import React, {useEffect, useState} from "react";
+const Boop = ({ rotation = 6, timing = 150, children }) => {
   const [isBooped, setIsBooped] = useState(false);
-  const [isHovered,setHovered] = useState(false)
+  const [isHovered,setHovered] = useState(false);
+  const [isInclined, setInclined] = useState(false)
+
   const s = useSpring({
     display: 'inline-block',
     transform: isBooped
-      ? `rotate(${rotation}deg)`
-      : isHovered
-        ? `rotate(-2deg)`
+      ? `rotate(${-rotation}deg)`
+        : isInclined ? `rotate(-1deg)`
         : `rotate(0deg)`,
     config: {
-      tension: 1000,
+      tension: 400,
       friction: 10,
-      duration: timing
     },
   });
 
+  useEffect(() => {
+    if (!isHovered && isInclined){
+      setInclined(false)
+    }
+  }, [isHovered, isInclined]);
+
   const trigger = () => {
+    setHovered(true)
     setIsBooped(true)
     setTimeout(() => {
       setIsBooped(false)
-      setHovered(true)
-    }, 1)
+    }, 50)
+
+    setTimeout(() => {
+      setInclined(true)
+    }, 200)
   };
 
   return (

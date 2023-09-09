@@ -1,9 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import './Greetings.css'
 import StandardButton from "../../../ui_components/standart_button/StandartButton";
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../../routes/RoutePaths";
-import Boop from "./boop/Boop";
 import Carousel from "./carousel/Carousel";
 
 const greetingMsgs = {
