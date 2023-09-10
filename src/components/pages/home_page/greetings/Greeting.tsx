@@ -36,6 +36,7 @@ const Greeting: React.FC = () => {
             borderRadius: '24px',
             padding: '8px 22px',
           }}
+          onHoverColor="white"
           onClickAction={() => navigate(RoutePaths.DARKSIDE)}
         />
         <StandardButton
@@ -48,6 +49,7 @@ const Greeting: React.FC = () => {
             borderRadius: '24px',
             padding: '8px 22px',
           }}
+          onHoverColor="white"
           onClickAction={() => navigate(RoutePaths.MUSTHAVE)}
         />
         <StandardButton
@@ -60,6 +62,7 @@ const Greeting: React.FC = () => {
             borderRadius: '24px',
             padding: '8px 22px',
           }}
+          onHoverColor="white"
           onClickAction={() => navigate(RoutePaths.ELEMENT)}
         />
         <StandardButton
@@ -72,6 +75,7 @@ const Greeting: React.FC = () => {
             borderRadius: '24px',
             padding: '8px 22px',
           }}
+          onHoverColor="white"
           onClickAction={() => navigate(RoutePaths.TANGIERS)}
         />
         <StandardButton
@@ -84,6 +88,7 @@ const Greeting: React.FC = () => {
             borderRadius: '24px',
             padding: '8px 22px',
           }}
+          onHoverColor="white"
           onClickAction={() => navigate(RoutePaths.FUMARI)}
         />
       </div>

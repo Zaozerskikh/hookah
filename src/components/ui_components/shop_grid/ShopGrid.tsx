@@ -49,6 +49,8 @@ const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products}) => 
               description={product.description}
               image={product.image}
               fullDescription={product.fullDescription}
+              stock={product.stock}
+              tags={product.tags}
              />
           ))
         }

@@ -16,6 +16,7 @@
     color: white;
     display: flex;
     flex-direction: row;
+    gap: 3px;
 }
 
 .greetings-container .greetings-header h2 {

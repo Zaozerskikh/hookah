@@ -28,10 +28,12 @@ export interface ProductInfo {
   brand: string;
   line ? : string;
   weight: number;
+  stock: number;
   description: string;
   fullDescription: string;
   price: number;
   image: string;
+  tags ? : string[]
 }
 
 export const Products: ProductInfo[] = [
@@ -44,7 +46,9 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.     fullDescription: \'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
-    image: darkSide_FallingStar_base
+    image: darkSide_FallingStar_base,
+    stock: 0,
+    tags: ['New']
   },
   {
     productId: '2',
@@ -55,7 +59,9 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.     fullDescription: \'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
-    image: darkSide_IGranny_base
+    image: darkSide_IGranny_base,
+    stock: 5,
+    tags: ['New']
   },
   {
     productId: '3',
@@ -66,7 +72,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.     fullDescription: \'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
-    image: darkSide_BnPapa_base
+    image: darkSide_BnPapa_base,
+    stock: 5,
   },
   {
     productId: '4',
@@ -77,7 +84,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.     fullDescription: \'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
-    image: darkSide_Supernova_base
+    image: darkSide_Supernova_base,
+    stock: 5,
   },
   {
     productId: '5',
@@ -88,7 +96,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
-    image: darkSide_SpaceIchi_base
+    image: darkSide_SpaceIchi_base,
+    stock: 5,
   },
   {
     productId: '6',
@@ -99,7 +108,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
-    image: darkSide_KaleeGrap_base
+    image: darkSide_KaleeGrap_base,
+    stock: 5,
   },
   {
     productId: '7',
@@ -110,7 +120,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
-    image: darkSide_Hola_base
+    image: darkSide_Hola_base,
+    stock: 5,
   },
   {
     productId: '8',
@@ -121,7 +132,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
-    image: darkSide_Skyline_base
+    image: darkSide_Skyline_base,
+    stock: 5,
   },
   {
     productId: '9',
@@ -132,7 +144,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 39.99,
-    image: musthaveSpaceForce
+    image: musthaveSpaceForce,
+    stock: 5,
   },
   {
     productId: '10',
@@ -143,7 +156,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 39.99,
-    image: musthaveSpaceInviders
+    image: musthaveSpaceInviders,
+    stock: 5,
   },
   {
     productId: '11',
@@ -154,7 +168,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 39.99,
-    image: musthaveFrosty
+    image: musthaveFrosty,
+    stock: 5,
   },
   {
     productId: '12',
@@ -165,7 +180,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 39.99,
-    image: musthaveMirlic
+    image: musthaveMirlic,
+    stock: 5,
   },
   {
     productId: '13',
@@ -176,7 +192,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 11.99,
-    image: fumariCaramel
+    image: fumariCaramel,
+    stock: 5,
   },
   {
     productId: '14',
@@ -187,7 +204,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '15',
@@ -198,7 +216,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '16',
@@ -209,7 +228,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '17',
@@ -220,7 +240,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '18',
@@ -231,7 +252,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: darkSide_BnPapa_base
+    image: darkSide_BnPapa_base,
+    stock: 5,
   },
   {
     productId: '19',
@@ -242,7 +264,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '20',
@@ -253,7 +276,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '21',
@@ -264,7 +288,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '22',
@@ -275,7 +300,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '23',
@@ -286,7 +312,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '24',
@@ -297,7 +324,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
   {
     productId: '25',
@@ -308,7 +336,8 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder
+    image: placeholder,
+    stock: 5,
   },
 ]
 

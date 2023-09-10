@@ -176,6 +176,7 @@ const CartButton: React.FC = () => {
                 borderColor: 'white',
                 borderRadius: '24px'
               }}
+              onHoverColor="white"
               onClickAction={() => dispatch(setIsCheckoutWindowShown(false))}
             />
             <MoreButton

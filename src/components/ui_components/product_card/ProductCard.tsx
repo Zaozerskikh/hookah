@@ -13,7 +13,7 @@ import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
 
 const ProductCard: React.FC<ProductInfo> =
-  ({ productId, name, brand,line, weight, description, price, image , fullDescription}) => {
+  ({ productId, name, brand,line, weight, description, price, image , fullDescription, stock, tags}) => {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
@@ -29,6 +29,7 @@ const ProductCard: React.FC<ProductInfo> =
       document.body.style.overflowX = 'hidden';
       document.body.style.overflowY = 'scroll';
     }
+
     return () => {
       document.body.style.overflowY = 'auto';
       document.body.style.overflowX = 'hidden';
@@ -37,6 +38,23 @@ const ProductCard: React.FC<ProductInfo> =
 
   return (
     <div className="product-card-container">
+      {
+        <div
+          style={{
+            position:'absolute',
+            top: '16px',
+            left: '16px',
+            display: "flex",
+            flexDirection:'row',
+            gap: '8px'
+          }}
+        >
+          {stock === 0 && <span className="soldout-detailed">Soldout</span>}
+          {tags && tags.map(tag => (
+            <span className="soldout-detailed">{tag}</span>
+          ))}
+        </div>
+      }
       <div
         className={`detailed-view-container ${!isCheckoutOpened && isDetailedViewOpened ? 'open' : ''}`}
         style={{
@@ -70,25 +88,41 @@ const ProductCard: React.FC<ProductInfo> =
                 <span className="detailed-view-brand-line">{line}</span>
               </div>
             </div>
-            <div className="detailed-button-container">
-              <CounterButton
-                counterState={purchasedCount}
-                isDark={true}
-                onPlusClickAction={() => dispatch(incrementProductCount(productId))}
-                onMinusClickAction={() => dispatch(decrementProductCount(productId))}
-              />
-              <button
-                className="detailed-buy-now-button"
-                onClick={() => {
-                  if (purchasedCount === 0) {
-                    dispatch(incrementProductCount(productId))
-                  }
-                  navigate(RoutePaths.FINAL_CHECKOUT)
-                }}
-              >
-                <span className="buy-now-text">Buy now</span>
-              </button>
-            </div>
+            {stock !== 0 ? (
+              <div className="detailed-button-container">
+                <CounterButton
+                  counterState={purchasedCount}
+                  isDark={true}
+                  onPlusClickAction={() => dispatch(incrementProductCount(productId))}
+                  onMinusClickAction={() => dispatch(decrementProductCount(productId))}
+                />
+                <button
+                  className="detailed-buy-now-button"
+                  onClick={() => {
+                    if (purchasedCount === 0) {
+                      dispatch(incrementProductCount(productId))
+                    }
+                    navigate(RoutePaths.FINAL_CHECKOUT)
+                  }}
+                >
+                  <span className="buy-now-text">Buy now</span>
+                </button>
+              </div>
+            ) : (
+              <div className="detailed-button-container">
+                <span
+                  style={{
+                    height: '48px',
+                    display: 'flex',
+                    alignItems:'center',
+                    width: '100%'
+                  }}
+                >
+                  <span className="soldout-detailed">Soldout</span>
+                </span>
+              </div>
+            )
+            }
             <div className={`containerwrapper${productsWithLongDescription.find(p => p === productId) ? '' : 'nogradient'}`}>
               <Scrollbar
                 className="detailed-full-description"
@@ -132,34 +166,37 @@ const ProductCard: React.FC<ProductInfo> =
           onClick={() => setDetailedViewOpened(true)}
           className="product-description">{description}
         </span>
-        <span className="product-price">{price.toFixed(2)}€</span>
+        <span className={`product-price ${stock === 0 ? 'soldout' : ''}`}>{price.toFixed(2)}€</span>
       </div>
       <div className="button-container">
-        {purchasedCount === 0
-          ? (
-            <StandardButton
-              text="Buy"
-              onClickAction={() => dispatch(incrementProductCount(productId))}
-              buttonStyle={{
-                width: '148px',
-                height: '48px',
-                borderRadius: '24px 0 0 24px',
-              }}
-            />
-          )
-          : (
-            <CounterButton
-              counterState={purchasedCount}
-              isDark={false}
-              onPlusClickAction={() => {
-                dispatch(incrementProductCount(productId))
-              }}
-              onMinusClickAction={() => {
-                dispatch(decrementProductCount(productId))
-              }}
-            />
-          )
-        }
+        {stock !== 0 ? (
+          purchasedCount === 0
+            ? (
+              <StandardButton
+                text="Buy"
+                onClickAction={() => dispatch(incrementProductCount(productId))}
+                buttonStyle={{
+                  width: '148px',
+                  height: '48px',
+                  borderRadius: '24px 0 0 24px',
+                }}
+              />
+            )
+            : (
+              <CounterButton
+                counterState={purchasedCount}
+                isDark={false}
+                onPlusClickAction={() => {
+                  dispatch(incrementProductCount(productId))
+                }}
+                onMinusClickAction={() => {
+                  dispatch(decrementProductCount(productId))
+                }}
+              />
+            )
+        ) : (
+          <span className="soldout-text">Soldout</span>
+        )}
         <MoreButton
           showText={false}
           buttonStyle={{

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import "./Carousel.css";
 import Boop from "../boop/Boop";
 
@@ -30,7 +30,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
   });
 
 
-  const determineStyle = (index: number, showAnimation: boolean) => {
+  const determineStyle = useCallback((index: number, showAnimation: boolean) => {
     const transition = showAnimation
       ? {
         transition: 'transform 300ms linear',
@@ -46,7 +46,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       transform: `translate3d(${-xPos[index]}px, 0px, 0px)`,
       ...transition,
     };
-  };
+  }, [xPos]);
 
   return (
     <div

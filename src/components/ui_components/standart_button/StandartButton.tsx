@@ -5,10 +5,11 @@ interface StandardButtonProps {
   onClickAction? : (...args: any) => any
   buttonStyle? : React.CSSProperties
   textStyle? : React.CSSProperties
+  onHoverColor ? : string
 }
 
 const StandardButton: React.FC<StandardButtonProps> =
-  ({ text, buttonStyle, textStyle , onClickAction}) => {
+  ({ text, buttonStyle, textStyle , onClickAction, onHoverColor}) => {
   const [isHovered, setHovered] = useState(false);
   const [isClicked, setClicked] = useState(false)
 
@@ -17,7 +18,7 @@ const StandardButton: React.FC<StandardButtonProps> =
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: isClicked ? '#c7ccd3' : isHovered ? '#CFD5DB' : 'black',
+    backgroundColor: isClicked ? '#c7ccd3' : isHovered ? onHoverColor ? onHoverColor : '#CFD5DB' : 'black',
     borderRadius: '12px',
     border: 'none',
     outline: 'none',

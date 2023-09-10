@@ -7,6 +7,7 @@
     gap: 24px;
     border-radius: 30px;
     border: none;
+    position: relative;
 }
 
 .product-card-container .product-image {
@@ -51,12 +52,36 @@
 .product-card-container .product-card-text .product-description:hover {
     cursor: pointer;
 }
+
 .product-card-container .product-card-text .product-price {
     font-family: Monsterrat-600, serif;
     font-size: 24px;
     line-height: 34.56px;
     color: black;
     text-align: center;
+}
+
+.product-card-container .product-card-text .product-price.soldout {
+    font-family: Monsterrat-600, serif;
+    font-size: 24px;
+    line-height: 34.56px;
+    color: #CFD5DB;
+    text-align: center;
+}
+
+.product-card-container .soldout-text {
+    color: #000;
+    text-align: center;
+    font-family: Monsterrat-600, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+    display: flex;
+    padding: 8px 28px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px 0 0 24px;
+    background: #EAEBF0;
 }
 
 .product-card-container .button-container {
@@ -146,13 +171,31 @@
 
 .product-card-container .detailed-view-container .detailed-button-container  {
     width: 296px;
-    height: 48px;
+    height: 48px !important;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 8px;
     margin-bottom: 8px;
+}
+
+.product-card-container .soldout-detailed {
+    color: #000;
+    text-align: center;
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%;
+    display: flex;
+    height: 28px;
+    padding: 0 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 16px;
+    background: #EAEBF0;
 }
 
 .product-card-container .detailed-view-container .detailed-view-text-container .detailed-button-container .detailed-buy-now-button {
