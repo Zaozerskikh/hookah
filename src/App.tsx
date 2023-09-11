@@ -18,10 +18,8 @@ import FinalCheckoutPage from "./components/pages/final_checkout_page/FinalCheck
 import loaderImg from './assets/icons/decorations/floating_loading_filled_clouds.png'
 import aboutImg from './assets/icons/decorations/floating_clouds_about_us.png'
 
-
 const App: React.FC = () => {
   const isWarningShown = useSelector((state: RootState) => state.warning.isShown)
-
   const [minHeight, setMinHeight] = useState(window.innerHeight - 500)
 
   useEffect(() => {
@@ -48,17 +46,10 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (isWarningShown) {
-      document.body.style.overflowX = 'hidden';
-      document.body.style.overflowY = 'hidden';
+      document.body.classList.add('hidden');
     } else {
-      document.body.style.overflowX = 'hidden';
-      document.body.style.overflowY = 'auto';
+      document.body.classList.remove('hidden');
     }
-
-    return () => {
-      document.body.style.overflowY = 'auto';
-      document.body.style.overflowX = 'hidden';
-    };
   }, [isWarningShown]);
 
   return (

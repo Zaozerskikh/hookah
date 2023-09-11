@@ -14,6 +14,7 @@ const Warning: React.FC = () => {
 
   useEffect(() => {
     if (!Object.values(RoutePaths).includes(location.pathname)) {
+      console.log(location.pathname)
       dispatch(setIsWarningShown(false))
     }
   }, [dispatch, location])
@@ -33,13 +34,13 @@ const Warning: React.FC = () => {
             showText={true}
             text="Enter"
             buttonStyle={{
-              width: '138px',
+              width: '530px',
               height: '48px',
               borderRadius: '24px',
               padding: '12px 20px 12px 20px'
             }}
             iconStyle={{
-              right: '-1px',
+              right: '20px',
               top: '12.5px'
             }}
           />

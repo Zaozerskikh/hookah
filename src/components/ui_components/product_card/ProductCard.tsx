@@ -9,7 +9,7 @@ import Scrollbar from "react-scrollbars-custom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import {decrementProductCount, incrementProductCount} from "../../../redux/cart_reducer/CartReducer";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
 
 const ProductCard: React.FC<ProductInfo> =
@@ -19,7 +19,11 @@ const ProductCard: React.FC<ProductInfo> =
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation()
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [currLocation, setCurrLocation] = useState(location.pathname)
 
   useEffect(() => {
     if (isDetailedViewOpened) {
@@ -35,6 +39,18 @@ const ProductCard: React.FC<ProductInfo> =
       document.body.style.overflowX = 'hidden';
     };
   }, [isDetailedViewOpened]);
+
+  useEffect(() => {
+    if (isDetailedViewOpened) {
+      if (currLocation === RoutePaths.HOME || currLocation === RoutePaths.TOBACCO) {
+        window.history.pushState({}, '', `${currLocation}/${brand.toLowerCase()}/${name.toLowerCase().replace(' ', '-')}`);
+      } else {
+        window.history.pushState({}, '', `${currLocation}/${name.toLowerCase().replace(' ', '-')}`);
+      }
+    } else {
+      window.history.pushState({}, '', `${currLocation}`);
+    }
+  }, [brand, currLocation, isDetailedViewOpened, name]);
 
   return (
     <div className="product-card-container">

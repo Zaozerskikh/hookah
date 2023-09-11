@@ -14,6 +14,10 @@ import NotFoundModal from "./not_found_modal/NotFoundModal";
 export const PRODUCTS_COUNT_ON_A_PAGE = 4;
 const PAGES_BEFORE_MORE_BUTTON = 5;
 
+interface TobaccoPageProps {
+
+}
+
 const TobaccoPage: React.FC = () => {
   // main content management
   const [isLoading, setLoading] = useState(false);

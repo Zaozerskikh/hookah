@@ -2,6 +2,7 @@ body {
   margin: 0;
     min-width: 1121px !important;
     overflow-x: hidden !important;
+    overflow-y: hidden;
     position: relative;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -69,4 +70,15 @@ code {
     src: local("Monsterrat-600"),
     url('./assets/fonts/monsterrat/Montserrat-600.ttf') format("truetype");
     font-weight: normal;
+}
+
+@font-face {
+    font-family: "NeutralFace";
+    src: local("NeutralFace"),
+    url('./assets/NeutralFace.otf') format("opentype");
+    font-weight: normal;
+}
+
+.hidden {
+    overflow-y: hidden !important;
 }

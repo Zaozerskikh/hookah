@@ -1,5 +1,6 @@
 export const RoutePaths = {
   HOME: '/home',
+  GITHUB_PAGES_HOME_PATH: '/hookah',
   TOBACCO: '/tobacco',
   DARKSIDE: '/darkside-tobacco',
   MUSTHAVE: '/musthave-tobacco',
@@ -12,5 +13,5 @@ export const RoutePaths = {
   ABOUT: '/about',
   DELIVERY_POLICY: '/delivery',
   TEST_404: '/404',
-  FINAL_CHECKOUT: '/checkout'
+  FINAL_CHECKOUT: '/checkout',
 }
