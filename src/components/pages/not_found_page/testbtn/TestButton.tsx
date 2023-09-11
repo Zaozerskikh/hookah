@@ -17,7 +17,7 @@ const TestButton: React.FC = () => {
         fontWeight: '400px',
         padding: '8px 16px 8px 16px',
         fontFamily: 'NeutralFace',
-        marginLeft: '300px'
+        marginLeft: '100px'
       }}
     >
       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,9 +25,12 @@ const TestButton: React.FC = () => {
       </svg>
       <span
         style={{
-          height: '18px',
-          marginTop: '3px',
-          marginBottom: '3px'
+          height: '0px',
+          marginTop: '12.5px',
+          marginBottom: '12.5px',
+          display: 'flex',
+          alignItems: "center",
+          justifyContent: 'center',
         }}
       >
         search
