@@ -19,3 +19,9 @@
     align-items: center;
     gap: 10px;
 }
+
+.tobacco-page-wrapper .tags-container .brand-tags-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}

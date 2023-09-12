@@ -21,7 +21,6 @@ const warningReducer = (
 ): WarningState => {
   switch (action.type) {
     case WarningActionTypes.TOGGLE:
-      console.log('toggle')
       return { ...state, isShown: action.payload};
     default:
       return state;

@@ -11,7 +11,6 @@ import './assets/fonts/monsterrat/Montserrat-400.ttf'
 import './assets/fonts/monsterrat/Montserrat-500.ttf'
 import './assets/fonts/monsterrat/Montserrat-600.ttf'
 import './assets/fonts/monsterrat/Montserrat-700.ttf'
-import './assets/NeutralFace.otf'
 import {Provider} from "react-redux";
 import store from "./redux/Store";
 

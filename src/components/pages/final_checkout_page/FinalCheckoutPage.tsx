@@ -25,6 +25,7 @@ import {
   validateEmail, validateName, validateNumber,
   validatePostalCode
 } from "./input_fields_validator/InputFieldsValidator";
+import {getFullAmountWithDiscount, getFullAmountWithoutDiscount} from "../../../redux/cart_reducer/CartOperations";
 
 
 const CheckoutState = {
@@ -43,7 +44,8 @@ const FinalCheckoutPage: React.FC = () => {
   const [phone, setPhone] = useState('')
   const [comment, setComment] = useState('')
   const [promocode, setPromocode] = useState('')
-  const [discount, setDiscount] = useState(0)
+  const [commonDiscount, setCommonDiscount] = useState(0)
+  const [promocodeDiscount, setPromocodeDiscount] = useState(0)
   const [deliveryPrice, setDeliveryPrice] = useState(10)
   const [isCheckoutButtonClicked, setCheckoutButtonClicked] = useState(false)
   const [isPromocodeButtonClicked, setPromocodeButtonClicked] = useState(false)
@@ -65,6 +67,7 @@ const FinalCheckoutPage: React.FC = () => {
       .entries(cartState)
       .filter(([, value]) => value !== 0)
     )
+    setCommonDiscount(getFullAmountWithoutDiscount(cartState) - getFullAmountWithDiscount(cartState))
   }, [cartState])
 
   useEffect(() => {
@@ -93,24 +96,16 @@ const FinalCheckoutPage: React.FC = () => {
 
   useEffect(() => {
     if (promocode === 'Gleb' && isPromocodeButtonClicked) {
-      setDiscount(3)
+      setPromocodeDiscount(3)
     }
 
     if (promocode !== 'Gleb' && isPromocodeButtonClicked) {
-      setDiscount(0)
+      setPromocodeDiscount(0)
     }
   }, [isPromocodeButtonClicked, promocode]);
 
   const getTotalPrice = useCallback(() => {
-    return Object.keys(cartState).reduce((acc, productId) => {
-      const product = Products.find((p) => p.productId === productId);
-      if (product) {
-        const productCount = cartState[productId];
-        const productPrice = product.price;
-        return acc + productCount * productPrice;
-      }
-      return acc;
-    }, 0);
+    return getFullAmountWithDiscount(cartState)
   }, [cartState]);
 
   useEffect(() => {
@@ -275,12 +270,12 @@ const FinalCheckoutPage: React.FC = () => {
               </div>
               <div className="payment-line-wrapper">
                 <span className="static-info">Discount: </span>
-                <span className={discount === 0 ? "black-info" : "green-info"}>{discount.toFixed(2)}€</span>
+                <span className={commonDiscount + promocodeDiscount === 0 ? "black-info" : "green-info"}>{(commonDiscount + promocodeDiscount).toFixed(2)}€</span>
               </div>
               <div
                 className="payment-line-wrapper"
                 style={{
-                  gap: discount === 0 ? '5px' : '10px',
+                  gap: commonDiscount === 0 ? '5px' : '10px',
                   transition: "all .2s ease",
                   WebkitTransition: "all .2s ease",
                   MozTransition: "all .2s ease",
@@ -290,15 +285,15 @@ const FinalCheckoutPage: React.FC = () => {
                 <span
                   className="total-item-amount-without-discount"
                   dangerouslySetInnerHTML={{
-                    __html: `${(getTotalPrice() + deliveryPrice).toFixed(2)}€`
+                    __html: `${(getFullAmountWithoutDiscount(cartState) + deliveryPrice).toFixed(2)}€`
                   }}
                   style={{
                     display: 'block',
-                    maxWidth: discount === 0 ? '0px' : '200px',
+                    maxWidth: commonDiscount + promocodeDiscount === 0 ? '0px' : '200px',
                     overflow: 'hidden',
                   }}
                 />
-                <span className="black-info">{(getTotalPrice() - discount + deliveryPrice).toFixed(2)}€</span>
+                <span className="black-info">{(getFullAmountWithoutDiscount(cartState) - commonDiscount - promocodeDiscount + deliveryPrice).toFixed(2)}€</span>
               </div>
             </div>
             {
@@ -311,27 +306,41 @@ const FinalCheckoutPage: React.FC = () => {
                     <span className="order-item-header">
                        {`${product.brand} – ${product.name} (${product.line}) ${product.weight}G`}
                     </span>
+                    <div style={{ display: 'flex', flexDirection: 'row', gap: '4px'}}>
+                      {product.discountPrice && product.discountPrice !== product.price && (
+                        <span className="order-item-old-price">
+                          {`${product.price}€/Pack`}
+                        </span>
+                      )}
                       <span className="order-item-price">
-                      {`${product.price}€/Pack`}
-                    </span>
-                      <div className="buttons-wrapper">
-                        <CounterButton
-                          counterState={productCount}
-                          isDark={false}
-                          onPlusClickAction={() => dispatch(incrementProductCount(productId))}
-                          onMinusClickAction={() => {
-                            if (actualCart.length > 1 || productCount > 1) {
-                              dispatch(decrementProductCount(productId))
-                            } else {
-                              setLastProductWarningState({isShown: true, productId: productId})
-                            }
-                          }}
-                          isFramed={true}
-                        />
-                        <span className="total-item-amount">
-                        {(product.price * productCount).toFixed(2)}€
+                        {`${product.discountPrice ? product.discountPrice : product.price}€/Pack`}
                       </span>
+                    </div>
+                    <div className="buttons-wrapper">
+                      <CounterButton
+                        counterState={productCount}
+                        isDark={false}
+                        onPlusClickAction={() => dispatch(incrementProductCount(productId))}
+                        onMinusClickAction={() => {
+                          if (actualCart.length > 1 || productCount > 1) {
+                            dispatch(decrementProductCount(productId))
+                          } else {
+                            setLastProductWarningState({isShown: true, productId: productId})
+                          }
+                        }}
+                        isFramed={true}
+                      />
+                      <div style={{ display: 'flex', flexDirection: 'row', gap: '8px'}}>
+                        {product.discountPrice && product.discountPrice !== product.price &&(
+                          <span className="total-item-old-amount">
+                            {(product.price * productCount).toFixed(2)}€
+                          </span>
+                        )}
+                        <span className="total-item-amount">
+                          {((product.discountPrice ? product.discountPrice : product.price) * productCount).toFixed(2)}€
+                        </span>
                       </div>
+                    </div>
 
                     </div>
                     <CloseButton

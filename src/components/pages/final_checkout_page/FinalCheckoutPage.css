@@ -93,6 +93,16 @@
     line-height: 144%;
 }
 
+.final-checkout-page-wrapper .order-item-container .order-item-info-container .order-item-old-price {
+    color: #CFD5DB;
+    font-family: Monsterrat-400, serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 144%;
+    text-decoration: line-through;
+}
+
 .final-checkout-page-wrapper .order-item-container .order-item-info-container .total-item-amount {
     color: #000;
     text-align: right;
@@ -101,6 +111,17 @@
     font-style: normal;
     font-weight: 500;
     line-height: 144%;
+}
+
+.final-checkout-page-wrapper .order-item-container .order-item-info-container .total-item-old-amount {
+    color: #909398;
+    text-align: right;
+    font-family: Monsterrat-500, serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 144%;
+    text-decoration: line-through;
 }
 
 .final-checkout-page-wrapper .total-item-amount-without-discount {

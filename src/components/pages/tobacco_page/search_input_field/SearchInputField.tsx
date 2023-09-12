@@ -18,7 +18,6 @@ const SearchInputField: React.FC<SearchInputFieldProps> = ({ inputValue, onInput
       type="text"
       placeholder="Find your flavour"
       onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
-        console.log('ddd')
         if (e.key === 'Enter') {
           onEnterAction();
         }

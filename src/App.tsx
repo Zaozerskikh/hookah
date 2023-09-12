@@ -17,6 +17,7 @@ import DeliveryPolicyPage from "./components/pages/delivery_policy_page/Delivery
 import FinalCheckoutPage from "./components/pages/final_checkout_page/FinalCheckoutPage";
 import loaderImg from './assets/icons/decorations/floating_loading_filled_clouds.png'
 import aboutImg from './assets/icons/decorations/floating_clouds_about_us.png'
+import {ProductBrand} from "./content/Products";
 
 const App: React.FC = () => {
   const isWarningShown = useSelector((state: RootState) => state.warning.isShown)
@@ -86,11 +87,11 @@ const App: React.FC = () => {
             <Route path={RoutePaths.ACCESSORIES} element={<NotFoundPage />} />
             <Route path={RoutePaths.ABOUT} element={<AboutUsPage />} />
             <Route path={RoutePaths.DELIVERY_POLICY} element={<DeliveryPolicyPage />} />
-            <Route path={RoutePaths.DARKSIDE} element={<NotFoundPage />} />
-            <Route path={RoutePaths.MUSTHAVE} element={<NotFoundPage />} />
-            <Route path={RoutePaths.ELEMENT} element={<NotFoundPage />} />
-            <Route path={RoutePaths.TANGIERS} element={<NotFoundPage />} />
-            <Route path={RoutePaths.FUMARI} element={<NotFoundPage />} />
+            <Route path={RoutePaths.DARKSIDE} element={<TobaccoPage initialSortByBrand={ProductBrand.DARKSIDE} />} />
+            <Route path={RoutePaths.MUSTHAVE} element={<TobaccoPage initialSortByBrand={ProductBrand.MUSTHAVE} />} />
+            <Route path={RoutePaths.ELEMENT} element={<TobaccoPage initialSortByBrand={ProductBrand.ELEMENTS} />} />
+            <Route path={RoutePaths.TANGIERS} element={<TobaccoPage initialSortByBrand={ProductBrand.TANGIERS} />} />
+            <Route path={RoutePaths.FUMARI} element={<TobaccoPage initialSortByBrand={ProductBrand.FUMARI} />} />
             <Route path={RoutePaths.FINAL_CHECKOUT} element={<FinalCheckoutPage />} />
             <Route path={RoutePaths.TEST_404} element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />

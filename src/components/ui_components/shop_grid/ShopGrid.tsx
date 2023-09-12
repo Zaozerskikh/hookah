@@ -46,6 +46,7 @@ const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products}) => 
               line={product.line}
               weight={product.weight}
               price={product.price}
+              discountPrice={product.discountPrice}
               description={product.description}
               image={product.image}
               fullDescription={product.fullDescription}
@@ -56,20 +57,20 @@ const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products}) => 
         }
       </div>
       {showAllCatalogButton &&
-          <Link to={RoutePaths.TOBACCO} className="tobacco-link" style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-              <StandardButton
-                  buttonStyle={{
-                    width: '323px',
-                    height: '60px',
-                  }}
-                  text="Open full catalog"
-              />
-          </Link>
+        <Link to={RoutePaths.TOBACCO} className="tobacco-link" style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <StandardButton
+            buttonStyle={{
+              width: '323px',
+              height: '60px',
+            }}
+            text="Open full catalog"
+          />
+        </Link>
       }
     </div>
   )

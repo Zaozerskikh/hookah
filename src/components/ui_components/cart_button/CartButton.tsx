@@ -14,13 +14,15 @@ import StandardButton from "../standart_button/StandartButton";
 import MoreButton from "../more_button/MoreButton";
 import {RoutePaths} from "../../../routes/RoutePaths";
 import {useLocation, useNavigate} from "react-router-dom";
+import {
+  getActualCart,
+  getFullAmountWithDiscount,
+  getProductsCountInCart
+} from "../../../redux/cart_reducer/CartOperations";
 
 const CartButton: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)
-  const [actualCart, setActualCart] = useState(Object
-    .entries(cartState)
-    .filter(([, countInCart]) => countInCart !== 0)
-  )
+  const [actualCart, setActualCart] = useState(getActualCart(cartState))
   const warningState = useSelector((state: RootState) => state.warning)
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isHovered, setHovered] = useState(false)
@@ -110,7 +112,10 @@ const CartButton: React.FC = () => {
                           <span className="product-header">
                             {`${product.brand} – ${product.name} (${product.line}) ${product.weight}G`}
                           </span>
-                          <span className="product-price">{`${product.price}€/Pack`}</span>
+                          <div style={{ display: "flex", flexDirection: 'row', gap: '4px'}}>
+                            {product.discountPrice && product.discountPrice !== product.price && <span className="product-price-old">{`${product.price}€/Pack`}</span> }
+                            <span className="product-price">{`${product.discountPrice ? product.discountPrice : product.price}€/Pack`}</span>
+                          </div>
                         </div>
                         <div style={{marginLeft: '20px', marginRight: '20px'}}>
                           <CounterButton
@@ -120,7 +125,7 @@ const CartButton: React.FC = () => {
                             onMinusClickAction={() => dispatch(decrementProductCount(key))}
                           />
                         </div>
-                        <div className="total-price-info">{(product.price * value).toFixed(2)}€</div>
+                        <div className="total-price-info">{((product.discountPrice ? product.discountPrice : product.price) * value).toFixed(2)}€</div>
                         <CloseButton
                           buttonStyle={{
                             position: "relative",
@@ -143,21 +148,7 @@ const CartButton: React.FC = () => {
               </div>
             </Scrollbar>
           </div>
-          <div className="total-total-amount-info">
-            {
-              `Total Amount: ${
-                actualCart.reduce((accumulator, [productId, count]) => {
-                  const product = Products.find((p) => p.productId === productId);
-                  if (product) {
-                    const productValue = count * product.price;
-                    return accumulator + productValue;
-                  }
-                  return accumulator;
-                }, 0)
-                  .toFixed(2)
-              }€`
-            }
-          </div>
+          <div className="total-total-amount-info">{`Total Amount: ${getFullAmountWithDiscount(cartState).toFixed(2)}€`}</div>
           <div style={{
             display: 'flex',
             flexDirection: 'row',
@@ -293,9 +284,7 @@ const CartButton: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-          <span className="info-text">
-            {Object.values(cartState).reduce((acc, value) => acc + value, 0)}
-          </span>
+          <span className="info-text">{getProductsCountInCart(cartState)}</span>
           </div>
           <div
             style={{
@@ -318,21 +307,7 @@ const CartButton: React.FC = () => {
               opacity: isHovered ? 1 : 0
             }}
           >
-            <span className="info-text">
-              {
-                Math.ceil(
-                  Object.keys(cartState).reduce((acc, productId) => {
-                    const product = Products.find((p) => p.productId === productId);
-                    if (product) {
-                      const productCount = cartState[productId];
-                      const productPrice = product.price;
-                      return acc + productCount * productPrice;
-                    }
-                    return acc;
-                  }, 0)
-                )
-              }€
-            </span>
+            <span className="info-text">{Math.ceil(getFullAmountWithDiscount(cartState))}€</span>
           </div>
         </div>
       </div>

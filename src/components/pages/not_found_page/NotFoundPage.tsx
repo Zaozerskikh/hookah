@@ -3,7 +3,6 @@ import './NotFoundPage.css'
 import StandardButton from "../../ui_components/standart_button/StandartButton";
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
-import TestButton from "./testbtn/TestButton";
 
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
@@ -67,7 +66,6 @@ const NotFoundPage: React.FC = () => {
         }}
         onClickAction={() => navigate(RoutePaths.TOBACCO)}
       />
-      <TestButton />
     </div>
   )
 }

@@ -1,13 +1,13 @@
-import './SearchTag.css'
+import './BrandSearchTag.css'
 import React, {useState} from "react";
 
-interface SearchTagProps {
+interface BrandSearchTagProps {
   name: string
   isActive: boolean
   onActiveChanged: (...args: any) => any
 }
 
-const SearchTag: React.FC<SearchTagProps> = ({ name , isActive, onActiveChanged}) => {
+const BrandSearchTag: React.FC<BrandSearchTagProps> = ({ name , isActive, onActiveChanged}) => {
   const [isHovered, setHovered] = useState(false)
 
   return(
@@ -39,4 +39,4 @@ const SearchTag: React.FC<SearchTagProps> = ({ name , isActive, onActiveChanged}
   )
 }
 
-export default SearchTag
+export default BrandSearchTag

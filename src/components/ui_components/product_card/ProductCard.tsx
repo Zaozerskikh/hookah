@@ -4,7 +4,7 @@ import MoreButton from "../more_button/MoreButton";
 import StandardButton from "../standart_button/StandartButton";
 import CounterButton from "../counter_button/CounterButton";
 import CloseButton from "../close_button/CloseButton";
-import {ProductInfo, productsWithLongDescription} from "../../../content/Products";
+import {ProductInfo, productsWithLongDescription, ProductTag} from "../../../content/Products";
 import Scrollbar from "react-scrollbars-custom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
@@ -13,7 +13,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
 
 const ProductCard: React.FC<ProductInfo> =
-  ({ productId, name, brand,line, weight, description, price, image , fullDescription, stock, tags}) => {
+  ({ productId, name, brand,line, weight, description, price, discountPrice, image , fullDescription, stock, tags}) => {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
@@ -66,9 +66,9 @@ const ProductCard: React.FC<ProductInfo> =
           }}
         >
           {stock === 0 && <span className="soldout-detailed">Soldout</span>}
-          {tags && tags.map(tag => (
-            <span className="soldout-detailed">{tag}</span>
-          ))}
+          {stock === 1 && <span className="soldout-detailed" style={{ backgroundColor: '#FF8A00'}}>Last</span>}
+          {stock !== 0 && discountPrice && discountPrice !== price && <span className="soldout-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
+          {stock !== 0 && tags && tags.includes(ProductTag.NEW) && <span className="soldout-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
         </div>
       }
       <div
@@ -182,7 +182,10 @@ const ProductCard: React.FC<ProductInfo> =
           onClick={() => setDetailedViewOpened(true)}
           className="product-description">{description}
         </span>
-        <span className={`product-price ${stock === 0 ? 'soldout' : ''}`}>{price.toFixed(2)}€</span>
+        <div className="product-price-wrapper">
+          {stock !== 0 && discountPrice && discountPrice !== price && <span className={`product-price-before-discount`}>{price.toFixed(2)}€</span>}
+          <span className={`product-price ${stock === 0 ? 'soldout' : ''}`}>{discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€</span>
+        </div>
       </div>
       <div className="button-container">
         {stock !== 0 ? (

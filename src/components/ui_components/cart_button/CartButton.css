@@ -98,6 +98,15 @@
     line-height: 144%;
 }
 
+.checkout-container .checkout-card .order-item-container .product-info .product-price-old {
+    color: #909398;
+    font-family: Monsterrat-400, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%;
+    text-decoration: line-through;;
+}
+
 .checkout-container .checkout-card .thumb-y {
     position: relative;
     display: flex;

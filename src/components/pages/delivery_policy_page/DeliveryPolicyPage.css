@@ -41,13 +41,13 @@
     flex-wrap: wrap;
 }
 
-a {
+.delivery-policy-container a {
     color: #005CCD;
     font-family: Monsterrat-500, serif;
     font-size: 20px;
     line-height: 29px;
 }
 
-a:hover {
+.delivery-policy-container a:hover {
     color: #1355A7;
 }

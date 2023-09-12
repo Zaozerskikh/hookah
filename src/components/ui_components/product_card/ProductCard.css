@@ -198,6 +198,21 @@
     background: #EAEBF0;
 }
 
+.product-card-container .product-price-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.product-card-container .product-price-wrapper .product-price-before-discount {
+    text-decoration: line-through;
+    font-family: Monsterrat-600, serif;
+    font-size: 24px;
+    line-height: 34.56px;
+    color: #CFD5DB;
+    text-align: center;
+}
+
 .product-card-container .detailed-view-container .detailed-view-text-container .detailed-button-container .detailed-buy-now-button {
     width: 148px;
     height: 48px;

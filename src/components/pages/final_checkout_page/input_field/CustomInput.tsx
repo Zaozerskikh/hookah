@@ -50,6 +50,10 @@ const CustomInput: React.FC<CustomInputProps> =
       setPrevTextLen(text.length)
     }, [prevTextLen, text, zipCode])
 
+    useEffect(() => {
+      console.log(text)
+    }, [text]);
+
     return(
       <div
         className="custom-input-wrapper"
@@ -160,7 +164,7 @@ const CustomInput: React.FC<CustomInputProps> =
             margin="none"
             multiline={multiline}
             maxRows={3}
-            value={text.length > 0 ? text : undefined}
+            value={text.length > 0 || isActive ? text : undefined}
           />
         </div>
       </div>

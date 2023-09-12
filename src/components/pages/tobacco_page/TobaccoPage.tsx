@@ -1,6 +1,6 @@
 import './TobaccoPage.css'
 import React, {useEffect, useState} from "react";
-import SearchTag from "./search_tag/SearchTag";
+import BrandSearchTag from "./search_tag/brand_tag/BrandSearchTag";
 import CloseButton from "../../ui_components/close_button/CloseButton";
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
 import {ProductBrand, ProductInfo, Products} from "../../../content/Products";
@@ -10,15 +10,16 @@ import LoadingIcon from "../../ui_components/loading/LoadingIcon";
 import PageNumberButton from "./page_number_button/PageNumberButton";
 import MoreButton from "../../ui_components/more_button/MoreButton";
 import NotFoundModal from "./not_found_modal/NotFoundModal";
+import PriceAndWeightTag, {TagState} from "./search_tag/price_and_weight_tag/PriceAndWeightTag";
 
 export const PRODUCTS_COUNT_ON_A_PAGE = 4;
 const PAGES_BEFORE_MORE_BUTTON = 5;
 
 interface TobaccoPageProps {
-
+  initialSortByBrand ? : string
 }
 
-const TobaccoPage: React.FC = () => {
+const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand }) => {
   // main content management
   const [isLoading, setLoading] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(Products)
@@ -79,6 +80,8 @@ const TobaccoPage: React.FC = () => {
   const [elementSideTagActive, setElementTagActive] = useState(false)
   const [tangiersTagActive, setTangiersTagActive] = useState(false)
   const [fumariTagActive, setFumariTagActive] = useState(false)
+  const [priceTagState, setPriceTagState] = useState(TagState.TURNED_OFF)
+  const [weightTagState, setWeightTagState] = useState(TagState.TURNED_OFF)
 
   useEffect(() => {
     const filterByTags = () => {
@@ -133,7 +136,7 @@ const TobaccoPage: React.FC = () => {
     tangiersTagActive, fumariTagActive, useTags
   ])
 
-  const clearAll = () => {
+  const clearAllBrandTags = () => {
     setTangiersTagActive(false)
     setFumariTagActive(false)
     setMusthaveTagActive(false)
@@ -149,6 +152,13 @@ const TobaccoPage: React.FC = () => {
     window.scrollTo({ top: 0 });
   })
 
+
+  useEffect(() => {
+    if (initialSortByBrand) {
+      setFilteredProducts(Products.filter(p => p.brand === initialSortByBrand))
+    }
+  }, [initialSortByBrand]);
+
   return(
     <div
       className="tobacco-page-wrapper"
@@ -162,45 +172,59 @@ const TobaccoPage: React.FC = () => {
           position: 'relative',
         }}
       >
-        <SearchTag
-          name="DarkSide"
-          isActive={darkSideTagActive}
-          onActiveChanged={() => {
-            setUseTags(true)
-            setDarkSideTagActive(!darkSideTagActive)
-          }}
+        {!initialSortByBrand && (
+          <div className="brand-tags-container">
+            <BrandSearchTag
+              name="DarkSide"
+              isActive={darkSideTagActive}
+              onActiveChanged={() => {
+                setUseTags(true)
+                setDarkSideTagActive(!darkSideTagActive)
+              }}
+            />
+            <BrandSearchTag
+              name="Musthave"
+              isActive={musthaveTagActive}
+              onActiveChanged={() => {
+                setUseTags(true)
+                setMusthaveTagActive(!musthaveTagActive)
+              }}
+            />
+            <BrandSearchTag
+              name="Element"
+              isActive={elementSideTagActive}
+              onActiveChanged={() => {
+                setUseTags(true)
+                setElementTagActive(!elementSideTagActive)
+              }}
+            />
+            <BrandSearchTag
+              name="Tangiers"
+              isActive={tangiersTagActive}
+              onActiveChanged={() => {
+                setUseTags(true)
+                setTangiersTagActive(!tangiersTagActive)
+              }}
+            />
+            <BrandSearchTag
+              name="Fumari"
+              isActive={fumariTagActive}
+              onActiveChanged={() => {
+                setUseTags(true)
+                setFumariTagActive(!fumariTagActive)
+              }}
+            />
+          </div>
+        )}
+        <PriceAndWeightTag
+          displayedName="Price"
+          onClickAction={setPriceTagState}
+          tagState={priceTagState}
         />
-        <SearchTag
-          name="Musthave"
-          isActive={musthaveTagActive}
-          onActiveChanged={() => {
-            setUseTags(true)
-            setMusthaveTagActive(!musthaveTagActive)
-          }}
-        />
-        <SearchTag
-          name="Element"
-          isActive={elementSideTagActive}
-          onActiveChanged={() => {
-            setUseTags(true)
-            setElementTagActive(!elementSideTagActive)
-          }}
-        />
-        <SearchTag
-          name="Tangiers"
-          isActive={tangiersTagActive}
-          onActiveChanged={() => {
-            setUseTags(true)
-            setTangiersTagActive(!tangiersTagActive)
-          }}
-        />
-        <SearchTag
-          name="Fumari"
-          isActive={fumariTagActive}
-          onActiveChanged={() => {
-            setUseTags(true)
-            setFumariTagActive(!fumariTagActive)
-          }}
+        <PriceAndWeightTag
+          displayedName="Weight"
+          onClickAction={setWeightTagState}
+          tagState={weightTagState}
         />
         <CloseButton
           onClickAction={() => {
@@ -252,7 +276,7 @@ const TobaccoPage: React.FC = () => {
         )
         : (
           filteredProducts.length === 0 ? (
-            <NotFoundModal  onClearFiltersAction={clearAll}/>
+            <NotFoundModal  onClearFiltersAction={clearAllBrandTags}/>
           ) : (
             <div>
               <ShopGrid

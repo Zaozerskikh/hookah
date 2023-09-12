@@ -11,6 +11,7 @@ import {RoutePaths} from "../../routes/RoutePaths";
 import SocialLink from "../ui_components/social_link/SocialLink";
 import CopyrightLink from "./copyright_link/CopyrightLink";
 import FooterLink from "./footer_link/FooterLink";
+import {Link} from "react-router-dom";
 
 
 const Footer: React.FC = () => {
@@ -37,21 +38,17 @@ const Footer: React.FC = () => {
         }}
       >
         <div className="section">
-          <span className="header">catalog</span>
+          <span className="header">links</span>
           <FooterLink
             text="tobacco"
             link={RoutePaths.TOBACCO}
-          />
-          <FooterLink
-            text="accessories"
-            link={RoutePaths.ACCESSORIES}
           />
           <FooterLink
             text="news"
             link={RoutePaths.NEWS}
           />
           <FooterLink
-            text="about"
+            text="about us"
             link={RoutePaths.ABOUT}
           />
         </div>
@@ -59,7 +56,10 @@ const Footer: React.FC = () => {
           <span className="header">delivery</span>
           <p className="delivery-info-text">
             The conditions for delivering hookah tobacco in Portugal via CTT Express for individuals aged 18+ are as follows: free delivery for orders exceeding 200 euros; all our tobacco is legal. Proof of age will be required upon delivery to confirm that the recipient is 18 years or older.Shipping via CTT takes up to 7 business days. Available throughout Portugal including Madeira, Azores, Lisbon, Porto, Algarve and the rest of Portugal.
+            <span style={{ visibility: 'hidden' }}>l</span>
+            <Link className="delivery-link-text" to={RoutePaths.DELIVERY_POLICY}>Read more...</Link>
           </p>
+
         </div>
         <div className="section">
           <span className="header">return policy</span>

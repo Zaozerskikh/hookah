@@ -13,7 +13,6 @@ import musthaveSpaceInviders from '../assets/icons/products/musthave/musthave_sp
 import fumariCaramel from '../assets/icons/products/fumari/fumari_caramella_kiss.jpg'
 import placeholder from '../assets/icons/products/tobacco_placeholder.png'
 
-
 export const ProductBrand = {
   DARKSIDE: 'DarkSide',
   FUMARI: 'Fumari',
@@ -22,17 +21,25 @@ export const ProductBrand = {
   TANGIERS: 'Tangiers',
 }
 
+export const ProductTag = {
+  NEW: 'New',
+  SALE: 'Sale',
+  LAST: 'Last',
+  SOLDOUT: 'Soldout'
+}
+
 export interface ProductInfo {
   productId: string,
   name: string;
   brand: string;
-  line ? : string;
   weight: number;
   stock: number;
   description: string;
   fullDescription: string;
   price: number;
   image: string;
+  line ? : string;
+  discountPrice ? : number;
   tags ? : string[]
 }
 
@@ -48,7 +55,7 @@ export const Products: ProductInfo[] = [
     price: 7.99,
     image: darkSide_FallingStar_base,
     stock: 0,
-    tags: ['New']
+    tags: [ProductTag.NEW, ProductTag.SALE]
   },
   {
     productId: '2',
@@ -60,8 +67,8 @@ export const Products: ProductInfo[] = [
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.     fullDescription: \'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
     image: darkSide_IGranny_base,
-    stock: 5,
-    tags: ['New']
+    stock: 1,
+    tags: [ProductTag.NEW]
   },
   {
     productId: '3',
@@ -84,6 +91,7 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.     fullDescription: \'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 7.99,
+    discountPrice: 5.99,
     image: darkSide_Supernova_base,
     stock: 5,
   },
@@ -98,6 +106,7 @@ export const Products: ProductInfo[] = [
     price: 7.99,
     image: darkSide_SpaceIchi_base,
     stock: 5,
+    discountPrice: 5.99,
   },
   {
     productId: '6',
