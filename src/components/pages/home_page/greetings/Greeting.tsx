@@ -24,7 +24,12 @@ const Greeting: React.FC = () => {
         👋
         <h2>Welcome to Hookah.pt</h2>
       </div>
-      <Carousel items={[greetingMsgs.FIRST, greetingMsgs.SECOND, greetingMsgs.FIRST, greetingMsgs.SECOND]}/>
+      <Carousel items={[
+        {item: greetingMsgs.FIRST, key: 1},
+        {item: greetingMsgs.SECOND, key: 2},
+        {item: greetingMsgs.FIRST, key: 3},
+        {item: greetingMsgs.SECOND, key: 4}
+      ]}/>
       <div className="header-buttons-wrapper">
         <StandardButton
           text="Darkside"

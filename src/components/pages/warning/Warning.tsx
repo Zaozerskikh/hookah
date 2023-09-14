@@ -14,7 +14,6 @@ const Warning: React.FC = () => {
 
   useEffect(() => {
     if (!Object.values(RoutePaths).includes(location.pathname)) {
-      console.log(location.pathname)
       dispatch(setIsWarningShown(false))
     }
   }, [dispatch, location])

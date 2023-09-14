@@ -11,15 +11,19 @@ import PageNumberButton from "./page_number_button/PageNumberButton";
 import MoreButton from "../../ui_components/more_button/MoreButton";
 import NotFoundModal from "./not_found_modal/NotFoundModal";
 import PriceAndWeightTag, {TagState} from "./search_tag/price_and_weight_tag/PriceAndWeightTag";
+import TobaccoDescription from "./tobacco_description/TobaccoDescription";
 
 export const PRODUCTS_COUNT_ON_A_PAGE = 4;
 const PAGES_BEFORE_MORE_BUTTON = 5;
 
 interface TobaccoPageProps {
-  initialSortByBrand ? : string
+  initialSortByBrand ? : string;
+  tobaccoName ? : string;
+  tobaccoDescription ? : string;
+  headerEmoji ? : string;
 }
 
-const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand }) => {
+const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDescription, tobaccoName, headerEmoji }) => {
   // main content management
   const [isLoading, setLoading] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(Products)
@@ -37,6 +41,12 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand }) => {
     setUseTags(false)
     setSearchString(value);
   };
+
+  useEffect(() => {
+    if (!initialSortByBrand) {
+      setFilteredProducts(Products)
+    }
+  }, [initialSortByBrand])
 
   const filterBySearchString = () => {
     if (searchString.length > 0) {
@@ -166,6 +176,7 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand }) => {
         minHeight: `${window.innerHeight - 500}px`
       }}
     >
+      {initialSortByBrand && <TobaccoDescription name={tobaccoName} description={tobaccoDescription} headerEmoji={headerEmoji} />}
       <div
         className="tags-container"
         style={{

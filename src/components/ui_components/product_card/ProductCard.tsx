@@ -4,12 +4,12 @@ import MoreButton from "../more_button/MoreButton";
 import StandardButton from "../standart_button/StandartButton";
 import CounterButton from "../counter_button/CounterButton";
 import CloseButton from "../close_button/CloseButton";
-import {ProductInfo, productsWithLongDescription, ProductTag} from "../../../content/Products";
+import {ProductInfo, ProductTag} from "../../../content/Products";
 import Scrollbar from "react-scrollbars-custom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import {decrementProductCount, incrementProductCount} from "../../../redux/cart_reducer/CartReducer";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
 
 const ProductCard: React.FC<ProductInfo> =
@@ -20,10 +20,6 @@ const ProductCard: React.FC<ProductInfo> =
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation()
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currLocation, setCurrLocation] = useState(location.pathname)
 
   useEffect(() => {
     if (isDetailedViewOpened) {
@@ -40,18 +36,6 @@ const ProductCard: React.FC<ProductInfo> =
     };
   }, [isDetailedViewOpened]);
 
-  useEffect(() => {
-    if (isDetailedViewOpened) {
-      if (currLocation === RoutePaths.HOME || currLocation === RoutePaths.TOBACCO) {
-        window.history.pushState({}, '', `${currLocation}/${brand.toLowerCase()}/${name.toLowerCase().replace(' ', '-')}`);
-      } else {
-        window.history.pushState({}, '', `${currLocation}/${name.toLowerCase().replace(' ', '-')}`);
-      }
-    } else {
-      window.history.pushState({}, '', `${currLocation}`);
-    }
-  }, [brand, currLocation, isDetailedViewOpened, name]);
-
   return (
     <div className="product-card-container">
       {
@@ -66,9 +50,9 @@ const ProductCard: React.FC<ProductInfo> =
           }}
         >
           {stock === 0 && <span className="soldout-detailed">Soldout</span>}
-          {stock === 1 && <span className="soldout-detailed" style={{ backgroundColor: '#FF8A00'}}>Last</span>}
-          {stock !== 0 && discountPrice && discountPrice !== price && <span className="soldout-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-          {stock !== 0 && tags && tags.includes(ProductTag.NEW) && <span className="soldout-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
+          {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
+          {stock !== 0 && discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
+          {stock !== 0 && tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
         </div>
       }
       <div
@@ -102,6 +86,18 @@ const ProductCard: React.FC<ProductInfo> =
               <div>
                 <span className="detailed-view-brand-line-info">Line: </span>
                 <span className="detailed-view-brand-line">{line}</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row', gap: '8px'}}>
+                <span className="detailed-view-brand-line-info">Price per pack: </span>
+                {discountPrice && discountPrice !== price && (
+                  <span
+                    className="detailed-view-brand-line-info"
+                    style={{ textDecoration: 'line-through'}}
+                  >
+                    {price}€
+                  </span>
+                )}
+                <span className="detailed-view-brand-line">{discountPrice ? discountPrice : price}€</span>
               </div>
             </div>
             {stock !== 0 ? (
@@ -139,7 +135,7 @@ const ProductCard: React.FC<ProductInfo> =
               </div>
             )
             }
-            <div className={`containerwrapper${productsWithLongDescription.find(p => p === productId) ? '' : 'nogradient'}`}>
+            <div className={`containerwrapper`}>
               <Scrollbar
                 className="detailed-full-description"
                 thumbYProps={{

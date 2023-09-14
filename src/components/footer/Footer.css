@@ -89,11 +89,3 @@
     width: 32px;
     height: 32px;
 }
-
-.footer a {
-    text-decoration: underline;
-}
-
-.footer a:hover {
-    cursor: pointer;
-}

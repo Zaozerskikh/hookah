@@ -87,11 +87,51 @@ const App: React.FC = () => {
             <Route path={RoutePaths.ACCESSORIES} element={<NotFoundPage />} />
             <Route path={RoutePaths.ABOUT} element={<AboutUsPage />} />
             <Route path={RoutePaths.DELIVERY_POLICY} element={<DeliveryPolicyPage />} />
-            <Route path={RoutePaths.DARKSIDE} element={<TobaccoPage initialSortByBrand={ProductBrand.DARKSIDE} />} />
-            <Route path={RoutePaths.MUSTHAVE} element={<TobaccoPage initialSortByBrand={ProductBrand.MUSTHAVE} />} />
-            <Route path={RoutePaths.ELEMENT} element={<TobaccoPage initialSortByBrand={ProductBrand.ELEMENTS} />} />
-            <Route path={RoutePaths.TANGIERS} element={<TobaccoPage initialSortByBrand={ProductBrand.TANGIERS} />} />
-            <Route path={RoutePaths.FUMARI} element={<TobaccoPage initialSortByBrand={ProductBrand.FUMARI} />} />
+            <Route
+              path={RoutePaths.DARKSIDE}
+              element={<TobaccoPage
+                initialSortByBrand={ProductBrand.DARKSIDE}
+                tobaccoName="DarkSide"
+                headerEmoji='🔥'
+                tobaccoDescription='lorem ipsum'
+              />}
+            />
+            <Route
+              path={RoutePaths.MUSTHAVE}
+              element={<TobaccoPage
+                initialSortByBrand={ProductBrand.MUSTHAVE}
+                tobaccoName="MustHave"
+                headerEmoji='🔥'
+                tobaccoDescription='lorem ipsum'
+              />}
+            />
+            <Route
+              path={RoutePaths.ELEMENT}
+              element={<TobaccoPage
+                initialSortByBrand={ProductBrand.ELEMENTS}
+                tobaccoName="Element"
+                headerEmoji='🔥'
+                tobaccoDescription='lorem ipsum'
+              />}
+            />
+            <Route
+              path={RoutePaths.TANGIERS}
+              element={<TobaccoPage
+                initialSortByBrand={ProductBrand.TANGIERS}
+                tobaccoName="Tangiers"
+                headerEmoji='🔥'
+                tobaccoDescription='lorem ipsum'
+              />}
+            />
+            <Route
+              path={RoutePaths.FUMARI}
+              element={<TobaccoPage
+                initialSortByBrand={ProductBrand.FUMARI}
+                tobaccoName="Fumari"
+                headerEmoji='🔥'
+                tobaccoDescription='lorem ipsum'
+              />}
+            />
             <Route path={RoutePaths.FINAL_CHECKOUT} element={<FinalCheckoutPage />} />
             <Route path={RoutePaths.TEST_404} element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />

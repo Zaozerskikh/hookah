@@ -12,11 +12,12 @@ interface MoreButtonProps {
   iconStyle? : React.CSSProperties;
   iconShift ? : number;
   dontShowIcon ? : boolean;
+  onHoverColor ? : string;
 }
 
 const MoreButton: React.FC<MoreButtonProps> =
   ({ showText, text, buttonStyle, textStyle,
-     iconStyle, iconWrapperStyle, onClickAction, iconShift , dontShowIcon}) => {
+     iconStyle, iconWrapperStyle, onClickAction, iconShift , dontShowIcon, onHoverColor}) => {
     const [isHovered, setHovered] = useState(false);
     const [isClicked, setClicked] = useState(false)
 
@@ -75,7 +76,7 @@ const MoreButton: React.FC<MoreButtonProps> =
           : !isHovered
             ? {...parsedButtonStyle, position: 'relative'}
             : {...parsedButtonStyle,
-              backgroundColor: "#CFD5DB",
+              backgroundColor: onHoverColor ? onHoverColor : "#CFD5DB",
             }
         }
       >

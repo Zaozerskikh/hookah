@@ -351,4 +351,3 @@ export const Products: ProductInfo[] = [
 ]
 
 export const productsOnTheMain: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '18', '20']
-export const productsWithLongDescription: string[] = ['1', '2', '3', '4']

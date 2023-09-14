@@ -2,8 +2,12 @@ import React, {useCallback, useEffect, useState} from "react";
 import "./Carousel.css";
 import Boop from "../boop/Boop";
 
+export interface CarouselItem {
+  item: string;
+  key: number;
+}
 interface CarouselProps {
-  items: string[]
+  items: CarouselItem[]
 }
 
 const Carousel: React.FC<CarouselProps> = ({ items }) => {
@@ -59,6 +63,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
           <div
             onClick={moveNext}
             className="carousel-item"
+            key={item.key}
           >
             <div
               style={determineStyle(index, (xPos[index] > 0))}
@@ -75,7 +80,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
                 <Boop rotation={6}>
                   <p className="greetings-text"
                      dangerouslySetInnerHTML={{
-                       __html: item
+                       __html: item.item
                      }}
                   />
                 </Boop>
