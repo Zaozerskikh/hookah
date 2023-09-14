@@ -26,6 +26,7 @@ import {
   validatePostalCode
 } from "./input_fields_validator/InputFieldsValidator";
 import {getFullAmountWithDiscount, getFullAmountWithoutDiscount} from "../../../redux/cart_reducer/CartOperations";
+import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintReducer";
 
 
 const CheckoutState = {
@@ -96,13 +97,14 @@ const FinalCheckoutPage: React.FC = () => {
 
   useEffect(() => {
     if (promocode === 'Gleb' && isPromocodeButtonClicked) {
+      dispatch(setBottomHintState(true, 'Promo code activated! 🎁'))
       setPromocodeDiscount(3)
     }
 
     if (promocode !== 'Gleb' && isPromocodeButtonClicked) {
       setPromocodeDiscount(0)
     }
-  }, [isPromocodeButtonClicked, promocode]);
+  }, [dispatch, isPromocodeButtonClicked, promocode]);
 
   const getTotalPrice = useCallback(() => {
     return getFullAmountWithDiscount(cartState)

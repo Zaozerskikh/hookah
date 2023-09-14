@@ -23,6 +23,7 @@ const MenuPanel: React.FC = () => {
         flexDirection: 'row',
         alignItems:'center',
         justifyContent: 'space-between',
+        backgroundColor: 'white'
       }}
     >
       <Link to={RoutePaths.HOME} className="home-link">

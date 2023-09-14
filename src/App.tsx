@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
 import MenuPanel from "./components/menu_panel/MenuPanel";
 import {RoutePaths} from "./routes/RoutePaths";
 import HomePage from "./components/pages/home_page/HomePage";
@@ -18,10 +18,13 @@ import FinalCheckoutPage from "./components/pages/final_checkout_page/FinalCheck
 import loaderImg from './assets/icons/decorations/floating_loading_filled_clouds.png'
 import aboutImg from './assets/icons/decorations/floating_clouds_about_us.png'
 import {ProductBrand} from "./content/Products";
+import DetailedProductPage from "./components/pages/detailed_product_page/DetailedProductPage";
+import BottomHint from "./components/ui_components/bottom_hint/BottomHint";
 
 const App: React.FC = () => {
   const isWarningShown = useSelector((state: RootState) => state.warning.isShown)
   const [minHeight, setMinHeight] = useState(window.innerHeight - 500)
+  const loc = useLocation()
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,16 +57,19 @@ const App: React.FC = () => {
   }, [isWarningShown]);
 
   return (
-    <Router>
+    <>
       <div
         style={{
           width:'100%',
           display: "flex",
           alignItems: 'flex-start',
           justifyContent: 'center',
-          minHeight: minHeight
-      }}
+          minHeight: minHeight,
+          backgroundColor: loc.pathname.startsWith('/product/')? 'black' : 'white',
+          position: 'relative'
+        }}
       >
+        <div style={{ width: '100%', position: 'absolute', top: '0', left: 0, backgroundColor: 'white', height: '80px'}}/>
         <div
           style={{
             width: '100%',
@@ -71,10 +77,11 @@ const App: React.FC = () => {
             display: "flex",
             flexDirection: 'column',
             alignItems: "center",
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
         >
           <Warning/>
+          <BottomHint/>
           <CartButton/>
           <MenuPanel/>
           <Routes>
@@ -93,7 +100,7 @@ const App: React.FC = () => {
                 initialSortByBrand={ProductBrand.DARKSIDE}
                 tobaccoName="DarkSide"
                 headerEmoji='🔥'
-                tobaccoDescription='lorem ipsum'
+                tobaccoDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
               />}
             />
             <Route
@@ -102,7 +109,7 @@ const App: React.FC = () => {
                 initialSortByBrand={ProductBrand.MUSTHAVE}
                 tobaccoName="MustHave"
                 headerEmoji='🔥'
-                tobaccoDescription='lorem ipsum'
+                tobaccoDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
               />}
             />
             <Route
@@ -111,7 +118,7 @@ const App: React.FC = () => {
                 initialSortByBrand={ProductBrand.ELEMENTS}
                 tobaccoName="Element"
                 headerEmoji='🔥'
-                tobaccoDescription='lorem ipsum'
+                tobaccoDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
               />}
             />
             <Route
@@ -120,8 +127,9 @@ const App: React.FC = () => {
                 initialSortByBrand={ProductBrand.TANGIERS}
                 tobaccoName="Tangiers"
                 headerEmoji='🔥'
-                tobaccoDescription='lorem ipsum'
-              />}
+                tobaccoDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                />
+            }
             />
             <Route
               path={RoutePaths.FUMARI}
@@ -129,17 +137,18 @@ const App: React.FC = () => {
                 initialSortByBrand={ProductBrand.FUMARI}
                 tobaccoName="Fumari"
                 headerEmoji='🔥'
-                tobaccoDescription='lorem ipsum'
+                tobaccoDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
               />}
             />
+            <Route path={RoutePaths.PRODUCT_DETAILED} element={<DetailedProductPage />} />
             <Route path={RoutePaths.FINAL_CHECKOUT} element={<FinalCheckoutPage />} />
-            <Route path={RoutePaths.TEST_404} element={<NotFoundPage />} />
+            <Route path={RoutePaths.NOT_FOUND} element={<NotFoundPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </div>
       <Footer/>
-    </Router>
+    </>
   );
 }
 

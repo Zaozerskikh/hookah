@@ -10,8 +10,9 @@ export const RoutePaths = {
   ACCESSORIES: '/accessories',
   NEWS: '/news',
   NEWS_DETAILED: '/news/:id',
+  PRODUCT_DETAILED: '/product/:productInfo',
   ABOUT: '/about',
   DELIVERY_POLICY: '/delivery',
-  TEST_404: '/404',
+  NOT_FOUND: '/not-found',
   FINAL_CHECKOUT: '/checkout',
 }

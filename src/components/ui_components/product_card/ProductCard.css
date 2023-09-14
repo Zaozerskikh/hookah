@@ -128,18 +128,25 @@
     justify-content: space-between;
 }
 
-.product-card-container .detailed-view-container .detailed-view-card .detailed-view-header {
-    color: white;
-    font-family: Unbounded-700, serif;
-    font-size: 25px;
-    line-height: 36px;
-    margin-bottom: 24px;
-}
-
 .product-card-container .detailed-view-container .detailed-view-card .detailed-view-text-container {
     margin: 32px;
     display: flex;
     flex-direction: column;
+}
+
+.product-card-container .product-price-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.product-card-container .product-price-wrapper .product-price-before-discount {
+    text-decoration: line-through;
+    font-family: Monsterrat-600, serif;
+    font-size: 24px;
+    line-height: 34.56px;
+    color: #CFD5DB;
+    text-align: center;
 }
 
 .product-card-container .detailed-view-container .detailed-view-card .detailed-view-image {
@@ -153,31 +160,6 @@
     flex-direction: column;
     gap: 4px;
     margin-bottom: 24px;
-}
-
-.detailed-view-description-container .detailed-view-brand-line {
-    font-family: Monsterrat-600, serif;
-    font-size: 22px;
-    line-height: 31.68px;
-    color: white;
-}
-
-.detailed-view-description-container .detailed-view-brand-line-info {
-    font-family: Monsterrat-500, serif;
-    font-size: 22px;
-    line-height: 31.68px;
-    color: #CFD5DB;
-}
-
-.product-card-container .detailed-view-container .detailed-button-container  {
-    width: 296px;
-    height: 48px !important;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 8px;
 }
 
 .product-card-container .soldout-detailed {
@@ -214,44 +196,6 @@
     gap: 10px;
     border-radius: 16px;
     background: #EAEBF0;
-}
-
-.product-card-container .product-price-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-}
-
-.product-card-container .product-price-wrapper .product-price-before-discount {
-    text-decoration: line-through;
-    font-family: Monsterrat-600, serif;
-    font-size: 24px;
-    line-height: 34.56px;
-    color: #CFD5DB;
-    text-align: center;
-}
-
-.product-card-container .detailed-view-container .detailed-view-text-container .detailed-button-container .detailed-buy-now-button {
-    width: 148px;
-    height: 48px;
-    background-color: #FFFFFF;
-    border: none;
-    outline: none;
-    border-radius: 24px;
-    transition: background-color 0.5s;
-}
-
-.product-card-container .detailed-view-container .detailed-view-text-container .detailed-button-container .detailed-buy-now-button:hover {
-    cursor: pointer;
-    background-color: #E1E2E9;
-    transition: background-color 0.5s;
-}
-
-.product-card-container .detailed-view-container .detailed-view-text-container .detailed-button-container .buy-now-text {
-    font-family: Monsterrat-600, serif;
-    font-size: 22px;
-    line-height: 31.68px;
-    color: black;
 }
 
 .product-card-container .detailed-view-container .detailed-full-description {

@@ -9,17 +9,14 @@ import Scrollbar from "react-scrollbars-custom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import {decrementProductCount, incrementProductCount} from "../../../redux/cart_reducer/CartReducer";
-import {useNavigate} from "react-router-dom";
-import {RoutePaths} from "../../../routes/RoutePaths";
+import ProductInfoOnCard from "./product_info/ProductInfoOnCard";
 
 const ProductCard: React.FC<ProductInfo> =
   ({ productId, name, brand,line, weight, description, price, discountPrice, image , fullDescription, stock, tags}) => {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (isDetailedViewOpened) {
@@ -75,66 +72,17 @@ const ProductCard: React.FC<ProductInfo> =
             onClickColor="#d1d1d9"
           />
           <div className="detailed-view-text-container">
-            <span className="detailed-view-header">
-              {`${brand} - ${name}`}
-            </span>
-            <div className="detailed-view-description-container">
-              <div>
-                <span className="detailed-view-brand-line-info">Brand: </span>
-                <span className="detailed-view-brand-line">{brand}</span>
-              </div>
-              <div>
-                <span className="detailed-view-brand-line-info">Line: </span>
-                <span className="detailed-view-brand-line">{line}</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'row', gap: '8px'}}>
-                <span className="detailed-view-brand-line-info">Price per pack: </span>
-                {discountPrice && discountPrice !== price && (
-                  <span
-                    className="detailed-view-brand-line-info"
-                    style={{ textDecoration: 'line-through'}}
-                  >
-                    {price}€
-                  </span>
-                )}
-                <span className="detailed-view-brand-line">{discountPrice ? discountPrice : price}€</span>
-              </div>
-            </div>
-            {stock !== 0 ? (
-              <div className="detailed-button-container">
-                <CounterButton
-                  counterState={purchasedCount}
-                  isDark={true}
-                  onPlusClickAction={() => dispatch(incrementProductCount(productId))}
-                  onMinusClickAction={() => dispatch(decrementProductCount(productId))}
-                />
-                <button
-                  className="detailed-buy-now-button"
-                  onClick={() => {
-                    if (purchasedCount === 0) {
-                      dispatch(incrementProductCount(productId))
-                    }
-                    navigate(RoutePaths.FINAL_CHECKOUT)
-                  }}
-                >
-                  <span className="buy-now-text">Buy now</span>
-                </button>
-              </div>
-            ) : (
-              <div className="detailed-button-container">
-                <span
-                  style={{
-                    height: '48px',
-                    display: 'flex',
-                    alignItems:'center',
-                    width: '100%'
-                  }}
-                >
-                  <span className="soldout-detailed">Soldout</span>
-                </span>
-              </div>
-            )
-            }
+            <ProductInfoOnCard
+              productId={productId}
+              name={name}
+              brand={brand}
+              line={line}
+              price={price}
+              discountPrice={discountPrice}
+              stock={stock}
+              purchasedCount={purchasedCount}
+              weight={weight}
+            />
             <div className={`containerwrapper`}>
               <Scrollbar
                 className="detailed-full-description"
