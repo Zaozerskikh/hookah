@@ -7,28 +7,28 @@
     top: 0;
     left: 800px !important;
     height: 356px;
-    width: 1315px;
+    width: 1863px;
 }
 
 .bottom-floating-clouds-container {
     overflow: hidden;
-    width: 1315px;
-    height: 120px;
+    width: 1863px;
+    height: 170px;
     display: flex;
     flex-direction: row;
 }
 
 .top-floating-clouds-container {
     overflow: hidden;
-    width: 1315px;
-    height: 120px;
+    width: 1863px;
+    height: 170px;
     display: flex;
     flex-direction: row;
     margin-bottom: 16px;
 }
 
 .bottom-floating-clouds-container .floating-clouds-image {
-    animation: scrollAnimationBottom 15s linear infinite;
+    animation: scrollAnimationBottom 18s linear infinite;
     background: repeat-x;
 }
 
@@ -42,7 +42,7 @@
         transform: translate(0, 0);
     }
     100% {
-        transform: translate(-219.166px, 0);
+        transform: translate(-310.5px, 0);
     }
 }
 
@@ -51,6 +51,6 @@
         transform: translate(0, 0);
     }
     100% {
-        transform: translate(-219.166px, 0);
+        transform: translate(-310.5px, 0);
     }
 }

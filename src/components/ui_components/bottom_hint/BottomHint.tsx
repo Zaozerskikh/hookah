@@ -3,9 +3,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintReducer";
 const BottomHint: React.FC = () => {
-  const [isHovered, setHovered] = useState(false)
   const bottomHintState = useSelector((state: RootState) => state.bottomHint)
   const dispatch = useDispatch()
+  const [startAnimation, setStartAnimation] = useState(false)
 
   useEffect(() => {
     if (bottomHintState.isShown) {
@@ -13,9 +13,27 @@ const BottomHint: React.FC = () => {
         if (bottomHintState.isShown) {
           dispatch(setBottomHintState(false, bottomHintState.message))
         }
-      }, 4000)
+      }, 4200)
     }
   },  [bottomHintState, dispatch]);
+
+  useEffect(() => {
+    if (bottomHintState.isShown) {
+      if (!startAnimation) {
+        setTimeout(() => {
+          if (bottomHintState.isShown) {
+            setStartAnimation(true)
+          }
+        }, 200)
+      }
+    }
+  }, [bottomHintState.isShown, startAnimation]);
+
+  useEffect(() => {
+    if (!bottomHintState.isShown) {
+      setStartAnimation(false)
+    }
+  }, [bottomHintState.isShown]);
 
   return(
     <div
@@ -31,16 +49,12 @@ const BottomHint: React.FC = () => {
         transition: "all .2s ease",
         WebkitTransition: "all .2s ease",
         MozTransition: "all .2s ease",
-        cursor: isHovered ? 'pointer' : undefined
       }}
-      onClick={() => dispatch(setBottomHintState(false, bottomHintState.message))}
-      onMouseLeave={() => setHovered(false)}
-      onMouseEnter={() => setHovered(true)}
     >
       <div
         style={{
           width: '530px',
-          backgroundColor: '#22CE5D',
+          backgroundColor: '#38D36D',
           borderRadius: '32px 32px 0px 0px',
           padding: '16px 32px 16px 32px',
           fontFamily: 'Monsterrat-600, serif',
@@ -49,10 +63,26 @@ const BottomHint: React.FC = () => {
           color: 'white',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          overflow: "hidden",
+          position: 'relative'
         }}
       >
-        {bottomHintState.message}
+        <div
+          style={{
+            position:'absolute',
+            top: '0px',
+            right: '0px',
+            height: '100%',
+            width: !startAnimation ? '0%' : '100%',
+            backgroundColor: '#22CE5D',
+            transition: startAnimation ? "all 4s ease-in-out" : undefined,
+            WebkitTransition: startAnimation ? "all 4s ease-in-out" : undefined,
+            MozTransition: startAnimation ? "all 4s ease-in-out" : undefined,
+            zIndex: '10000',
+          }}
+        />
+        <span style={{ zIndex: '10001'}}>{bottomHintState.message}</span>
       </div>
     </div>
   )

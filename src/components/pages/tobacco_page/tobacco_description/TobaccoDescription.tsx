@@ -22,14 +22,15 @@ const TobaccoDescription: React.FC<TobaccoDescriptionProps> = ({ name, descripti
           showText={true}
           text="Open all brands"
           buttonStyle={{
-            paddingLeft: '15px',
+            paddingLeft: '20px',
             width: '254px',
             height: '48px',
             display:'flex',
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: 'white',
-            gap:'0px'
+            gap:'0px',
+            borderRadius: '24px'
           }}
           textStyle={{
             fontFamily: 'Monsterrat-600, serif',

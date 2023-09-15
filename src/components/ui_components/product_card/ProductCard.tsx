@@ -48,8 +48,8 @@ const ProductCard: React.FC<ProductInfo> =
         >
           {stock === 0 && <span className="soldout-detailed">Soldout</span>}
           {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
-          {stock !== 0 && discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-          {stock !== 0 && tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
+          {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
+          {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
         </div>
       }
       <div
@@ -82,10 +82,11 @@ const ProductCard: React.FC<ProductInfo> =
               stock={stock}
               purchasedCount={purchasedCount}
               weight={weight}
+              optionalTags={tags}
             />
             <div className={`containerwrapper`}>
               <Scrollbar
-                className="detailed-full-description"
+                className={`detailed-full-description ${(name.length > 20 || stock === 0 || stock === 1 || (tags && tags.includes(ProductTag.NEW)) || (discountPrice && discountPrice !== price)) ? 'short' : 'long'}`}
                 thumbYProps={{
                   renderer: (props) => {
                     const { elementRef, ...restProps } = props;
