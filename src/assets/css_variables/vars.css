@@ -1,0 +1,25 @@
+:root {
+    --main-black: black;
+    --main-white: white;
+
+    --auxiliary-dark-gray: #2C2D2E;
+    --auxiliary-light-gray: #EAEBF0;
+    --auxiliary-smoke-gray: #CFD5DB;
+
+    --text-gray: #2C2D2E;
+    --text-gray-secondary: #909398;
+    --text-link: #005CCD;
+    --text-link-hover: #1355A7;
+
+    --on-hover-white: #F7F7FB;
+
+    --on-click-smoke-gray: #C9D0D7;
+    --on-click-light-gray: #E1E2E9;
+    --on-click-dark-gray: #424446;
+
+    --special-error: #FF4572;
+    --special-green: #38D36D;
+    --special-green-secondary: #22CE5D;
+    --special-pink: #BC4FFF;
+    --special-orange: #FF8A00;
+}

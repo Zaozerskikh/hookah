@@ -1,5 +1,4 @@
 .about-us-container {
-    min-width: 1264px;
     margin: 34px 88px;
     display: flex;
     flex-direction: column;
@@ -15,7 +14,7 @@
 }
 
 .about-us-container .main-text-container {
-    color: #000;
+    color: var(--main-black);
     font-family: Monsterrat-400, serif;
     font-size: 20px;
     font-style: normal;
@@ -33,7 +32,7 @@
 }
 
 .about-us-container .about-header {
-    color: #000;
+    color: var(--main-black);
     font-family: Monsterrat-700, serif;
     font-size: 32px;
     font-style: normal;

@@ -1,7 +1,7 @@
 .copyright-link {
     font-size: 12px;
     line-height: 14.88px;
-    color: #909398;
+    color: var(--text-gray-secondary);
     position: absolute;
     top: 272px;
     font-family: Unbounded-300, serif;
@@ -14,5 +14,5 @@
 }
 
 .copyright-link:hover {
-    color: white;
+    color: var(--main-white);
 }

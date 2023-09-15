@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './ShopGrid.css'
 import ProductCard from "../product_card/ProductCard";
 import {RoutePaths} from "../../../routes/RoutePaths";
 import {Link} from "react-router-dom";
 import StandardButton from "../standart_button/StandartButton";
 import {ProductInfo} from "../../../content/Products";
+import {useMediaQuery} from "react-responsive";
 
 interface ShopGridProps {
   showAllCatalogButton: boolean;
@@ -12,6 +13,18 @@ interface ShopGridProps {
 }
 
 const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products}) => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
+  const isTablet = useMediaQuery({
+    query: '(min-width: 1000px)'
+  })
+
+  useEffect(() => {
+    console.log(isTablet)
+  }, [isTablet]);
+
   return(
     <div
       className="shop-container"
@@ -21,7 +34,7 @@ const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products}) => 
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        minWidth: '1264px'
+        width: isDesktopOrLaptop ? '1264px' : '948px'
       }}
     >
       <div
@@ -33,7 +46,7 @@ const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products}) => 
           alignContent: 'center',
           gap: '48px 16px',
           flexWrap: 'wrap',
-          minWidth: '1264px'
+          minWidth: isDesktopOrLaptop ? '1264px' : '948px'
         }}
       >
         {

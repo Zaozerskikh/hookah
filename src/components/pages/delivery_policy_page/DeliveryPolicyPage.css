@@ -16,7 +16,7 @@
 }
 
 .delivery-policy-container .h2 {
-    color: #000;
+    color: var(--main-black);;
     font-family: Unbounded-700, serif;
     font-size: 25px;
     font-style: normal;
@@ -24,7 +24,7 @@
 }
 
 .delivery-policy-container .common-text {
-    color: #000;
+    color: var(--main-black);;
     font-family: Monsterrat-400, serif;
     font-size: 20px;
     font-style: normal;
@@ -42,12 +42,12 @@
 }
 
 .delivery-policy-container a {
-    color: #005CCD;
+    color: var(--text-link);
     font-family: Monsterrat-500, serif;
     font-size: 20px;
     line-height: 29px;
 }
 
 .delivery-policy-container a:hover {
-    color: #1355A7;
+    color: var(--text-link-hover);
 }

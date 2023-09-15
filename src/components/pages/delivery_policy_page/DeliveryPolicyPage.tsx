@@ -4,6 +4,7 @@ import Block, {BlockProps} from "./block/Block";
 import StandardButton from "../../ui_components/standart_button/StandartButton";
 import {RoutePaths} from "../../../routes/RoutePaths";
 import {useNavigate} from "react-router-dom";
+import {useMediaQuery} from "react-responsive";
 
 const Blocks: BlockProps[] = [
   {
@@ -37,6 +38,10 @@ const DeliveryPolicyPage: React.FC = () => {
 
   useState(() => {
     window.scrollTo({ top: 0 });
+  })
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
   })
 
   return(

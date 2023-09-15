@@ -13,18 +13,24 @@ import telegramGreyIcon from "./../../../assets/icons/socials/telegram_logo__smo
 import StandardButton from "../../ui_components/standart_button/StandartButton";
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
+import {useMediaQuery} from "react-responsive";
 
 const AboutUsPage: React.FC = () => {
   const navigate = useNavigate()
+
   useState(() => {
     window.scrollTo({ top: 0 });
   })
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   return(
-    <div className="about-us-container">
+    <div className="about-us-container" style={{ width: isDesktopOrLaptop ? '1264px' : '948px'}}>
       <div className="about-header">About us</div>
       <div className="main-text-and-logo-container">
-        <div className="main-text-container">
+        <div className="main-text-container" style={{width: isDesktopOrLaptop ? '808px' : 'calc(808px - 316px'}}>
           <span>
             Hookah PT is a premier online store based in Portugal that specializes in providing a wide selection of high-quality hookahs, accessories, and popular tobacco brands such as MustHave, DarkSide, Element, and Tangiers. With a focus on customer satisfaction, Hookah PT aims to deliver an exceptional hookah experience, catering to the needs and preferences of hookah enthusiasts in Portugal and beyond. Whether you’re a seasoned hookah connoisseur or a newcomer to the world of hookah, Hookah PT offers a comprehensive range of products to enhance your enjoyment and elevate your hookah sessions to new heights.
           </span>

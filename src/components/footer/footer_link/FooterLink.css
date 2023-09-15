@@ -15,7 +15,7 @@
     background-color: transparent;
     height: 32px;
     font-family: Unbounded-300, serif;
-    color: #CFD5DB;
+    color: var(--auxiliary-smoke-gray);
     font-size: 16px;
     margin-bottom: 8px;
     padding: 0;
@@ -26,5 +26,5 @@
 }
 
 .footer-link-wrapper .footer-link:hover {
-    color: white;
+    color: var(--main-white);
 }

@@ -33,6 +33,7 @@ const LastProductWarningModal: React.FC<LastProductWarningModalProps> =
                 height: '48px',
               }}
               onClickAction={onConfirmAction}
+              onHoverColor={'var(--main-white)'}
             />
             <MoreButton
               showText={true}

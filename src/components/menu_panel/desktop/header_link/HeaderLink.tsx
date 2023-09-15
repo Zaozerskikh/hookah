@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Link, useLocation} from "react-router-dom";
 import './HeaderLink.css'
-import mainLogoClouds from '../../../assets/icons/decorations/main_logo_cloud.png'
+import mainLogoClouds from '../../../../assets/icons/decorations/main_logo_cloud.png'
 
 interface HeaderLinkProps {
   link: string

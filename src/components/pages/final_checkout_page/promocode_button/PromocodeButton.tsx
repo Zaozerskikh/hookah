@@ -16,7 +16,7 @@ const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction }) => {
         cursor: isHovered ? 'pointer' : undefined,
         width: '128px',
         height: '24px',
-        backgroundColor: isClicked ? '#c7ccd3' : isHovered ? "#CFD5DB" : '#EAEBF0',
+        backgroundColor: isClicked ? 'var(--on-click-smoke-gray)' : isHovered ? "var(--auxiliary-smoke-gray)" : 'var(--auxiliary-light-gray)',
         transition: "all .5s ease",
         WebkitTransition: "all .5s ease",
         MozTransition: "all .5s ease",

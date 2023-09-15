@@ -5,19 +5,22 @@ import checkoutWindowReducer, {
   CheckoutWindowState
 } from "./product_detailed_view_reducer/CheckoutWindowReducer";
 import bottomHintReducer, {BottomHintState} from "./bottom_hint_reducer/BottomHintReducer";
+import burgerReducer, {BurgerState} from "./burger_button_reducer/BurgerButtonReducer";
 
 const rootReducer = combineReducers({
   warning: warningReducer,
   cart: cartReducer,
   productDetailedView: checkoutWindowReducer,
-  bottomHint: bottomHintReducer
+  bottomHint: bottomHintReducer,
+  burger: burgerReducer
 });
 
 export type RootState = {
   warning: WarningState
   cart: Record<string, number>,
   productDetailedView: CheckoutWindowState,
-  bottomHint: BottomHintState
+  bottomHint: BottomHintState,
+  burger: BurgerState
 };
 
 const store = configureStore({

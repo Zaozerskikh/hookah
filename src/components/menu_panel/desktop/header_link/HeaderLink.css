@@ -1,7 +1,7 @@
 .menu-panel-container .menu-link {
     text-decoration: none;
     outline: none;
-    color: black;
+    color: var(--main-black);
     background-color: transparent;
     height: 32px;
     font-family: Unbounded-300, serif;
@@ -16,7 +16,7 @@
 .menu-panel-container .curr-menu-link {
     text-decoration: none;
     outline: none;
-    color: black;
+    color: var(--main-black);
     background-color: transparent;
     height: 32px;
     font-family: Unbounded-400, serif;

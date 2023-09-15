@@ -5,6 +5,7 @@ import './DetailedNewsPage.css'
 import StandardButton from "../../ui_components/standart_button/StandartButton";
 import {RoutePaths} from "../../../routes/RoutePaths";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
+import {useMediaQuery} from "react-responsive";
 
 const DetailedNewsPage: React.FC = () => {
   const navigate = useNavigate()
@@ -21,9 +22,13 @@ const DetailedNewsPage: React.FC = () => {
     }
   }, [id, article, navigate]);
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   return(
     article ? (
-      <div className="detailed-news-container">
+      <div className="detailed-news-container" style={{ width: isDesktopOrLaptop ? '1264px' : '948px'}}>
         <div className="header-container">
           <span className="header-text" dangerouslySetInnerHTML={{ __html: article.name }} />
           <span className="header-date">

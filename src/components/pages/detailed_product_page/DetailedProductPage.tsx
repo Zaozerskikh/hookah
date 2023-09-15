@@ -8,6 +8,7 @@ import ProductInfoOnCard from "../../ui_components/product_card/product_info/Pro
 import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import MoreButton from "../../ui_components/more_button/MoreButton";
+import {useMediaQuery} from "react-responsive";
 
 const DetailedProductPage: React.FC = () => {
   const navigate = useNavigate()
@@ -44,13 +45,17 @@ const DetailedProductPage: React.FC = () => {
     window.scrollTo({ top: 0 });
   })
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   return(
     <div
       style={{
         minHeight: `${Math.max(window.innerHeight - 692, 300)}px`,
-        width: '1264px',
+        width: isDesktopOrLaptop ? '1264px' : '948px',
         display: "flex",
-        backgroundColor: 'black',
+        backgroundColor: 'var(--main-black)',
         justifyContent: 'center',
         marginTop: '32px',
         marginBottom: '160px'
@@ -61,7 +66,7 @@ const DetailedProductPage: React.FC = () => {
       ) : (
         <div
           style={{
-            width: '1264px',
+            width: isDesktopOrLaptop ? '1264px' : '948px',
           }}
         >
           <div
@@ -79,7 +84,7 @@ const DetailedProductPage: React.FC = () => {
               }}
             >
               <div
-                style={{ width: '782px', display: 'flex', flexDirection: 'column', gap: '16px'}}
+                style={{ width: isDesktopOrLaptop ? '782px' : 'calc(782px - 216px)', display: 'flex', flexDirection: 'column', gap: '16px'}}
               >
                 <ProductInfoOnCard
                   productId={currProduct.productId}
@@ -96,7 +101,7 @@ const DetailedProductPage: React.FC = () => {
                 />
                 <div
                   style={{
-                    color: '#EAEBF0',
+                    color: 'var(--auxiliary-light-gray)',
                     fontFamily: 'Monsterrat-400, serif',
                     fontSize: '16px',
                     lineHeight: '144%'
@@ -108,8 +113,8 @@ const DetailedProductPage: React.FC = () => {
               <img
                 src={currProduct.image}
                 style={{
-                  width: '384px',
-                  height: '476px'
+                  width: isDesktopOrLaptop ? '384px' : '284px',
+                  height:  isDesktopOrLaptop ? '476px' : '347px'
                 }}
                 alt="tobacco-img"
               />

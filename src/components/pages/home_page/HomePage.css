@@ -4,6 +4,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .homepage-container .clouds-and-text-container {
@@ -24,7 +25,6 @@
 
 .homepage-container .partners-container {
     display: flex;
-    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;

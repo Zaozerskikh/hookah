@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import {decrementProductCount, incrementProductCount} from "../../../redux/cart_reducer/CartReducer";
 import ProductInfoOnCard from "./product_info/ProductInfoOnCard";
+import {useMediaQuery} from "react-responsive";
 
 const ProductCard: React.FC<ProductInfo> =
   ({ productId, name, brand,line, weight, description, price, discountPrice, image , fullDescription, stock, tags}) => {
@@ -33,6 +34,10 @@ const ProductCard: React.FC<ProductInfo> =
     };
   }, [isDetailedViewOpened]);
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   return (
     <div className="product-card-container">
       {
@@ -55,7 +60,8 @@ const ProductCard: React.FC<ProductInfo> =
       <div
         className={`detailed-view-container ${!isCheckoutOpened && isDetailedViewOpened ? 'open' : ''}`}
         style={{
-          backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent'
+          backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
+          width: `${window.innerWidth}px`
         }}
         onClick={(e) => {
           e.preventDefault()
@@ -64,7 +70,7 @@ const ProductCard: React.FC<ProductInfo> =
           }
         }}
       >
-        <div className="detailed-view-card">
+        <div className="detailed-view-card" style={{marginTop: isDesktopOrLaptop ? '0px' : '24px'}}>
           <CloseButton
             onClickAction={() => setDetailedViewOpened(false)}
             iconSize={20}

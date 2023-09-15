@@ -20,8 +20,11 @@ import aboutImg from './assets/icons/decorations/floating_clouds_about_us.png'
 import {ProductBrand} from "./content/Products";
 import DetailedProductPage from "./components/pages/detailed_product_page/DetailedProductPage";
 import BottomHint from "./components/ui_components/bottom_hint/BottomHint";
+import './assets/css_variables/vars.css'
+import SlidingMenu from "./components/menu_panel/mobile/sliding_menu/SlidingMenu";
 
 const App: React.FC = () => {
+  const isBorgerOpened = useSelector((state: RootState) => state.burger.isOpened)
   const isWarningShown = useSelector((state: RootState) => state.warning.isShown)
   const [minHeight, setMinHeight] = useState(window.innerHeight - 500)
   const loc = useLocation()
@@ -49,12 +52,12 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isWarningShown) {
+    if (isWarningShown || isBorgerOpened) {
       document.body.classList.add('hidden');
     } else {
       document.body.classList.remove('hidden');
     }
-  }, [isWarningShown]);
+  }, [isWarningShown, isBorgerOpened]);
 
   return (
     <>
@@ -65,8 +68,8 @@ const App: React.FC = () => {
           alignItems: 'flex-start',
           justifyContent: 'center',
           minHeight: minHeight,
-          backgroundColor: loc.pathname.startsWith('/product/')? 'black' : 'white',
-          position: 'relative'
+          backgroundColor: loc.pathname.startsWith('/product/')? 'var(--main-black)' : 'white',
+          position: 'relative',
         }}
       >
         <div style={{ width: '100%', position: 'absolute', top: '0', left: 0, backgroundColor: 'white', height: '80px'}}/>
@@ -80,6 +83,7 @@ const App: React.FC = () => {
             justifyContent: 'center',
           }}
         >
+          <SlidingMenu/>
           <Warning/>
           <BottomHint/>
           <CartButton/>

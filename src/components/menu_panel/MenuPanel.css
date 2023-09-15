@@ -4,8 +4,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 0 88px;
-    min-width: 1264px;
 }
 
 .menu-panel-container .home-link {
@@ -14,7 +12,7 @@
     line-height: 35.81px;
     text-decoration: none;
     outline: none;
-    color: black;
+    color: var(--main-black);
     z-index: 999 !important;
 }
 
@@ -66,9 +64,7 @@
 
 .menu-panel-container .links {
     height: 31px;
-    width: 550px !important;
     display: flex;
-    gap: 35px !important;
     align-self: center;
 }
 

@@ -129,10 +129,7 @@
 }
 
 .product-card-container .detailed-view-container .detailed-view-card .detailed-view-text-container {
-    margin-top: 32px;
-    margin-bottom: 15px;
-    margin-left: 32px;
-    margin-right: 32px;
+    margin: 32px 32px 15px;
     display: flex;
     flex-direction: column;
 }

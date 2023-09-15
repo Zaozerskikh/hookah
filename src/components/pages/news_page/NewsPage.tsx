@@ -2,24 +2,28 @@ import React, {useState} from "react";
 import './NewsPage.css'
 import {News} from "../../../content/News";
 import NewsCard from "../../ui_components/news_card/NewsCard";
+import {useMediaQuery} from "react-responsive";
 
 const NewsPage: React.FC = () => {
   useState(() => {
     window.scrollTo({ top: 0 });
   })
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   return(
     <div
       className="news-page-container"
       style={{
-        width: 'calc(100% - 176px)',
+        width: isDesktopOrLaptop ? '1264px' : '948px',
         margin: '34px 88px',
         display: 'inline-flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: '34px',
         paddingBottom: '128px',
-        minWidth: '1264px'
      }}
     >
       <span
@@ -39,7 +43,6 @@ const NewsPage: React.FC = () => {
             alignContent: 'center',
             gap: '48px 32px',
             flexWrap: 'wrap',
-            minWidth: '1264px'
           }}
         >
           {

@@ -81,10 +81,10 @@ const CustomInput: React.FC<CustomInputProps> =
           style={{
             height: !multiline ? '45px' : '96px',
             borderColor: !validationFunc(text) && ((isActivated && !isActive && !promocode) || isSubmitButtonClicked)
-              ? '#FF4572'
+              ? 'var(--special-error)'
               : isActive
-                ? '#005CCD'
-                : '#EAEBF0',
+                ? 'var(--text-link)'
+                : 'var(--auxiliary-light-gray)',
             zIndex: '9999 !important'
           }}
         >

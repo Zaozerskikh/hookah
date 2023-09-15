@@ -36,7 +36,7 @@ const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPh
       .PhoneInputInput {
         margin-left: 10px;
         border: none !important;
-        color: ${isActivated ? 'black' : '#909398'};
+        color: ${isActivated ? 'black' : 'var(--text-gray-secondary)'};
         font-family: Monsterrat-500, serif;
         font-size: 16px;
         font-style: normal;
@@ -85,7 +85,7 @@ const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPh
         }}
         onBlur={() => setActive(false)}
         style={{
-          borderColor: !(validationFunc(value)) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? '#FF4572' : '#EAEBF0'
+          borderColor: !(validationFunc(value)) && ((isActivated && !isActive) || isCheckoutButtonClicked) ? 'var(--special-error)' : 'var(--auxiliary-light-gray)'
         }}
       >
         <PhoneInput

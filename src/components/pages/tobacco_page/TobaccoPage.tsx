@@ -12,6 +12,7 @@ import MoreButton from "../../ui_components/more_button/MoreButton";
 import NotFoundModal from "./not_found_modal/NotFoundModal";
 import PriceAndWeightTag, {TagState} from "./search_tag/price_and_weight_tag/PriceAndWeightTag";
 import TobaccoDescription from "./tobacco_description/TobaccoDescription";
+import {useMediaQuery} from "react-responsive";
 
 export const PRODUCTS_COUNT_ON_A_PAGE = 4;
 const PAGES_BEFORE_MORE_BUTTON = 5;
@@ -30,6 +31,10 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
   const [currPageNumber, setCurrPageNumber] = useState(1)
   const [totalPageCount, setTotalPageCount] = useState(0)
   const [currLastPageNumberShown, setCurrLastPageNumberShown] = useState(PAGES_BEFORE_MORE_BUTTON)
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
 
   useEffect(() => {
     setTotalPageCount(Math.ceil(filteredProducts.length / PRODUCTS_COUNT_ON_A_PAGE))
@@ -173,7 +178,8 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
     <div
       className="tobacco-page-wrapper"
       style={{
-        minHeight: `${window.innerHeight - 500}px`
+        minHeight: `${window.innerHeight - 500}px`,
+        width: isDesktopOrLaptop ? '1264px' : '948px'
       }}
     >
       {initialSortByBrand && <TobaccoDescription name={tobaccoName} description={tobaccoDescription} headerEmoji={headerEmoji} />}
@@ -183,86 +189,88 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
           position: 'relative',
         }}
       >
-        {!initialSortByBrand && (
-          <div className="brand-tags-container">
-            <BrandSearchTag
-              name="DarkSide"
-              isActive={darkSideTagActive}
-              onActiveChanged={() => {
-                setUseTags(true)
-                setDarkSideTagActive(!darkSideTagActive)
-              }}
-            />
-            <BrandSearchTag
-              name="Musthave"
-              isActive={musthaveTagActive}
-              onActiveChanged={() => {
-                setUseTags(true)
-                setMusthaveTagActive(!musthaveTagActive)
-              }}
-            />
-            <BrandSearchTag
-              name="Element"
-              isActive={elementSideTagActive}
-              onActiveChanged={() => {
-                setUseTags(true)
-                setElementTagActive(!elementSideTagActive)
-              }}
-            />
-            <BrandSearchTag
-              name="Tangiers"
-              isActive={tangiersTagActive}
-              onActiveChanged={() => {
-                setUseTags(true)
-                setTangiersTagActive(!tangiersTagActive)
-              }}
-            />
-            <BrandSearchTag
-              name="Fumari"
-              isActive={fumariTagActive}
-              onActiveChanged={() => {
-                setUseTags(true)
-                setFumariTagActive(!fumariTagActive)
-              }}
-            />
-          </div>
-        )}
-        <PriceAndWeightTag
-          displayedName="Price"
-          onClickAction={setPriceTagState}
-          tagState={priceTagState}
-        />
-        <PriceAndWeightTag
-          displayedName="Weight"
-          onClickAction={setWeightTagState}
-          tagState={weightTagState}
-        />
-        <CloseButton
-          onClickAction={() => {
-            setDarkSideTagActive(false)
-            setMusthaveTagActive(false)
-            setElementTagActive(false)
-            setTangiersTagActive(false)
-            setFumariTagActive(false)
-          }}
-          buttonStyle={{
-            position: 'relative',
-            width: '32px',
-            height: '32px',
-            borderRadius: '16px',
-            padding: '6px',
-            top: '0px',
-            left: '0px',
-            marginLeft: '16px',
-            opacity:
-              !darkSideTagActive && !elementSideTagActive && !tangiersTagActive &&
-              !fumariTagActive && !musthaveTagActive ? 0 : 1
-          }}
-          iconSize={12}
-          isDark={true}
-          changeColorOnHover={true}
-          onClickColor="#424446"
-        />
+        <div style={{ display: 'flex', flexDirection: "row", gap: '8px', flexWrap: 'wrap', maxWidth: isDesktopOrLaptop ? undefined : '555px'}}>
+          {!initialSortByBrand && (
+            <div className="brand-tags-container">
+              <BrandSearchTag
+                name="DarkSide"
+                isActive={darkSideTagActive}
+                onActiveChanged={() => {
+                  setUseTags(true)
+                  setDarkSideTagActive(!darkSideTagActive)
+                }}
+              />
+              <BrandSearchTag
+                name="Musthave"
+                isActive={musthaveTagActive}
+                onActiveChanged={() => {
+                  setUseTags(true)
+                  setMusthaveTagActive(!musthaveTagActive)
+                }}
+              />
+              <BrandSearchTag
+                name="Element"
+                isActive={elementSideTagActive}
+                onActiveChanged={() => {
+                  setUseTags(true)
+                  setElementTagActive(!elementSideTagActive)
+                }}
+              />
+              <BrandSearchTag
+                name="Tangiers"
+                isActive={tangiersTagActive}
+                onActiveChanged={() => {
+                  setUseTags(true)
+                  setTangiersTagActive(!tangiersTagActive)
+                }}
+              />
+              <BrandSearchTag
+                name="Fumari"
+                isActive={fumariTagActive}
+                onActiveChanged={() => {
+                  setUseTags(true)
+                  setFumariTagActive(!fumariTagActive)
+                }}
+              />
+            </div>
+          )}
+          <PriceAndWeightTag
+            displayedName="Price"
+            onClickAction={setPriceTagState}
+            tagState={priceTagState}
+          />
+          <PriceAndWeightTag
+            displayedName="Weight"
+            onClickAction={setWeightTagState}
+            tagState={weightTagState}
+          />
+          <CloseButton
+            onClickAction={() => {
+              setDarkSideTagActive(false)
+              setMusthaveTagActive(false)
+              setElementTagActive(false)
+              setTangiersTagActive(false)
+              setFumariTagActive(false)
+            }}
+            buttonStyle={{
+              position: 'relative',
+              width: '32px',
+              height: '32px',
+              borderRadius: '16px',
+              padding: '6px',
+              top: '0px',
+              left: '0px',
+              marginLeft: '16px',
+              opacity:
+                !darkSideTagActive && !elementSideTagActive && !tangiersTagActive &&
+                !fumariTagActive && !musthaveTagActive ? 0 : 1
+            }}
+            iconSize={12}
+            isDark={true}
+            changeColorOnHover={true}
+            onClickColor="#424446"
+          />
+        </div>
         <SearchInputField
           onInputChange={onSearchStringChanged}
           onEnterAction={filterBySearchString}

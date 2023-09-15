@@ -12,16 +12,21 @@ import SocialLink from "../ui_components/social_link/SocialLink";
 import CopyrightLink from "./copyright_link/CopyrightLink";
 import FooterLink from "./footer_link/FooterLink";
 import {Link} from "react-router-dom";
+import {useMediaQuery} from "react-responsive";
 
 
 const Footer: React.FC = () => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   return(
     <div
       className="footer"
       style={{
         padding: `64px 0px 64px 0px`,
-        width: 'calc(100%)',
         position: "absolute",
+        width: '100%',
         bottom: '-420px',
         justifyContent: 'center',
         display: 'flex',
@@ -33,11 +38,11 @@ const Footer: React.FC = () => {
         style={{
           display: "flex",
           flexDirection: 'row',
-          width: '1264px',
+          width: isDesktopOrLaptop ? '1264px' : '948px',
           justifyContent: 'space-between'
         }}
       >
-        <div className="section">
+        <div className="section" style={{width: isDesktopOrLaptop ? '224px' : '175px'}}>
           <span className="header">links</span>
           <FooterLink
             text="tobacco"
@@ -59,7 +64,6 @@ const Footer: React.FC = () => {
             <span style={{ visibility: 'hidden' }}>l</span>
             <Link className="delivery-link-text" to={RoutePaths.DELIVERY_POLICY}>Read more...</Link>
           </p>
-
         </div>
         <div className="section">
           <span className="header">return policy</span>
@@ -76,7 +80,7 @@ const Footer: React.FC = () => {
             A valid proof of purchase, such as a receipt or order confirmation, is required for processing the return of hookah tobacco in Portugal.
           </p>
         </div>
-        <div className="section">
+        <div className="section" style={{width: isDesktopOrLaptop ? '224px' : '175px'}}>
           <div className="socials-wrapper">
             <SocialLink
               commonIcon={instagramWhiteIcon}

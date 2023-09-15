@@ -5,7 +5,7 @@
 }
 
 .all-input-wrapper .delivery-info {
-    color: #000;
+    color: var(--main-black);
     font-family: Monsterrat-400, serif;
     font-size: 20px;
     font-style: normal;
@@ -13,7 +13,7 @@
 }
 
 .header {
-    color: #000;
+    color: var(--main-black);
     font-family: Monsterrat-700, serif;
     font-size: 32px;
     font-style: normal;
@@ -34,7 +34,7 @@
 }
 
 .payment-info-wrapper .payment-line-wrapper .static-info {
-    color: #909398;
+    color: var(--text-gray-secondary);
     font-family: Unbounded-400, serif;
     font-size: 22px;
     font-style: normal;
@@ -42,7 +42,7 @@
 }
 
 .payment-info-wrapper .payment-line-wrapper .black-info {
-    color: black;
+    color: var(--main-black);
     font-family: Unbounded-400, serif;
     font-size: 22px;
     font-style: normal;
@@ -85,7 +85,7 @@
 }
 
 .final-checkout-page-wrapper .order-item-container .order-item-info-container .order-item-price {
-    color: #909398;
+    color: var(--text-gray-secondary);
     font-family: Monsterrat-400, serif;
     font-size: 16px;
     font-style: normal;
@@ -94,7 +94,7 @@
 }
 
 .final-checkout-page-wrapper .order-item-container .order-item-info-container .order-item-old-price {
-    color: #CFD5DB;
+    color: var(--auxiliary-smoke-gray);
     font-family: Monsterrat-400, serif;
     font-size: 16px;
     font-style: normal;
@@ -104,7 +104,7 @@
 }
 
 .final-checkout-page-wrapper .order-item-container .order-item-info-container .total-item-amount {
-    color: #000;
+    color: var(--main-black);
     text-align: right;
     font-family: Monsterrat-500, serif;
     font-size: 22px;
@@ -114,7 +114,7 @@
 }
 
 .final-checkout-page-wrapper .order-item-container .order-item-info-container .total-item-old-amount {
-    color: #909398;
+    color: var(--text-gray-secondary);
     text-align: right;
     font-family: Monsterrat-500, serif;
     font-size: 22px;
@@ -125,7 +125,7 @@
 }
 
 .final-checkout-page-wrapper .total-item-amount-without-discount {
-    color: #909398;
+    color: var(--text-gray-secondary);
     font-family: Unbounded-400, serif;
     font-size: 22px;
     font-style: normal;

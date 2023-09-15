@@ -19,7 +19,10 @@ const Warning: React.FC = () => {
   }, [dispatch, location])
 
   return(
-    <div className={`warning-container ${isWarningShown && Object.values(RoutePaths).includes(location.pathname) ? 'open' : ''}`}>
+    <div
+      className={`warning-container ${isWarningShown && Object.values(RoutePaths).includes(location.pathname) ? 'open' : ''}`}
+      style={{ width: window.innerWidth}}
+    >
       <div className="warning-card">
         <span className="warning-header">
           By clicking Enter you certify that you are 18 years of age or older
@@ -36,7 +39,7 @@ const Warning: React.FC = () => {
               width: '530px',
               height: '48px',
               borderRadius: '24px',
-              padding: '12px 20px 12px 20px'
+              padding: '12px 20px 12px 20px',
             }}
             iconStyle={{
               right: '20px',

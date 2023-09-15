@@ -21,19 +21,19 @@
 .PhoneInputCountryIcon {
     border: none !important;
     box-shadow: none !important;
-    background-color: white !important;
+    background-color: var(--main-white) !important;
     margin-bottom: 2px !important;
 }
 
 .PhoneInputCountrySelectArrow {
-    color: black !important;
+    color: var(--main-black) !important;
     font-weight: bold;
 }
 
 .invalid-phone-hint {
     position: absolute;
     top: -15px;
-    color: #FF4572;
+    color: var(--special-error);
     font-family: Monsterrat-500, serif;
     font-size: 11px;
     font-style: normal;

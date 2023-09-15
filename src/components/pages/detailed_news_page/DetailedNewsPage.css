@@ -1,10 +1,9 @@
 .detailed-news-container {
-    margin: 34px 88px 128px;
+    margin: 34px 0 128px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 32px;
-    align-self: stretch;
 }
 
 .detailed-news-container .header-container {
@@ -23,7 +22,7 @@
 }
 
 .detailed-news-container .header-container .header-date {
-    color: #909398;
+    color: var(--text-gray-secondary);
     font-family: Monsterrat-400, serif;
     font-size: 16px;
     font-style: normal;
@@ -36,7 +35,7 @@
 }
 
 .detailed-news-container .detailed_news_text {
-    color: #000;
+    color: var(--main-black);
     font-family: Monsterrat-400, serif;
     font-size: 20px;
     font-style: normal;

@@ -27,53 +27,56 @@ const HomePage: React.FC = () => {
     console.log(isDesktopOrLaptop)
   }, [isDesktopOrLaptop]);
 
-  return (
-    <div className="homepage-container">
-      <div className="clouds-and-text-container">
-        <div
-          className="left-tricky-div"
-          style={{
-            width: "6000px",
-            position: 'absolute',
-            left: '-5500px'
-          }}
+  const renderDesktop= () => {
+    return(
+      <div className="homepage-container" style={{ width: isDesktopOrLaptop ? '1264px' : '948px'}}>
+        <div className="clouds-and-text-container">
+          <div
+            className="left-tricky-div"
+            style={{
+              width: "6000px",
+              position: 'absolute',
+              left: '-5500px'
+            }}
+          />
+          <Greeting />
+          <FloatingClouds />
+        </div>
+        <ShopGrid
+          products={productsOnTheMain.map(productId =>
+            Products.find(product =>
+              product.productId === productId
+            )
+          )}
+          showAllCatalogButton={true}
         />
-        <Greeting />
-        <FloatingClouds />
-      </div>
-      <ShopGrid
-        products={productsOnTheMain.map(productId =>
-          Products.find(product =>
-            product.productId === productId
-          )
-        )}
-        showAllCatalogButton={true}
-      />
-      <NewsSection/>
-      <div className="partners-container">
+        <NewsSection/>
+        <div className="partners-container" style={{ width: isDesktopOrLaptop ? '1264px' : '948px'}}>
         <span className="partners-header">
           <h2>Our partners</h2> ❤️
         </span>
-        <div
-          className="partners-logo-container"
-          style={{
-            display: 'flex',
-            width: '100%',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: '64px',
-            gap: '88px',
-          }}
-        >
-          <PartnersLogo src={darksideLogo} url={ExternalLinks.DARKSIDE} />
-          <PartnersLogo src={musthaveLogo} url={ExternalLinks.MUSTHAVE} />
-          <PartnersLogo src={elementLogo} url={ExternalLinks.ELEMENT} />
-          <PartnersLogo src={tangiersLogo} url={ExternalLinks.TANGIERS} />
-          <PartnersLogo src={fumariLogo} url={ExternalLinks.FUMARI} />
+          <div
+            className="partners-logo-container"
+            style={{
+              display: 'flex',
+              width: isDesktopOrLaptop ? '1264px' : '948px',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: '64px',
+            }}
+          >
+            <PartnersLogo src={darksideLogo} url={ExternalLinks.DARKSIDE} />
+            <PartnersLogo src={musthaveLogo} url={ExternalLinks.MUSTHAVE} />
+            <PartnersLogo src={elementLogo} url={ExternalLinks.ELEMENT} />
+            <PartnersLogo src={tangiersLogo} url={ExternalLinks.TANGIERS} />
+            <PartnersLogo src={fumariLogo} url={ExternalLinks.FUMARI} />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    )
+  }
+
+  return (renderDesktop());
 };
 
 export default HomePage;

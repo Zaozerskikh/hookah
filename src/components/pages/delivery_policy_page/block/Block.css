@@ -1,5 +1,5 @@
 .block-container .block-header {
-    color: #000;
+    color: var(--main-black);
     font-family: Unbounded-400, serif;
     font-size: 22px;
     font-style: normal;
@@ -7,7 +7,7 @@
 }
 
 .block-container .block-text{
-    color: #000;
+    color: var(--main-black);
     font-family: Monsterrat-400, serif;
     font-size: 20px;
     font-style: normal;
