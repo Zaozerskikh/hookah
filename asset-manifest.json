@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/hookah/static/css/main.2e137724.css",
-    "main.js": "/hookah/static/js/main.98550b21.js",
+    "main.js": "/hookah/static/js/main.f098b851.js",
     "static/js/787.c274760c.chunk.js": "/hookah/static/js/787.c274760c.chunk.js",
     "static/media/news-5.png": "/hookah/static/media/news-5.6c6942cfaf5918f8fa1a.png",
     "static/media/choosing_hookah_bowl_icon.png": "/hookah/static/media/choosing_hookah_bowl_icon.fb4c7cbd2fc7c46f1afe.png",
@@ -45,11 +45,11 @@
     "static/media/instagram_logo_black.png": "/hookah/static/media/instagram_logo_black.7c90a78377d0d9eab47a.png",
     "index.html": "/hookah/index.html",
     "main.2e137724.css.map": "/hookah/static/css/main.2e137724.css.map",
-    "main.98550b21.js.map": "/hookah/static/js/main.98550b21.js.map",
+    "main.f098b851.js.map": "/hookah/static/js/main.f098b851.js.map",
     "787.c274760c.chunk.js.map": "/hookah/static/js/787.c274760c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2e137724.css",
-    "static/js/main.98550b21.js"
+    "static/js/main.f098b851.js"
   ]
 }
