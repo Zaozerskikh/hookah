@@ -22,6 +22,7 @@ import DetailedProductPage from "./components/pages/detailed_product_page/Detail
 import BottomHint from "./components/ui_components/bottom_hint/BottomHint";
 import './assets/css_variables/vars.css'
 import SlidingMenu from "./components/menu_panel/mobile/sliding_menu/SlidingMenu";
+import {useMediaQuery} from "react-responsive";
 
 const App: React.FC = () => {
   const isBorgerOpened = useSelector((state: RootState) => state.burger.isOpened)
@@ -59,6 +60,10 @@ const App: React.FC = () => {
     }
   }, [isWarningShown, isBorgerOpened]);
 
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
+
   return (
     <>
       <div
@@ -67,7 +72,7 @@ const App: React.FC = () => {
           display: "flex",
           alignItems: 'flex-start',
           justifyContent: 'center',
-          minHeight: minHeight,
+          minHeight: isMobile ? '300px' :minHeight,
           backgroundColor: loc.pathname.startsWith('/product/')? 'var(--main-black)' : 'white',
           position: 'relative',
         }}

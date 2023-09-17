@@ -7,12 +7,31 @@ export interface CarouselItem {
   key: number;
 }
 interface CarouselProps {
-  items: CarouselItem[]
+  items: CarouselItem[];
+  isMobile ? : boolean;
+  longestKey ? : number;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ items }) => {
+const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
   const [xPos, setXPos] = useState([0, 1000, 2000, 3000]);
   const [isSwipingPaused, setIsSwipingPaused] = useState(false);
+  const [textCarouselWidth, setTextCarouselWidth] = useState(window.innerWidth - 64);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (isMobile) {
+        setTextCarouselWidth(document.getElementById("greetings-container-mobile")?.offsetWidth)
+      }
+    };
+
+    window.addEventListener('resize', updateWidth);
+    updateWidth();
+    console.log(window.devicePixelRatio + 'xcefvrg')
+
+    return () => {
+      window.removeEventListener('resize', updateWidth);
+    };
+  }, [isMobile]);
 
   const moveNext = () => {
     let newPositions = xPos.slice();
@@ -32,6 +51,12 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       }
     };
   });
+
+  useEffect(() => {
+    if (isMobile) {
+      setIsSwipingPaused(false)
+    }
+  }, [isMobile]);
 
 
   const determineStyle = useCallback((index: number, showAnimation: boolean) => {
@@ -55,8 +80,32 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
   return (
     <div
       className="carousel-wrapper"
-      onMouseEnter={() => setIsSwipingPaused(true)}
-      onMouseLeave={() => setIsSwipingPaused(false)}
+      id="carousel-wrapper"
+      style={{
+        top: isMobile ? '44px' : '64px',
+        right: isMobile ? undefined : '-1186px',
+        left: !isMobile ? undefined : '1020px'
+      }}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setIsSwipingPaused(true)}
+        }
+      }
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setIsSwipingPaused(false)}
+        }
+      }
+      onMouseDown={() => {
+        if (isMobile) {
+          setIsSwipingPaused(true)}
+        }
+      }
+      onMouseUp={() => {
+        if (isMobile) {
+          setIsSwipingPaused(false)}
+        }
+      }
     >
       {items.map((item, index) => {
         return (
@@ -66,22 +115,33 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
             key={item.key}
           >
             <div
-              style={determineStyle(index, (xPos[index] > 0))}
+              style={{...determineStyle(index, (xPos[index] > 0))}}
               className="carousel-item"
             >
               <div
+                id={`carousel-item-text-wrapper-${item.key === longestKey ? item.key.toString() : ''}`}
                 style={{
                   transition: "all .5s ease",
                   WebkitTransition: "all .5s ease",
                   MozTransition: "all .5s ease",
-                  width: '784px'
+                  width: isMobile ? `${textCarouselWidth - 32}px` : '784px'
                 }}
               >
-                <Boop rotation={6}>
-                  <p className="greetings-text"
-                     dangerouslySetInnerHTML={{
-                       __html: item.item
-                     }}
+                <Boop
+                  rotation={6}
+                  isMobile={isMobile}
+                >
+                  <p
+                    className="greetings-text"
+                    style={isMobile ? {
+                      color: 'var(--main-white)',
+                      fontFamily: 'Monsterrat-400, serif',
+                      fontSize: '16px',
+                      lineHeight: '144%',
+                    } :{}}
+                    dangerouslySetInnerHTML={{
+                      __html: item.item
+                    }}
                   />
                 </Boop>
               </div>

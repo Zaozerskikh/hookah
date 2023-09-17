@@ -4,8 +4,9 @@ import React, {useEffect, useState} from "react";
 interface BoopProps {
   rotation: number;
   children: any;
+  isMobile ? : boolean;
 }
-const Boop: React.FC<BoopProps> = ({ rotation , children }) => {
+const Boop: React.FC<BoopProps> = ({ rotation , children, isMobile }) => {
   const [isBooped, setIsBooped] = useState(false);
   const [isHovered,setHovered] = useState(false);
   const [isInclined, setInclined] = useState(false)
@@ -35,9 +36,11 @@ const Boop: React.FC<BoopProps> = ({ rotation , children }) => {
       setIsBooped(false)
     }, 50)
 
-    setTimeout(() => {
-      setInclined(true)
-    }, 200)
+    if (!isMobile) {
+      setTimeout(() => {
+        setInclined(true)
+      }, 200)
+    }
   };
 
   return (

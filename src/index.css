@@ -30,6 +30,13 @@ code {
 }
 
 @font-face {
+    font-family: "Unbounded-600";
+    src: local("Unbounded-600"),
+    url("./assets/fonts/unbounded/Unbounded-600.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
     font-family: "Unbounded-700";
     src: local("Unbounded-700"),
     url("./assets/fonts/unbounded/Unbounded-700.ttf") format("truetype");

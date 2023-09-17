@@ -9,6 +9,20 @@
     z-index: 2;
 }
 
+.greetings-container-mobile {
+    background-color: var(--main-black);
+    overflow: hidden !important;
+    position: relative;
+    width: calc(100% - 32px);
+    padding: 24px 16px;
+    height: 100px;
+    border-radius: 16px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .greetings-container .greetings-header {
     font-family: Monsterrat-700, serif;
     font-size: 28px;
@@ -17,6 +31,20 @@
     display: flex;
     flex-direction: row;
     gap: 3px;
+}
+
+.greetings-container-mobile .greetings-header-mobile {
+    color: var(--main-white);
+    font-family: Unbounded-600, serif;
+    font-size: 19px;
+    line-height: 125%;
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    align-items: center;
 }
 
 .greetings-container .greetings-header h2 {
@@ -75,6 +103,18 @@
     background: linear-gradient(to right, transparent, black);
     height: 100%;
     width: 32px;
+    pointer-events: none;
+    z-index: 9999 !important;
+}
+
+.greetings-container-mobile:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to left, transparent, black);
+    height: 100%;
+    width: 16px;
     pointer-events: none;
     z-index: 9999 !important;
 }

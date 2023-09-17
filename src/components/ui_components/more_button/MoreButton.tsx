@@ -13,13 +13,15 @@ interface MoreButtonProps {
   iconShift ? : number;
   dontShowIcon ? : boolean;
   onHoverColor ? : string;
+  isMobile ? : boolean;
 }
 
 const MoreButton: React.FC<MoreButtonProps> =
   ({ showText, text, buttonStyle, textStyle,
-     iconStyle, iconWrapperStyle, onClickAction, iconShift , dontShowIcon, onHoverColor}) => {
+     iconStyle, iconWrapperStyle, onClickAction, iconShift ,
+     dontShowIcon, onHoverColor, isMobile}) => {
     const [isHovered, setHovered] = useState(false);
-    const [isClicked, setClicked] = useState(false)
+    const [isClicked, setClicked] = useState(false);
 
     const parsedButtonStyle = {
       cursor: isHovered ? 'pointer' : undefined,
@@ -54,12 +56,13 @@ const MoreButton: React.FC<MoreButtonProps> =
       height: '24px',
       width: '24px',
       position: 'absolute' as 'absolute',
-      top: '12px',
+      top: isMobile ? '11px': '12px',
       right: '12px',
       zIndex: '9999 !important',
       transition: "all .5s ease",
       WebkitTransition: "all .5s ease",
       MozTransition: "all .5s ease",
+      marginTop: isMobile ? '1px' : 0,
       ...iconStyle
     }
 
@@ -70,6 +73,7 @@ const MoreButton: React.FC<MoreButtonProps> =
         onMouseEnter={() => setHovered(true)}
         onMouseDown={() => setClicked(true)}
         onMouseUp={() => setClicked(false)}
+        onMouseUpCapture={() => setClicked(false)}
         onMouseOut={() => setClicked(false)}
         style={isClicked
           ? {...parsedButtonStyle, backgroundColor: '#c7ccd3'}
@@ -90,13 +94,27 @@ const MoreButton: React.FC<MoreButtonProps> =
                 className="more-icon"
                 src={blackMoreIconArrow}
                 alt="more-icon"
-                style={{opacity: 1, ...parsedIconStyle}}
+                style={!isMobile ? {
+                  opacity: 1,
+                  ...parsedIconStyle,
+                } : {
+                  ...parsedIconStyle,
+                  height: '22px',
+                  width: '22px',
+                  marginTop: '2px'
+                }}
               />
               <img
                 className="more-icon"
                 src={blackMoreIconBase}
                 alt="more-icon"
-                style={{opacity: 1, right: '12px', ...parsedIconStyle, width: isHovered ? iconShift ? `calc(24px + ${iconShift}px` : '32px' : '24px'}}
+                style={{
+                  opacity: 1,
+                  right: '12px', ...parsedIconStyle,
+                  width: !isMobile
+                    ? (isHovered ? iconShift ? `calc(24px + ${iconShift}px` : '32px' : '24px')
+                    : isClicked ? iconShift ? `calc(23px + ${iconShift}px` : '27px' : '23px'
+                }}
               />
             </div>
           )

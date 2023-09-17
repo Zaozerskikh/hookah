@@ -19,6 +19,10 @@ const HomePage: React.FC = () => {
     query: '(min-width: 1264px)'
   })
 
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
+
   useState(() => {
     window.scrollTo({ top: 0 });
   })
@@ -76,7 +80,15 @@ const HomePage: React.FC = () => {
     )
   }
 
-  return (renderDesktop());
+  const renderMobile = () => {
+    return(
+      <div style={{ display: "flex", flexDirection: 'column', width: 'calc(100% - 32px)', paddingRight: '16px', paddingLeft: '16px', paddingTop: '16px', height:'1000px'}}>
+        <Greeting/>
+      </div>
+    )
+  }
+
+  return (isMobile ? renderMobile() : renderDesktop());
 };
 
 export default HomePage;
