@@ -6,10 +6,11 @@ interface StandardButtonProps {
   buttonStyle? : React.CSSProperties
   textStyle? : React.CSSProperties
   onHoverColor ? : string
+  isMobile ? : boolean
 }
 
 const StandardButton: React.FC<StandardButtonProps> =
-  ({ text, buttonStyle, textStyle , onClickAction, onHoverColor}) => {
+  ({ text, buttonStyle, textStyle , onClickAction, onHoverColor, isMobile}) => {
   const [isHovered, setHovered] = useState(false);
   const [isClicked, setClicked] = useState(false)
 
@@ -29,10 +30,10 @@ const StandardButton: React.FC<StandardButtonProps> =
   }
 
   const parsedTextStyle = {
-    color: !isHovered ? 'white' : 'black',
+    color: !isHovered && !isClicked? 'white' : 'black',
     fontFamily: 'Monsterrat-600, serif',
-    fontSize: '22px',
-    lineHeight: '31.68px',
+    fontSize: isMobile ? '16px' : '22px',
+    lineHeight: isMobile ? '23px' : '31.68px',
     transition: "all .5s ease",
     WebkitTransition: "all .5s ease",
     MozTransition: "all .5s ease",
@@ -43,11 +44,30 @@ const StandardButton: React.FC<StandardButtonProps> =
     <button
       style={parsedButtonStyle}
       onClick={onClickAction}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onMouseDown={() => setClicked(true)}
-      onMouseUp={() => setClicked(false)}
-      onMouseOut={() => setClicked(false)}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setHovered(false)
+          setClicked(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
+      onMouseDown={() => {
+        if (!isMobile) {
+          setClicked(true)
+        }
+      }}
+      onMouseUp={() => {
+        if (!isMobile) {
+          setClicked(false)
+        }
+      }}
     >
       <span style={parsedTextStyle}>
         {text}

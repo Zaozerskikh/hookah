@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../../routes/RoutePaths";
 import Carousel from "./carousel/Carousel";
 import {useMediaQuery} from "react-responsive";
+import AutoscrollButtonsSection from "./autoscroll_buttons_section/AutoscrollButtonsSection";
 
 const greetingMsgs = {
   FIRST: 'Our premium tobacco shop is your way to hookah pleasure in Portugal. ' +
@@ -18,28 +19,29 @@ const greetingMsgs = {
 }
 const Greeting: React.FC = () => {
   const navigate = useNavigate();
-  const [mobileGreetingHeight, setMobileGreetingHeight]= useState(0)
+  const [mobileGreetingHeight, setMobileGreetingHeight]
+    = useState(document.getElementById("carousel-item-text-wrapper-2")?.offsetHeight || 0)
 
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
   })
 
   useEffect(() => {
-    console.log(mobileGreetingHeight)
-  }, [mobileGreetingHeight]);
-
-  useEffect(() => {
     const updateWidth = () => {
       if (isMobile) {
-        console.log(document.getElementById("carousel-item-text-wrapper-2")?.offsetHeight)
         setMobileGreetingHeight(document.getElementById("carousel-item-text-wrapper-2")?.offsetHeight)
       }
     };
 
     window.addEventListener('resize', updateWidth);
+
     setTimeout(() => {
       updateWidth();
-    },300)
+    },100)
+
+    setTimeout(() => {
+      updateWidth();
+    },500)
 
     return () => {
       window.removeEventListener('resize', updateWidth);
@@ -135,18 +137,20 @@ const Greeting: React.FC = () => {
       <div
         className="greetings-container-mobile"
         id="greetings-container-mobile"
-        style={{ height: `${mobileGreetingHeight + 8}px`
-      }}>
+      >
         <div className="greetings-header-mobile">
           👋
           <h2 className="greetings-header-mobile">Welcome to Hookah.pt</h2>
         </div>
-        <Carousel isMobile={true} longestKey={2} items={[
-          {item: greetingMsgs.FIRST, key: 1},
-          {item: greetingMsgs.SECOND, key: 2},
-          {item: greetingMsgs.FIRST, key: 3},
-          {item: greetingMsgs.SECOND, key: 4}
-        ]}/>
+        <div style={{ position: "relative", height: mobileGreetingHeight}}>
+          <Carousel isMobile={true} longestKey={2} items={[
+            {item: greetingMsgs.FIRST, key: 1},
+            {item: greetingMsgs.SECOND, key: 2},
+            {item: greetingMsgs.FIRST, key: 3},
+            {item: greetingMsgs.SECOND, key: 4}
+          ]}/>
+        </div>
+        <AutoscrollButtonsSection />
       </div>
     )
   }

@@ -47,7 +47,7 @@
 }
 
 .menu .floating-clouds-wrapper-mobile .floating-clouds-top-mobile .floating-clouds-image {
-    animation: scrollAnimationTopMobile 5s linear infinite;
+    animation: scrollAnimationTopMobile 6s linear infinite;
     background: repeat-x;
 }
 

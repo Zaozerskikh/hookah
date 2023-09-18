@@ -25,12 +25,13 @@ const Warning: React.FC = () => {
 
   const renderMobile = () => {
     return(
-      <div
-        className={`warning-container-mobile ${isWarningShown && Object.values(RoutePaths).includes(location.pathname) ? 'open' : ''}`}
-        style={{ width: window.innerWidth}}
-      >
+      <>
         <div
-          className="warning-card-mobile"
+          className={`warning-container-mobile ${isWarningShown && Object.values(RoutePaths).includes(location.pathname) ? 'open' : ''}`}
+          style={{ width: window.innerWidth}}
+        />
+        <div
+          className={`warning-card-mobile ${isWarningShown && Object.values(RoutePaths).includes(location.pathname) ? 'open' : ''}`}
         >
           <div className="warning-header-mobile" dangerouslySetInnerHTML={{ __html: 'By clicking Enter</br>you certify that you are</br> 18 years of age or older'}}/>
           <div className="warning-text-mobile">
@@ -61,7 +62,7 @@ const Warning: React.FC = () => {
             isMobile={true}
           />
         </div>
-      </div>
+      </>
     )
   }
 

@@ -7,7 +7,7 @@ const WarningActionTypes = {
 }
 
 const initialState: WarningState = {
-  isShown: true
+  isShown: false
 };
 
 export const setIsWarningShown = (isShown: boolean) => ({

@@ -82,9 +82,9 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
       className="carousel-wrapper"
       id="carousel-wrapper"
       style={{
-        top: isMobile ? '44px' : '64px',
+        top: isMobile ? '0' : '64px',
         right: isMobile ? undefined : '-1186px',
-        left: !isMobile ? undefined : '1020px'
+        left: !isMobile ? undefined : '1002px'
       }}
       onMouseEnter={() => {
         if (!isMobile) {
@@ -138,6 +138,8 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
                       fontFamily: 'Monsterrat-400, serif',
                       fontSize: '16px',
                       lineHeight: '144%',
+                      padding: 0,
+                      margin: 0,
                     } :{}}
                     dangerouslySetInnerHTML={{
                       __html: item.item

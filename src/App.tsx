@@ -9,7 +9,7 @@ import NewsPage from "./components/pages/news_page/NewsPage";
 import DetailedNewsPage from "./components/pages/detailed_news_page/DetailedNewsPage";
 import TobaccoPage from "./components/pages/tobacco_page/TobaccoPage";
 import AboutUsPage from "./components/pages/about_us_page/AboutUsPage";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./redux/Store";
 import CartButton from "./components/ui_components/cart_button/CartButton";
 import NotFoundPage from "./components/pages/not_found_page/NotFoundPage";
@@ -23,12 +23,14 @@ import BottomHint from "./components/ui_components/bottom_hint/BottomHint";
 import './assets/css_variables/vars.css'
 import SlidingMenu from "./components/menu_panel/mobile/sliding_menu/SlidingMenu";
 import {useMediaQuery} from "react-responsive";
+import {setIsWarningShown} from "./redux/warning_reducer/WarningReducer";
 
 const App: React.FC = () => {
   const isBorgerOpened = useSelector((state: RootState) => state.burger.isOpened)
   const isWarningShown = useSelector((state: RootState) => state.warning.isShown)
   const [minHeight, setMinHeight] = useState(window.innerHeight - 500)
   const loc = useLocation()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,9 +46,7 @@ const App: React.FC = () => {
   useEffect(() => {
     [loaderImg, aboutImg].map(im => {
       const img = new Image();
-      img.onload = () => {
-        console.log('initialized')
-      }
+      img.onload = () => { }
       img.src = im
       return undefined;
     })
@@ -63,6 +63,10 @@ const App: React.FC = () => {
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
   })
+
+  useEffect(() => {
+    dispatch(setIsWarningShown(true))
+  }, [dispatch]);
 
   return (
     <>

@@ -1,0 +1,16 @@
+.scrollable-container {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    width: 100%;
+    overflow: scroll;
+    margin-top: 2px;
+}
+
+.scrollable-container .scroll-content {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+::-webkit-scrollbar {display:none;}

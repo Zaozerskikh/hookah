@@ -65,31 +65,45 @@
 .warning-container-mobile {
     position: fixed;
     height: 100%;
-    bottom:-1000px;
+    bottom:0;
     left: 0;
-    z-index: 9998 !important;
-    transition: bottom 1s ease;
-    -webkit-transition: bottom 1s ease;
-    -moz-transition: bottom 1s ease;
+    z-index: -9998 !important;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     background-color: transparent;
     align-items: flex-end;
+    backdrop-filter: blur(2px) opacity(0);
 }
 
 .warning-container-mobile.open {
     z-index: 9998 !important;
-    transition: bottom 1s ease;
-    -webkit-transition: bottom 1s ease;
-    -moz-transition: bottom 1s ease;
     bottom:0;
     background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px) opacity(1);
 }
 
 .warning-card-mobile {
     width: calc(100% - 32px);
     background-color: black;
+    position: fixed;
+    bottom: -500px;
+    border-radius: 22px 22px 0 0;
+    display: flex;
+    padding: 32px 16px 64px 16px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+}
+
+.warning-card-mobile.open {
+    width: calc(100% - 32px);
+    background-color: black;
+    position: fixed;
     bottom: 0;
     border-radius: 22px 22px 0 0;
     display: flex;
@@ -98,9 +112,13 @@
     justify-content: flex-end;
     align-items: center;
     gap: 16px;
+    transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    z-index: 9999 !important;
 }
 
-.warning-container-mobile .warning-header-mobile {
+.warning-header-mobile {
     color: var(--main-white);
     font-family: Unbounded-600, serif;
     font-size: 20px;
@@ -110,7 +128,7 @@
     width: 100%;
 }
 
-.warning-container-mobile .warning-text-mobile {
+.warning-text-mobile {
     color: var(--auxiliary-light-gray);
     font-family: Monsterrat-500, serif;
     font-size: 16px;
