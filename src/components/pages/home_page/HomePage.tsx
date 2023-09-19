@@ -86,7 +86,7 @@ const HomePage: React.FC = () => {
 
   const renderMobile = () => {
     return(
-      <div style={{ display: "flex", flexDirection: 'column', width: 'calc(100% - 32px)', paddingRight: '16px', paddingLeft: '16px', paddingTop: '16px', paddingBottom: '128px', gap: '76px'}}>
+      <div style={{ display: "flex", flexDirection: 'column', width: 'calc(100% - 32px)', paddingRight: '16px', paddingLeft: '16px', paddingTop: '76px', paddingBottom: '128px', gap: '76px'}}>
         <Greeting/>
         <ShopGrid
           products={productsOnTheMain.map(productId =>
