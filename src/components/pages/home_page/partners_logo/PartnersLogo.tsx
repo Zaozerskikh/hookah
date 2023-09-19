@@ -3,16 +3,17 @@ import React from "react";
 interface PartnersLogoProps {
   src: string;
   url: string;
+  isMobile ? : boolean;
 }
-const PartnersLogo: React.FC<PartnersLogoProps> = ({ src, url}) => {
+const PartnersLogo: React.FC<PartnersLogoProps> = ({ src, url, isMobile }) => {
   return(
     <a href={url} target="_blank" rel="noreferrer">
       <img
         src={src}
-        alt="darksideLogo"
+        alt="partner-logo"
         style={{
-          height: '160px',
-          width: '160px'
+          height: isMobile ? '76px' : '160px',
+          width: isMobile ? '76px' : '160px'
         }}
       />
     </a>

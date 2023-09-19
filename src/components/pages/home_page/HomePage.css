@@ -48,3 +48,22 @@
     margin: 0;
     padding: 0;
 }
+
+.partners-header-mobile {
+    font-family: Unbounded-600, serif;
+    font-size: 20px;
+    line-height: 125%;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.partners-header-mobile h2{
+    font-family: Unbounded-600, serif;
+    font-size: 20px;
+    line-height: 125%;
+    color: black;
+    margin: 0;
+    padding: 0;
+}

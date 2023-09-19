@@ -26,3 +26,28 @@
     outline: none;
     text-decoration: none;
 }
+
+.news-section-container-mobile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.news-section-container-mobile .news-section-cards-wrapper-mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+}
+
+.news-section-container-mobile .button-wrapper-mobile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-section-container-mobile .news-link-mobile {
+    outline: none;
+    text-decoration: none;
+}

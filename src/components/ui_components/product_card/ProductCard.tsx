@@ -19,6 +19,14 @@ const ProductCard: React.FC<ProductInfo> =
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
   const dispatch = useDispatch();
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
+
   useEffect(() => {
     if (isDetailedViewOpened) {
       document.body.style.overflowX = 'hidden';
@@ -34,154 +42,252 @@ const ProductCard: React.FC<ProductInfo> =
     };
   }, [isDetailedViewOpened]);
 
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-width: 1264px)'
-  })
 
-  return (
-    <div className="product-card-container">
-      {
+  const renderDesktop = () => {
+    return(
+      <div className="product-card-container">
+        {
+          <div
+            style={{
+              position:'absolute',
+              top: '16px',
+              left: '16px',
+              display: "flex",
+              flexDirection:'row',
+              gap: '8px'
+            }}
+          >
+            {stock === 0 && <span className="soldout-detailed">Soldout</span>}
+            {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
+            {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
+            {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
+          </div>
+        }
+        <div
+          className={`detailed-view-container ${!isCheckoutOpened && isDetailedViewOpened ? 'open' : ''}`}
+          style={{
+            backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
+            width: `${window.innerWidth}px`
+          }}
+          onClick={(e) => {
+            e.preventDefault()
+            if (e.target === e.currentTarget) {
+              setDetailedViewOpened(false)
+            }
+          }}
+        >
+          <div className="detailed-view-card" style={{marginTop: isDesktopOrLaptop ? '0px' : '24px'}}>
+            <CloseButton
+              onClickAction={() => setDetailedViewOpened(false)}
+              iconSize={20}
+              changeColorOnHover={true}
+              onClickColor="#d1d1d9"
+            />
+            <div className="detailed-view-text-container">
+              <ProductInfoOnCard
+                productId={productId}
+                name={name}
+                brand={brand}
+                line={line}
+                price={price}
+                discountPrice={discountPrice}
+                stock={stock}
+                purchasedCount={purchasedCount}
+                weight={weight}
+                optionalTags={tags}
+              />
+              <div className={`containerwrapper`}>
+                <Scrollbar
+                  className={`detailed-full-description ${(name.length > 20 || stock === 0 || stock === 1 || (tags && tags.includes(ProductTag.NEW)) || (discountPrice && discountPrice !== price)) ? 'short' : 'long'}`}
+                  thumbYProps={{
+                    renderer: (props) => {
+                      const { elementRef, ...restProps } = props;
+                      return <span {...restProps} ref={elementRef} className="thumb-y" />;
+                    },
+                  }}
+                  trackYProps={{
+                    renderer: (props) => {
+                      const { elementRef, ...restProps } = props;
+                      return <span {...restProps} ref={elementRef} className="track-y" />;
+                    },
+                  }}
+                >
+                  <span className="test">{fullDescription}</span>
+                </Scrollbar>
+              </div>
+            </div>
+            <img className="detailed-view-image" src={image} alt="detailed-img"/>
+          </div>
+        </div>
+        <img
+          src={image}
+          alt={name}
+          className="product-image"
+          onClick={() => setDetailedViewOpened(true)}
+        />
+        <div className="product-card-text">
+          <span
+            className="product-name"
+            onClick={() => setDetailedViewOpened(true)}
+            style={{
+              fontSize: `${name.length > 20 ? 18 : 22}px`
+            }}
+          >
+            {`${brand} – ${name} (${line}) ${weight}G`}
+          </span>
+          <span
+            onClick={() => setDetailedViewOpened(true)}
+            className="product-description">{description}
+          </span>
+          <div className="product-price-wrapper">
+            {stock !== 0 && discountPrice && discountPrice !== price && <span className={`product-price-before-discount`}>{price.toFixed(2)}€</span>}
+            <span className={`product-price ${stock === 0 ? 'soldout' : ''}`}>{discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€</span>
+          </div>
+        </div>
+        <div className="button-container">
+          {stock !== 0 ? (
+            purchasedCount === 0
+              ? (
+                <StandardButton
+                  text="Buy"
+                  onClickAction={() => dispatch(incrementProductCount(productId))}
+                  buttonStyle={{
+                    width: '148px',
+                    height: '48px',
+                    borderRadius: '24px 0 0 24px',
+                  }}
+                />
+              )
+              : (
+                <CounterButton
+                  counterState={purchasedCount}
+                  isDark={false}
+                  onPlusClickAction={() => {
+                    dispatch(incrementProductCount(productId))
+                  }}
+                  onMinusClickAction={() => {
+                    dispatch(decrementProductCount(productId))
+                  }}
+                />
+              )
+          ) : (
+            <span className="soldout-text">Soldout</span>
+          )}
+          <MoreButton
+            showText={false}
+            buttonStyle={{
+              backgroundColor:
+                purchasedCount === 0
+                  ? '#EAEBF0'
+                  : "transparent",
+              width: '64px',
+              height: '48px'
+            }}
+            onClickAction={() => setDetailedViewOpened(true)}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  const renderMobile = () => {
+    return(
+      <div className="card-wrapper-mobile">
         <div
           style={{
             position:'absolute',
-            top: '16px',
-            left: '16px',
+            top: '8px',
+            left: '8px',
             display: "flex",
             flexDirection:'row',
-            gap: '8px'
+            flexWrap:'wrap',
+            gap: '6px'
           }}
         >
-          {stock === 0 && <span className="soldout-detailed">Soldout</span>}
-          {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
-          {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-          {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
+          {stock === 0 && <span className="soldout-detailed-mobile">Soldout</span>}
+          {stock === 1 && <span className="tag-detailed-mobile" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
+          {discountPrice && discountPrice !== price && <span className="tag-detailed-mobile" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
+          {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed-mobile" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
         </div>
-      }
-      <div
-        className={`detailed-view-container ${!isCheckoutOpened && isDetailedViewOpened ? 'open' : ''}`}
-        style={{
-          backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
-          width: `${window.innerWidth}px`
-        }}
-        onClick={(e) => {
-          e.preventDefault()
-          if (e.target === e.currentTarget) {
-            setDetailedViewOpened(false)
-          }
-        }}
-      >
-        <div className="detailed-view-card" style={{marginTop: isDesktopOrLaptop ? '0px' : '24px'}}>
-          <CloseButton
-            onClickAction={() => setDetailedViewOpened(false)}
-            iconSize={20}
-            changeColorOnHover={true}
-            onClickColor="#d1d1d9"
-          />
-          <div className="detailed-view-text-container">
-            <ProductInfoOnCard
-              productId={productId}
-              name={name}
-              brand={brand}
-              line={line}
-              price={price}
-              discountPrice={discountPrice}
-              stock={stock}
-              purchasedCount={purchasedCount}
-              weight={weight}
-              optionalTags={tags}
-            />
-            <div className={`containerwrapper`}>
-              <Scrollbar
-                className={`detailed-full-description ${(name.length > 20 || stock === 0 || stock === 1 || (tags && tags.includes(ProductTag.NEW)) || (discountPrice && discountPrice !== price)) ? 'short' : 'long'}`}
-                thumbYProps={{
-                  renderer: (props) => {
-                    const { elementRef, ...restProps } = props;
-                    return <span {...restProps} ref={elementRef} className="thumb-y" />;
-                  },
-                }}
-                trackYProps={{
-                  renderer: (props) => {
-                    const { elementRef, ...restProps } = props;
-                    return <span {...restProps} ref={elementRef} className="track-y" />;
-                  },
-                }}
-              >
-                <span className="test">{fullDescription}</span>
-              </Scrollbar>
-            </div>
-          </div>
-          <img className="detailed-view-image" src={image} alt="detailed-img"/>
-        </div>
-      </div>
-      <img
-        src={image}
-        alt={name}
-        className="product-image"
-        onClick={() => setDetailedViewOpened(true)}
-      />
-      <div className="product-card-text">
-        <span
-          className="product-name"
-          onClick={() => setDetailedViewOpened(true)}
+        <img
+          src={image}
+          alt={name}
+          className="product-image-mobile"
+          // onClick={() => setDetailedViewOpened(true)}
           style={{
-            fontSize: `${name.length > 20 ? 18 : 22}px`
+            width: '100%',
+            height: "auto",
+            borderRadius: '16px 16px 0px 0px'
           }}
-        >
-          {`${brand} – ${name} (${line}) ${weight}G`}
-        </span>
-        <span
-          onClick={() => setDetailedViewOpened(true)}
-          className="product-description">{description}
-        </span>
-        <div className="product-price-wrapper">
-          {stock !== 0 && discountPrice && discountPrice !== price && <span className={`product-price-before-discount`}>{price.toFixed(2)}€</span>}
-          <span className={`product-price ${stock === 0 ? 'soldout' : ''}`}>{discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€</span>
+        />
+        <div className="product-card-product-info-mobile">
+          <span
+            className="product-name-mobile"
+          >
+            {`${brand} – ${name} (${line}) ${weight}G`}
+          </span>
+          <span
+            // onClick={() => setDetailedViewOpened(true)}
+            className="product-description-mobile">{description}
+          </span>
+          <div className="product-price-wrapper-mobile">
+            {stock !== 0 && discountPrice && discountPrice !== price && <span className={`product-price-before-discount-mobile`}>{price.toFixed(2)}€</span>}
+            <span className={`product-price-mobile ${stock === 0 ? 'soldout' : ''}`}>{discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€</span>
+          </div>
+        </div>
+        <div className="button-container-mobile">
+          {stock !== 0 ? (
+            purchasedCount === 0
+              ? (
+                <StandardButton
+                  text="Buy"
+                  onClickAction={() => dispatch(incrementProductCount(productId))}
+                  buttonStyle={{
+                    height: '40px',
+                    width: '100%',
+                    borderRadius: '20px 0px 0px 20px'
+                  }}
+                  isMobile={true}
+                />
+              )
+              : (
+                <CounterButton
+                  isMobile={true}
+                  counterState={purchasedCount}
+                  isDark={false}
+                  onPlusClickAction={() => {
+                    dispatch(incrementProductCount(productId))
+                  }}
+                  onMinusClickAction={() => {
+                    dispatch(decrementProductCount(productId))
+                  }}
+                />
+              )
+          ) : (
+            <span className="soldout-text">Soldout</span>
+          )}
+          <MoreButton
+            showText={false}
+            buttonStyle={{
+              height: '40px',
+              width: '48px',
+              backgroundColor:
+                purchasedCount === 0
+                  ? '#EAEBF0'
+                  : "transparent",
+            }}
+            iconStyle={{
+              left: '6px'
+            }}
+            isMobile={true}
+            // onClickAction={() => setDetailedViewOpened(true)}
+          />
         </div>
       </div>
-      <div className="button-container">
-        {stock !== 0 ? (
-          purchasedCount === 0
-            ? (
-              <StandardButton
-                text="Buy"
-                onClickAction={() => dispatch(incrementProductCount(productId))}
-                buttonStyle={{
-                  width: '148px',
-                  height: '48px',
-                  borderRadius: '24px 0 0 24px',
-                }}
-              />
-            )
-            : (
-              <CounterButton
-                counterState={purchasedCount}
-                isDark={false}
-                onPlusClickAction={() => {
-                  dispatch(incrementProductCount(productId))
-                }}
-                onMinusClickAction={() => {
-                  dispatch(decrementProductCount(productId))
-                }}
-              />
-            )
-        ) : (
-          <span className="soldout-text">Soldout</span>
-        )}
-        <MoreButton
-          showText={false}
-          buttonStyle={{
-            backgroundColor:
-              purchasedCount === 0
-                ? '#EAEBF0'
-                : "transparent",
-            width: '64px',
-            height: '48px'
-          }}
-          onClickAction={() => setDetailedViewOpened(true)}
-        />
-      </div>
-    </div>
-  );
+    )
+  }
+
+  return (isMobile ? renderMobile() : renderDesktop());
 };
 
 export default ProductCard;

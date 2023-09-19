@@ -6,3 +6,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.shop-container-mobile .tobacco-link-mobile {
+    outline: none;
+    text-decoration: none;
+    text-underline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -290,3 +290,127 @@
     height: 100%;
     overflow-y: scroll;
 }
+
+
+
+.card-wrapper-mobile {
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.card-wrapper-mobile .tag-detailed-mobile {
+    color: white;
+    text-align: center;
+    font-family: Monsterrat-500, serif;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 144%;
+    display: flex;
+    padding: 2px 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 16px;
+    background: #EAEBF0;
+}
+
+.card-wrapper-mobile .product-card-product-info-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+}
+
+.card-wrapper-mobile .product-card-product-info-mobile .product-name-mobile {
+    color: #000;
+    text-align: center;
+    font-family: Monsterrat-600, serif;
+    font-size: 13px;
+    font-style: normal;
+    line-height: 144%;
+    height: 57px;
+}
+
+.card-wrapper-mobile .product-card-product-info-mobile .product-description-mobile {
+    color: var(--text-gray-secondary);
+    text-align: center;
+    width: 100%;
+    font-family: Monsterrat-400, serif;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 144%;
+}
+
+.card-wrapper-mobile .product-card-product-info-mobile .product-price-wrapper-mobile{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.card-wrapper-mobile .product-price-before-discount-mobile {
+    text-decoration: line-through;
+    font-family: Monsterrat-600, serif;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 144%;
+    color: #CFD5DB;
+    text-align: center;
+}
+
+.card-wrapper-mobile .product-price-mobile {
+    font-family: Monsterrat-600, serif;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 144%;
+    color: var(--main-black);
+    text-align: center;
+}
+
+.button-container-mobile {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: center;
+    width: 100%;
+    max-width: 150px;
+}
+
+.shop-container-mobile .soldout-text {
+    color: #000;
+    text-align: center;
+    font-family: Monsterrat-600, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px 0 0 20px;
+    background: #EAEBF0;
+}
+
+.card-wrapper-mobile .soldout-detailed-mobile {
+    color: #000;
+    text-align: center;
+    font-family: Monsterrat-500, serif;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 144%;
+    display: flex;
+    padding: 2px 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 16px;
+    background: #EAEBF0;
+}
+

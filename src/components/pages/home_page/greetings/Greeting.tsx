@@ -29,7 +29,31 @@ const Greeting: React.FC = () => {
   useEffect(() => {
     const updateWidth = () => {
       if (isMobile) {
-        setMobileGreetingHeight(document.getElementById("carousel-item-text-wrapper-2")?.offsetHeight)
+        setMobileGreetingHeight(Math.max(
+          document.getElementById("carousel-item-text-wrapper-2")?.offsetHeight,
+          document.getElementById("carousel-item-text-wrapper-")?.offsetHeight)
+        )
+
+        setTimeout(() => {
+          setMobileGreetingHeight(Math.max(
+            document.getElementById("carousel-item-text-wrapper-2")?.offsetHeight,
+            document.getElementById("carousel-item-text-wrapper-")?.offsetHeight)
+          )
+        },100)
+
+        setTimeout(() => {
+          setMobileGreetingHeight(Math.max(
+            document.getElementById("carousel-item-text-wrapper-2")?.offsetHeight,
+            document.getElementById("carousel-item-text-wrapper-")?.offsetHeight)
+          )
+        },500)
+
+        setTimeout(() => {
+          setMobileGreetingHeight(Math.max(
+            document.getElementById("carousel-item-text-wrapper-2")?.offsetHeight,
+            document.getElementById("carousel-item-text-wrapper-")?.offsetHeight)
+          )
+        },1000)
       }
     };
 
@@ -38,10 +62,6 @@ const Greeting: React.FC = () => {
     setTimeout(() => {
       updateWidth();
     },100)
-
-    setTimeout(() => {
-      updateWidth();
-    },500)
 
     return () => {
       window.removeEventListener('resize', updateWidth);

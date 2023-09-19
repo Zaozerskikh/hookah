@@ -56,25 +56,44 @@ const MoreButton: React.FC<MoreButtonProps> =
       height: '24px',
       width: '24px',
       position: 'absolute' as 'absolute',
-      top: isMobile ? '11px': '12px',
-      right: '12px',
+      top: isMobile ? '7px': '12px',
+      right: isMobile ? '7px' : '12px',
       zIndex: '9999 !important',
       transition: "all .5s ease",
       WebkitTransition: "all .5s ease",
       MozTransition: "all .5s ease",
       marginTop: isMobile ? '1px' : 0,
-      ...iconStyle
+      ...iconStyle,
+      left: undefined
     }
 
     return(
       <button
         onClick={onClickAction}
-        onMouseLeave={() => setHovered(false)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseDown={() => setClicked(true)}
-        onMouseUp={() => setClicked(false)}
-        onMouseUpCapture={() => setClicked(false)}
-        onMouseOut={() => setClicked(false)}
+        onMouseEnter={() => {
+          if (!isMobile) {
+            setHovered(true)
+          }
+        }}
+        onMouseLeave={() => {
+          if (!isMobile) {
+            setHovered(false)
+            setClicked(false)
+          }
+        }}
+        onTouchStart={() => setHovered(true)}
+        onTouchEnd={() => setHovered(false)}
+        onTouchCancel={() => setHovered(false)}
+        onMouseDown={() => {
+          if (!isMobile) {
+            setClicked(true)
+          }
+        }}
+        onMouseUp={() => {
+          if (!isMobile) {
+            setClicked(false)
+          }
+        }}
         style={isClicked
           ? {...parsedButtonStyle, backgroundColor: '#c7ccd3'}
           : !isHovered
@@ -89,7 +108,12 @@ const MoreButton: React.FC<MoreButtonProps> =
         )}
         {
           !dontShowIcon && (
-            <div style={{position: "relative", height: '48px', width: '48px', ...iconWrapperStyle}}>
+            <div style={{
+              position: "relative",
+              height: isMobile? '40px' : '48px',
+              width: '48px',
+              ...iconWrapperStyle}}
+            >
               <img
                 className="more-icon"
                 src={blackMoreIconArrow}
@@ -113,7 +137,7 @@ const MoreButton: React.FC<MoreButtonProps> =
                   right: '12px', ...parsedIconStyle,
                   width: !isMobile
                     ? (isHovered ? iconShift ? `calc(24px + ${iconShift}px` : '32px' : '24px')
-                    : isClicked ? iconShift ? `calc(23px + ${iconShift}px` : '27px' : '23px'
+                    : isHovered ? iconShift ? `calc(23px + ${iconShift}px` : '27px' : '23px'
                 }}
               />
             </div>

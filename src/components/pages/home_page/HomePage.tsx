@@ -19,6 +19,10 @@ const HomePage: React.FC = () => {
     query: '(min-width: 1264px)'
   })
 
+  const showMockPartnerCard = useMediaQuery({
+    query: '(max-width: 500px)'
+  })
+
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
   })
@@ -82,8 +86,43 @@ const HomePage: React.FC = () => {
 
   const renderMobile = () => {
     return(
-      <div style={{ display: "flex", flexDirection: 'column', width: 'calc(100% - 32px)', paddingRight: '16px', paddingLeft: '16px', paddingTop: '16px', height:'1000px'}}>
+      <div style={{ display: "flex", flexDirection: 'column', width: 'calc(100% - 32px)', paddingRight: '16px', paddingLeft: '16px', paddingTop: '16px', paddingBottom: '128px', gap: '76px'}}>
         <Greeting/>
+        <ShopGrid
+          products={productsOnTheMain.map(productId =>
+            Products.find(product =>
+              product.productId === productId
+            )
+          )}
+          showAllCatalogButton={true}
+          isMobile={true}
+        />
+        <NewsSection isMobile={true}/>
+        <div style={{ display: "flex", flexDirection: "column", gap: '24px', alignItems: 'center'}}>
+          <span className="partners-header-mobile">
+            <h2>Our partners</h2> ❤️
+          </span>
+          <div
+            style={{
+              alignSelf: 'center',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              alignContent: 'center',
+              flexWrap: 'wrap',
+              rowGap: '8px',
+              columnGap: '16px'
+            }}
+          >
+            <PartnersLogo src={darksideLogo} url={ExternalLinks.DARKSIDE} isMobile={true} />
+            <PartnersLogo src={musthaveLogo} url={ExternalLinks.MUSTHAVE} isMobile={true} />
+            <PartnersLogo src={elementLogo} url={ExternalLinks.ELEMENT} isMobile={true} />
+            <PartnersLogo src={tangiersLogo} url={ExternalLinks.TANGIERS} isMobile={true} />
+            <PartnersLogo src={fumariLogo} url={ExternalLinks.FUMARI} isMobile={true} />
+            {showMockPartnerCard && <div style={{ width: '76px', height: '76px'}}/>}
+          </div>
+        </div>
       </div>
     )
   }
