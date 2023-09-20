@@ -31,7 +31,6 @@ export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name,
   const navigate = useNavigate();
 
   const buildProductLink = useCallback((): string => {
-    console.log(name.toLowerCase().replace(' ', '-'));
     return `${FRONTEND_URL}/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
   }, [name, productId, brand, line, weight]);
 

@@ -11,6 +11,7 @@ import {RootState} from "../../../redux/Store";
 import {decrementProductCount, incrementProductCount} from "../../../redux/cart_reducer/CartReducer";
 import ProductInfoOnCard from "./product_info/ProductInfoOnCard";
 import {useMediaQuery} from "react-responsive";
+import ProductViewMobile from "./product_view_mobile/ProductViewMobile";
 
 const ProductCard: React.FC<ProductInfo> =
   ({ productId, name, brand,line, weight, description, price, discountPrice, image , fullDescription, stock, tags}) => {
@@ -41,7 +42,6 @@ const ProductCard: React.FC<ProductInfo> =
       document.body.style.overflowX = 'hidden';
     };
   }, [isDetailedViewOpened]);
-
 
   const renderDesktop = () => {
     return(
@@ -193,6 +193,22 @@ const ProductCard: React.FC<ProductInfo> =
   const renderMobile = () => {
     return(
       <div className="card-wrapper-mobile">
+        <ProductViewMobile
+          onClick={() => setDetailedViewOpened(false)}
+          isOpened={isDetailedViewOpened}
+          productId={productId}
+          name={name}
+          brand={brand}
+          line={line}
+          weight={weight}
+          price={price}
+          discountPrice={discountPrice}
+          description={description}
+          image={image}
+          fullDescription={fullDescription}
+          stock={stock}
+          tags={tags}
+        />
         <div
           style={{
             position:'absolute',
@@ -203,6 +219,7 @@ const ProductCard: React.FC<ProductInfo> =
             flexWrap:'wrap',
             gap: '6px'
           }}
+          onClick={() => setDetailedViewOpened(true)}
         >
           {stock === 0 && <span className="soldout-detailed-mobile">Soldout</span>}
           {stock === 1 && <span className="tag-detailed-mobile" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
@@ -210,24 +227,26 @@ const ProductCard: React.FC<ProductInfo> =
           {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed-mobile" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
         </div>
         <img
+          onClick={() => setDetailedViewOpened(true)}
           src={image}
           alt={name}
           className="product-image-mobile"
-          // onClick={() => setDetailedViewOpened(true)}
           style={{
             width: '100%',
             height: "auto",
             borderRadius: '16px 16px 0px 0px'
           }}
         />
-        <div className="product-card-product-info-mobile">
+        <div
+          className="product-card-product-info-mobile"
+          onClick={() => setDetailedViewOpened(true)}
+        >
           <span
             className="product-name-mobile"
           >
             {`${brand} – ${name} (${line}) ${weight}G`}
           </span>
           <span
-            // onClick={() => setDetailedViewOpened(true)}
             className="product-description-mobile">{description}
           </span>
           <div className="product-price-wrapper-mobile">

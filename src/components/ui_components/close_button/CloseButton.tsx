@@ -11,10 +11,11 @@ interface CloseButtonProps {
   onClickColor : string;
   iconSize: number;
   onClickAction : (...args: any) => any;
+  isMobile ? : boolean;
 }
 
 const CloseButton: React.FC<CloseButtonProps> =
-  ({onClickAction, buttonStyle, iconSize, isDark, changeColorOnHover, onClickColor}) => {
+  ({onClickAction, buttonStyle, iconSize, isDark, changeColorOnHover, onClickColor, isMobile}) => {
   const [isHovered, setHovered] = useState(false)
   const [isClicked, setClicked] = useState(false)
 
@@ -44,12 +45,31 @@ const CloseButton: React.FC<CloseButtonProps> =
         MozTransition: "all 0.5s ease",
         ...buttonStyle
       }}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setHovered(false)
+          setClicked(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
+      onMouseDown={() => {
+        if (!isMobile) {
+          setClicked(true)
+        }
+      }}
+      onMouseUp={() => {
+        if (!isMobile) {
+          setClicked(false)
+        }
+      }}
       onClick={onClickAction}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onMouseDown={() => setClicked(true)}
-      onMouseUp={() => setClicked(false)}
-      onMouseOut={() => setClicked(false)}
     >
       <img
         style={{

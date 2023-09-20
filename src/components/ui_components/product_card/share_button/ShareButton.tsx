@@ -6,39 +6,67 @@ import arrTail from './../../../../assets/icons/share_button/arr_tail.png'
 
 interface ShareButtonProps {
   productLink: string;
-  onClickAdditionalAction : (...args: any) => any
+  onClickAdditionalAction : (...args: any) => any;
+  isMobile ? : boolean;
 }
-const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAdditionalAction}) => {
+const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAdditionalAction, isMobile}) => {
   const [isHovered, setHovered] = useState(false)
 
   const onClickAction = async () => {
     onClickAdditionalAction()
-    await navigator.clipboard.writeText(productLink);
+    try {
+      await navigator.clipboard.writeText(productLink);
+      console.log('Link copied to clipboard successfully');
+    } catch (error) {
+      const tempInput = document.createElement('input');
+      tempInput.setAttribute('value', productLink);
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      tempInput.setSelectionRange(0, 99999);
+      try {
+        document.execCommand('copy');
+      } catch (copyError) {
+        //
+      } finally {
+        document.body.removeChild(tempInput);
+      }
+    }
   }
 
   return(
     <div
       style={{
-        width: '48px',
-        height: '48px',
+        width: isMobile ? '42px' : '48px',
+        height: isMobile ? '42px' : '48px',
         borderRadius: '36px',
         backgroundColor: isHovered ? '#EAEBF0' : 'white',
         cursor: isHovered ? 'pointer' : undefined,
         display: "flex",
         alignItems:'center',
         justifyContent: 'center',
-        transition: "all .5s ease",
-        WebkitTransition: "all .5s ease",
-        MozTransition: "all .5s ease",
+        transition: "all .3s ease",
+        WebkitTransition: "all .3s ease",
+        MozTransition: "all .3s ease",
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setHovered(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
       onClick={onClickAction}
     >
       <div
         style={{
-          width: '30px',
-          height: '30px',
+          width: isMobile ? '24px' : '30px',
+          height: isMobile ? '24px' : '30px',
           position: 'relative',
         }}
       >
@@ -46,10 +74,10 @@ const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAddition
           src={arrHeader}
           alt="arr"
           style={{
-            width: '18px',
+            width: isMobile ? '16px' : '18px',
             position: 'absolute',
-            left: '6px',
-            top: '2px'
+            left: isMobile ? '4px' : '6px',
+            top: isMobile ?'1px' : '2px'
           }}
         />
         <img
@@ -57,13 +85,13 @@ const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAddition
           alt="arr"
           style={{
             position: 'absolute',
-            top: '5px',
-            left: '14px',
-            height: isHovered ? '17px' : '12px',
-            width: '2.5px',
-            transition: "all .5s ease",
-            WebkitTransition: "all .5s ease",
-            MozTransition: "all .5s ease",
+            top: isMobile ? '3px' : '5px',
+            left: isMobile ? '11.7px' : '14px',
+            height: isHovered ? isMobile ? '15px' : '17px' : '12px',
+            width: isMobile ? '2px' : '2.5px',
+            transition: "all .2s ease",
+            WebkitTransition: "all .2s ease",
+            MozTransition: "all .2s ease",
           }}
         />
         <img
@@ -71,9 +99,9 @@ const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAddition
           alt="arr"
           style={{
             position: 'absolute',
-            top: '18.75px',
-            left: '5px',
-            width: '20px'
+            top: isMobile ? '16px' : '18.75px',
+            left: isMobile ? '4px' : '5px',
+            width: isMobile ? '18px' : '20px'
           }}
         />
       </div>
