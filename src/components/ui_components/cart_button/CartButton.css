@@ -44,6 +44,7 @@
     justify-content: space-between;
     padding: 32px;
     margin-top: 32px;
+    box-shadow: 1px 1px 100px 0 rgba(0, 0, 0, 0.30);
 }
 
 .checkout-container .checkout-card .order-header {

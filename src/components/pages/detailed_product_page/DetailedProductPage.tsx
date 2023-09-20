@@ -98,6 +98,7 @@ const DetailedProductPage: React.FC = () => {
                   weight={currProduct.weight}
                   showOptionalTags={true}
                   optionalTags={currProduct.tags}
+                  showShareButtonOnCard={true}
                 />
                 <div
                   style={{

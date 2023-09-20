@@ -23,9 +23,10 @@ interface ProductInfoProps {
   weight: number;
   optionalTags ? : string[];
   showOptionalTags ? : boolean;
+  showShareButtonOnCard ? : boolean;
 }
 
-export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name, brand, line, price, discountPrice, stock, purchasedCount, weight, optionalTags}) => {
+export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name, brand, line, price, discountPrice, stock, purchasedCount, weight, optionalTags, showShareButtonOnCard}) => {
   const bottomHintState = useSelector((state: RootState) => state.bottomHint);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -91,26 +92,28 @@ export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name,
           >
             <span className="buy-now-text">Buy now</span>
           </button>
-          <ShareButton
+          {showShareButtonOnCard && <ShareButton
             productLink={buildProductLink()}
             onClickAdditionalAction={() => {
               if (!bottomHintState.isShown) {
                 dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))
               }
             }}
-          />
+          />}
         </div>
       ) : (
-        <div className="detailed-button-container">
-          <ShareButton
-            productLink={buildProductLink()}
-            onClickAdditionalAction={() => {
-              if (!bottomHintState.isShown) {
-                dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))
-              }
-            }}
-          />
-        </div>
+        showShareButtonOnCard ? (
+          <div className="detailed-button-container">
+            <ShareButton
+              productLink={buildProductLink()}
+              onClickAdditionalAction={() => {
+                if (!bottomHintState.isShown) {
+                  dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))
+                }
+              }}
+            />
+          </div>
+        ) : (<div/>)
       )}
     </div>
   )

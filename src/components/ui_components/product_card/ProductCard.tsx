@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import './ProductCard.css';
 import MoreButton from "../more_button/MoreButton";
 import StandardButton from "../standart_button/StandartButton";
@@ -12,17 +12,24 @@ import {decrementProductCount, incrementProductCount} from "../../../redux/cart_
 import ProductInfoOnCard from "./product_info/ProductInfoOnCard";
 import {useMediaQuery} from "react-responsive";
 import ProductViewMobile from "./product_view_mobile/ProductViewMobile";
+import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintReducer";
+import ShareButton from "./share_button/ShareButton";
+import {FRONTEND_URL} from "../../../env/env";
 
-const ProductCard: React.FC<ProductInfo> =
-  ({ productId, name, brand,line, weight, description, price, discountPrice, image , fullDescription, stock, tags}) => {
+const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weight, description, price, discountPrice, image , fullDescription, stock, tags}) => {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const bottomHintState = useSelector((state: RootState) => state.bottomHint);
 
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1264px)'
   })
+
+   const buildProductLink = useCallback((): string => {
+     return `${FRONTEND_URL}/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
+   }, [name, productId, brand, line, weight]);
 
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
@@ -42,6 +49,8 @@ const ProductCard: React.FC<ProductInfo> =
       document.body.style.overflowX = 'hidden';
     };
   }, [isDetailedViewOpened]);
+
+
 
   const renderDesktop = () => {
     return(
@@ -83,6 +92,21 @@ const ProductCard: React.FC<ProductInfo> =
               changeColorOnHover={true}
               onClickColor="#d1d1d9"
             />
+            <div style={{
+              position: "absolute",
+              marginTop: isDesktopOrLaptop ? '0px' : '24px',
+              top: '-64px',
+              right: '64px',
+            }}>
+              <ShareButton
+                productLink={buildProductLink()}
+                onClickAdditionalAction={() => {
+                  if (!bottomHintState.isShown) {
+                    dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))
+                  }
+                }}
+              />
+            </div>
             <div className="detailed-view-text-container">
               <ProductInfoOnCard
                 productId={productId}
@@ -299,7 +323,7 @@ const ProductCard: React.FC<ProductInfo> =
               left: '6px'
             }}
             isMobile={true}
-            // onClickAction={() => setDetailedViewOpened(true)}
+            onClickAction={() => setDetailedViewOpened(true)}
           />
         </div>
       </div>

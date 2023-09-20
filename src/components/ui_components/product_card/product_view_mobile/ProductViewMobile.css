@@ -15,7 +15,7 @@
     position: fixed;
     bottom: -800px;
     display: flex;
-    padding: 0px 16px 64px 16px;
+    padding: 0 16px 64px 16px;
     flex-direction: column;
     justify-content: flex-start;
     transition: all .1s ease-in-out;
@@ -34,7 +34,7 @@
     bottom: 0;
     border-radius: 22px 22px 0 0;
     display: flex;
-    padding: 0px 16px 32px 16px;
+    padding: 0 16px 32px 16px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -184,11 +184,11 @@
 }
 
 .img-wrpr-opened {
-    top: 0;
-    transition: top 0.2s;
+    opacity: 1;
+    transition: opacity 0.2s;
 }
 
 .img-wrpr {
-    top: -1000px;
-    transition: top 0.3s ease 0.2s;
+    opacity: 0;
+    transition: opacity 0.2s ease 0.2s;
 }

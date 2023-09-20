@@ -2,10 +2,15 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintReducer";
+import {useMediaQuery} from "react-responsive";
 const BottomHint: React.FC = () => {
   const bottomHintState = useSelector((state: RootState) => state.bottomHint)
   const dispatch = useDispatch()
   const [startAnimation, setStartAnimation] = useState(false)
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
 
   useEffect(() => {
     if (bottomHintState.isShown) {
@@ -30,6 +35,10 @@ const BottomHint: React.FC = () => {
   }, [bottomHintState.isShown, startAnimation]);
 
   useEffect(() => {
+    console.log('ipdated' + bottomHintState.isShown)
+  }, [bottomHintState]);
+
+  useEffect(() => {
     if (!bottomHintState.isShown) {
       setStartAnimation(false)
     }
@@ -39,13 +48,13 @@ const BottomHint: React.FC = () => {
     <div
       style={{
         position: 'fixed',
-        bottom: bottomHintState.isShown && bottomHintState.message ? 0 :'-55px',
+        bottom: !isMobile ? bottomHintState.isShown && bottomHintState.message ? 0 :'-55px' : undefined,
+        top: isMobile ? bottomHintState.isShown && bottomHintState.message ? 0 :'-100px' : undefined,
         width: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '55px',
-        zIndex: '9999',
+        zIndex: '99999',
         transition: "all .2s ease",
         WebkitTransition: "all .2s ease",
         MozTransition: "all .2s ease",
@@ -53,13 +62,12 @@ const BottomHint: React.FC = () => {
     >
       <div
         style={{
-          width: '530px',
           backgroundColor: '#38D36D',
-          borderRadius: '32px 32px 0px 0px',
-          padding: '16px 32px 16px 32px',
+          borderRadius: isMobile ? '0 0 19px 19px' : '32px 32px 0px 0px',
+          padding: isMobile ? '8px 16px 8px 16px' : '16px 32px 16px 32px',
           fontFamily: 'Monsterrat-600, serif',
-          lineHeight: '23.04px',
-          fontSize: '16px',
+          lineHeight: isMobile ? '17.28px' : '23.04px',
+          fontSize: isMobile ? '12px' : '16px',
           color: 'white',
           display: 'flex',
           alignItems: 'center',
@@ -82,7 +90,7 @@ const BottomHint: React.FC = () => {
             zIndex: '10000',
           }}
         />
-        <span style={{ zIndex: '10001'}}>{bottomHintState.message}</span>
+        <span style={{ zIndex: '10001', textAlign: 'center'}} dangerouslySetInnerHTML={{__html: bottomHintState.message}}/>
       </div>
     </div>
   )

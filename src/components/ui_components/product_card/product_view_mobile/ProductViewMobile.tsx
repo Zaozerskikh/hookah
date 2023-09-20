@@ -14,6 +14,7 @@ import {useNavigate} from "react-router-dom";
 import CloseButton from "../../close_button/CloseButton";
 import ShareButton from "../share_button/ShareButton";
 import {FRONTEND_URL} from "../../../../env/env";
+import {setBottomHintState} from "../../../../redux/bottom_hint_reducer/BottomHintReducer";
 
 interface ProductViewMobileProps extends ProductInfo {
   onClick: (...args: any) => void;
@@ -65,7 +66,6 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
 
       if (container) {
         const distance = container.scrollHeight - container.scrollTop - container.clientHeight;
-        console.log(distance);
         setDistanceFromBottom(distance);
       }
     };
@@ -123,7 +123,7 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
           <ShareButton
             productLink={buildProductLink()}
             isMobile={true}
-            onClickAdditionalAction={() => console.log('f')}/>
+            onClickAdditionalAction={() => dispatch(setBottomHintState(true, 'The link has been copied!</br>You can share it with your friends 😎'))}/>
         </div>
       </div>
       <div className={`product-view-mobile-product-info-wrapper ${isOpened ? 'open' : ''}`} style={{maxHeight: window.innerHeight * 0.7}}>
@@ -246,4 +246,6 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
   )
 }
 
+//@ts-ignore
 export default ProductViewMobile
+//@ts-ignore

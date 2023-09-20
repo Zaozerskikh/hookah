@@ -16,7 +16,6 @@ const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAddition
     onClickAdditionalAction()
     try {
       await navigator.clipboard.writeText(productLink);
-      console.log('Link copied to clipboard successfully');
     } catch (error) {
       const tempInput = document.createElement('input');
       tempInput.setAttribute('value', productLink);
@@ -86,7 +85,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAddition
           style={{
             position: 'absolute',
             top: isMobile ? '3px' : '5px',
-            left: isMobile ? '11.7px' : '14px',
+            left: isMobile ? '11.7px' : '14.5px',
             height: isHovered ? isMobile ? '15px' : '17px' : '12px',
             width: isMobile ? '2px' : '2.5px',
             transition: "all .2s ease",

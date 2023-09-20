@@ -35,9 +35,9 @@ const MoreButton: React.FC<MoreButtonProps> =
       alignItems: 'center',
       justifyContent: 'center',
       gap: '10px',
-      transition: "all .5s ease",
-      WebkitTransition: "all .5s ease",
-      MozTransition: "all .5s ease",
+      transition: "all .3s ease",
+      WebkitTransition: "all .3s ease",
+      MozTransition: "all .3s ease",
       ...buttonStyle
     }
 
@@ -46,9 +46,9 @@ const MoreButton: React.FC<MoreButtonProps> =
       fontFamily: 'Monsterrat-600, serif',
       fontSize: '22px',
       lineHeight: '31.68px',
-      transition: "all .5s ease",
-      WebkitTransition: "all .5s ease",
-      MozTransition: "all .5s ease",
+      transition: "all .3s ease",
+      WebkitTransition: "all .3s ease",
+      MozTransition: "all .3s ease",
       ...textStyle
     }
 
@@ -59,9 +59,9 @@ const MoreButton: React.FC<MoreButtonProps> =
       top: isMobile ? '7px': '12px',
       right: isMobile ? '7px' : '12px',
       zIndex: '9999 !important',
-      transition: "all .5s ease",
-      WebkitTransition: "all .5s ease",
-      MozTransition: "all .5s ease",
+      transition: "all .3s ease",
+      WebkitTransition: "all .3s ease",
+      MozTransition: "all .3s ease",
       marginTop: isMobile ? '1px' : 0,
       ...iconStyle,
       left: undefined
