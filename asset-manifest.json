@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/hookah/static/css/main.afdaba23.css",
-    "main.js": "/hookah/static/js/main.feedb7d3.js",
+    "main.css": "/hookah/static/css/main.e460c60f.css",
+    "main.js": "/hookah/static/js/main.486b199e.js",
     "static/js/787.c274760c.chunk.js": "/hookah/static/js/787.c274760c.chunk.js",
     "static/media/news-5.png": "/hookah/static/media/news-5.6c6942cfaf5918f8fa1a.png",
     "static/media/choosing_hookah_bowl_icon.png": "/hookah/static/media/choosing_hookah_bowl_icon.fb4c7cbd2fc7c46f1afe.png",
     "static/media/guide_to_coconut_icon.png": "/hookah/static/media/guide_to_coconut_icon.26141c9a1760018e8774.png",
+    "static/media/darkSide_KaleeGrap_base.png": "/hookah/static/media/darkSide_KaleeGrap_base.a3643f87501923a921fe.png",
     "static/media/darkSide_FallingStar_base.png": "/hookah/static/media/darkSide_FallingStar_base.89e4d14ef7ba6a0416e2.png",
     "static/media/darkSide_SuperNova_base.png": "/hookah/static/media/darkSide_SuperNova_base.51de5431e84dc1bec23e.png",
     "static/media/darkSide_Hola_base.png": "/hookah/static/media/darkSide_Hola_base.f9205e45b69002c6f80e.png",
     "static/media/how_to_choose_hookah_icon.png": "/hookah/static/media/how_to_choose_hookah_icon.6a5f7453792ec0a18ca9.png",
-    "static/media/darkSide_KaleeGrap_base.png": "/hookah/static/media/darkSide_KaleeGrap_base.1b25a763773d862eb4ba.png",
     "static/media/darkSide_BnPapa_base.png": "/hookah/static/media/darkSide_BnPapa_base.aeb43494d50f253a433c.png",
     "static/media/darkSide_Igranny_base.png": "/hookah/static/media/darkSide_Igranny_base.b63f13d7a55430d63a4a.png",
     "static/media/carring_for_hookah_bowl.png": "/hookah/static/media/carring_for_hookah_bowl.3ffeb26b8099c054b2fa.png",
@@ -44,12 +44,12 @@
     "static/media/darkside_logo.png": "/hookah/static/media/darkside_logo.ce2d1eaa4ddbe5a1ab7a.png",
     "static/media/instagram_logo_black.png": "/hookah/static/media/instagram_logo_black.7c90a78377d0d9eab47a.png",
     "index.html": "/hookah/index.html",
-    "main.afdaba23.css.map": "/hookah/static/css/main.afdaba23.css.map",
-    "main.feedb7d3.js.map": "/hookah/static/js/main.feedb7d3.js.map",
+    "main.e460c60f.css.map": "/hookah/static/css/main.e460c60f.css.map",
+    "main.486b199e.js.map": "/hookah/static/js/main.486b199e.js.map",
     "787.c274760c.chunk.js.map": "/hookah/static/js/787.c274760c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.afdaba23.css",
-    "static/js/main.feedb7d3.js"
+    "static/css/main.e460c60f.css",
+    "static/js/main.486b199e.js"
   ]
 }
