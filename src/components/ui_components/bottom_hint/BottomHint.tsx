@@ -54,7 +54,7 @@ const BottomHint: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: '99999',
+        zIndex: '10000',
         transition: "all .2s ease",
         WebkitTransition: "all .2s ease",
         MozTransition: "all .2s ease",

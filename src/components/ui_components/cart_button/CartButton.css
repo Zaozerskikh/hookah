@@ -105,7 +105,7 @@
     font-size: 16px;
     font-style: normal;
     line-height: 144%;
-    text-decoration: line-through;;
+    text-decoration: line-through;
 }
 
 .checkout-container .checkout-card .thumb-y {
@@ -224,3 +224,106 @@
     font-style: normal;
     line-height: 144%;
 }
+
+
+.products-container-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    overflow: auto;
+    padding-bottom: 24px;
+    padding-top: 16px;
+}
+
+.products-container-mobile::-webkit-scrollbar {
+    display: none;
+}
+
+.products-container-mobile .order-item-container-mobile {
+    height: 84px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.products-container-mobile .product-img-mobile {
+    width: 32px;
+    height: 40px;
+}
+
+.products-container-mobile .product-header-mobile {
+    color: var(--main-white);
+    font-family: Monsterrat-600, serif;
+    font-size: 13px;
+    font-style: normal;
+    line-height: 144%; /* 18.72px */
+}
+
+.products-container-mobile .product-price-mobile {
+    color: var(--text-gray-secondary, #909398);
+    font-family: Monsterrat-400, serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 144%;
+}
+
+.products-container-mobile .product-price-old-mobile {
+    color: var(--text-gray-secondary, #909398);
+    font-family: Monsterrat-400, serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 144%;
+    text-decoration: line-through;;
+}
+
+.products-container-mobile .total-price-info-mobile {
+    color: var(--main-white, #FFF);
+    font-family: Monsterrat-600, serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 144%; /* 25.92px */
+}
+
+.ur-order-span-mobile {
+    color: var(--main-white, #FFF);
+
+    /* Mobile/H2 */
+    font-family: Unbounded-600, serif;
+    font-size: 19px;
+    font-style: normal;
+    line-height: 125%; /* 23.75px */
+    width: 100%;
+    text-align: left;
+    position: relative;
+}
+
+.ur-order-span-mobile:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    background: linear-gradient(to top, transparent, black);
+    height: 16px;
+    width: 100%;
+    display: flex;
+    pointer-events: none;
+    z-index: 9999 !important;
+}
+
+.checkoot-mobile-bottom-grad {
+    content: '';
+    position: fixed;
+    bottom: 74px;
+    background: linear-gradient(to bottom, transparent, black);
+    height: 24px;
+    width: 100%;
+    display: flex;
+    pointer-events: none;
+    z-index: 9999 !important;
+}
+
+

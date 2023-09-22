@@ -352,4 +352,4 @@ export const Products: ProductInfo[] = [
   },
 ]
 
-export const productsOnTheMain: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '18', '20']
+export const productsOnTheMain: string[] = ['12', '9', '10', '11', '5', '6', '7', '8', '9', '3', '18', '20']

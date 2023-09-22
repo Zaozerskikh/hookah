@@ -20,6 +20,7 @@ import {
   getProductsCountInCart
 } from "../../../redux/cart_reducer/CartOperations";
 import {useMediaQuery} from "react-responsive";
+import BottomSlider from "../bottom_slider/BottomSlider";
 
 const CartButton: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)
@@ -323,81 +324,193 @@ const CartButton: React.FC = () => {
 
   const renderMobile = () => {
     return(
-      <div
-        className="cart-button-mobile"
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          position: "fixed",
-          top: getActualCart(cartState).length === 0 ? '-60px' : '9px',
-          left: '59px',
-          padding: '7px 15px 7px 9px',
-          backgroundColor: isHovered ? '#CFD5DB' : '#EAEBF0',
-          zIndex: '6000',
-          borderRadius: '20px',
-          transition: "all .2s ease",
-          WebkitTransition: "all .2s ease",
-          MozTransition: "all .2s ease",
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px'
-        }}
-        onTouchCancel={() => setHovered(false)}
-        onTouchStart={() => setHovered(true)}
-        onTouchEnd={() => setHovered(false)}
-      >
-        <div className="product-count-mobile">
-          <span className="product-count-text">{getProductsCountInCart(cartState)}</span>
+      <>
+        <BottomSlider
+          isOpened={isCheckoutOpened}
+          maxRelativeHeight={0.7}
+          onCloseAction={() => dispatch(setIsCheckoutWindowShown(false))}
+          threshold={9}
+          gestureZoneChild={(<div style={{height: '0px', width: '100%'}}/>)}
+          mainZoneChild={(
+            <>
+              <div className="ur-order-span-mobile">Your Order</div>
+              <div className="products-container-mobile">
+                <div
+                  style={{
+                    position: "fixed",
+                    top: '24px',
+                    right: '16px',
+                    opacity: isCheckoutOpened ? '1' : '0',
+                    transition: "all .2s ease",
+                    WebkitTransition: "all .2s ease",
+                    MozTransition: "all .2s ease"
+                  }}
+                >
+                  <CloseButton
+                    changeColorOnHover={false}
+                    onClickColor={'white'}
+                    iconSize={17}
+                    onClickAction={() => dispatch(setIsCheckoutWindowShown(false))}
+                    isMobile={true}
+                    buttonStyle={{
+                      top: 0,
+                      width: '42px',
+                      height: '42px',
+                    }}
+                  />
+                </div>
+                {
+                  actualCart.map(([key, value]) => {
+                    const product = Products.find(p => p.productId === key)
+                    return(
+                      <div className="order-item-container-mobile" key={key}>
+                        <div style={{ width: '100%', display: 'flex', flexDirection: 'row', gap: '16px'}}>
+                          <CloseButton
+                            buttonStyle={{
+                              position: "absolute",
+                              width: '24px',
+                              height: '24px',
+                              top: '4px',
+                              right: 0
+                            }}
+                            isDark={true}
+                            iconSize={12}
+                            onClickAction={() => dispatch(resetProductCount(key))}
+                            changeColorOnHover={true}
+                            onClickColor="#424446"
+                            isMobile={true}
+                          />
+                          <img src={product.image} alt="dd" className="product-img-mobile"/>
+                          <div className="product-info-mobile">
+                        <span className="product-header-mobile">
+                          {`${product.brand} – ${product.name} (${product.line}) ${product.weight}G`}
+                        </span>
+                            <div style={{ display: "flex", flexDirection: 'row', gap: '4px'}}>
+                              {product.discountPrice && product.discountPrice !== product.price && <span className="product-price-old-mobile">{`${product.price}€/Pack`}</span> }
+                              <span className="product-price-mobile">{`${product.discountPrice ? product.discountPrice : product.price}€/Pack`}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div style={{marginLeft: '48px', display: "flex", flexDirection: 'row', width: 'calc(100% - 48px)', justifyContent: 'space-between', alignItems: 'flex-end'}}>
+                          <div className="total-price-info-mobile">{((product.discountPrice ? product.discountPrice : product.price) * value).toFixed(2)}€</div>
+                          <CounterButton
+                            counterState={value}
+                            isDark={true}
+                            onPlusClickAction={() => dispatch(incrementProductCount(key))}
+                            onMinusClickAction={() => dispatch(decrementProductCount(key))}
+                            isMobile={true}
+                            wrapperStyle={{
+                              maxWidth: '86px',
+                            }}
+                          />
+                        </div>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+              <MoreButton
+                showText={true}
+                isMobile={true}
+                text={`Checkout ${getFullAmountWithDiscount(cartState).toFixed(2)}€`}
+                buttonStyle={{
+                  width: '100%',
+                  borderRadius: '20px',
+                  backgroundColor: 'white',
+                  marginTop: '2px',
+                  zIndex: '10000',
+                  height: '40px'
+                }}
+                textStyle={{
+                  fontFamily: 'Monsterrat-600, serif',
+                  fontSize: '16px',
+                  marginLeft: '30px'
+                }}
+                iconStyle={{
+                  right: '27px'
+                }}
+              />
+              <div className="checkoot-mobile-bottom-grad"/>
+            </>
+          )}
+        />
+        <div
+          className="cart-button-mobile"
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            position: "fixed",
+            top: getActualCart(cartState).length === 0 ? '-60px' : '9px',
+            left: '59px',
+            padding: '7px 15px 7px 9px',
+            backgroundColor: isHovered ? '#CFD5DB' : '#EAEBF0',
+            zIndex: '6000',
+            borderRadius: '20px',
+            transition: "all .2s ease",
+            WebkitTransition: "all .2s ease",
+            MozTransition: "all .2s ease",
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px'
+          }}
+          onTouchCancel={() => setHovered(false)}
+          onTouchStart={() => setHovered(true)}
+          onTouchEnd={() => setHovered(false)}
+          onClick={() => dispatch(setIsCheckoutWindowShown(true))}
+        >
+          <div className="product-count-mobile">
+            <span className="product-count-text">{getProductsCountInCart(cartState)}</span>
+          </div>
+          <div style={{position: 'relative', width: '24px', height: '26px'}}>
+            <img
+              src={hangerIcon}
+              alt="c"
+              style={{
+                height: !isHovered ? '4px' : '7px',
+                top: '8px',
+                width: '2px',
+                left: '13.5px',
+                position: 'absolute',
+                transition: "all .1s ease",
+                WebkitTransition: "all .1s ease",
+                MozTransition: "all .1s ease",
+                zIndex: '4'
+              }}
+            />
+            <img
+              src={hangerIcon}
+              alt="c"
+              style={{
+                height: !isHovered ? '4px' : '0px',
+                top: '8px',
+                width: '2px',
+                left: '8px',
+                position: 'absolute',
+                transition: "all .2s ease",
+                WebkitTransition: "all .2s ease",
+                MozTransition: "all .2s ease",
+                zIndex: '3'
+              }}
+            />
+            <img
+              src={cartIcon}
+              alt="c"
+              style={{
+                height: !isHovered ? '22px' : '24px',
+                width: !isHovered ? '22px' : '24px',
+                top: isHovered ? '0px' : '1px',
+                left: isHovered ? '0px' : '1px',
+                position: 'absolute',
+                transition: "all .1s ease",
+                WebkitTransition: "all .1s ease",
+                MozTransition: "all .1s ease",
+                zIndex: '5',
+              }}
+            />
+          </div>
+          <span className="product-amount-text">{getFullAmountWithDiscount(cartState).toFixed(2)}€</span>
         </div>
-        <div style={{position: 'relative', width: '24px', height: '26px'}}>
-          <img
-            src={hangerIcon}
-            alt="c"
-            style={{
-              height: !isHovered ? '4px' : '7px',
-              top: '8px',
-              width: '2px',
-              left: '13.5px',
-              position: 'absolute',
-              transition: "all .1s ease",
-              WebkitTransition: "all .1s ease",
-              MozTransition: "all .1s ease",
-              zIndex: '4'
-            }}
-          />
-          <img
-            src={hangerIcon}
-            alt="c"
-            style={{
-              height: !isHovered ? '4px' : '0px',
-              top: '8px',
-              width: '2px',
-              left: '8px',
-              position: 'absolute',
-              transition: "all .2s ease",
-              WebkitTransition: "all .2s ease",
-              MozTransition: "all .2s ease",
-              zIndex: '3'
-            }}
-          />
-          <img
-            src={cartIcon}
-            alt="c"
-            style={{
-              height: !isHovered ? '22px' : '24px',
-              width: !isHovered ? '22px' : '24px',
-              top: isHovered ? '0px' : '1px',
-              left: isHovered ? '0px' : '1px',
-              position: 'absolute',
-              transition: "all .1s ease",
-              WebkitTransition: "all .1s ease",
-              MozTransition: "all .1s ease",
-              zIndex: '5',
-            }}
-          />
-        </div>
-        <span className="product-amount-text">{getFullAmountWithDiscount(cartState).toFixed(2)}€</span>
-      </div>
+      </>
     )
   }
 
