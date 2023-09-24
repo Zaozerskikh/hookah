@@ -15,3 +15,28 @@
     font-style: normal;
     line-height: 144%;
 }
+
+.news-page-container-mobile {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+    flex-direction: column;
+    margin-top: 58px;
+    box-sizing: border-box;
+    padding: 16px 16px 128px;
+}
+
+.news-page-container-mobile .news-page-card-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 24px;
+}
+
+.news-page-container-mobile .news-page-header-mobile {
+    color: #000;
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%; /* 23.04px */
+}

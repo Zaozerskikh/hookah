@@ -26,36 +26,83 @@ const DetailedNewsPage: React.FC = () => {
     query: '(min-width: 1264px)'
   })
 
-  return(
-    article ? (
-      <div className="detailed-news-container" style={{ width: isDesktopOrLaptop ? '1264px' : '948px'}}>
-        <div className="header-container">
-          <span className="header-text" dangerouslySetInnerHTML={{ __html: article.name }} />
-          <span className="header-date">
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
+
+  const renderDesktop = () => {
+    return(
+      article ? (
+        <div className="detailed-news-container" style={{ width: isDesktopOrLaptop ? '1264px' : '948px'}}>
+          <div className="header-container">
+            <span className="header-text" dangerouslySetInnerHTML={{ __html: article.name }} />
+            <span className="header-date">
           {`${article.date.getDate()}-${article.date.getMonth()}-${article.date.getFullYear()}`}
         </span>
+          </div>
+          <img src={article.image} alt={"news-img"} className="image"/>
+          <p className="detailed_news_text">
+            <div dangerouslySetInnerHTML={{ __html: article.fullText }} />
+          </p>
+          <StandardButton
+            text="Return to all news"
+            buttonStyle={{
+              height: '60px',
+              width: '334px',
+              padding: '12px 64px',
+              marginTop: '32px'
+            }}
+            onClickAction={() => navigate(RoutePaths.NEWS)}
+          />
         </div>
-        <img src={article.image} alt={"news-img"} className="image"/>
-        <p className="detailed_news_text">
-          <div dangerouslySetInnerHTML={{ __html: article.fullText }} />
-        </p>
-        <StandardButton
-          text="Return to all news"
-          buttonStyle={{
-            height: '60px',
-            width: '334px',
-            padding: '12px 64px',
-            marginTop: '32px'
-          }}
-          onClickAction={() => navigate(RoutePaths.NEWS)}
-        />
-      </div>
-    ) : (
-      <div style={{ minHeight: `${Math.max(window.innerHeight - 500, 300)}px`, display: "flex", alignItems: 'center'}}>
-        <LoadingIcon/>
-      </div>
+      ) : (
+        <div style={{ minHeight: `${Math.max(window.innerHeight - 500, 300)}px`, display: "flex", alignItems: 'center'}}>
+          <LoadingIcon/>
+        </div>
+      )
     )
-  )
+  }
+
+  const renderMobile = () => {
+    return(
+      article ? (
+        <div className="detailed-news-container-mobile">
+          <div className="date-header-wrapper">
+            <div className="article-name-mobile">
+              {article.name.replaceAll('</br>', '')}
+            </div>
+            <div className="article-date-mobile">
+              {`${article.date.getDate()}-${article.date.getMonth()}-${article.date.getFullYear()}`}
+            </div>
+          </div>
+          <img
+            src={article.image}
+            alt={"news-img"}
+            className="image-mob"
+          />
+          <div className="text-mobile" dangerouslySetInnerHTML={{ __html: article.fullText}}/>
+          <StandardButton
+            text="All news"
+            buttonStyle={{
+              alignSelf: 'center',
+              width: '262px',
+              height: '48px',
+              marginTop: '24px',
+              borderRadius: '8px'
+            }}
+            isMobile={true}
+            onClickAction={() => navigate(RoutePaths.NEWS)}
+          />
+        </div>
+      ) : (
+        <div style={{ width: '100%', display: "flex", alignItems: 'center'}}>
+          <LoadingIcon/>
+        </div>
+      )
+    )
+  }
+
+  return(isMobile ? renderMobile() : renderDesktop())
 }
 
 //@ts-ignore

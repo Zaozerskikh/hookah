@@ -20,7 +20,7 @@ const StandardButton: React.FC<StandardButtonProps> =
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: isClicked ? '#c7ccd3' : isHovered ? onHoverColor ? onHoverColor : '#CFD5DB' : 'black',
-    borderRadius: '12px',
+    borderRadius: isMobile ? '8px' : '12px',
     border: 'none',
     outline: 'none',
     transition: "all .5s ease",

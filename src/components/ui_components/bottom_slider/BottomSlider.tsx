@@ -59,7 +59,7 @@ const BottomSlider: React.FC<BottomSliderProps> = ({ isOpened, onCloseAction, th
         backgroundColor: isOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
       }}
     >
-      <div className={`bottom-slider-info-wrapper ${isOpened ? 'open' : ''}`} style={{maxHeight: window.innerHeight * maxRelativeHeight}}>
+      <div className={`bottom-slider-info-wrapper ${isOpened ? 'open' : ''}`} style={{maxHeight: window.innerHeight - 128}}>
         <animated.div {...bind()} style={{ x, y }} >
           <div
             style={{

@@ -79,6 +79,7 @@ const NewsSection: React.FC<NewsSectionProps> = ({ isMobile }) => {
               buttonStyle={{
                 width: '262px',
                 height: '48px',
+                borderRadius: '8px'
               }}
               isMobile={true}
             />

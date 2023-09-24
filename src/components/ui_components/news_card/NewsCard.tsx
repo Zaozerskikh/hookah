@@ -85,8 +85,11 @@ const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description, dat
 
   const renderMobile = () => {
     return(
-      <div className="news-card-container-mobile">
-        <div style={{position: 'relative', display: "flex", width: '100%', height: '100%'}}>
+      <div
+        className="news-card-container-mobile"
+        onClick={openNews}
+      >
+        <div style={{position: 'relative', display: "flex", width: '100%'}}>
           <img
             src={image}
             alt={name}
@@ -122,7 +125,6 @@ const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description, dat
         <div className="news-card-text-container-mobile">
           <span
             className="news-card-header-mobile"
-            // onClick={openNews}
           >
             {shortNameInCard.replaceAll('</br>', ' ')}
           </span>

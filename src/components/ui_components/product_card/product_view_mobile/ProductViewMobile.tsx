@@ -158,7 +158,7 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
                 backgroundColor: 'black',
                 paddingTop: '16px',
                 zIndex: '9999',
-                marginBottom: '-3px',
+                marginBottom: '16px',
                 borderRadius: '22px 22px 0px 0px',
                 boxShadow: '1px 1px 30px 0px rgba(0, 0, 0, 0.50)',
               }}

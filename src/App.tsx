@@ -24,6 +24,7 @@ import './assets/css_variables/vars.css'
 import SlidingMenu from "./components/menu_panel/mobile/sliding_menu/SlidingMenu";
 import {useMediaQuery} from "react-responsive";
 import {setIsWarningShown} from "./redux/warning_reducer/WarningReducer";
+import './index.css'
 
 const App: React.FC = () => {
   const isBorgerOpened = useSelector((state: RootState) => state.burger.isOpened)
@@ -81,7 +82,7 @@ const App: React.FC = () => {
           position: 'relative',
         }}
       >
-        <div style={{ width: '100%', position: 'absolute', top: '0', left: 0, backgroundColor: 'white', height: '80px'}}/>
+        <div style={{ width: '100%', position: 'absolute', top: '0', left: 0, backgroundColor: 'white', height: isMobile ? '58px' : '80px'}}/>
         <div
           style={{
             width: '100%',

@@ -15,6 +15,7 @@ import ProductViewMobile from "./product_view_mobile/ProductViewMobile";
 import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintReducer";
 import ShareButton from "./share_button/ShareButton";
 import {FRONTEND_URL} from "../../../env/env";
+import ImageWrapper from "../image_wrapper/ImageWrapper";
 
 const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weight, description, price, discountPrice, image , fullDescription, stock, tags}) => {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
@@ -250,17 +251,22 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
           {discountPrice && discountPrice !== price && <span className="tag-detailed-mobile" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
           {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed-mobile" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
         </div>
-        <img
-          onClick={() => setDetailedViewOpened(true)}
-          src={image}
-          alt={name}
-          className="product-image-mobile"
-          style={{
-            width: '100%',
-            height: "auto",
-            borderRadius: '16px 16px 0px 0px'
-          }}
-        />
+        <ImageWrapper
+          xRatio={608}
+          yRatio={760}
+        >
+          <img
+            onClick={() => setDetailedViewOpened(true)}
+            src={image}
+            alt={name}
+            className="product-image-mobile"
+            style={{
+              width: '100%',
+              height: "auto",
+              borderRadius: '16px 16px 0px 0px'
+            }}
+          />
+        </ImageWrapper>
         <div
           className="product-card-product-info-mobile"
           onClick={() => setDetailedViewOpened(true)}

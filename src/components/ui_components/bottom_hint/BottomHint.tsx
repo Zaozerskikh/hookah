@@ -49,7 +49,7 @@ const BottomHint: React.FC = () => {
       style={{
         position: 'fixed',
         bottom: !isMobile ? bottomHintState.isShown && bottomHintState.message ? 0 :'-55px' : undefined,
-        top: isMobile ? bottomHintState.isShown && bottomHintState.message ? 0 :'-100px' : undefined,
+        top: isMobile ? bottomHintState.isShown && bottomHintState.message ? 0 : '-55px' : undefined,
         width: '100%',
         display: 'flex',
         alignItems: 'center',
@@ -73,7 +73,8 @@ const BottomHint: React.FC = () => {
           alignItems: 'center',
           justifyContent: 'center',
           overflow: "hidden",
-          position: 'relative'
+          position: 'relative',
+          width: '100%'
         }}
       >
         <div

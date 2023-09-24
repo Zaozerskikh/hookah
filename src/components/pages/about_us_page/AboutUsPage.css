@@ -39,3 +39,37 @@
     line-height: 144%;
 }
 
+.about-us-container-mobile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 58px;
+    box-sizing: border-box;
+    padding: 16px 16px 128px;
+    gap: 16px;
+}
+
+.about-header-mobile {
+    color: #000;
+    font-family: Monsterrat-700, serif;
+    font-size: 24px;
+    font-style: normal;
+    line-height: 125%;
+}
+
+.about-us-container-mobile .about-us-text-mobile {
+    color: #000;
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%; /* 23.04px */
+}
+
+.about-us-container-mobile .about-socials {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+    align-items: flex-start;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}

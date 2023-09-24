@@ -327,7 +327,7 @@ const CartButton: React.FC = () => {
       <>
         <BottomSlider
           isOpened={isCheckoutOpened}
-          maxRelativeHeight={0.7}
+          maxRelativeHeight={0.85}
           onCloseAction={() => dispatch(setIsCheckoutWindowShown(false))}
           threshold={9}
           gestureZoneChild={(<div style={{height: '0px', width: '100%'}}/>)}
@@ -370,7 +370,7 @@ const CartButton: React.FC = () => {
                               position: "absolute",
                               width: '24px',
                               height: '24px',
-                              top: '4px',
+                              top: '2px',
                               right: 0
                             }}
                             isDark={true}
@@ -440,7 +440,7 @@ const CartButton: React.FC = () => {
             display: 'flex',
             flexDirection: 'row',
             position: "fixed",
-            top: getActualCart(cartState).length === 0 ? '-60px' : '9px',
+            top: getActualCart(cartState).length === 0 ? '-60px' : '6px',
             left: '59px',
             padding: '7px 15px 7px 9px',
             backgroundColor: isHovered ? '#CFD5DB' : '#EAEBF0',

@@ -23,6 +23,12 @@ const Warning: React.FC = () => {
     }
   }, [dispatch, location])
 
+  useEffect(() => {
+    setTimeout(() => {
+      document.body.classList.add('hidden');
+    }, 600)
+  }, []);
+
   const renderMobile = () => {
     return(
       <>
