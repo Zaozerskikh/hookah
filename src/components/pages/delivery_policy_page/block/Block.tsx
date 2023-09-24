@@ -4,38 +4,57 @@ import abouTbullit from './../../../../assets/icons/decorations/about_bullit.png
 
 export interface BlockProps {
   headerText: string,
-  mainText: string
+  mainText: string,
+  isMobile ? : boolean
 }
 
-const Block: React.FC<BlockProps> = ({headerText, mainText}) => {
-  return(
-    <div
-      className="block-container"
-      style={{
-        width: '600px',
-        height: '245px',
-        display: 'flex',
-        flexDirection: 'row',
-        gap: '16px',
-      }}
-    >
-      <img src={abouTbullit} style={{ width: '32px', height: '32px'}} alt="bullit"/>
+const Block: React.FC<BlockProps> = ({headerText, mainText, isMobile}) => {
+  const renderDesktop = () => {
+    return(
       <div
+        className="block-container"
         style={{
+          width: '600px',
+          height: '245px',
           display: 'flex',
-          flexDirection: 'column',
-          gap: '8px'
+          flexDirection: 'row',
+          gap: '16px',
         }}
       >
-        <div className="block-header">
-          {headerText}
-        </div>
-        <div className="block-text">
-          <div dangerouslySetInnerHTML={{ __html: mainText }} />
+        <img src={abouTbullit} style={{ width: '32px', height: '32px'}} alt="bullit"/>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px'
+          }}
+        >
+          <div className="block-header">
+            {headerText}
+          </div>
+          <div className="block-text">
+            <div dangerouslySetInnerHTML={{ __html: mainText }} />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
+
+  const renderMobile = () => {
+    return(
+      <div className="block-container-mobile">
+        <img src={abouTbullit} style={{ width: '32px', height: '32px'}} alt="bullit"/>
+        <div className="block-header-mobile">
+          {headerText}
+        </div>
+        <div className="block-text-mobile">
+          <div dangerouslySetInnerHTML={{ __html: mainText.replaceAll('</br>', '') }} />
+        </div>
+      </div>
+    )
+  }
+
+  return(isMobile ? renderMobile() : renderDesktop())
 }
 
 export default Block

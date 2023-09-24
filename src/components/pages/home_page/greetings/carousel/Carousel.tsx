@@ -1,6 +1,9 @@
 import React, {useCallback, useEffect, useState} from "react";
 import "./Carousel.css";
 import Boop from "../boop/Boop";
+import {useDrag} from "@use-gesture/react";
+import {ReactDOMAttributes} from "@use-gesture/react/dist/declarations/src/types";
+import { animated } from "react-spring";
 
 export interface CarouselItem {
   item: string;
@@ -16,6 +19,15 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
   const [xPos, setXPos] = useState([0, 1000, 2000, 3000]);
   const [isSwipingPaused, setIsSwipingPaused] = useState(false);
   const [textCarouselWidth, setTextCarouselWidth] = useState(window.innerWidth - 64);
+  const [canSwipe, setCanSwipe] = useState(false)
+
+  useEffect(() => {
+    if (!canSwipe) {
+      setTimeout(() => {
+        setCanSwipe(true)
+      }, 500)
+    }
+  }, [canSwipe]);
 
   useEffect(() => {
     const updateWidth = () => {
@@ -33,10 +45,17 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
     };
   }, [isMobile]);
 
+  const bind = useDrag(({ down, movement: [mx, my] }) => {
+    if (mx < -5 && canSwipe) {
+      moveNext()
+    }
+  }) as unknown as (...args: any[]) => ReactDOMAttributes;
+
   const moveNext = () => {
     let newPositions = xPos.slice();
     newPositions.push(newPositions.shift());
     setXPos(newPositions);
+    setCanSwipe(false)
   };
 
   useEffect(() => {
@@ -78,80 +97,82 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
   }, [xPos]);
 
   return (
-    <div
-      className="carousel-wrapper"
-      id="carousel-wrapper"
-      style={{
-        top: isMobile ? '0' : '64px',
-        right: isMobile ? undefined : '-1186px',
-        left: !isMobile ? undefined : '1002px'
-      }}
-      onMouseEnter={() => {
-        if (!isMobile) {
-          setIsSwipingPaused(true)}
-        }
-      }
-      onMouseLeave={() => {
-        if (!isMobile) {
-          setIsSwipingPaused(false)}
-        }
-      }
-      onMouseDown={() => {
-        if (isMobile) {
-          setIsSwipingPaused(true)}
-        }
-      }
-      onMouseUp={() => {
-        if (isMobile) {
-          setIsSwipingPaused(false)}
-        }
-      }
-    >
-      {items.map((item, index) => {
-        return (
-          <div
-            onClick={moveNext}
-            className="carousel-item"
-            key={item.key}
-          >
+    <animated.div {...bind()}>
+      <div
+        className="carousel-wrapper"
+        id="carousel-wrapper"
+        style={{
+          top: isMobile ? '0' : '64px',
+          right: isMobile ? undefined : '-1186px',
+          left: !isMobile ? undefined : '1002px'
+        }}
+        onMouseEnter={() => {
+          if (!isMobile) {
+            setIsSwipingPaused(true)}
+        }}
+        onMouseLeave={() => {
+          if (!isMobile) {
+            setIsSwipingPaused(false)}
+        }}
+        onMouseDown={() => {
+          if (isMobile) {
+            setIsSwipingPaused(true)}
+        }}
+        onMouseUp={() => {
+          if (isMobile) {
+            setIsSwipingPaused(false)}
+        }}
+        onTouchStart={() => {
+          if (isMobile) {
+            setIsSwipingPaused(false)}
+        }}
+      >
+        {items.map((item, index) => {
+          return (
             <div
-              style={{...determineStyle(index, (xPos[index] > 0))}}
+              onClick={moveNext}
               className="carousel-item"
+              key={item.key}
             >
               <div
-                id={`carousel-item-text-wrapper-${item.key === longestKey ? item.key.toString() : ''}`}
-                style={{
-                  transition: "all .5s ease",
-                  WebkitTransition: "all .5s ease",
-                  MozTransition: "all .5s ease",
-                  width: isMobile ? `${textCarouselWidth - 32}px` : '784px'
-                }}
+                style={{...determineStyle(index, (xPos[index] > 0))}}
+                className="carousel-item"
               >
-                <Boop
-                  rotation={6}
-                  isMobile={isMobile}
+                <div
+                  id={`carousel-item-text-wrapper-${item.key === longestKey ? item.key.toString() : ''}`}
+                  style={{
+                    transition: "all .5s ease",
+                    WebkitTransition: "all .5s ease",
+                    MozTransition: "all .5s ease",
+                    width: isMobile ? `${textCarouselWidth - 32}px` : '784px'
+                  }}
                 >
-                  <p
-                    className="greetings-text"
-                    style={isMobile ? {
-                      color: 'var(--main-white)',
-                      fontFamily: 'Monsterrat-400, serif',
-                      fontSize: '16px',
-                      lineHeight: '144%',
-                      padding: 0,
-                      margin: 0,
-                    } :{}}
-                    dangerouslySetInnerHTML={{
-                      __html: item.item
-                    }}
-                  />
-                </Boop>
+                  <Boop
+                    rotation={6}
+                    isMobile={isMobile}
+                  >
+                    <p
+                      className="greetings-text"
+                      style={isMobile ? {
+                        color: 'var(--main-white)',
+                        fontFamily: 'Monsterrat-400, serif',
+                        fontSize: '16px',
+                        lineHeight: '144%',
+                        padding: 0,
+                        margin: 0,
+                      } :{}}
+                      dangerouslySetInnerHTML={{
+                        __html: item.item
+                      }}
+                    />
+                  </Boop>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </animated.div>
   );
 };
 

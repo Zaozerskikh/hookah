@@ -51,3 +51,58 @@
 .delivery-policy-container a:hover {
     color: var(--text-link-hover);
 }
+
+.delivery-policy-container-mobile {
+    display: flex;
+    flex-direction: column;
+    margin-top: 58px;
+    box-sizing: border-box;
+    gap: 16px;
+    padding: 16px 16px 128px;
+}
+
+.delivery-policy-container-mobile .h1-mobile {
+    font-family: Monsterrat-700, serif;
+    font-size: 24px;
+    line-height: 125%;
+    letter-spacing: 0;
+    text-align: left;
+}
+
+.delivery-policy-container-mobile .h2-mobile {
+    color: var(--main-black);
+    font-family: Unbounded-600, serif;
+    font-size: 19px;
+    font-style: normal;
+    line-height: 125%;
+}
+
+.delivery-policy-container-mobile .common-text-mobile {
+    color: #000;
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%; /* 23.04px */
+}
+
+.delivery-policy-container-mobile .blocks-wrapper-mobile {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.delivery-policy-container-mobile a {
+    color: var(--text-link);
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%; /* 23.04px */
+}
+
+.delivery-policy-container-mobile a:active {
+    color: var(--text-link-hover);
+}

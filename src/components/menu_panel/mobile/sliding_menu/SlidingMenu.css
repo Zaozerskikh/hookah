@@ -1,9 +1,9 @@
 .menu {
     position: fixed;
-    top: 52px;
+    top: 58px;
     right: -100%;
     width: 100%;
-    height: calc(100% - 96px);
+    height: calc(100% - 90px);
     background-color: var(--main-black);
     transition: right 0.4s;
     z-index: 9998;

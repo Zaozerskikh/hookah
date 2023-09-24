@@ -11,7 +11,17 @@ import musthaveMirlic from '../assets/icons/products/musthave/musthave_mirlic.jp
 import musthaveSpaceForce from '../assets/icons/products/musthave/musthave_space_force.jpg'
 import musthaveSpaceInviders from '../assets/icons/products/musthave/musthave_space_invaders.jpg'
 import fumariCaramel from '../assets/icons/products/fumari/fumari_caramella_kiss.jpg'
-import placeholder from '../assets/icons/products/tobacco_placeholder.png'
+import caneMint from './../assets/icons/products/tangiers/cane_mint96.png'
+import cereal34 from './../assets/icons/products/tangiers/cereal34.png'
+import horchata78 from './../assets/icons/products/tangiers/horchata78.png'
+import kashmirPeach38 from './../assets/icons/products/tangiers/KashmirPeach38.png'
+import kiwi87 from './../assets/icons/products/tangiers/kiwi87.png'
+import welsh_cream58 from './../assets/icons/products/tangiers/welsh_cream58.png'
+import amazon from './../assets/icons/products/element/amazon.png'
+import amur from './../assets/icons/products/element/amur.png'
+import mekong from './../assets/icons/products/element/mekong.png'
+import misisipi from './../assets/icons/products/element/missisipi.png'
+
 
 export const ProductBrand = {
   DARKSIDE: 'DarkSide',
@@ -215,7 +225,7 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder,
+    image: caneMint,
     stock: 5,
   },
   {
@@ -227,7 +237,7 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder,
+    image: horchata78,
     stock: 5,
   },
   {
@@ -239,7 +249,7 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder,
+    image: kashmirPeach38,
     stock: 5,
   },
   {
@@ -251,7 +261,7 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder,
+    image: kiwi87,
     stock: 5,
   },
   {
@@ -263,19 +273,19 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: darkSide_BnPapa_base,
+    image: cereal34,
     stock: 5,
   },
   {
     productId: '19',
-    name: 'C34 Breakfast Cereal',
+    name: 'C18 Welsh Cream',
     brand: ProductBrand.TANGIERS,
     line: 'Noir',
     weight: 250,
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 79.99,
-    image: placeholder,
+    image: welsh_cream58,
     stock: 5,
   },
   {
@@ -287,7 +297,7 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder,
+    image: amazon,
     stock: 5,
   },
   {
@@ -299,57 +309,33 @@ export const Products: ProductInfo[] = [
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder,
+    image: misisipi,
     stock: 5,
   },
   {
     productId: '22',
-    name: 'Amazon',
+    name: 'Mekong',
     brand: ProductBrand.ELEMENTS,
     line: 'Agua',
     weight: 40,
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder,
+    image: mekong,
     stock: 5,
   },
   {
     productId: '23',
-    name: 'Mississippi',
+    name: 'Amur',
     brand: ProductBrand.ELEMENTS,
     line: 'Agua',
     weight: 40,
     description: 'Mango, joghurt',
     fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     price: 12.99,
-    image: placeholder,
-    stock: 5,
-  },
-  {
-    productId: '24',
-    name: 'Amazon',
-    brand: ProductBrand.ELEMENTS,
-    line: 'Amur',
-    weight: 40,
-    description: 'Mango, joghurt',
-    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    price: 12.99,
-    image: placeholder,
-    stock: 5,
-  },
-  {
-    productId: '25',
-    name: 'Mississippi',
-    brand: ProductBrand.ELEMENTS,
-    line: 'Mekong',
-    weight: 40,
-    description: 'Mango, joghurt',
-    fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    price: 12.99,
-    image: placeholder,
+    image: amur,
     stock: 5,
   },
 ]
 
-export const productsOnTheMain: string[] = ['12', '9', '10', '11', '5', '6', '7', '8', '9', '3', '18', '20']
+export const productsOnTheMain: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']

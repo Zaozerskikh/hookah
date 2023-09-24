@@ -440,7 +440,7 @@ const CartButton: React.FC = () => {
             display: 'flex',
             flexDirection: 'row',
             position: "fixed",
-            top: getActualCart(cartState).length === 0 ? '-60px' : '6px',
+            top: getActualCart(cartState).length === 0 ? '-60px' : '9px',
             left: '59px',
             padding: '7px 15px 7px 9px',
             backgroundColor: isHovered ? '#CFD5DB' : '#EAEBF0',

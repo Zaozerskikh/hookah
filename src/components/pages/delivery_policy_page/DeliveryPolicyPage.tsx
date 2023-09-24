@@ -40,50 +40,97 @@ const DeliveryPolicyPage: React.FC = () => {
     window.scrollTo({ top: 0 });
   })
 
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-width: 1264px)'
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
   })
 
-  return(
-    <div className="delivery-policy-container">
-      <div className="h1">🚚 Our Delivery Policy</div>
-      <div style={{ display: "flex", flexDirection: 'column', gap: '8px'}}>
-        <div className="h2">⚡ Fast and Reliable Tobacco Delivery Across Portugal</div>
-        <div className="common-text">
-          Looking for hassle-free tobacco delivery in Portugal? Look no further than Hookah PT! We specialize in delivering premium tobacco products right to your doorstep, whether you're in a bustling city or a tranquil island. Explore our comprehensive delivery service that covers cities like Lisbon, Porto, Vila Nova de Gaia, Faro, Albufeira, Portimao, Sintra, Evora, Cascais, Coimbra and more, as well as picturesque island destinations like Madeira and Azores.
+  const renderDesktop = () => {
+    return(
+      <div className="delivery-policy-container">
+        <div className="h1">🚚 Our Delivery Policy</div>
+        <div style={{ display: "flex", flexDirection: 'column', gap: '8px'}}>
+          <div className="h2">⚡ Fast and Reliable Tobacco Delivery Across Portugal</div>
+          <div className="common-text">
+            Looking for hassle-free tobacco delivery in Portugal? Look no further than Hookah PT! We specialize in delivering premium tobacco products right to your doorstep, whether you're in a bustling city or a tranquil island. Explore our comprehensive delivery service that covers cities like Lisbon, Porto, Vila Nova de Gaia, Faro, Albufeira, Portimao, Sintra, Evora, Cascais, Coimbra and more, as well as picturesque island destinations like Madeira and Azores.
+          </div>
+        </div>
+        <div style={{ display: "flex", flexDirection: 'column', gap: '8px'}}>
+          <div className="h2">👀 Our Delivery Features</div>
+          <div className="common-text">
+            At Hookah PT, we combine premium quality with seamless delivery, making us your ultimate choice for tobacco products in Portugal. Thank you for choosing us as your partner in creating memorable hookah moments.
+          </div>
+        </div>
+        <div className="blocks-wrapper">
+          {
+            Blocks.map((block, idx) => (
+              <Block
+                headerText={block.headerText}
+                mainText={block.mainText}
+                key={idx}
+              />
+            ))
+          }
+        </div>
+        <div style={{ display: 'flex', width: 'TS2528: A module cannot have multiple default exports.', alignItems: 'center', justifyContent: 'center'}}>
+          <StandardButton
+            text="Open catalog"
+            onClickAction={() => navigate(RoutePaths.TOBACCO)}
+            buttonStyle={{
+              width: '282px',
+              height: '60px',
+              marginTop: '48px',
+              marginBottom: '128px'
+            }}
+          />
         </div>
       </div>
-      <div style={{ display: "flex", flexDirection: 'column', gap: '8px'}}>
-        <div className="h2">👀 Our Delivery Features</div>
-        <div className="common-text">
-          At Hookah PT, we combine premium quality with seamless delivery, making us your ultimate choice for tobacco products in Portugal. Thank you for choosing us as your partner in creating memorable hookah moments.
+    )
+  }
+
+  const renderMobile = () => {
+    return(
+      <div className="delivery-policy-container-mobile">
+        <div className="h1-mobile">🚚 Our Delivery Policy</div>
+        <div style={{ display: "flex", flexDirection: 'column', gap: '8px'}}>
+          <div className="h2-mobile">⚡ Fast and Reliable Tobacco Delivery Across Portugal</div>
+          <div className="common-text-mobile">
+            Looking for hassle-free tobacco delivery in Portugal? Look no further than Hookah PT! We specialize in delivering premium tobacco products right to your doorstep, whether you're in a bustling city or a tranquil island. Explore our comprehensive delivery service that covers cities like Lisbon, Porto, Vila Nova de Gaia, Faro, Albufeira, Portimao, Sintra, Evora, Cascais, Coimbra and more, as well as picturesque island destinations like Madeira and Azores.
+          </div>
         </div>
-      </div>
-      <div className="blocks-wrapper">
-        {
-          Blocks.map((block, idx) => (
-            <Block
-              headerText={block.headerText}
-              mainText={block.mainText}
-              key={idx}
-            />
-          ))
-        }
-      </div>
-      <div style={{ display: 'flex', width: 'TS2528: A module cannot have multiple default exports.', alignItems: 'center', justifyContent: 'center'}}>
+        <div style={{ display: "flex", flexDirection: 'column', gap: '8px'}}>
+          <div className="h2-mobile">👀 Our Delivery Features</div>
+          <div className="common-text-mobile">
+            At Hookah PT, we combine premium quality with seamless delivery, making us your ultimate choice for tobacco products in Portugal. Thank you for choosing us as your partner in creating memorable hookah moments.
+          </div>
+        </div>
+        <div className="blocks-wrapper-mobile">
+          {
+            Blocks.map((block, idx) => (
+              <Block
+                headerText={block.headerText}
+                mainText={block.mainText}
+                key={idx}
+                isMobile={true}
+              />
+            ))
+          }
+        </div>
         <StandardButton
           text="Open catalog"
-          onClickAction={() => navigate(RoutePaths.TOBACCO)}
           buttonStyle={{
-            width: '282px',
-            height: '60px',
-            marginTop: '48px',
-            marginBottom: '128px'
+            width: '262px',
+            height: '48px',
+            borderRadius: '8px',
+            alignSelf: 'center'
           }}
+          isMobile={true}
+          onClickAction={() => navigate(RoutePaths.TOBACCO)}
         />
       </div>
-    </div>
-  )
+    )
+  }
+
+  return(isMobile ? renderMobile() : renderDesktop())
 }
 
 //@ts-ignore [ide bug with default exports]
