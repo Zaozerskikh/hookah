@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/hookah/static/css/main.6e0224da.css",
-    "main.js": "/hookah/static/js/main.39bc23ee.js",
+    "main.css": "/hookah/static/css/main.7d44598b.css",
+    "main.js": "/hookah/static/js/main.3bd78ad6.js",
     "static/js/787.c274760c.chunk.js": "/hookah/static/js/787.c274760c.chunk.js",
     "static/media/news-5.png": "/hookah/static/media/news-5.6c6942cfaf5918f8fa1a.png",
     "static/media/choosing_hookah_bowl_icon.png": "/hookah/static/media/choosing_hookah_bowl_icon.fb4c7cbd2fc7c46f1afe.png",
@@ -13,10 +13,20 @@
     "static/media/how_to_choose_hookah_icon.png": "/hookah/static/media/how_to_choose_hookah_icon.6a5f7453792ec0a18ca9.png",
     "static/media/darkSide_BnPapa_base.png": "/hookah/static/media/darkSide_BnPapa_base.aeb43494d50f253a433c.png",
     "static/media/darkSide_Igranny_base.png": "/hookah/static/media/darkSide_Igranny_base.b63f13d7a55430d63a4a.png",
+    "static/media/amur.png": "/hookah/static/media/amur.a7eb7d8550e5dd8e5cc5.png",
+    "static/media/KashmirPeach38.png": "/hookah/static/media/KashmirPeach38.b69b4e5094fe60970e51.png",
+    "static/media/cereal34.png": "/hookah/static/media/cereal34.c79b047c009e59087196.png",
+    "static/media/missisipi.png": "/hookah/static/media/missisipi.7ad7d939b8f9c38b8ac7.png",
+    "static/media/kiwi87.png": "/hookah/static/media/kiwi87.69ab68fd42fc0d225612.png",
     "static/media/carring_for_hookah_bowl.png": "/hookah/static/media/carring_for_hookah_bowl.3ffeb26b8099c054b2fa.png",
+    "static/media/amazon.png": "/hookah/static/media/amazon.cbb329f6e5b16450c3c3.png",
     "static/media/darkSide_SpaceIchi_base.png": "/hookah/static/media/darkSide_SpaceIchi_base.c69f338a79435cc4658b.png",
+    "static/media/mekong.png": "/hookah/static/media/mekong.7c6f5e046cfd63475496.png",
+    "static/media/cane_mint96.png": "/hookah/static/media/cane_mint96.46835ba61b3217996d2d.png",
+    "static/media/welsh_cream58.png": "/hookah/static/media/welsh_cream58.7933ccf8f6ad35e1807d.png",
     "static/media/darkSide_Skyline_base.png": "/hookah/static/media/darkSide_Skyline_base.1f8a81d2688a676ee9dc.png",
     "static/media/musthave_space_force.jpg": "/hookah/static/media/musthave_space_force.1b5103e040c5c1e1c4b6.jpg",
+    "static/media/horchata78.png": "/hookah/static/media/horchata78.0ee66f8bdbf62cc76964.png",
     "static/media/musthave_space_invaders.jpg": "/hookah/static/media/musthave_space_invaders.75d733d7c56bada3b42e.jpg",
     "static/media/fumari_caramella_kiss.jpg": "/hookah/static/media/fumari_caramella_kiss.31ef4276e9f502650375.jpg",
     "static/media/Unbounded-700.ttf": "/hookah/static/media/Unbounded-700.0c54d6e100bb5ec11f3a.ttf",
@@ -25,7 +35,6 @@
     "static/media/Unbounded-400.ttf": "/hookah/static/media/Unbounded-400.29479ac97777a463b92f.ttf",
     "static/media/musthave_mirlic.jpg": "/hookah/static/media/musthave_mirlic.660e3f118573634d5b82.jpg",
     "static/media/musthave_frosty.jpg": "/hookah/static/media/musthave_frosty.cc510693d39749c29894.jpg",
-    "static/media/tobacco_placeholder.png": "/hookah/static/media/tobacco_placeholder.6cd951a42d35158340da.png",
     "static/media/Montserrat-600.ttf": "/hookah/static/media/Montserrat-600.d5e0cc788cba9ced1fb9.ttf",
     "static/media/Montserrat-500.ttf": "/hookah/static/media/Montserrat-500.c86e3b9010ff63c99166.ttf",
     "static/media/Montserrat-300.ttf": "/hookah/static/media/Montserrat-300.6fcc9263a21be961d246.ttf",
@@ -37,6 +46,7 @@
     "static/media/floating_clouds_test_2.png": "/hookah/static/media/floating_clouds_test_2.13630214cc0c7b28844b.png",
     "static/media/fumari_logo.png": "/hookah/static/media/fumari_logo.e3dfbe448179133a93eb.png",
     "static/media/element_logo.png": "/hookah/static/media/element_logo.397a92fdb50f2c473b43.png",
+    "static/media/he.mp3": "/hookah/static/media/he.7be80a6e20c92811cb05.mp3",
     "static/media/extended_close_button_icon_white.png": "/hookah/static/media/extended_close_button_icon_white.85dfb7deea8f5e0eae38.png",
     "static/media/extended_close_button_icon.png": "/hookah/static/media/extended_close_button_icon.7607d98d6dbe75892ece.png",
     "static/media/close_button_icon.png": "/hookah/static/media/close_button_icon.d9b59ca83a015121b37a.png",
@@ -44,12 +54,12 @@
     "static/media/darkside_logo.png": "/hookah/static/media/darkside_logo.ce2d1eaa4ddbe5a1ab7a.png",
     "static/media/instagram_logo_black.png": "/hookah/static/media/instagram_logo_black.7c90a78377d0d9eab47a.png",
     "index.html": "/hookah/index.html",
-    "main.6e0224da.css.map": "/hookah/static/css/main.6e0224da.css.map",
-    "main.39bc23ee.js.map": "/hookah/static/js/main.39bc23ee.js.map",
+    "main.7d44598b.css.map": "/hookah/static/css/main.7d44598b.css.map",
+    "main.3bd78ad6.js.map": "/hookah/static/js/main.3bd78ad6.js.map",
     "787.c274760c.chunk.js.map": "/hookah/static/js/787.c274760c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6e0224da.css",
-    "static/js/main.39bc23ee.js"
+    "static/css/main.7d44598b.css",
+    "static/js/main.3bd78ad6.js"
   ]
 }
