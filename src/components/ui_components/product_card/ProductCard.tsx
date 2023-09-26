@@ -95,7 +95,6 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
             />
             <div style={{
               position: "absolute",
-              marginTop: isDesktopOrLaptop ? '0px' : '24px',
               top: '-64px',
               right: '64px',
             }}>

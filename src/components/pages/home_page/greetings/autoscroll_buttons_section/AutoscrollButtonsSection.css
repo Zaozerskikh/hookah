@@ -5,6 +5,7 @@
     width: 100%;
     overflow: scroll;
     margin-top: 2px;
+    z-index: 999;
 }
 
 .scrollable-container .scroll-content {
