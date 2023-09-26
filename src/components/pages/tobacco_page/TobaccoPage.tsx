@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import BrandSearchTag from "./search_tag/brand_tag/BrandSearchTag";
 import CloseButton from "../../ui_components/close_button/CloseButton";
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
-import {ProductBrand, ProductInfo, Products} from "../../../content/Products";
+import {Products} from "../../../content/Products";
 import ZoomButton from "./zoom_button/ZoomButton";
 import SearchInputField from "./search_input_field/SearchInputField";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
@@ -13,6 +13,13 @@ import NotFoundModal from "./not_found_modal/NotFoundModal";
 import PriceAndWeightTag, {TagState} from "./search_tag/price_and_weight_tag/PriceAndWeightTag";
 import TobaccoDescription from "./tobacco_description/TobaccoDescription";
 import {useMediaQuery} from "react-responsive";
+import {
+  applyFilteringTags,
+  applySearchString,
+  applySortingTags,
+  filterByOneBrand,
+  moveSoldoutToEnd
+} from "./TobaccoOperations";
 
 export const PRODUCTS_COUNT_ON_A_PAGE = 4;
 const PAGES_BEFORE_MORE_BUTTON = 5;
@@ -36,6 +43,10 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
     query: '(min-width: 1264px)'
   })
 
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
+
   useEffect(() => {
     setTotalPageCount(Math.ceil(filteredProducts.length / PRODUCTS_COUNT_ON_A_PAGE))
   }, [filteredProducts])
@@ -49,7 +60,7 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
 
   useEffect(() => {
     if (!initialSortByBrand) {
-      setFilteredProducts(Products)
+      setFilteredProducts(moveSoldoutToEnd(Products))
     }
   }, [initialSortByBrand])
 
@@ -66,23 +77,7 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
       setElementTagActive(false)
 
       setTimeout(() => {
-        const namesMatches = Products
-          .filter(product => product.name.toLowerCase().includes(searchString.toLowerCase()))
-          .sort((a, b) => a.name.localeCompare(b.name));
-
-        const brandMatches = Products
-          .filter(product =>
-            product.brand.toLowerCase().includes(searchString.toLowerCase()) &&
-            !namesMatches.some(nm => nm.productId === product.productId))
-          .sort((a, b) => a.name.localeCompare(b.name));
-
-        const descriptionMatches = Products
-          .filter(product =>
-            product.description.toLowerCase().includes(searchString.toLowerCase()) &&
-            ![...namesMatches, ...brandMatches].some(nm => nm.productId === product.productId))
-          .sort((a, b) => a.name.localeCompare(b.name));
-
-        setFilteredProducts([...namesMatches, ...brandMatches, ...descriptionMatches])
+        setFilteredProducts(applySearchString(searchString, Products))
         setLoading(false)
       }, 500)
     }
@@ -106,42 +101,15 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
         setCurrPageNumber(1)
         setCurrLastPageNumberShown(PAGES_BEFORE_MORE_BUTTON)
 
-        if (!(darkSideTagActive || musthaveTagActive || elementSideTagActive ||
-          tangiersTagActive || fumariTagActive)) {
-          setFilteredProducts(Products)
+        setFilteredProducts(
+          applyFilteringTags(
+            darkSideTagActive, tangiersTagActive, elementSideTagActive,
+            musthaveTagActive, fumariTagActive, Products
+          )
+        )
+        setTimeout(() => {
           setLoading(false)
-        } else {
-          const brandsToSearch = []
-          if (darkSideTagActive) {
-            brandsToSearch.push(ProductBrand.DARKSIDE)
-          }
-
-          if (fumariTagActive) {
-            brandsToSearch.push(ProductBrand.FUMARI)
-          }
-
-          if (elementSideTagActive) {
-            brandsToSearch.push(ProductBrand.ELEMENTS)
-          }
-
-          if (tangiersTagActive) {
-            brandsToSearch.push(ProductBrand.TANGIERS)
-          }
-
-          if (musthaveTagActive) {
-            brandsToSearch.push(ProductBrand.MUSTHAVE)
-          }
-
-          let filtered: ProductInfo[] = []
-          brandsToSearch.map(brand => {
-            filtered = [...filtered, ...Products.filter(p => p.brand === brand)]
-          })
-
-          setFilteredProducts(filtered)
-          setTimeout(() => {
-            setLoading(false)
-          }, 1000)
-        }
+        }, 1000)
       }
     }
 
@@ -158,6 +126,8 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
     setDarkSideTagActive(false)
     setElementTagActive(false)
     setSearchString('')
+    setWeightTagState(TagState.TURNED_OFF)
+    setPriceTagState(TagState.TURNED_OFF)
     setUseTags(true)
     setFilteredProducts(Products)
   }
@@ -167,288 +137,344 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
     window.scrollTo({ top: 0 });
   })
 
+  useEffect(() => {
+    if (weightTagState === TagState.ASCENDING || weightTagState === TagState.DESCENDING) {
+      setPriceTagState(TagState.TURNED_OFF)
+      setFilteredProducts(applySortingTags(weightTagState, undefined, filteredProducts))
+    }
+  }, [weightTagState]);
+
+  useEffect(() => {
+    if (priceTagState === TagState.ASCENDING || priceTagState === TagState.DESCENDING) {
+      setWeightTagState(TagState.TURNED_OFF)
+      setFilteredProducts(applySortingTags(undefined, priceTagState, filteredProducts))
+    }
+  }, [priceTagState]);
 
   useEffect(() => {
     if (initialSortByBrand) {
-      setFilteredProducts(Products.filter(p => p.brand === initialSortByBrand))
+      setFilteredProducts(filterByOneBrand(initialSortByBrand, Products))
     }
   }, [initialSortByBrand]);
 
-  return(
-    <div
-      className="tobacco-page-wrapper"
-      style={{
-        minHeight: `${window.innerHeight - 500}px`,
-        width: isDesktopOrLaptop ? '1264px' : '948px'
-      }}
-    >
-      {initialSortByBrand && <TobaccoDescription name={tobaccoName} description={tobaccoDescription} headerEmoji={headerEmoji} />}
+  const renderDesktop = () => {
+    return(
       <div
-        className="tags-container"
+        className="tobacco-page-wrapper"
         style={{
-          position: 'relative',
+          minHeight: `${window.innerHeight - 500}px`,
+          width: isDesktopOrLaptop ? '1264px' : '948px'
         }}
       >
-        <div style={{ display: 'flex', flexDirection: "row", gap: '8px', flexWrap: 'wrap', maxWidth: isDesktopOrLaptop ? undefined : '555px'}}>
-          {!initialSortByBrand && (
-            <div className="brand-tags-container">
-              <BrandSearchTag
-                name="DarkSide"
-                isActive={darkSideTagActive}
-                onActiveChanged={() => {
-                  setUseTags(true)
-                  setDarkSideTagActive(!darkSideTagActive)
-                }}
-              />
-              <BrandSearchTag
-                name="Musthave"
-                isActive={musthaveTagActive}
-                onActiveChanged={() => {
-                  setUseTags(true)
-                  setMusthaveTagActive(!musthaveTagActive)
-                }}
-              />
-              <BrandSearchTag
-                name="Element"
-                isActive={elementSideTagActive}
-                onActiveChanged={() => {
-                  setUseTags(true)
-                  setElementTagActive(!elementSideTagActive)
-                }}
-              />
-              <BrandSearchTag
-                name="Tangiers"
-                isActive={tangiersTagActive}
-                onActiveChanged={() => {
-                  setUseTags(true)
-                  setTangiersTagActive(!tangiersTagActive)
-                }}
-              />
-              <BrandSearchTag
-                name="Fumari"
-                isActive={fumariTagActive}
-                onActiveChanged={() => {
-                  setUseTags(true)
-                  setFumariTagActive(!fumariTagActive)
-                }}
-              />
-            </div>
-          )}
-          <PriceAndWeightTag
-            displayedName="Price"
-            onClickAction={setPriceTagState}
-            tagState={priceTagState}
-          />
-          <PriceAndWeightTag
-            displayedName="Weight"
-            onClickAction={setWeightTagState}
-            tagState={weightTagState}
-          />
-          <CloseButton
-            onClickAction={() => {
-              setDarkSideTagActive(false)
-              setMusthaveTagActive(false)
-              setElementTagActive(false)
-              setTangiersTagActive(false)
-              setFumariTagActive(false)
-            }}
-            buttonStyle={{
-              position: 'relative',
-              width: '32px',
-              height: '32px',
-              borderRadius: '16px',
-              padding: '6px',
-              top: '0px',
-              left: '0px',
-              marginLeft: '16px',
-              opacity:
-                !darkSideTagActive && !elementSideTagActive && !tangiersTagActive &&
-                !fumariTagActive && !musthaveTagActive ? 0 : 1
-            }}
-            iconSize={12}
-            isDark={true}
-            changeColorOnHover={true}
-            onClickColor="#424446"
-          />
-        </div>
-        <SearchInputField
-          onInputChange={onSearchStringChanged}
-          onEnterAction={filterBySearchString}
-          inputValue={searchString}
-        />
-        <ZoomButton onClickAction={filterBySearchString}/>
-      </div>
-      {isLoading
-        ? (
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              minHeight: `${window.innerHeight - 645}px`
-            }}
-          >
-            <LoadingIcon/>
-          </div>
-        )
-        : (
-          filteredProducts.length === 0 ? (
-            <NotFoundModal  onClearFiltersAction={clearAllBrandTags}/>
-          ) : (
-            <div>
-              <ShopGrid
-                showAllCatalogButton={false}
-                products={filteredProducts.slice(
-                  (currPageNumber - 1) * PRODUCTS_COUNT_ON_A_PAGE,
-                  currPageNumber * PRODUCTS_COUNT_ON_A_PAGE
-                )}
-              />
-              {
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    marginTop: '64px',
-                    marginBottom: '128px'
+        {initialSortByBrand && <TobaccoDescription name={tobaccoName} description={tobaccoDescription} headerEmoji={headerEmoji} />}
+        <div
+          className="tags-container"
+          style={{
+            position: 'relative',
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: "row", gap: '8px', flexWrap: 'wrap', maxWidth: isDesktopOrLaptop ? undefined : '555px'}}>
+            {!initialSortByBrand && (
+              <div className="brand-tags-container">
+                <BrandSearchTag
+                  name="DarkSide"
+                  isActive={darkSideTagActive}
+                  onActiveChanged={() => {
+                    setUseTags(true)
+                    setDarkSideTagActive(!darkSideTagActive)
                   }}
-                >
+                />
+                <BrandSearchTag
+                  name="Musthave"
+                  isActive={musthaveTagActive}
+                  onActiveChanged={() => {
+                    setUseTags(true)
+                    setMusthaveTagActive(!musthaveTagActive)
+                  }}
+                />
+                <BrandSearchTag
+                  name="Element"
+                  isActive={elementSideTagActive}
+                  onActiveChanged={() => {
+                    setUseTags(true)
+                    setElementTagActive(!elementSideTagActive)
+                  }}
+                />
+                <BrandSearchTag
+                  name="Tangiers"
+                  isActive={tangiersTagActive}
+                  onActiveChanged={() => {
+                    setUseTags(true)
+                    setTangiersTagActive(!tangiersTagActive)
+                  }}
+                />
+                <BrandSearchTag
+                  name="Fumari"
+                  isActive={fumariTagActive}
+                  onActiveChanged={() => {
+                    setUseTags(true)
+                    setFumariTagActive(!fumariTagActive)
+                  }}
+                />
+              </div>
+            )}
+            <PriceAndWeightTag
+              displayedName="Price"
+              onClickAction={setPriceTagState}
+              tagState={priceTagState}
+            />
+            <PriceAndWeightTag
+              displayedName="Weight"
+              onClickAction={setWeightTagState}
+              tagState={weightTagState}
+            />
+            <CloseButton
+              onClickAction={() => {
+                setDarkSideTagActive(false)
+                setMusthaveTagActive(false)
+                setElementTagActive(false)
+                setTangiersTagActive(false)
+                setFumariTagActive(false)
+                setWeightTagState(TagState.TURNED_OFF)
+                setPriceTagState(TagState.TURNED_OFF)
+              }}
+              buttonStyle={{
+                position: 'relative',
+                width: '32px',
+                height: '32px',
+                borderRadius: '16px',
+                padding: '6px',
+                top: '0px',
+                left: '0px',
+                marginLeft: '16px',
+                opacity:
+                  !darkSideTagActive && !elementSideTagActive && !tangiersTagActive &&
+                  !fumariTagActive && !musthaveTagActive && priceTagState === TagState.TURNED_OFF && weightTagState === TagState.TURNED_OFF ? 0 : 1
+              }}
+              iconSize={12}
+              isDark={true}
+              changeColorOnHover={true}
+              onClickColor="#424446"
+            />
+          </div>
+          <SearchInputField
+            onInputChange={onSearchStringChanged}
+            onEnterAction={filterBySearchString}
+            inputValue={searchString}
+          />
+          <ZoomButton onClickAction={filterBySearchString}/>
+        </div>
+        {isLoading
+          ? (
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: `${window.innerHeight - 645}px`
+              }}
+            >
+              <LoadingIcon/>
+            </div>
+          )
+          : (
+            filteredProducts.length === 0 ? (
+              <NotFoundModal  onClearFiltersAction={clearAllBrandTags}/>
+            ) : (
+              <div>
+                <ShopGrid
+                  showAllCatalogButton={false}
+                  products={filteredProducts.slice(
+                    (currPageNumber - 1) * PRODUCTS_COUNT_ON_A_PAGE,
+                    currPageNumber * PRODUCTS_COUNT_ON_A_PAGE
+                  )}
+                />
+                {
                   <div
                     style={{
-                      position: 'relative',
-                      display: 'flex',
-                      flexDirection: 'row',
+                      display: "flex",
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '16px',
-                      width: '320px',
+                      width: '100%',
+                      marginTop: '64px',
+                      marginBottom: '128px'
                     }}
                   >
                     <div
                       style={{
-                        transform: 'rotate(180deg)',
-                        position: "absolute",
-                        left: 0,
-                        display: 'flex',
-                        marginLeft: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
-                        zIndex: '10',
-                      }}
-                    >
-                      <MoreButton
-                        showText={false}
-                        buttonStyle={{
-                          width: '32px',
-                          height: '32px',
-                          borderRadius: '16px',
-                          paddingRight: '0px',
-                          paddingLeft: '-5px',
-                          opacity: currPageNumber > 1 ? 1 : 0
-                        }}
-                        iconStyle={{
-                          right: '4px'
-                        }}
-                        iconShift={3}
-                        onClickAction={() => {
-                          if (currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON) {
-                            setCurrLastPageNumberShown(currLastPageNumberShown - 1)
-                          }
-
-                          if (currPageNumber > 1) {
-                            setCurrPageNumber(currPageNumber - 1)
-                          }
-                        }}
-                      />
-                    </div>
-                    <div
-                      className="static-number-window"
-                      style={{
-                        width: '224px',
-                        height: '32px',
                         position: 'relative',
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        overflow: 'hidden'
+                        justifyContent: 'center',
+                        gap: '16px',
+                        width: '320px',
                       }}
                     >
                       <div
-                        className="dynamic-number-row"
                         style={{
-                          display: "flex",
-                          flexDirection: 'row',
-                          gap: '16px',
-                          width: '224px',
-                          flexWrap: 'nowrap',
-                          flexShrink: '0',
-                          alignItems: 'center',
-                          justifyContent: currLastPageNumberShown === PAGES_BEFORE_MORE_BUTTON && currLastPageNumberShown > totalPageCount ? 'center' : 'flex-start',
+                          transform: 'rotate(180deg)',
                           position: "absolute",
-                          left: 48 * (-currLastPageNumberShown) + PAGES_BEFORE_MORE_BUTTON * 48,
-                          transition: "all .5s ease",
-                          WebkitTransition: "all .5s ease",
-                          MozTransition: "all .5s ease",
-                        }}
-                      >
-                        {
-                          totalPageCount > 1 && Array.from(
-                            { length: totalPageCount },
-                            (_, i) => i + 1
-                          ).map((num, idx) => (
-                            <PageNumberButton
-                              pageNumber={num}
-                              isActive={currPageNumber === num}
-                              onClickAction={() => setCurrPageNumber(num)}
-                              key={idx}
-                            />
-                          ))
-                        }
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        position: "absolute",
-                        right: 0,
-                      }}
-                    >
-                      <MoreButton
-                        showText={false}
-                        buttonStyle={{
-                          width: '32px',
-                          height: '32px',
-                          borderRadius: '16px',
-                          paddingRight: '0px',
-                          paddingLeft: '-5px',
-                          marginRight: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
-                          opacity: currPageNumber < totalPageCount ? 1 : 0,
+                          left: 0,
+                          display: 'flex',
+                          marginLeft: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
                           zIndex: '10',
                         }}
-                        iconStyle={{
-                          right: '4px'
-                        }}
-                        iconShift={3}
-                        onClickAction={() => {
-                          if (currLastPageNumberShown < totalPageCount) {
-                            setCurrLastPageNumberShown(currLastPageNumberShown + 1)
-                          }
+                      >
+                        <MoreButton
+                          showText={false}
+                          buttonStyle={{
+                            width: '32px',
+                            height: '32px',
+                            borderRadius: '16px',
+                            paddingRight: '0px',
+                            paddingLeft: '-5px',
+                            opacity: currPageNumber > 1 ? 1 : 0
+                          }}
+                          iconStyle={{
+                            right: '4px'
+                          }}
+                          iconShift={3}
+                          onClickAction={() => {
+                            if (currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON) {
+                              setCurrLastPageNumberShown(currLastPageNumberShown - 1)
+                            }
 
-                          if (currPageNumber < totalPageCount) {
-                            setCurrPageNumber(currPageNumber + 1)
-                          }
+                            if (currPageNumber > 1) {
+                              setCurrPageNumber(currPageNumber - 1)
+                            }
+                          }}
+                        />
+                      </div>
+                      <div
+                        className="static-number-window"
+                        style={{
+                          width: '224px',
+                          height: '32px',
+                          position: 'relative',
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          overflow: 'hidden'
                         }}
-                      />
+                      >
+                        <div
+                          className="dynamic-number-row"
+                          style={{
+                            display: "flex",
+                            flexDirection: 'row',
+                            gap: '16px',
+                            width: '224px',
+                            flexWrap: 'nowrap',
+                            flexShrink: '0',
+                            alignItems: 'center',
+                            justifyContent: currLastPageNumberShown === PAGES_BEFORE_MORE_BUTTON && currLastPageNumberShown > totalPageCount ? 'center' : 'flex-start',
+                            position: "absolute",
+                            left: 48 * (-currLastPageNumberShown) + PAGES_BEFORE_MORE_BUTTON * 48,
+                            transition: "all .5s ease",
+                            WebkitTransition: "all .5s ease",
+                            MozTransition: "all .5s ease",
+                          }}
+                        >
+                          {
+                            totalPageCount > 1 && Array.from(
+                              { length: totalPageCount },
+                              (_, i) => i + 1
+                            ).map((num, idx) => (
+                              <PageNumberButton
+                                pageNumber={num}
+                                isActive={currPageNumber === num}
+                                onClickAction={() => setCurrPageNumber(num)}
+                                key={idx}
+                              />
+                            ))
+                          }
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          right: 0,
+                        }}
+                      >
+                        <MoreButton
+                          showText={false}
+                          buttonStyle={{
+                            width: '32px',
+                            height: '32px',
+                            borderRadius: '16px',
+                            paddingRight: '0px',
+                            paddingLeft: '-5px',
+                            marginRight: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
+                            opacity: currPageNumber < totalPageCount ? 1 : 0,
+                            zIndex: '10',
+                          }}
+                          iconStyle={{
+                            right: '4px'
+                          }}
+                          iconShift={3}
+                          onClickAction={() => {
+                            if (currLastPageNumberShown < totalPageCount) {
+                              setCurrLastPageNumberShown(currLastPageNumberShown + 1)
+                            }
+
+                            if (currPageNumber < totalPageCount) {
+                              setCurrPageNumber(currPageNumber + 1)
+                            }
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              }
-            </div>
+                }
+              </div>
+            )
           )
-        )
-      }
-    </div>
-  )
+        }
+      </div>
+    )
+  }
+
+  const renderMobile = () => {
+    return(
+      <div className="tobacco-page-wrapper-mobile">
+        {initialSortByBrand &&
+            <TobaccoDescription
+                isMobile={true}
+                name={tobaccoName}
+                description={tobaccoDescription}
+                headerEmoji={headerEmoji}
+            />
+        }
+        <div style={{ display: "flex", flexDirection:'row', gap: '4px'}}>
+          <SearchInputField
+            onInputChange={onSearchStringChanged}
+            onEnterAction={filterBySearchString}
+            inputValue={searchString}
+            isMobile={true}
+          />
+          <ZoomButton
+            onClickAction={filterBySearchString}
+            isMobile={true}
+          />
+        </div>
+        <div style={{ paddingTop: '32px'}}>
+          <ShopGrid
+            showAllCatalogButton={false}
+            products={filteredProducts.slice(
+              (currPageNumber - 1) * PRODUCTS_COUNT_ON_A_PAGE,
+              currPageNumber * PRODUCTS_COUNT_ON_A_PAGE
+            )}
+            isMobile={true}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  return(isMobile ? renderMobile() : renderDesktop())
 }
 
 export default TobaccoPage;

@@ -24,3 +24,19 @@
     flex-direction: row;
     gap: 8px;
 }
+
+.tobacco-page-wrapper-mobile {
+    display: flex;
+    width: 100%;
+    gap: 24px;
+    flex-direction: column;
+    margin-top: 58px;
+    box-sizing: border-box;
+    padding: 16px 16px 128px;
+}
+
+.tobacco-page-wrapper-mobile .tobaco-header-wrapper-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

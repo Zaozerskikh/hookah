@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import './HomePage.css'
 import FloatingClouds from "./floating_clouds/FloatingClouds";
 import darksideLogo from '../../../assets/icons/partners/darkside_logo.png'
@@ -30,10 +30,6 @@ const HomePage: React.FC = () => {
   useState(() => {
     window.scrollTo({ top: 0 });
   })
-
-  useEffect(() => {
-    console.log(isDesktopOrLaptop)
-  }, [isDesktopOrLaptop]);
 
   const renderDesktop= () => {
     return(

@@ -4,8 +4,9 @@ interface SearchInputFieldProps {
   onInputChange: (value: string) => void;
   onEnterAction : () => void;
   inputValue: string;
+  isMobile ? : boolean;
 }
-const SearchInputField: React.FC<SearchInputFieldProps> = ({ inputValue, onInputChange, onEnterAction }) => {
+const SearchInputField: React.FC<SearchInputFieldProps> = ({ inputValue, onInputChange, onEnterAction, isMobile}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,16 +25,16 @@ const SearchInputField: React.FC<SearchInputFieldProps> = ({ inputValue, onInput
       }}
       style={{
         overflow: 'hidden',
-        position: "absolute",
+        position: isMobile ? undefined : "absolute",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '4px 16px',
         right: '45px',
         color: isFocused ? 'black' : '#909398',
-        width: '137px',
+        width: isMobile ? 'calc(100% - 84px)' : '137px',
         marginTop: isFocused ? '1px': undefined,
-        height: isFocused ? '21px' : '23px',
+        height: !isMobile ? (isFocused ? '21px' : '23px') : (isFocused ? '18px' : '20px'),
         fontFamily: 'Monsterrat-500, serif',
         fontSize: '16px',
         fontStyle: 'normal',

@@ -2,22 +2,34 @@ import React, {useState} from "react";
 import zoomIcon from "../../../../assets/icons/tobacco_page/zoom-icon.png";
 
 interface ZoomButtonProps {
-  onClickAction: () => void
+  onClickAction: () => void;
+  isMobile ? : boolean;
 }
 
-const ZoomButton: React.FC<ZoomButtonProps> = ({ onClickAction }) => {
+const ZoomButton: React.FC<ZoomButtonProps> = ({ onClickAction, isMobile }) => {
   const [isHovered, setHovered] = useState(false);
   return(
     <button
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setHovered(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
       onClick={onClickAction}
       style={{
-        position: 'absolute',
+        position: isMobile ? undefined : 'absolute',
         right: `0px`,
         cursor: isHovered ? 'pointer' : undefined,
         display: 'inline-flex',
-        height: '31px',
+        height: isMobile ? '28px' : '31px',
         width: '40px',
         alignItems: 'center',
         justifyContent: 'center',
