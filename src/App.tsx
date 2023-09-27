@@ -25,6 +25,7 @@ import SlidingMenu from "./components/menu_panel/mobile/sliding_menu/SlidingMenu
 import {useMediaQuery} from "react-responsive";
 import {setIsWarningShown} from "./redux/warning_reducer/WarningReducer";
 import './index.css'
+import {setIsBurgerShown} from "./redux/burger_button_reducer/BurgerButtonReducer";
 
 const App: React.FC = () => {
   const isBorgerOpened = useSelector((state: RootState) => state.burger.isOpened)
@@ -64,6 +65,12 @@ const App: React.FC = () => {
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
   })
+
+  useEffect(() => {
+    if (isMobile) {
+      dispatch(setIsBurgerShown(false))
+    }
+  }, [dispatch, isMobile, loc]);
 
   useEffect(() => {
     dispatch(setIsWarningShown(true))

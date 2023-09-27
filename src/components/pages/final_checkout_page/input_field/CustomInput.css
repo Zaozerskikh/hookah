@@ -3,10 +3,10 @@
 }
 
 .custom-input-field-wrapper {
-    border-width: 2px !important;
+    border-width: 1.5px !important;
     border-style: solid;
     border-radius: 10px;
-    width: 100%;
+    width: calc(100% - 4px);
 }
 
 .custom-input-field-wrapper .MuiOutlinedInput-notchedOutline {

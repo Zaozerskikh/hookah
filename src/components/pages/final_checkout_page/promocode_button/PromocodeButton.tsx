@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import tapeIcon from './../../../../assets/icons/promocode_button/tape.png'
 
 interface PromocodeButtonProps {
-  onClickAction: (...args: any) => any
+  onClickAction: (...args: any) => any;
+  isMobile ? : boolean;
 }
 
-const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction }) => {
+const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction, isMobile }) => {
   const [isHovered, setHovered] = useState(false)
   const [isClicked, setClicked] = useState(false)
 
@@ -20,25 +21,45 @@ const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction }) => {
         transition: "all .5s ease",
         WebkitTransition: "all .5s ease",
         MozTransition: "all .5s ease",
-        borderRadius: '24px',
-        padding: '12px 20px 12px 20px',
+        borderRadius: isMobile ? '20px' : '24px',
+        padding: isMobile ? '8px 20px 8px 20px' : '12px 20px 12px 20px',
         display: "flex",
         alignItems: 'center',
-        gap: '10px'
+        gap: '10px',
+        marginBottom: isMobile ? '4px' : 0
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setHovered(false)
+          setClicked(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
+      onMouseDown={() => {
+        if (!isMobile) {
+          setClicked(true)
+        }
+      }}
+      onMouseUp={() => {
+        if (!isMobile) {
+          setClicked(false)
+        }
+      }}
       onClick={onClickAction}
-      onMouseDown={() => setClicked(true)}
-      onMouseUp={() => setClicked(false)}
-      onMouseOut={() => setClicked(false)}
     >
       <span
         style={{
           color: 'black',
           fontFamily: 'Monsterrat-600, serif',
-          fontSize: '22px',
-          lineHeight: '31.68px',
+          fontSize: isMobile ? '16px' : '22px',
+          lineHeight: isMobile ? '144%' : '31.68px',
           transition: "all .5s ease",
           WebkitTransition: "all .5s ease",
           MozTransition: "all .5s ease",
@@ -55,8 +76,8 @@ const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction }) => {
         alt="tape"
         style={{
           position: 'absolute',
-          right: '31.7px',
-          bottom: '15px',
+          right: isMobile ? '33.3px' : '31.5px',
+          bottom: isMobile ? '12px' : '15px',
           width: '2px',
           height: isHovered ? '2px' : '16px',
           transition: "all .5s ease",

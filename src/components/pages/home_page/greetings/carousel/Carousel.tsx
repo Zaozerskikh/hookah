@@ -46,7 +46,7 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
   }, [isMobile]);
 
   const bind = useDrag(({ down, movement: [mx, my] }) => {
-    if (mx < -5 && canSwipe) {
+    if (mx < -5 && canSwipe && isMobile) {
       moveNext()
     }
   }) as unknown as (...args: any[]) => ReactDOMAttributes;

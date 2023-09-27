@@ -478,8 +478,8 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
               }}
               buttonStyle={{
                 position: 'absolute',
-                width: isTagsOff ? '0px' : '28px',
-                height: '28px',
+                width: isTagsOff ? '0px' : '27px',
+                height: '27px',
                 borderRadius: '16px',
                 padding: isTagsOff ? '0px' : '6px',
                 top: '0px',

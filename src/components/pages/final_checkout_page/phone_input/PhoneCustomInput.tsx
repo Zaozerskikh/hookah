@@ -42,7 +42,11 @@ const PhoneCustomInput: React.FC<PhoneCustomInputProps> = ({ onChange, invalidPh
         font-style: normal;
         line-height: 144%;
         outline: none !important;
-        width: 520px;
+        width: 100%;
+      }
+      
+      .PhoneInput {
+        width: 100%;
       }
     `;
 

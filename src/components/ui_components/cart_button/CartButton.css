@@ -317,13 +317,13 @@
 .checkoot-mobile-bottom-grad {
     content: '';
     position: fixed;
-    bottom: 74px;
+    bottom: 70px;
     background: linear-gradient(to bottom, transparent, black);
-    height: 24px;
+    height: 28px;
     width: 100%;
     display: flex;
     pointer-events: none;
-    z-index: 9999 !important;
+    z-index: 9997 !important;
 }
 
 

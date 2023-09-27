@@ -35,10 +35,6 @@ const BottomHint: React.FC = () => {
   }, [bottomHintState.isShown, startAnimation]);
 
   useEffect(() => {
-    console.log('ipdated' + bottomHintState.isShown)
-  }, [bottomHintState]);
-
-  useEffect(() => {
     if (!bottomHintState.isShown) {
       setStartAnimation(false)
     }

@@ -21,6 +21,7 @@ import {
 } from "../../../redux/cart_reducer/CartOperations";
 import {useMediaQuery} from "react-responsive";
 import BottomSlider from "../bottom_slider/BottomSlider";
+import ContinueOrderingButton from "../../pages/final_checkout_page/continue_ordering_button/ContinueOrderingButton";
 
 const CartButton: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)
@@ -38,10 +39,7 @@ const CartButton: React.FC = () => {
   })
 
   useEffect(() => {
-    setActualCart(Object
-      .entries(cartState)
-      .filter(([, value]) => value !== 0)
-    )
+    setActualCart(getActualCart(cartState))
   }, [cartState])
 
   useEffect(() => {
@@ -409,28 +407,40 @@ const CartButton: React.FC = () => {
                   })
                 }
               </div>
-              <MoreButton
-                showText={true}
-                isMobile={true}
-                text={`Checkout ${getFullAmountWithDiscount(cartState).toFixed(2)}€`}
-                buttonStyle={{
-                  width: '100%',
-                  borderRadius: '20px',
-                  backgroundColor: 'white',
-                  marginTop: '2px',
-                  zIndex: '10000',
-                  height: '40px'
-                }}
-                textStyle={{
-                  fontFamily: 'Monsterrat-600, serif',
-                  fontSize: '16px',
-                  marginLeft: '30px'
-                }}
-                iconStyle={{
-                  right: '27px'
-                }}
-              />
-              <div className="checkoot-mobile-bottom-grad"/>
+              {location.pathname !== RoutePaths.FINAL_CHECKOUT ? (
+                <MoreButton
+                  showText={true}
+                  isMobile={true}
+                  text={location.pathname === RoutePaths.FINAL_CHECKOUT ? 'Continue ordering' : `Checkout ${getFullAmountWithDiscount(cartState).toFixed(2)}€`}
+                  buttonStyle={{
+                    width: '100%',
+                    borderRadius: '20px',
+                    backgroundColor: 'white',
+                    marginTop: '2px',
+                    zIndex: '10000',
+                    height: '40px'
+                  }}
+                  textStyle={{
+                    fontFamily: 'Monsterrat-600, serif',
+                    fontSize: '16px',
+                    marginLeft: '30px'
+                  }}
+                  iconStyle={{
+                    right: '27px'
+                  }}
+                  onClickAction={() => {
+                    dispatch(setIsCheckoutWindowShown(false))
+                    navigate(RoutePaths.FINAL_CHECKOUT)
+                  }}
+                />
+              ) : (
+                <ContinueOrderingButton
+                  onClickAction={() => {
+                    dispatch(setIsCheckoutWindowShown(false))
+                  }}
+                />
+              )}
+              <div className="checkoot-mobile-bottom-grad" style={{ opacity: isCheckoutOpened ? '1' : '0'}}/>
             </>
           )}
         />

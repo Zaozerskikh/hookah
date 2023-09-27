@@ -148,4 +148,127 @@
     left: 0;
 }
 
+.final-checkout-page-wrapper-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    margin-top: 58px;
+    margin-bottom: 128px;
+    padding-right: 16px;
+    padding-left: 16px;
+    padding-top: 16px;
+    box-sizing: border-box;
+}
 
+.final-checkout-page-wrapper-mobile .inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.final-checkout-page-wrapper-mobile .inputs-wrapper .header-mobile {
+    margin-bottom: 8px;
+    color: #000;
+
+    /* Mobile/H1 */
+    font-family: Monsterrat-700, serif;
+    font-size: 24px;
+    font-style: normal;
+    line-height: 125%;
+}
+
+.final-checkout-page-wrapper-mobile .delivery-promo-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.final-checkout-page-wrapper-mobile .delivery-promo-wrapper .promo-wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.final-checkout-page-wrapper-mobile .delivery-info-mobile {
+    color: #000;
+
+    /* Mobile/Main text */
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%; /* 23.04px */
+}
+
+.final-checkout-page-wrapper-mobile .delivery-info-mobile a {
+    color: var(--text-link, #005CCD);
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%;
+    text-decoration-line: underline;
+}
+
+.final-checkout-page-wrapper .delivery-info a {
+    color: var(--text-link, #005CCD);
+    font-family: Monsterrat-500, serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 144%;
+    text-decoration-line: underline;
+}
+
+.final-checkout-page-wrapper-mobile .buttons-wrapper-final {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.final-checkout-page-wrapper-mobile .payment-info-wrapper-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.final-checkout-page-wrapper-mobile .payment-line-wrapper-mobile {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.final-checkout-page-wrapper-mobile .static-info-mobile {
+    color: var(--text-gray-secondary, #909398);
+    font-family: Unbounded-400, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 125%; /* 20px */
+}
+
+.final-checkout-page-wrapper-mobile .black-info-mobile {
+    color: var(--main-black);
+    font-family: Unbounded-400, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 125%; /* 20px */
+}
+
+.final-checkout-page-wrapper-mobile .green-info-mobile {
+    color: #7BECB6;
+    font-family: Unbounded-400, serif;
+    font-size: 16px;
+    line-height: 125%;
+}
+
+.final-checkout-page-wrapper-mobile .total-item-amount-without-discount-mobile {
+    color: var(--text-gray-secondary);
+    font-family: Unbounded-400, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 125%;
+    text-decoration: line-through;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+}

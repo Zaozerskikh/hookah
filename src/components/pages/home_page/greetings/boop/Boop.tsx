@@ -48,11 +48,12 @@ const Boop: React.FC<BoopProps> = ({ rotation , children, isMobile }) => {
   };
 
   const bind = useDrag(({ down, movement: [mx, my] }) => {
-    if (mx > 5) {
+    if (mx > 5 && isMobile) {
       audio
         .play()
         .then(() => trigger())
-
+    } else if (mx > 5) {
+      trigger()
     }
   }) as unknown as (...args: any[]) => ReactDOMAttributes;
 

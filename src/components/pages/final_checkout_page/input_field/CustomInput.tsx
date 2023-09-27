@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {TextField} from "@mui/material";
 
 interface CustomInputProps {
-  placeholderText: string
+  placeholderText: string;
   onInputChange: (value: string) => void;
   validationFunc : (text: string) => boolean;
   isSubmitButtonClicked: boolean;
@@ -11,17 +11,19 @@ interface CustomInputProps {
   promocode ? : boolean;
   dontExpandOnError ? : boolean;
   invalidTextHint ? : string;
-  autoFocus ? : boolean
-  onFocus ? : () => any
-  zipCode ? : boolean
+  autoFocus ? : boolean;
+  onFocus ? : () => any;
+  zipCode ? : boolean;
+  disabled ? : boolean;
+  initialText ? : string;
 }
 
 const CustomInput: React.FC<CustomInputProps> =
   ({ placeholderText, multiline, validationFunc, invalidTextHint,
-     onInputChange, isSubmitButtonClicked , autoFocus,
-     promocode, onFocus, zipCode, dontExpandOnError}) => {
+     onInputChange, isSubmitButtonClicked , autoFocus, initialText,
+     promocode, onFocus, zipCode, dontExpandOnError, disabled}) => {
     const [isActive, setIsActive] = useState(false)
-    const [text, setText] = useState('')
+    const [text, setText] = useState(initialText ? initialText : '')
     const [prevTextLen, setPrevTextLen] = useState(0)
     const [padding, setPadding] = useState(1)
     const [isActivated, setActivated] = useState(false)
@@ -80,12 +82,15 @@ const CustomInput: React.FC<CustomInputProps> =
           className="custom-input-field-wrapper"
           style={{
             height: !multiline ? '45px' : '96px',
-            borderColor: !validationFunc(text) && ((isActivated && !isActive && !promocode) || isSubmitButtonClicked)
-              ? 'var(--special-error)'
-              : isActive
-                ? 'var(--text-link)'
-                : 'var(--auxiliary-light-gray)',
-            zIndex: '9999 !important'
+            borderColor:
+              !disabled ?
+                !validationFunc(text) && ((isActivated && !isActive && !promocode) || isSubmitButtonClicked)
+                  ? 'var(--special-error)'
+                  : isActive
+                    ? 'var(--text-link)'
+                    : 'var(--auxiliary-smoke-gray)'
+                : '#EAEBF0',
+            zIndex: '9999 !important',
           }}
         >
           <TextField
@@ -164,7 +169,8 @@ const CustomInput: React.FC<CustomInputProps> =
             margin="none"
             multiline={multiline}
             maxRows={3}
-            value={text.length > 0 || isActive ? text : undefined}
+            value={initialText ? initialText : text.length > 0 || isActive ? text : undefined}
+            disabled={disabled}
           />
         </div>
       </div>
