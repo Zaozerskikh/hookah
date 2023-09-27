@@ -56,93 +56,97 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
   const renderDesktop = () => {
     return(
       <div className="product-card-container">
-        {
-          <div
-            style={{
-              position:'absolute',
-              top: '16px',
-              left: '16px',
-              display: "flex",
-              flexDirection:'row',
-              gap: '8px'
-            }}
-          >
-            {stock === 0 && <span className="soldout-detailed">Soldout</span>}
-            {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
-            {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-            {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
-          </div>
-        }
-        <div
-          className={`detailed-view-container ${!isCheckoutOpened && isDetailedViewOpened ? 'open' : ''}`}
-          style={{
-            backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
-            width: `${window.innerWidth}px`
-          }}
-          onClick={(e) => {
-            e.preventDefault()
-            if (e.target === e.currentTarget) {
-              setDetailedViewOpened(false)
-            }
-          }}
-        >
-          <div className="detailed-view-card" style={{marginTop: isDesktopOrLaptop ? '0px' : '24px'}}>
-            <CloseButton
-              onClickAction={() => setDetailedViewOpened(false)}
-              iconSize={20}
-              changeColorOnHover={true}
-              onClickColor="#d1d1d9"
-            />
-            <div style={{
-              position: "absolute",
-              top: '-64px',
-              right: '64px',
-            }}>
-              <ShareButton
-                productLink={buildProductLink()}
-                onClickAdditionalAction={() => {
-                  if (!bottomHintState.isShown) {
-                    dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))
-                  }
+        {isDetailedViewOpened && (
+          <>
+            {
+              <div
+                style={{
+                  position:'absolute',
+                  top: '16px',
+                  left: '16px',
+                  display: "flex",
+                  flexDirection:'row',
+                  gap: '8px'
                 }}
-              />
-            </div>
-            <div className="detailed-view-text-container">
-              <ProductInfoOnCard
-                productId={productId}
-                name={name}
-                brand={brand}
-                line={line}
-                price={price}
-                discountPrice={discountPrice}
-                stock={stock}
-                purchasedCount={purchasedCount}
-                weight={weight}
-                optionalTags={tags}
-              />
-              <div className={`containerwrapper`}>
-                <Scrollbar
-                  className={`detailed-full-description ${(name.length > 20 || stock === 0 || stock === 1 || (tags && tags.includes(ProductTag.NEW)) || (discountPrice && discountPrice !== price)) ? 'short' : 'long'}`}
-                  thumbYProps={{
-                    renderer: (props) => {
-                      const { elementRef, ...restProps } = props;
-                      return <span {...restProps} ref={elementRef} className="thumb-y" />;
-                    },
-                  }}
-                  trackYProps={{
-                    renderer: (props) => {
-                      const { elementRef, ...restProps } = props;
-                      return <span {...restProps} ref={elementRef} className="track-y" />;
-                    },
-                  }}
-                >
-                  <span className="test">{fullDescription}</span>
-                </Scrollbar>
+              >
+                {stock === 0 && <span className="soldout-detailed">Soldout</span>}
+                {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
+                {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
+                {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
+              </div>
+            }
+            <div
+              className={`detailed-view-container ${!isCheckoutOpened && isDetailedViewOpened ? 'open' : ''}`}
+              style={{
+                backgroundColor: !isCheckoutOpened && isDetailedViewOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
+                width: `${window.innerWidth}px`
+              }}
+              onClick={(e) => {
+                e.preventDefault()
+                if (e.target === e.currentTarget) {
+                  setDetailedViewOpened(false)
+                }
+              }}
+            >
+              <div className="detailed-view-card" style={{marginTop: isDesktopOrLaptop ? '0px' : '24px'}}>
+                <CloseButton
+                  onClickAction={() => setDetailedViewOpened(false)}
+                  iconSize={20}
+                  changeColorOnHover={true}
+                  onClickColor="#d1d1d9"
+                />
+                <div style={{
+                  position: "absolute",
+                  top: '-64px',
+                  right: '64px',
+                }}>
+                  <ShareButton
+                    productLink={buildProductLink()}
+                    onClickAdditionalAction={() => {
+                      if (!bottomHintState.isShown) {
+                        dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))
+                      }
+                    }}
+                  />
+                </div>
+                <div className="detailed-view-text-container">
+                  <ProductInfoOnCard
+                    productId={productId}
+                    name={name}
+                    brand={brand}
+                    line={line}
+                    price={price}
+                    discountPrice={discountPrice}
+                    stock={stock}
+                    purchasedCount={purchasedCount}
+                    weight={weight}
+                    optionalTags={tags}
+                  />
+                  <div className={`containerwrapper`}>
+                    <Scrollbar
+                      className={`detailed-full-description ${(name.length > 20 || stock === 0 || stock === 1 || (tags && tags.includes(ProductTag.NEW)) || (discountPrice && discountPrice !== price)) ? 'short' : 'long'}`}
+                      thumbYProps={{
+                        renderer: (props) => {
+                          const { elementRef, ...restProps } = props;
+                          return <span {...restProps} ref={elementRef} className="thumb-y" />;
+                        },
+                      }}
+                      trackYProps={{
+                        renderer: (props) => {
+                          const { elementRef, ...restProps } = props;
+                          return <span {...restProps} ref={elementRef} className="track-y" />;
+                        },
+                      }}
+                    >
+                      <span className="test">{fullDescription}</span>
+                    </Scrollbar>
+                  </div>
+                </div>
+                <img className="detailed-view-image" src={image} alt="detailed-img"/>
               </div>
             </div>
-            <img className="detailed-view-image" src={image} alt="detailed-img"/>
-          </div>
-        </div>
+          </>
+        )}
         <img
           src={image}
           alt={name}

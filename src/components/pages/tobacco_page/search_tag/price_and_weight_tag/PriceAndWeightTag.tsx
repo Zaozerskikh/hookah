@@ -10,10 +10,11 @@ export const TagState = {
 interface PriceAndWeightTagProps {
   displayedName: string;
   onClickAction: (newState: string) => void;
-  tagState: string
+  tagState: string;
+  isMobile? : boolean;
 }
 
-const PriceAndWeightTag: React.FC<PriceAndWeightTagProps> = ({ displayedName, onClickAction, tagState }) => {
+const PriceAndWeightTag: React.FC<PriceAndWeightTagProps> = ({ displayedName, onClickAction, tagState, isMobile }) => {
   const [isHovered, setHovered] = useState(false)
 
   const changeState = () => {
@@ -44,8 +45,19 @@ const PriceAndWeightTag: React.FC<PriceAndWeightTagProps> = ({ displayedName, on
         WebkitTransition: "all 0.5s ease",
         MozTransition: "all 0.5s ease",
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setHovered(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
       onClick={changeState}
     >
       <span
@@ -53,7 +65,7 @@ const PriceAndWeightTag: React.FC<PriceAndWeightTagProps> = ({ displayedName, on
           color: '#000',
           textAlign: 'center',
           fontFamily: 'Monsterrat-500, serif',
-          fontSize: '16px',
+          fontSize: isMobile ? '12px' : '16px',
           fontStyle: 'normal',
           lineHeight: '144%',
         }}

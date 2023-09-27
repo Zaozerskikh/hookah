@@ -4,17 +4,29 @@ import React, {useState} from "react";
 interface BrandSearchTagProps {
   name: string
   isActive: boolean
-  onActiveChanged: (...args: any) => any
+  onActiveChanged: (...args: any) => any;
+  isMobile ? : boolean;
 }
 
-const BrandSearchTag: React.FC<BrandSearchTagProps> = ({ name , isActive, onActiveChanged}) => {
+const BrandSearchTag: React.FC<BrandSearchTagProps> = ({ name , isActive, onActiveChanged, isMobile}) => {
   const [isHovered, setHovered] = useState(false)
 
   return(
     <button
       onClick={onActiveChanged}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setHovered(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
       className="search-tag-button"
       style={{
         cursor: isHovered ? 'pointer' : undefined,
@@ -32,7 +44,7 @@ const BrandSearchTag: React.FC<BrandSearchTagProps> = ({ name , isActive, onActi
         MozTransition: "all 0.5s ease",
       }}
     >
-      <span className="tag-name">
+      <span className="tag-name" style={{ fontSize: isMobile ? '12px' : '16px'}}>
         {name}
       </span>
     </button>

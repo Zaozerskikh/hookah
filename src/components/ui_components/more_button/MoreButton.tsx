@@ -76,10 +76,8 @@ const MoreButton: React.FC<MoreButtonProps> =
           }
         }}
         onMouseLeave={() => {
-          if (!isMobile) {
-            setHovered(false)
-            setClicked(false)
-          }
+          setHovered(false)
+          setClicked(false)
         }}
         onTouchStart={() => setHovered(true)}
         onTouchEnd={() => setHovered(false)}
@@ -90,9 +88,7 @@ const MoreButton: React.FC<MoreButtonProps> =
           }
         }}
         onMouseUp={() => {
-          if (!isMobile) {
-            setClicked(false)
-          }
+          setClicked(false)
         }}
         style={isClicked
           ? {...parsedButtonStyle, backgroundColor: '#c7ccd3'}
