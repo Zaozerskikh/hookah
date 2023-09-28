@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/hookah/static/css/main.63e37a37.css",
-    "main.js": "/hookah/static/js/main.d69eaa4e.js",
+    "main.css": "/hookah/static/css/main.5f486110.css",
+    "main.js": "/hookah/static/js/main.e6af9024.js",
     "static/js/787.c274760c.chunk.js": "/hookah/static/js/787.c274760c.chunk.js",
     "static/media/news-5.png": "/hookah/static/media/news-5.6c6942cfaf5918f8fa1a.png",
     "static/media/choosing_hookah_bowl_icon.png": "/hookah/static/media/choosing_hookah_bowl_icon.fb4c7cbd2fc7c46f1afe.png",
@@ -54,12 +54,12 @@
     "static/media/darkside_logo.png": "/hookah/static/media/darkside_logo.ce2d1eaa4ddbe5a1ab7a.png",
     "static/media/instagram_logo_black.png": "/hookah/static/media/instagram_logo_black.7c90a78377d0d9eab47a.png",
     "index.html": "/hookah/index.html",
-    "main.63e37a37.css.map": "/hookah/static/css/main.63e37a37.css.map",
-    "main.d69eaa4e.js.map": "/hookah/static/js/main.d69eaa4e.js.map",
+    "main.5f486110.css.map": "/hookah/static/css/main.5f486110.css.map",
+    "main.e6af9024.js.map": "/hookah/static/js/main.e6af9024.js.map",
     "787.c274760c.chunk.js.map": "/hookah/static/js/787.c274760c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.63e37a37.css",
-    "static/js/main.d69eaa4e.js"
+    "static/css/main.5f486110.css",
+    "static/js/main.e6af9024.js"
   ]
 }
