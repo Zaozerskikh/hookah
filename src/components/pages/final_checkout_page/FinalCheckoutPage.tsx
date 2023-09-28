@@ -34,6 +34,7 @@ import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintR
 import {useMediaQuery} from "react-responsive";
 import ReturnToCartButton from "./return_to_cart_button/ReturnToCartButton";
 import {setIsCheckoutWindowShown} from "../../../redux/product_detailed_view_reducer/CheckoutWindowReducer";
+import {setIsLastProductWarningShown} from "../../../redux/last_product_warning_reducer/LastProductWarningReducer";
 
 
 const CheckoutState = {
@@ -60,11 +61,10 @@ const FinalCheckoutPage: React.FC = () => {
 
   const cartState = useSelector((state: RootState) => state.cart)
   const [actualCart, setActualCart] = useState(getActualCart(cartState))
+  const lastProductWarningState= useSelector((state: RootState) => state.lastProductWarning)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const [lastProductWarningState, setLastProductWarningState] = useState({isShown: false, productId: '0'})
 
   useEffect(() => {
     setActualCart(getActualCart(cartState))
@@ -138,12 +138,12 @@ const FinalCheckoutPage: React.FC = () => {
         <LastProductWarningModal
           isShown={lastProductWarningState.isShown}
           onConfirmAction={() => {
-            setLastProductWarningState({...lastProductWarningState, isShown: false})
+            dispatch(setIsLastProductWarningShown(false, lastProductWarningState.productId))
             dispatch(resetProductCount(lastProductWarningState.productId))}
           }
           onRollbackAction={() => {
-            setLastProductWarningState({...lastProductWarningState, isShown: false})}
-          }
+            dispatch(setIsLastProductWarningShown(false, lastProductWarningState.productId))
+          }}
         />
         <span className="header">📦 Your order</span>
         <div
@@ -342,7 +342,7 @@ const FinalCheckoutPage: React.FC = () => {
                           if (actualCart.length > 1 || productCount > 1) {
                             dispatch(decrementProductCount(productId))
                           } else {
-                            setLastProductWarningState({isShown: true, productId: productId})
+                            dispatch(setIsLastProductWarningShown(true, productId))
                           }
                         }}
                         isFramed={true}
@@ -367,7 +367,7 @@ const FinalCheckoutPage: React.FC = () => {
                         if (actualCart.length > 1) {
                           dispatch(resetProductCount(productId))
                         } else {
-                          setLastProductWarningState({isShown: true, productId: productId})
+                          dispatch(setIsLastProductWarningShown(true, productId))
                         }
                       }}
                       buttonStyle={{
@@ -392,75 +392,87 @@ const FinalCheckoutPage: React.FC = () => {
 
   const renderNewCheckoutResultMobile = () => {
     return(
-      <div className="final-checkout-page-wrapper-mobile">
-        <div className="inputs-wrapper">
-          <span className="header-mobile">📦 Your order</span>
-          <CustomInput
-            placeholderText="Your name"
-            multiline={false}
-            invalidTextHint="Please enter your real name"
-            validationFunc={(e) => validateName(e)}
-            onInputChange={(text) => setName(text)}
-            isSubmitButtonClicked={isCheckoutButtonClicked}
-          />
-          <CustomInput
-            placeholderText="Your email"
-            multiline={false}
-            invalidTextHint="Incorrect e-mail. Please use form: email@domain.com"
-            validationFunc={(e) => validateEmail(e)}
-            onInputChange={(text) => setEmail(text)}
-            isSubmitButtonClicked={isCheckoutButtonClicked}
-          />
-          <CustomInput
-            placeholderText="Country"
-            multiline={false}
-            invalidTextHint="Please enter your real country"
-            validationFunc={() => true}
-            onInputChange={() => true}
-            isSubmitButtonClicked={false}
-            disabled={true}
-            initialText="Portugal"
-          />
-          <CustomInput
-            placeholderText="Your city"
-            multiline={false}
-            invalidTextHint="Please enter your real city"
-            validationFunc={(e) => validateCity(e)}
-            onInputChange={(text) => setCity(text)}
-            isSubmitButtonClicked={isCheckoutButtonClicked}
-          />
-          <CustomInput
-            placeholderText="Your address"
-            multiline={true}
-            invalidTextHint="Please enter not blank address"
-            validationFunc={(e) => validateAddress(e)}
-            onInputChange={(text) => setAddress(text)}
-            isSubmitButtonClicked={isCheckoutButtonClicked}
-          />
-          <CustomInput
-            placeholderText="Zip-code"
-            multiline={false}
-            invalidTextHint="Incorrect zip-code. Please use form: 1234-567"
-            validationFunc={(e) => validatePostalCode(e)}
-            onInputChange={(text) => setZipCode(text)}
-            isSubmitButtonClicked={isCheckoutButtonClicked}
-            zipCode={true}
-          />
-          <PhoneCustomInput
-            onChange={(e) => setPhone(e)}
-            invalidPhoneHint="Incorrect number"
-            isCheckoutButtonClicked={isCheckoutButtonClicked}
-            validationFunc={(e) => validateNumber(e)}
-          />
-          <CustomInput
-            placeholderText="Order comment (if desired)"
-            multiline={true}
-            validationFunc={() => true}
-            onInputChange={(text) => setComment(text)}
-            isSubmitButtonClicked={isCheckoutButtonClicked}
-          />
-        </div>
-        <div className="delivery-promo-wrapper">
+      <>
+        <LastProductWarningModal
+          isShown={lastProductWarningState.isShown}
+          onConfirmAction={() => {
+            dispatch(setIsLastProductWarningShown(false, lastProductWarningState.productId))
+            dispatch(resetProductCount(lastProductWarningState.productId))}
+          }
+          onRollbackAction={() => {
+            dispatch(setIsLastProductWarningShown(false, lastProductWarningState.productId))
+          }}
+          isMobile={true}
+        />
+        <div className="final-checkout-page-wrapper-mobile">
+          <div className="inputs-wrapper">
+            <span className="header-mobile">📦 Your order</span>
+            <CustomInput
+              placeholderText="Your name"
+              multiline={false}
+              invalidTextHint="Please enter your real name"
+              validationFunc={(e) => validateName(e)}
+              onInputChange={(text) => setName(text)}
+              isSubmitButtonClicked={isCheckoutButtonClicked}
+            />
+            <CustomInput
+              placeholderText="Your email"
+              multiline={false}
+              invalidTextHint="Incorrect e-mail. Please use form: email@domain.com"
+              validationFunc={(e) => validateEmail(e)}
+              onInputChange={(text) => setEmail(text)}
+              isSubmitButtonClicked={isCheckoutButtonClicked}
+            />
+            <CustomInput
+              placeholderText="Country"
+              multiline={false}
+              invalidTextHint="Please enter your real country"
+              validationFunc={() => true}
+              onInputChange={() => true}
+              isSubmitButtonClicked={false}
+              disabled={true}
+              initialText="Portugal"
+            />
+            <CustomInput
+              placeholderText="Your city"
+              multiline={false}
+              invalidTextHint="Please enter your real city"
+              validationFunc={(e) => validateCity(e)}
+              onInputChange={(text) => setCity(text)}
+              isSubmitButtonClicked={isCheckoutButtonClicked}
+            />
+            <CustomInput
+              placeholderText="Your address"
+              multiline={true}
+              invalidTextHint="Please enter not blank address"
+              validationFunc={(e) => validateAddress(e)}
+              onInputChange={(text) => setAddress(text)}
+              isSubmitButtonClicked={isCheckoutButtonClicked}
+            />
+            <CustomInput
+              placeholderText="Zip-code"
+              multiline={false}
+              invalidTextHint="Incorrect zip-code. Please use form: 1234-567"
+              validationFunc={(e) => validatePostalCode(e)}
+              onInputChange={(text) => setZipCode(text)}
+              isSubmitButtonClicked={isCheckoutButtonClicked}
+              zipCode={true}
+            />
+            <PhoneCustomInput
+              onChange={(e) => setPhone(e)}
+              invalidPhoneHint="Incorrect number"
+              isCheckoutButtonClicked={isCheckoutButtonClicked}
+              validationFunc={(e) => validateNumber(e)}
+            />
+            <CustomInput
+              placeholderText="Order comment (if desired)"
+              multiline={true}
+              validationFunc={() => true}
+              onInputChange={(text) => setComment(text)}
+              isSubmitButtonClicked={isCheckoutButtonClicked}
+            />
+          </div>
+          <div className="delivery-promo-wrapper">
           <span
             className="delivery-info-mobile"
             dangerouslySetInnerHTML={{__html: 'We will deliver your order with <a href="https://www.ctt.pt/" target="_blank" rel="noreferrer">CTT</a>.</br>' +
@@ -468,77 +480,78 @@ const FinalCheckoutPage: React.FC = () => {
                 'Free shipping on orders of 200 euros and more.'
             }}
           />
-          <div className="promo-wrapper">
-            <CustomInput
-              placeholderText="Promo code"
-              invalidTextHint="Invalid or expired code"
-              onInputChange={(text) => setPromocode(text)}
-              validationFunc={(e) => e === 'Gleb'}
-              isSubmitButtonClicked={isPromocodeButtonClicked}
-              onFocus={() => setPromocodeButtonClicked(false)}
-              promocode={true}
+            <div className="promo-wrapper">
+              <CustomInput
+                placeholderText="Promo code"
+                invalidTextHint="Invalid or expired code"
+                onInputChange={(text) => setPromocode(text)}
+                validationFunc={(e) => e === 'Gleb'}
+                isSubmitButtonClicked={isPromocodeButtonClicked}
+                onFocus={() => setPromocodeButtonClicked(false)}
+                promocode={true}
+              />
+              <PromocodeButton
+                onClickAction={() => setPromocodeButtonClicked(true)}
+                isMobile={true}
+              />
+            </div>
+          </div>
+          <div className="payment-info-wrapper-mobile">
+            <div className="payment-line-wrapper-mobile">
+              <span className="static-info-mobile">CTT Delivery: </span>
+              <span className="black-info-mobile">{deliveryPrice.toFixed(2)}€</span>
+            </div>
+            <div className="payment-line-wrapper-mobile">
+              <span className="static-info-mobile">Discount: </span>
+              <span className={commonDiscount + promocodeDiscount === 0 ? "black-info-mobile" : "green-info-mobile"}>{(commonDiscount + promocodeDiscount).toFixed(2)}€</span>
+            </div>
+            <div
+              className="payment-line-wrapper-mobile"
+              style={{
+                gap: commonDiscount === 0 ? '5px' : '10px',
+                transition: "all .2s ease",
+                WebkitTransition: "all .2s ease",
+                MozTransition: "all .2s ease",
+              }}
+            >
+              <span className="static-info-mobile">Total amount: </span>
+              <span
+                className="total-item-amount-without-discount-mobile"
+                dangerouslySetInnerHTML={{
+                  __html: `${(getFullAmountWithoutDiscount(cartState) + deliveryPrice).toFixed(2)}€`
+                }}
+                style={{
+                  display: 'block',
+                  maxWidth: commonDiscount + promocodeDiscount === 0 ? '0px' : '200px',
+                  overflow: 'hidden',
+                }}
+              />
+              <span className="black-info-mobile">{(getFullAmountWithoutDiscount(cartState) - commonDiscount - promocodeDiscount + deliveryPrice).toFixed(2)}€</span>
+            </div>
+          </div>
+          <div className="buttons-wrapper-final">
+            <ReturnToCartButton
+              onClickAction={() => dispatch(setIsCheckoutWindowShown(true))}
             />
-            <PromocodeButton
-              onClickAction={() => setPromocodeButtonClicked(true)}
+            <StandardButton
+              text="Checkout"
+              buttonStyle={{
+                height: '48px',
+                borderRadius: '8px'
+              }}
+              onClickAction={() => {
+                setCheckoutButtonClicked(true)
+                if (validateAll(name, email, city, address, zipCode, phone)) {
+                  setCheckoutResult(Math.random() > 0.5 ? CheckoutState.ERROR : CheckoutState.SUCCESS)
+                } else {
+                  window.scrollTo({ top: 0})
+                }
+              }}
               isMobile={true}
             />
           </div>
         </div>
-        <div className="payment-info-wrapper-mobile">
-          <div className="payment-line-wrapper-mobile">
-            <span className="static-info-mobile">CTT Delivery: </span>
-            <span className="black-info-mobile">{deliveryPrice.toFixed(2)}€</span>
-          </div>
-          <div className="payment-line-wrapper-mobile">
-            <span className="static-info-mobile">Discount: </span>
-            <span className={commonDiscount + promocodeDiscount === 0 ? "black-info-mobile" : "green-info-mobile"}>{(commonDiscount + promocodeDiscount).toFixed(2)}€</span>
-          </div>
-          <div
-            className="payment-line-wrapper-mobile"
-            style={{
-              gap: commonDiscount === 0 ? '5px' : '10px',
-              transition: "all .2s ease",
-              WebkitTransition: "all .2s ease",
-              MozTransition: "all .2s ease",
-            }}
-          >
-            <span className="static-info-mobile">Total amount: </span>
-            <span
-              className="total-item-amount-without-discount-mobile"
-              dangerouslySetInnerHTML={{
-                __html: `${(getFullAmountWithoutDiscount(cartState) + deliveryPrice).toFixed(2)}€`
-              }}
-              style={{
-                display: 'block',
-                maxWidth: commonDiscount + promocodeDiscount === 0 ? '0px' : '200px',
-                overflow: 'hidden',
-              }}
-            />
-            <span className="black-info-mobile">{(getFullAmountWithoutDiscount(cartState) - commonDiscount - promocodeDiscount + deliveryPrice).toFixed(2)}€</span>
-          </div>
-        </div>
-        <div className="buttons-wrapper-final">
-          <ReturnToCartButton
-            onClickAction={() => dispatch(setIsCheckoutWindowShown(true))}
-          />
-          <StandardButton
-            text="Checkout"
-            buttonStyle={{
-              height: '48px',
-              borderRadius: '8px'
-            }}
-            onClickAction={() => {
-              setCheckoutButtonClicked(true)
-              if (validateAll(name, email, city, address, zipCode, phone)) {
-                setCheckoutResult(Math.random() > 0.5 ? CheckoutState.ERROR : CheckoutState.SUCCESS)
-              } else {
-                window.scrollTo({ top: 0})
-              }
-            }}
-            isMobile={true}
-          />
-        </div>
-      </div>
+      </>
     )
   }
 

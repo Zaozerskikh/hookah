@@ -44,8 +44,8 @@ const MoreButton: React.FC<MoreButtonProps> =
     const parsedTextStyle = {
       color: 'black',
       fontFamily: 'Monsterrat-600, serif',
-      fontSize: '22px',
-      lineHeight: '31.68px',
+      fontSize: isMobile ? '16px' : '22px',
+      lineHeight: '144%',
       transition: "all .3s ease",
       WebkitTransition: "all .3s ease",
       MozTransition: "all .3s ease",

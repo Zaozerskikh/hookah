@@ -22,6 +22,7 @@ import {
 import {useMediaQuery} from "react-responsive";
 import BottomSlider from "../bottom_slider/BottomSlider";
 import ContinueOrderingButton from "../../pages/final_checkout_page/continue_ordering_button/ContinueOrderingButton";
+import {setIsLastProductWarningShown} from "../../../redux/last_product_warning_reducer/LastProductWarningReducer";
 
 const CartButton: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)
@@ -33,6 +34,8 @@ const CartButton: React.FC = () => {
   const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const lastProductWarningState= useSelector((state: RootState) => state.lastProductWarning)
 
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
@@ -326,7 +329,10 @@ const CartButton: React.FC = () => {
         <BottomSlider
           isOpened={isCheckoutOpened}
           maxRelativeHeight={0.85}
-          onCloseAction={() => dispatch(setIsCheckoutWindowShown(false))}
+          onCloseAction={() => {
+            dispatch(setIsCheckoutWindowShown(false))
+            dispatch(setIsLastProductWarningShown(false, '0'))
+          }}
           threshold={9}
           gestureZoneChild={(<div style={{height: '0px', width: '100%'}}/>)}
           mainZoneChild={(
@@ -344,7 +350,7 @@ const CartButton: React.FC = () => {
                     MozTransition: "all .2s ease"
                   }}
                 >
-                  <CloseButton
+                  {!lastProductWarningState.isShown && <CloseButton
                     changeColorOnHover={false}
                     onClickColor={'white'}
                     iconSize={17}
@@ -355,13 +361,13 @@ const CartButton: React.FC = () => {
                       width: '42px',
                       height: '42px',
                     }}
-                  />
+                  />}
                 </div>
                 {
-                  actualCart.map(([key, value]) => {
-                    const product = Products.find(p => p.productId === key)
+                  actualCart.map(([productId, productCount]) => {
+                    const product = Products.find(p => p.productId === productId)
                     return(
-                      <div className="order-item-container-mobile" key={key}>
+                      <div className="order-item-container-mobile" key={productId}>
                         <div style={{ width: '100%', display: 'flex', flexDirection: 'row', gap: '16px'}}>
                           <CloseButton
                             buttonStyle={{
@@ -373,16 +379,22 @@ const CartButton: React.FC = () => {
                             }}
                             isDark={true}
                             iconSize={12}
-                            onClickAction={() => dispatch(resetProductCount(key))}
+                            onClickAction={() => {
+                              if (actualCart.length > 1 || productCount > 1 || location.pathname !== RoutePaths.FINAL_CHECKOUT) {
+                                dispatch(resetProductCount(productId))
+                              } else if (location.pathname === RoutePaths.FINAL_CHECKOUT) {
+                                dispatch(setIsLastProductWarningShown(true, productId))
+                              }
+                            }}
                             changeColorOnHover={true}
                             onClickColor="#424446"
                             isMobile={true}
                           />
                           <img src={product.image} alt="dd" className="product-img-mobile"/>
                           <div className="product-info-mobile">
-                        <span className="product-header-mobile">
-                          {`${product.brand} – ${product.name} (${product.line}) ${product.weight}G`}
-                        </span>
+                            <span className="product-header-mobile">
+                              {`${product.brand} – ${product.name} (${product.line}) ${product.weight}G`}
+                            </span>
                             <div style={{ display: "flex", flexDirection: 'row', gap: '4px'}}>
                               {product.discountPrice && product.discountPrice !== product.price && <span className="product-price-old-mobile">{`${product.price}€/Pack`}</span> }
                               <span className="product-price-mobile">{`${product.discountPrice ? product.discountPrice : product.price}€/Pack`}</span>
@@ -390,12 +402,18 @@ const CartButton: React.FC = () => {
                           </div>
                         </div>
                         <div style={{marginLeft: '48px', display: "flex", flexDirection: 'row', width: 'calc(100% - 48px)', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                          <div className="total-price-info-mobile">{((product.discountPrice ? product.discountPrice : product.price) * value).toFixed(2)}€</div>
+                          <div className="total-price-info-mobile">{((product.discountPrice ? product.discountPrice : product.price) * productCount).toFixed(2)}€</div>
                           <CounterButton
-                            counterState={value}
+                            counterState={productCount}
                             isDark={true}
-                            onPlusClickAction={() => dispatch(incrementProductCount(key))}
-                            onMinusClickAction={() => dispatch(decrementProductCount(key))}
+                            onPlusClickAction={() => dispatch(incrementProductCount(productId))}
+                            onMinusClickAction={() => {
+                              if (actualCart.length > 1 || productCount > 1 || location.pathname !== RoutePaths.FINAL_CHECKOUT) {
+                                dispatch(decrementProductCount(productId))
+                              } else if (location.pathname === RoutePaths.FINAL_CHECKOUT) {
+                                dispatch(setIsLastProductWarningShown(true, productId))
+                              }
+                            }}
                             isMobile={true}
                             wrapperStyle={{
                               maxWidth: '86px',

@@ -241,7 +241,6 @@
 }
 
 .products-container-mobile .order-item-container-mobile {
-    height: 84px;
     width: 100%;
     display: flex;
     flex-direction: column;
