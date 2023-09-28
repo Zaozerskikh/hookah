@@ -5,6 +5,10 @@ export const validateName = (name: string): boolean => {
   return name.length > 1
 }
 
+export const validateSurname = (surname: string): boolean => {
+  return surname.length > 1
+}
+
 export const validateEmail = (email: string): boolean => {
   return emailRegex.test(email)
 }
@@ -26,8 +30,8 @@ export const validateNumber = (number: string): boolean => {
 }
 
 export const validateAll =
-  (name: string, email: string, city: string, address: string, postalCode: string, phone: string): boolean => {
-  return validateName(name) && validateEmail(email) && validateCity(city)
+  (name: string, surname: string, email: string, city: string, address: string, postalCode: string, phone: string): boolean => {
+  return validateName(name) && validateSurname(surname) && validateEmail(email) && validateCity(city)
     && validateAddress(address) && validateNumber(phone) && validatePostalCode(postalCode)
 }
 

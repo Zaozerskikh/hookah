@@ -380,7 +380,7 @@ const CartButton: React.FC = () => {
                             isDark={true}
                             iconSize={12}
                             onClickAction={() => {
-                              if (actualCart.length > 1 || productCount > 1 || location.pathname !== RoutePaths.FINAL_CHECKOUT) {
+                              if (actualCart.length > 1 || location.pathname !== RoutePaths.FINAL_CHECKOUT) {
                                 dispatch(resetProductCount(productId))
                               } else if (location.pathname === RoutePaths.FINAL_CHECKOUT) {
                                 dispatch(setIsLastProductWarningShown(true, productId))

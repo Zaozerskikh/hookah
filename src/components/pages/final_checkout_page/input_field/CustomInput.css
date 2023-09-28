@@ -37,27 +37,31 @@
     animation-name: onAutoFillStart;
     background-color: var(--main-white);
     box-shadow: 0 0 0 1000px var(--main-white) inset;
-    font-family: Monsterrat-500, serif !important;
+    font-family: Monsterrat-600, serif !important;
+    font-weight: 500;
 }
 
 .input:-webkit-autofill:focus {
     animation-name: onAutoFillStart;
     background-color: var(--main-white);
     box-shadow: 0 0 0 1000px var(--main-white) inset;
-    font-family: Monsterrat-500, serif !important;
+    font-family: Monsterrat-600, serif !important;
 }
 
 input:-webkit-autofill,
+input:-webkit-autofill::first-line,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill::first-line,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
+select:-webkit-autofill:focus,
+select:-webkit-autofill::first-line{
     -webkit-box-shadow: 0 0 0 1000px var(--main-white) inset !important;
-    font-family: Monsterrat-500, serif !important;
+    font-family: Monsterrat-600, serif !important;
 }
 
 .MuiInputBase-input {

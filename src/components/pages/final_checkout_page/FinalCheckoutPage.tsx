@@ -23,7 +23,7 @@ import {
   validateAddress, validateAll,
   validateCity,
   validateEmail, validateName, validateNumber,
-  validatePostalCode
+  validatePostalCode, validateSurname
 } from "./input_fields_validator/InputFieldsValidator";
 import {
   getActualCart,
@@ -46,6 +46,7 @@ const CheckoutState = {
 const FinalCheckoutPage: React.FC = () => {
   const [checkoutResult, setCheckoutResult] = useState(CheckoutState.NEW)
   const [name, setName] = useState('')
+  const [surname, setSurname] = useState('')
   const [email, setEmail] = useState('')
   const [city, setCity] = useState('')
   const [address, setAddress] = useState('')
@@ -73,13 +74,14 @@ const FinalCheckoutPage: React.FC = () => {
 
   useEffect(() => {
     if (actualCart.length === 0 && checkoutResult !== CheckoutState.SUCCESS) {
-      navigate(RoutePaths.HOME)
+      navigate(RoutePaths.TOBACCO)
     }
   }, [actualCart.length, checkoutResult, navigate])
 
   useEffect(() => {
     setCheckoutButtonClicked(false)
     setPromocodeButtonClicked(false)
+    document.body.classList.remove('hidden');
   }, [])
 
   useEffect(() => {
@@ -163,6 +165,14 @@ const FinalCheckoutPage: React.FC = () => {
                 invalidTextHint="Please enter your real name"
                 validationFunc={(e) => validateName(e)}
                 onInputChange={(text) => setName(text)}
+                isSubmitButtonClicked={isCheckoutButtonClicked}
+              />
+              <CustomInput
+                placeholderText="Your surname"
+                multiline={false}
+                invalidTextHint="Please enter your real surname"
+                validationFunc={(e) => validateSurname(e)}
+                onInputChange={(text) => setSurname(text)}
                 isSubmitButtonClicked={isCheckoutButtonClicked}
               />
               <CustomInput
@@ -266,7 +276,7 @@ const FinalCheckoutPage: React.FC = () => {
               }}
               onClickAction={() => {
                 setCheckoutButtonClicked(true)
-                if (validateAll(name, email, city, address, zipCode, phone)) {
+                if (validateAll(name, surname, email, city, address, zipCode, phone)) {
                   setCheckoutResult(Math.random() > 0.5 ? CheckoutState.ERROR : CheckoutState.SUCCESS)
                 }
               }}
@@ -416,6 +426,14 @@ const FinalCheckoutPage: React.FC = () => {
               isSubmitButtonClicked={isCheckoutButtonClicked}
             />
             <CustomInput
+              placeholderText="Your surname"
+              multiline={false}
+              invalidTextHint="Please enter your real surname"
+              validationFunc={(e) => validateSurname(e)}
+              onInputChange={(text) => setSurname(text)}
+              isSubmitButtonClicked={isCheckoutButtonClicked}
+            />
+            <CustomInput
               placeholderText="Your email"
               multiline={false}
               invalidTextHint="Incorrect e-mail. Please use form: email@domain.com"
@@ -541,7 +559,7 @@ const FinalCheckoutPage: React.FC = () => {
               }}
               onClickAction={() => {
                 setCheckoutButtonClicked(true)
-                if (validateAll(name, email, city, address, zipCode, phone)) {
+                if (validateAll(name, surname, email, city, address, zipCode, phone)) {
                   setCheckoutResult(Math.random() > 0.5 ? CheckoutState.ERROR : CheckoutState.SUCCESS)
                 } else {
                   window.scrollTo({ top: 0})
