@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import zoomIcon from "../../../../assets/icons/tobacco_page/zoom-icon.png";
+import {useMediaQuery} from "react-responsive";
 
 interface ZoomButtonProps {
   onClickAction: () => void;
@@ -8,15 +9,17 @@ interface ZoomButtonProps {
 
 const ZoomButton: React.FC<ZoomButtonProps> = ({ onClickAction, isMobile }) => {
   const [isHovered, setHovered] = useState(false);
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
+
   return(
     <button
       onMouseEnter={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(true)
         }
       }}
       onMouseLeave={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(false)
         }
       }}

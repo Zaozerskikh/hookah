@@ -3,6 +3,7 @@ import blackMinusIcon from "../../../assets/icons/product_card/black_minus_icon.
 import blackPlusIcon from "../../../assets/icons/product_card/black_plus_icon.png";
 import whiteMinusIcon from "../../../assets/icons/product_card/white_minus_icon.png";
 import whitePlusIcon from "../../../assets/icons/product_card/white_plus_icon.png";
+import {useMediaQuery} from "react-responsive";
 
 interface CounterButtonProps {
   counterState: number
@@ -21,6 +22,7 @@ const CounterButton: React.FC<CounterButtonProps> =
      counterStyle , wrapperStyle, isFramed}) => {
     const [isPlusHovered, setPlusHovered] = useState(false);
     const [isMinusHovered, setMinusHovered] = useState(false);
+    const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
     const parsedCounterStyle = {
       fontFamily: 'Monsterrat-600, serif',
@@ -76,12 +78,12 @@ const CounterButton: React.FC<CounterButtonProps> =
         <button
           onClick={onMinusClickAction}
           onMouseEnter={() => {
-            if (!isMobile) {
+            if (!isTouchable) {
               setMinusHovered(true)
             }
           }}
           onMouseLeave={() => {
-            if (!isMobile) {
+            if (!isTouchable) {
               setMinusHovered(false)
             }
           }}
@@ -107,12 +109,12 @@ const CounterButton: React.FC<CounterButtonProps> =
         <button
           onClick={onPlusClickAction}
           onMouseEnter={() => {
-            if (!isMobile) {
+            if (!isTouchable) {
               setPlusHovered(true)
             }
           }}
           onMouseLeave={() => {
-            if (!isMobile) {
+            if (!isTouchable) {
               setPlusHovered(false)
             }
           }}

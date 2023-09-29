@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useMediaQuery} from "react-responsive";
 
 interface StandardButtonProps {
   text: string;
@@ -12,7 +13,8 @@ interface StandardButtonProps {
 const StandardButton: React.FC<StandardButtonProps> =
   ({ text, buttonStyle, textStyle , onClickAction, onHoverColor, isMobile}) => {
   const [isHovered, setHovered] = useState(false);
-  const [isClicked, setClicked] = useState(false)
+  const [isClicked, setClicked] = useState(false);
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   const parsedButtonStyle = {
     cursor: isHovered ? 'pointer' : undefined,
@@ -45,12 +47,12 @@ const StandardButton: React.FC<StandardButtonProps> =
       style={parsedButtonStyle}
       onClick={onClickAction}
       onMouseEnter={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(true)
         }
       }}
       onMouseLeave={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(false)
           setClicked(false)
         }
@@ -59,12 +61,12 @@ const StandardButton: React.FC<StandardButtonProps> =
       onTouchEnd={() => setHovered(false)}
       onTouchCancel={() => setHovered(false)}
       onMouseDown={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setClicked(true)
         }
       }}
       onMouseUp={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setClicked(false)
         }
       }}

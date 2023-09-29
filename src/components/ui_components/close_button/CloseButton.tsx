@@ -3,6 +3,7 @@ import blackCloseIcon from "../../../assets/icons/product_card/close_button_icon
 import extendedBlackCloseIcon from "../../../assets/icons/product_card/extended_close_button_icon.png";
 import whiteCloseIcon from "../../../assets/icons/product_card/close_button_icon_white.png";
 import whiteExtendedCloseIcon from "../../../assets/icons/product_card/extended_close_button_icon_white.png";
+import {useMediaQuery} from "react-responsive";
 
 interface CloseButtonProps {
   isDark ? : boolean,
@@ -14,10 +15,10 @@ interface CloseButtonProps {
   isMobile ? : boolean;
 }
 
-const CloseButton: React.FC<CloseButtonProps> =
-  ({onClickAction, buttonStyle, iconSize, isDark, changeColorOnHover, onClickColor, isMobile}) => {
+const CloseButton: React.FC<CloseButtonProps> = ({onClickAction, buttonStyle, iconSize, isDark, changeColorOnHover, onClickColor, isMobile}) => {
   const [isHovered, setHovered] = useState(false)
   const [isClicked, setClicked] = useState(false)
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   return(
     <button
@@ -46,12 +47,12 @@ const CloseButton: React.FC<CloseButtonProps> =
         ...buttonStyle
       }}
       onMouseEnter={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(true)
         }
       }}
       onMouseLeave={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(false)
           setClicked(false)
         }
@@ -60,12 +61,12 @@ const CloseButton: React.FC<CloseButtonProps> =
       onTouchEnd={() => setHovered(false)}
       onTouchCancel={() => setHovered(false)}
       onMouseDown={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setClicked(true)
         }
       }}
       onMouseUp={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setClicked(false)
         }
       }}

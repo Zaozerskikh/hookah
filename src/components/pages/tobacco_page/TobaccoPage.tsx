@@ -42,6 +42,7 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1264px)'
   })
+  const height = window.innerHeight
 
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
@@ -122,6 +123,12 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
     darkSideTagActive, musthaveTagActive, elementSideTagActive,
     tangiersTagActive, fumariTagActive, useTags
   ])
+
+  useEffect(() => {
+    if (searchString.length === 0) {
+      setUseTags(true)
+    }
+  }, [searchString]);
 
   const clearAllBrandTags = () => {
     setTangiersTagActive(false)
@@ -453,7 +460,7 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
             />
         }
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%'}}>
-          <div style={{ display: "flex", flexDirection:'row', gap: '4px'}}>
+          <div style={{ display: "flex", flexDirection:'row', gap: '4px', position: 'relative'}}>
             <SearchInputField
               onInputChange={onSearchStringChanged}
               onEnterAction={filterBySearchString}
@@ -465,7 +472,7 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
               isMobile={true}
             />
           </div>
-          <div style={{ display: 'flex', flexDirection: "row", gap: '4px', flexWrap: 'wrap', position: 'relative'}}>
+          <div style={{ display: 'flex', flexDirection: "row", gap: '6px', flexWrap: 'wrap', position: 'relative'}}>
             <CloseButton
               onClickAction={() => {
                 setDarkSideTagActive(false)
@@ -478,8 +485,8 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
               }}
               buttonStyle={{
                 position: 'absolute',
-                width: isTagsOff ? '0px' : '27px',
-                height: '27px',
+                width: isTagsOff ? '0px' : '28px',
+                height: '28px',
                 borderRadius: '16px',
                 padding: isTagsOff ? '0px' : '6px',
                 top: '0px',
@@ -568,169 +575,192 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
           </div>
         </div>
         <div style={{ paddingTop: '32px'}}>
-          <ShopGrid
-            showAllCatalogButton={false}
-            products={filteredProducts.slice(
-              (currPageNumber - 1) * PRODUCTS_COUNT_ON_A_PAGE,
-              currPageNumber * PRODUCTS_COUNT_ON_A_PAGE
-            )}
-            isMobile={true}
-          />
-          {
-            <div
-              style={{
-                display: "flex",
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '100%',
-                marginTop: '64px',
-                marginBottom: '128px'
-              }}
-            >
-              <div
-                style={{
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '16px',
-                  width: '320px',
-                }}
-              >
-                <div
-                  style={{
-                    transform: 'rotate(180deg)',
-                    position: "absolute",
-                    left: 0,
-                    display: 'flex',
-                    marginLeft: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
-                    zIndex: '10',
-                  }}
-                >
-                  <MoreButton
-                    showText={false}
-                    buttonStyle={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '16px',
-                      paddingRight: '0px',
-                      paddingLeft: '-5px',
-                      opacity: totalPageCount > 1 ? 1 : 0
-                      // opacity: currPageNumber > 1 ? 1 : 0
-                    }}
-                    iconStyle={{
-                      right: '4px'
-                    }}
-                    iconShift={3}
-                    onClickAction={() => {
-                      if (currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON) {
-                        setCurrLastPageNumberShown(currLastPageNumberShown - 1)
-                      }
-
-                      if (currPageNumber > 1) {
-                        setCurrPageNumber(currPageNumber - 1)
-                      }
-
-                      if (currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON || currPageNumber > 1) {
-                        window.scrollTo({ top: 0 });
-                      }
-                    }}
-                    isMobile={true}
-                  />
-                </div>
-                <div
-                  className="static-number-window"
-                  style={{
-                    width: '224px',
-                    height: '32px',
-                    position: 'relative',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    overflow: 'hidden'
-                  }}
-                >
-                  <div
-                    className="dynamic-number-row"
-                    style={{
-                      display: "flex",
-                      flexDirection: 'row',
-                      gap: '16px',
-                      width: '224px',
-                      flexWrap: 'nowrap',
-                      flexShrink: '0',
-                      alignItems: 'center',
-                      justifyContent: currLastPageNumberShown === PAGES_BEFORE_MORE_BUTTON && currLastPageNumberShown > totalPageCount ? 'center' : 'flex-start',
-                      position: "absolute",
-                      left: 48 * (-currLastPageNumberShown) + PAGES_BEFORE_MORE_BUTTON * 48,
-                      transition: "all .5s ease",
-                      WebkitTransition: "all .5s ease",
-                      MozTransition: "all .5s ease",
-                    }}
-                  >
-                    {
-                      totalPageCount > 1 && Array.from(
-                        { length: totalPageCount },
-                        (_, i) => i + 1
-                      ).map((num, idx) => (
-                        <PageNumberButton
-                          pageNumber={num}
-                          isActive={currPageNumber === num}
-                          onClickAction={() => {
-                            setCurrPageNumber(num)
-                            if (currPageNumber !== num) {
-                              window.scrollTo({ top: 0 });
-                            }
-                          }}
-                          key={idx}
-                        />
-                      ))
-                    }
-                  </div>
-                </div>
-                <div
-                  style={{
-                    position: "absolute",
-                    right: 0,
-                  }}
-                >
-                  <MoreButton
-                    showText={false}
-                    buttonStyle={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '16px',
-                      paddingRight: '0px',
-                      paddingLeft: '-5px',
-                      marginRight: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
-                      opacity: totalPageCount > 1 ? 1 : 0,
-                      // opacity: currPageNumber < totalPageCount ? 1 : 0,
-                      zIndex: '10',
-                    }}
-                    iconStyle={{
-                      right: '4px'
-                    }}
-                    iconShift={3}
-                    onClickAction={() => {
-                      if (currLastPageNumberShown < totalPageCount) {
-                        setCurrLastPageNumberShown(currLastPageNumberShown + 1)
-                      }
-
-                      if (currPageNumber < totalPageCount) {
-                        setCurrPageNumber(currPageNumber + 1)
-                      }
-
-                      if (currPageNumber < totalPageCount || currLastPageNumberShown < totalPageCount) {
-                        window.scrollTo({ top: 0 });
-                      }
-                    }}
-                    isMobile={true}
-                  />
-                </div>
+          {isLoading ? (
+            <div style={{
+              display: 'flex',
+              width: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: height - 240,
+            }}>
+              <div style={{ marginBottom: '40px'}}>
+                <LoadingIcon isMobile={true}/>
               </div>
             </div>
-          }
+          ) : (
+            filteredProducts.length === 0 ? (
+              <NotFoundModal
+                onClearFiltersAction={clearAllBrandTags}
+                isMobile={true}
+              />
+              ) : (
+                <>
+                  <ShopGrid
+                    showAllCatalogButton={false}
+                    products={filteredProducts.slice(
+                      (currPageNumber - 1) * PRODUCTS_COUNT_ON_A_PAGE,
+                      currPageNumber * PRODUCTS_COUNT_ON_A_PAGE
+                    )}
+                    isMobile={true}
+                  />
+                  {
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        marginTop: '64px',
+                        marginBottom: '128px'
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: 'relative',
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '16px',
+                          width: '320px',
+                        }}
+                      >
+                        <div
+                          style={{
+                            transform: 'rotate(180deg)',
+                            position: "absolute",
+                            left: 0,
+                            display: 'flex',
+                            marginLeft: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
+                            zIndex: '10',
+                          }}
+                        >
+                          <MoreButton
+                            showText={false}
+                            buttonStyle={{
+                              width: '32px',
+                              height: '32px',
+                              borderRadius: '16px',
+                              paddingRight: '0px',
+                              paddingLeft: '-5px',
+                              opacity: totalPageCount > 1 ? 1 : 0
+                              // opacity: currPageNumber > 1 ? 1 : 0
+                            }}
+                            iconStyle={{
+                              right: '4px'
+                            }}
+                            iconShift={3}
+                            onClickAction={() => {
+                              if (currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON) {
+                                setCurrLastPageNumberShown(currLastPageNumberShown - 1)
+                              }
+
+                              if (currPageNumber > 1) {
+                                setCurrPageNumber(currPageNumber - 1)
+                              }
+
+                              if (currLastPageNumberShown > PAGES_BEFORE_MORE_BUTTON || currPageNumber > 1) {
+                                window.scrollTo({ top: 0 });
+                              }
+                            }}
+                            isMobile={true}
+                          />
+                        </div>
+                        <div
+                          className="static-number-window"
+                          style={{
+                            width: '224px',
+                            height: '32px',
+                            position: 'relative',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            overflow: 'hidden'
+                          }}
+                        >
+                          <div
+                            className="dynamic-number-row"
+                            style={{
+                              display: "flex",
+                              flexDirection: 'row',
+                              gap: '16px',
+                              width: '224px',
+                              flexWrap: 'nowrap',
+                              flexShrink: '0',
+                              alignItems: 'center',
+                              justifyContent: currLastPageNumberShown === PAGES_BEFORE_MORE_BUTTON && currLastPageNumberShown > totalPageCount ? 'center' : 'flex-start',
+                              position: "absolute",
+                              left: 48 * (-currLastPageNumberShown) + PAGES_BEFORE_MORE_BUTTON * 48,
+                              transition: "all .5s ease",
+                              WebkitTransition: "all .5s ease",
+                              MozTransition: "all .5s ease",
+                            }}
+                          >
+                            {
+                              totalPageCount > 1 && Array.from(
+                                { length: totalPageCount },
+                                (_, i) => i + 1
+                              ).map((num, idx) => (
+                                <PageNumberButton
+                                  pageNumber={num}
+                                  isActive={currPageNumber === num}
+                                  onClickAction={() => {
+                                    setCurrPageNumber(num)
+                                    if (currPageNumber !== num) {
+                                      window.scrollTo({ top: 0 });
+                                    }
+                                  }}
+                                  key={idx}
+                                />
+                              ))
+                            }
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            position: "absolute",
+                            right: 0,
+                          }}
+                        >
+                          <MoreButton
+                            showText={false}
+                            buttonStyle={{
+                              width: '32px',
+                              height: '32px',
+                              borderRadius: '16px',
+                              paddingRight: '0px',
+                              paddingLeft: '-5px',
+                              marginRight: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
+                              opacity: totalPageCount > 1 ? 1 : 0,
+                              // opacity: currPageNumber < totalPageCount ? 1 : 0,
+                              zIndex: '10',
+                            }}
+                            iconStyle={{
+                              right: '4px'
+                            }}
+                            iconShift={3}
+                            onClickAction={() => {
+                              if (currLastPageNumberShown < totalPageCount) {
+                                setCurrLastPageNumberShown(currLastPageNumberShown + 1)
+                              }
+
+                              if (currPageNumber < totalPageCount) {
+                                setCurrPageNumber(currPageNumber + 1)
+                              }
+
+                              if (currPageNumber < totalPageCount || currLastPageNumberShown < totalPageCount) {
+                                window.scrollTo({ top: 0 });
+                              }
+                            }}
+                            isMobile={true}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </>
+              )
+          )}
         </div>
       </div>
     )

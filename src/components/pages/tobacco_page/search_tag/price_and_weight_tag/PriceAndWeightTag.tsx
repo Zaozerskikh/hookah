@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import logIcon from './../../../../../assets/icons/search_tag/log.png'
+import {useMediaQuery} from "react-responsive";
 
 export const TagState = {
   ASCENDING: 'ASCENDING',
@@ -16,6 +17,7 @@ interface PriceAndWeightTagProps {
 
 const PriceAndWeightTag: React.FC<PriceAndWeightTagProps> = ({ displayedName, onClickAction, tagState, isMobile }) => {
   const [isHovered, setHovered] = useState(false)
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   const changeState = () => {
     if (tagState === TagState.TURNED_OFF) {
@@ -34,7 +36,7 @@ const PriceAndWeightTag: React.FC<PriceAndWeightTagProps> = ({ displayedName, on
         borderColor: tagState !== TagState.TURNED_OFF ? 'black' : !isHovered ? '#EAEBF0' : '#CFD5DB',
         borderStyle: 'solid',
         display: 'flex',
-        padding: '3px 16px',
+        padding: isMobile ? '4px 10px' : '3px 16px',
         flexDirection: 'row',
         alignItems: 'center',
         gap: tagState !== TagState.TURNED_OFF ? '10px' : '0px',
@@ -44,14 +46,16 @@ const PriceAndWeightTag: React.FC<PriceAndWeightTagProps> = ({ displayedName, on
         transition: "all 0.5s ease",
         WebkitTransition: "all 0.5s ease",
         MozTransition: "all 0.5s ease",
+        height: isMobile ? '28px' : undefined,
+        boxSizing: "border-box"
       }}
       onMouseEnter={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(true)
         }
       }}
       onMouseLeave={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(false)
         }
       }}

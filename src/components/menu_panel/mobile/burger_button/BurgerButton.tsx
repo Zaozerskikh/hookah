@@ -13,7 +13,7 @@ const BurgerButton: React.FC = () => {
       style={{
         width: '56px',
         height: '42px',
-        position: 'relative'
+        position: 'relative',
       }}
       onClick={() => dispatch(setIsBurgerShown(!isOpened))}
     >

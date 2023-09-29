@@ -11,7 +11,7 @@ import {RoutePaths} from "../../routes/RoutePaths";
 import ExternalLinks from "../../routes/ExternalLinks";
 import SocialLink from "../ui_components/social_link/SocialLink";
 import HeaderLink from "./desktop/header_link/HeaderLink";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {useMediaQuery} from "react-responsive";
 import BurgerButton from "./mobile/burger_button/BurgerButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -21,6 +21,7 @@ import {getActualCart} from "../../redux/cart_reducer/CartOperations";
 
 const MenuPanel: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)
+  const location = useLocation()
 
   const dispatch = useDispatch();
   const isDesktopOrLaptop = useMediaQuery({
@@ -41,7 +42,7 @@ const MenuPanel: React.FC = () => {
           flexDirection: 'row',
           alignItems:'center',
           justifyContent: 'space-between',
-          backgroundColor: 'white'
+          backgroundColor: 'white',
         }}
       >
         <Link to={RoutePaths.HOME} className="home-link">
@@ -127,7 +128,7 @@ const MenuPanel: React.FC = () => {
           flexDirection: 'row',
           alignItems: "center",
           padding: '8px 16px',
-          backgroundColor: 'white'
+          backgroundColor: location.pathname !== RoutePaths.NOT_FOUND ? 'white' : 'transparent'
         }}
       >
         <div/>

@@ -52,10 +52,6 @@ const CustomInput: React.FC<CustomInputProps> =
       setPrevTextLen(text.length)
     }, [prevTextLen, text, zipCode])
 
-    useEffect(() => {
-      console.log(text)
-    }, [text]);
-
     return(
       <div
         className="custom-input-wrapper"

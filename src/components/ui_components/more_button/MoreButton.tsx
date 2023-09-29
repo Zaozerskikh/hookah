@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import blackMoreIconArrow from "../../../assets/icons/product_card/black_more_icon.png";
 import blackMoreIconBase from "../../../assets/icons/product_card/black_more_icon_base.png";
+import {useMediaQuery} from "react-responsive";
 
 interface MoreButtonProps {
   showText: boolean;
@@ -22,6 +23,7 @@ const MoreButton: React.FC<MoreButtonProps> =
      dontShowIcon, onHoverColor, isMobile}) => {
     const [isHovered, setHovered] = useState(false);
     const [isClicked, setClicked] = useState(false);
+    const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
     const parsedButtonStyle = {
       cursor: isHovered ? 'pointer' : undefined,
@@ -71,24 +73,28 @@ const MoreButton: React.FC<MoreButtonProps> =
       <button
         onClick={onClickAction}
         onMouseEnter={() => {
-          if (!isMobile) {
+          if (!isTouchable) {
             setHovered(true)
           }
         }}
         onMouseLeave={() => {
-          setHovered(false)
-          setClicked(false)
+          if (!isTouchable) {
+            setHovered(false)
+            setClicked(false)
+          }
         }}
         onTouchStart={() => setHovered(true)}
         onTouchEnd={() => setHovered(false)}
         onTouchCancel={() => setHovered(false)}
         onMouseDown={() => {
-          if (!isMobile) {
+          if (!isTouchable) {
             setClicked(true)
           }
         }}
         onMouseUp={() => {
-          setClicked(false)
+          if (!isTouchable) {
+            setClicked(false)
+          }
         }}
         style={isClicked
           ? {...parsedButtonStyle, backgroundColor: '#c7ccd3'}

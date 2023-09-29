@@ -40,6 +40,7 @@ const CartButton: React.FC = () => {
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
   })
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   useEffect(() => {
     setActualCart(getActualCart(cartState))
@@ -214,12 +215,21 @@ const CartButton: React.FC = () => {
             MozTransition: "all .2s ease",
             zIndex: '9999'
           }}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
           onClick={() => dispatch(setIsCheckoutWindowShown(true))}
-          onMouseDown={() => setClicked(true)}
-          onMouseUp={() => setClicked(false)}
-          onMouseOut={() => setClicked(false)}
+          onMouseEnter={() => {
+            if (!isTouchable) {
+              setHovered(true)
+            }
+          }}
+          onMouseLeave={() => {
+            if (!isTouchable) {
+              setHovered(false)
+              setClicked(false)
+            }
+          }}
+          onTouchStart={() => setHovered(true)}
+          onTouchEnd={() => setHovered(false)}
+          onTouchCancel={() => setHovered(false)}
         >
           <div
             style={{

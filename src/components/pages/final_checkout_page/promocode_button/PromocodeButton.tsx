@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import tapeIcon from './../../../../assets/icons/promocode_button/tape.png'
+import {useMediaQuery} from "react-responsive";
 
 interface PromocodeButtonProps {
   onClickAction: (...args: any) => any;
@@ -9,6 +10,7 @@ interface PromocodeButtonProps {
 const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction, isMobile }) => {
   const [isHovered, setHovered] = useState(false)
   const [isClicked, setClicked] = useState(false)
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   return(
     <div
@@ -29,12 +31,12 @@ const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction, isMobi
         marginBottom: isMobile ? '4px' : 0
       }}
       onMouseEnter={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(true)
         }
       }}
       onMouseLeave={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setHovered(false)
           setClicked(false)
         }
@@ -43,12 +45,12 @@ const PromocodeButton: React.FC<PromocodeButtonProps> = ({ onClickAction, isMobi
       onTouchEnd={() => setHovered(false)}
       onTouchCancel={() => setHovered(false)}
       onMouseDown={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setClicked(true)
         }
       }}
       onMouseUp={() => {
-        if (!isMobile) {
+        if (!isTouchable) {
           setClicked(false)
         }
       }}

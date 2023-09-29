@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './FooterLink.css'
 import mainLogoWhite from '../../../assets/icons/decorations/main_logo_cloud.png'
 import {Link} from "react-router-dom";
+import {useMediaQuery} from "react-responsive";
 
 interface FooterLinkProps {
   text: string,
@@ -10,14 +11,26 @@ interface FooterLinkProps {
 
 const FooterLink: React.FC<FooterLinkProps> = ({text, link}) => {
   const [isHovered, setHovered] = useState(false)
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   return(
     <div className="footer-link-wrapper">
       <Link
         to={link}
         className="footer-link"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onMouseEnter={() => {
+          if (!isTouchable) {
+            setHovered(true)
+          }
+        }}
+        onMouseLeave={() => {
+          if (!isTouchable) {
+            setHovered(false)
+          }
+        }}
+        onTouchStart={() => setHovered(true)}
+        onTouchEnd={() => setHovered(false)}
+        onTouchCancel={() => setHovered(false)}
       >
         {text}
 

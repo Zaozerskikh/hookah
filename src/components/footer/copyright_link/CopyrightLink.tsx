@@ -2,9 +2,11 @@ import React, {useState} from "react";
 import './CopyrightLink.css'
 import mainLogoGrey from '../../../assets/icons/decorations/main_logo_cloud_grey.png'
 import ExternalLinks from "../../../routes/ExternalLinks";
+import {useMediaQuery} from "react-responsive";
 
 const CopyrightLink: React.FC = () => {
   const [isHovered, setHovered] = useState(false)
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   return(
     <a
@@ -12,8 +14,19 @@ const CopyrightLink: React.FC = () => {
       target="_blank"
       className="copyright-link"
       rel="noreferrer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (!isTouchable) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isTouchable) {
+          setHovered(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
     >
       designed by Gleb Kossov
       <img

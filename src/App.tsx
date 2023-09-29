@@ -46,6 +46,10 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log(window.outerWidth)
+  }, []);
+
+  useEffect(() => {
     [loaderImg, aboutImg].map(im => {
       const img = new Image();
       img.onload = () => { }
@@ -55,12 +59,12 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isWarningShown || isBorgerOpened) {
+    if (isWarningShown || isBorgerOpened || loc.pathname === RoutePaths.NOT_FOUND) {
       document.body.classList.add('hidden');
     } else {
       document.body.classList.remove('hidden');
     }
-  }, [isWarningShown, isBorgerOpened]);
+  }, [isWarningShown, isBorgerOpened, loc]);
 
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
@@ -73,7 +77,9 @@ const App: React.FC = () => {
   }, [dispatch, isMobile, loc]);
 
   useEffect(() => {
-    dispatch(setIsWarningShown(true))
+    if (window.location.pathname !== RoutePaths.NOT_FOUND) {
+      dispatch(setIsWarningShown(true))
+    }
   }, [dispatch]);
 
   return (
@@ -164,7 +170,7 @@ const App: React.FC = () => {
             <Route path={RoutePaths.PRODUCT_DETAILED} element={<DetailedProductPage />} />
             <Route path={RoutePaths.FINAL_CHECKOUT} element={<FinalCheckoutPage />} />
             <Route path={RoutePaths.NOT_FOUND} element={<NotFoundPage />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="*" element={<Navigate to={RoutePaths.NOT_FOUND} />} />
           </Routes>
         </div>
       </div>

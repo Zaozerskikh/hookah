@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Link, useLocation} from "react-router-dom";
 import './HeaderLink.css'
 import mainLogoClouds from '../../../../assets/icons/decorations/main_logo_cloud.png'
+import {useMediaQuery} from "react-responsive";
 
 interface HeaderLinkProps {
   link: string
@@ -14,11 +15,23 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({ link, text, wrapperWidth }) => 
   const currPath = location.pathname;
 
   const [isHovered, setHovered] = useState(false)
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   return(
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => {
+        if (!isTouchable) {
+          setHovered(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isTouchable) {
+          setHovered(false)
+        }
+      }}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+      onTouchCancel={() => setHovered(false)}
       style={{
         minWidth: `${wrapperWidth}px`,
         display: 'flex',
