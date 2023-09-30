@@ -44,9 +44,13 @@ const DeliveryPolicyPage: React.FC = () => {
     query: '(max-width: 1000px)'
   })
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   const renderDesktop = () => {
     return(
-      <div className="delivery-policy-container">
+      <div className="delivery-policy-container" style={{ maxWidth: isDesktopOrLaptop ? '1264px' : '948px'}}>
         <div className="h1">🚚 Our Delivery Policy</div>
         <div style={{ display: "flex", flexDirection: 'column', gap: '8px'}}>
           <div className="h2">⚡ Fast and Reliable Tobacco Delivery Across Portugal</div>
@@ -60,7 +64,7 @@ const DeliveryPolicyPage: React.FC = () => {
             At Hookah PT, we combine premium quality with seamless delivery, making us your ultimate choice for tobacco products in Portugal. Thank you for choosing us as your partner in creating memorable hookah moments.
           </div>
         </div>
-        <div className="blocks-wrapper">
+        <div className="blocks-wrapper" style={{ maxWidth: isDesktopOrLaptop ? '1264px' : '948px', gap: isDesktopOrLaptop ? '64px' : '48px'}}>
           {
             Blocks.map((block, idx) => (
               <Block
@@ -71,7 +75,7 @@ const DeliveryPolicyPage: React.FC = () => {
             ))
           }
         </div>
-        <div style={{ display: 'flex', width: 'TS2528: A module cannot have multiple default exports.', alignItems: 'center', justifyContent: 'center'}}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
           <StandardButton
             text="Open catalog"
             onClickAction={() => navigate(RoutePaths.TOBACCO)}

@@ -46,10 +46,6 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log(window.outerWidth)
-  }, []);
-
-  useEffect(() => {
     [loaderImg, aboutImg].map(im => {
       const img = new Image();
       img.onload = () => { }
@@ -99,11 +95,11 @@ const App: React.FC = () => {
         <div
           style={{
             width: '100%',
-            maxWidth: '1440px',
             display: "flex",
             flexDirection: 'column',
             alignItems: "center",
             justifyContent: 'center',
+            overflowX: 'hidden'
           }}
         >
           <SlidingMenu/>

@@ -4,6 +4,14 @@ import StandardButton from "../../ui_components/standart_button/StandartButton";
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
 import {useMediaQuery} from "react-responsive";
+import SocialLink from "../../ui_components/social_link/SocialLink";
+import mainLogoInstagramIcon from "../../../assets/icons/socials/instagram_logo_black.png";
+import instagramGreyIcon from "../../../assets/icons/socials/instagram_logo_smokegrey.png";
+import ExternalLinks from "../../../routes/ExternalLinks";
+import mainLogoWhatsappIcon from "../../../assets/icons/socials/whatsapp_logo_black.png";
+import whatsappGreyIcon from "../../../assets/icons/socials/whatsapp_logo_smokegrey.png";
+import mainLogoTelegramIcon from "../../../assets/icons/socials/telegram_logo_black.png";
+import telegramGreyIcon from "../../../assets/icons/socials/telegram_logo__smokegrey.png";
 
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,11 +20,19 @@ const NotFoundPage: React.FC = () => {
     query: '(max-width: 1000px)'
   })
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   useEffect(() => {
     if (!isMobile) {
       setTimeout(() => {
         document.body.classList.remove('hidden');
       }, 500)
+
+      setTimeout(() => {
+        document.body.classList.remove('hidden');
+      }, 800)
     } else {
       setTimeout(() => {
         document.body.classList.add('hidden');
@@ -29,11 +45,29 @@ const NotFoundPage: React.FC = () => {
       <div
         style={{
           width: '100%',
+          maxWidth: isDesktopOrLaptop ? '1264px' : '948px',
           minHeight: '700px',
           position: 'relative',
         }}
       >
-        <div style={{position: "absolute", top: '220px', left: '926px'}}>
+        <div style={{ position: "absolute", top: '-56px', right: 0, zIndex: '20', display: 'flex', flexDirection: 'row', gap: '32px'}}>
+          <SocialLink
+            commonIcon={mainLogoInstagramIcon}
+            hoveredIcon={instagramGreyIcon}
+            link={ExternalLinks.INSTAGRAM}
+          />
+          <SocialLink
+            commonIcon={mainLogoWhatsappIcon}
+            hoveredIcon={whatsappGreyIcon}
+            link={ExternalLinks.WHATSAPP}
+          />
+          <SocialLink
+            commonIcon={mainLogoTelegramIcon}
+            hoveredIcon={telegramGreyIcon}
+            link={ExternalLinks.TELEGRAM}
+          />
+        </div>
+        <div style={{position: "absolute", top: '220px', left: isDesktopOrLaptop ? '926px' : '726px'}}>
           <svg width="199" height="294" viewBox="0 0 199 294" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M52.1729 0H88.3968L79.3408 72.4478H61.2288L52.1729 0Z" fill="#2C2D2E"/>
             <rect x="58.207" y="77.2546" width="24.1493" height="132.821" fill="#2C2D2E"/>
@@ -53,7 +87,8 @@ const NotFoundPage: React.FC = () => {
           style={{
             position: 'absolute',
             top: '-180px',
-            left: '720px',
+            left: isDesktopOrLaptop ? '720px' : '520px',
+            zIndex: 0
           }}
         >
           <svg width="832" height="832" viewBox="0 0 832 832" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +96,7 @@ const NotFoundPage: React.FC = () => {
           </svg>
 
         </div>
-        <div style={{ marginLeft: `88px`, marginTop: '100px'}}>
+        <div style={{marginTop: '100px'}}>
           <svg width="411" height="141" viewBox="0 0 411 141" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M123.8 106.102H97.2V140.502H77.8V106.102H0V92.1024L71.6 0.502441H93.2L24.6 88.9025H78.4V58.5024H97.2V88.9025H123.8V106.102Z" fill="#CFD5DB"/>
             <path d="M228.844 86.1727L221.096 86.2963L220.972 94.0437C220.816 103.847 217.003 113.579 209.529 121.054C194.264 136.319 169.514 136.319 154.249 121.054C138.984 105.788 138.984 81.0387 154.249 65.7736C161.724 58.2984 171.456 54.4861 181.261 54.3297L189.008 54.2062L189.132 46.4587C189.289 36.6549 193.101 26.9235 200.576 19.4489C215.841 4.18371 240.591 4.18371 255.856 19.4489C271.121 34.714 271.121 59.4637 255.856 74.7288C248.381 82.204 238.648 86.0163 228.844 86.1727Z" stroke="#CFD5DB" strokeWidth="16"/>
@@ -77,7 +112,6 @@ const NotFoundPage: React.FC = () => {
           text="Open catalog"
           buttonStyle={{
             position: "absolute",
-            left: "88px",
             top: 490,
             padding: '12px 64px 12px 64px'
           }}

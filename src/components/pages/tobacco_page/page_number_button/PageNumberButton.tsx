@@ -3,19 +3,20 @@ import React, {useState} from "react";
 interface PageNumberButtonProps {
   pageNumber: number,
   isActive: boolean,
-  onClickAction: (...args: any) => any
+  onClickAction: (...args: any) => any,
+  isMobile ? : boolean
 }
 
-const PageNumberButton: React.FC<PageNumberButtonProps> = ({ isActive, pageNumber, onClickAction }) => {
+const PageNumberButton: React.FC<PageNumberButtonProps> = ({ isActive, pageNumber, onClickAction, isMobile }) => {
   const [isHovered, setHovered] = useState(false)
 
   return(
     <div
       style={{
         cursor: isHovered ? 'pointer' : undefined,
-        width: '32px',
-        height: '32px',
-        borderRadius: '16px',
+        width: isMobile ? '28px' : '32px',
+        height: isMobile ? '28px' : '32px',
+        borderRadius: isMobile ? '14px' : '16px',
         backgroundColor: isHovered && !isActive ? '#CFD5DB' : isActive ? 'black' :'#EAEBF0',
         display: "flex",
         alignItems: "center",
@@ -32,7 +33,7 @@ const PageNumberButton: React.FC<PageNumberButtonProps> = ({ isActive, pageNumbe
       <span
         style={{
           fontFamily: 'Monsterrat-500, serif',
-          fontSize: '22px',
+          fontSize: isMobile ? '20px' : '22px',
           fontWeight: '500',
           lineHeight: '32px',
           textAlign: 'center',

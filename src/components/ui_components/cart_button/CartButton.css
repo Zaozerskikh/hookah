@@ -163,7 +163,7 @@
     position: absolute;
     bottom: 0;
     background: linear-gradient(to bottom, transparent, black);
-    height: 70px;
+    height: 30px;
     width: 939px;
     pointer-events: none;
     z-index: 5000 !important;
@@ -174,7 +174,7 @@
     position: absolute;
     top: 0;
     background: linear-gradient(to top, transparent, black);
-    height: 80px;
+    height: 30px;
     width: 939px;
     pointer-events: none;
     z-index: 9999 !important;

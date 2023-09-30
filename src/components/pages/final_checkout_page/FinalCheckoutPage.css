@@ -141,7 +141,8 @@
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    width: 401px;
+    width: 100%;
+    max-width: 401px;
     height: 48px;
     position: absolute;
     bottom: 0;

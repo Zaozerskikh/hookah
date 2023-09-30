@@ -125,10 +125,10 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
   ])
 
   useEffect(() => {
-    if (searchString.length === 0) {
+    if (searchString.length === 0 && !initialSortByBrand) {
       setUseTags(true)
     }
-  }, [searchString]);
+  }, [searchString, initialSortByBrand]);
 
   const clearAllBrandTags = () => {
     setTangiersTagActive(false)
@@ -621,8 +621,8 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
                           flexDirection: 'row',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          gap: '16px',
-                          width: '320px',
+                          gap: '12px',
+                          width: '268px',
                         }}
                       >
                         <div
@@ -631,15 +631,15 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
                             position: "absolute",
                             left: 0,
                             display: 'flex',
-                            marginLeft: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
+                            marginLeft: totalPageCount > 4 ? undefined : `calc(94px - ${totalPageCount / 2 * 40}px + 6px)`,
                             zIndex: '10',
                           }}
                         >
                           <MoreButton
                             showText={false}
                             buttonStyle={{
-                              width: '32px',
-                              height: '32px',
+                              width: '28px',
+                              height: '28px',
                               borderRadius: '16px',
                               paddingRight: '0px',
                               paddingLeft: '-5px',
@@ -647,7 +647,7 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
                               // opacity: currPageNumber > 1 ? 1 : 0
                             }}
                             iconStyle={{
-                              right: '4px'
+                              right: '2px'
                             }}
                             iconShift={3}
                             onClickAction={() => {
@@ -669,8 +669,8 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
                         <div
                           className="static-number-window"
                           style={{
-                            width: '224px',
-                            height: '32px',
+                            width: '188px',
+                            height: '28px',
                             position: 'relative',
                             display: 'flex',
                             flexDirection: 'row',
@@ -683,14 +683,14 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
                             style={{
                               display: "flex",
                               flexDirection: 'row',
-                              gap: '16px',
-                              width: '224px',
+                              gap: '12px',
+                              width: '188px',
                               flexWrap: 'nowrap',
                               flexShrink: '0',
                               alignItems: 'center',
                               justifyContent: currLastPageNumberShown === PAGES_BEFORE_MORE_BUTTON && currLastPageNumberShown > totalPageCount ? 'center' : 'flex-start',
                               position: "absolute",
-                              left: 48 * (-currLastPageNumberShown) + PAGES_BEFORE_MORE_BUTTON * 48,
+                              left: 40 * (-currLastPageNumberShown) + PAGES_BEFORE_MORE_BUTTON * 40,
                               transition: "all .5s ease",
                               WebkitTransition: "all .5s ease",
                               MozTransition: "all .5s ease",
@@ -711,6 +711,7 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
                                     }
                                   }}
                                   key={idx}
+                                  isMobile={true}
                                 />
                               ))
                             }
@@ -725,18 +726,18 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
                           <MoreButton
                             showText={false}
                             buttonStyle={{
-                              width: '32px',
-                              height: '32px',
+                              width: '28px',
+                              height: '28px',
                               borderRadius: '16px',
                               paddingRight: '0px',
                               paddingLeft: '-5px',
-                              marginRight: totalPageCount > 4 ? undefined : `calc(112px - ${totalPageCount / 2 * 48}px + 8px)`,
+                              marginRight: totalPageCount > 4 ? undefined : `calc(96px - ${totalPageCount / 2 * 40}px + 6px)`,
                               opacity: totalPageCount > 1 ? 1 : 0,
                               // opacity: currPageNumber < totalPageCount ? 1 : 0,
                               zIndex: '10',
                             }}
                             iconStyle={{
-                              right: '4px'
+                              right: '2px'
                             }}
                             iconShift={3}
                             onClickAction={() => {

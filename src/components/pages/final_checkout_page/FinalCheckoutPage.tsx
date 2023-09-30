@@ -125,6 +125,10 @@ const FinalCheckoutPage: React.FC = () => {
     query: '(max-width: 1000px)'
   })
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   const renderNewCheckoutResultDesktop = () => {
     return(
       <div
@@ -152,12 +156,12 @@ const FinalCheckoutPage: React.FC = () => {
           style={{
             display: "flex",
             flexDirection: 'row',
-            gap: '64px',
-            width: '1264px',
+            gap: isDesktopOrLaptop ? '64px' : '48px',
+            width: isDesktopOrLaptop ? '1264px' : '948px',
             marginBottom: '128px'
           }}
         >
-          <div className="all-input-wrapper">
+          <div className="all-input-wrapper" style={{ width: isDesktopOrLaptop ? '600px' : '450px'}}>
             <div className="input-box">
               <CustomInput
                 placeholderText="Your name"
@@ -290,7 +294,7 @@ const FinalCheckoutPage: React.FC = () => {
               gap: '32px',
             }}
           >
-            <div className="payment-info-wrapper">
+            <div className="payment-info-wrapper" style={{ width: isDesktopOrLaptop ? '600px' : '450px'}}>
               <div className="payment-line-wrapper">
                 <span className="static-info">CTT Delivery: </span>
                 <span className="black-info">{deliveryPrice.toFixed(2)}€</span>
@@ -327,9 +331,9 @@ const FinalCheckoutPage: React.FC = () => {
               actualCart.map(([productId, productCount]) => {
                 const product = Products.find(p => p.productId === productId)
                 return(
-                  <div className="order-item-container" key={productId}>
+                  <div className="order-item-container" key={productId} style={{ width: isDesktopOrLaptop ? '600px' : '450px'}}>
                     <img src={product.image} alt="p" style={{ width: '48px', height: '48px', borderRadius: '8px'}}/>
-                    <div className="order-item-info-container">
+                    <div className="order-item-info-container"  style={{ width: isDesktopOrLaptop ? '401px' : '340px'}}>
                     <span className="order-item-header">
                        {`${product.brand} – ${product.name} (${product.line}) ${product.weight}G`}
                     </span>

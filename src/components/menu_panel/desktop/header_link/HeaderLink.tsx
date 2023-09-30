@@ -17,6 +17,10 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({ link, text, wrapperWidth }) => 
   const [isHovered, setHovered] = useState(false)
   const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+
   return(
     <div
       onMouseEnter={() => {
@@ -39,9 +43,8 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({ link, text, wrapperWidth }) => 
         justifyContent: 'center',
         position: "relative"
       }}
-
     >
-      <Link to={link} className={currPath === link ? 'curr-menu-link' : 'menu-link'}>
+      <Link to={link} className={currPath === link ? 'curr-menu-link' : 'menu-link'} style={{ fontSize: isDesktopOrLaptop ? '25px' : '24px' }}>
         {text}
       </Link>
       <img

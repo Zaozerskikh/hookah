@@ -1,6 +1,7 @@
 import React from "react";
 import './Block.css'
 import abouTbullit from './../../../../assets/icons/decorations/about_bullit.png'
+import {useMediaQuery} from "react-responsive";
 
 export interface BlockProps {
   headerText: string,
@@ -9,13 +10,16 @@ export interface BlockProps {
 }
 
 const Block: React.FC<BlockProps> = ({headerText, mainText, isMobile}) => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
   const renderDesktop = () => {
     return(
       <div
         className="block-container"
         style={{
-          width: '600px',
-          height: '245px',
+          width: isDesktopOrLaptop ? '600px' : '450px',
+          height: isDesktopOrLaptop ? '245px' : '300px',
           display: 'flex',
           flexDirection: 'row',
           gap: '16px',

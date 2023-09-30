@@ -1,10 +1,10 @@
 .delivery-policy-container {
     margin: 34px 88px;
     width: 100%;
-    max-width: 1264px;
     gap: 24px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .delivery-policy-container .h1 {
@@ -33,11 +33,10 @@
 
 .delivery-policy-container .blocks-wrapper {
     display: flex;
-    width: 1264px;
+    width: 100%;
     padding-top: 40px;
     align-items: flex-start;
     align-content: flex-start;
-    gap: 64px;
     flex-wrap: wrap;
 }
 

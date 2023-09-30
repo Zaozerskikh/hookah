@@ -56,25 +56,25 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
   const renderDesktop = () => {
     return(
       <div className="product-card-container">
+        {
+          <div
+            style={{
+              position:'absolute',
+              top: '16px',
+              left: '16px',
+              display: "flex",
+              flexDirection:'row',
+              gap: '8px',
+            }}
+          >
+            {stock === 0 && <span className="soldout-detailed">Soldout</span>}
+            {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
+            {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
+            {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
+          </div>
+        }
         {isDetailedViewOpened && (
           <>
-            {
-              <div
-                style={{
-                  position:'absolute',
-                  top: '16px',
-                  left: '16px',
-                  display: "flex",
-                  flexDirection:'row',
-                  gap: '8px'
-                }}
-              >
-                {stock === 0 && <span className="soldout-detailed">Soldout</span>}
-                {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
-                {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-                {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
-              </div>
-            }
             <div
               className={`detailed-view-container ${!isCheckoutOpened && isDetailedViewOpened ? 'open' : ''}`}
               style={{
@@ -123,6 +123,7 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
                     optionalTags={tags}
                   />
                   <div className={`containerwrapper`}>
+                    <div className="heheboi"/>
                     <Scrollbar
                       className={`detailed-full-description ${(name.length > 20 || stock === 0 || stock === 1 || (tags && tags.includes(ProductTag.NEW)) || (discountPrice && discountPrice !== price)) ? 'short' : 'long'}`}
                       thumbYProps={{
