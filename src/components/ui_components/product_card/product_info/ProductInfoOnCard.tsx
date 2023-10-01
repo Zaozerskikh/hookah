@@ -4,12 +4,13 @@ import {decrementProductCount, incrementProductCount} from "../../../../redux/ca
 import {RoutePaths} from "../../../../routes/RoutePaths";
 import ShareButton from "../share_button/ShareButton";
 import {setBottomHintState} from "../../../../redux/bottom_hint_reducer/BottomHintReducer";
-import React, {useCallback} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../redux/Store";
 import {useNavigate} from "react-router-dom";
 import {FRONTEND_URL} from "../../../../env/env";
 import {ProductTag} from "../../../../content/Products";
+import {buildFullTobaccoPageLink, buildTobaccoLink} from "../../../pages/tobacco_page/TobaccoOperations";
 
 interface ProductInfoProps {
   productId: string;
@@ -31,15 +32,11 @@ export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name,
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const buildProductLink = useCallback((): string => {
-    return `${FRONTEND_URL}/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
-  }, [name, productId, brand, line, weight]);
-
   return(
     <div style={{display: 'flex', flexDirection: 'column'}} className="product-info-on-card">
       <span
         className="detailed-view-header"
-        onClick={() => navigate('/product/' + buildProductLink().split('/').slice(-1)[0])}
+        onClick={() => navigate(buildTobaccoLink(productId, brand, name, line, weight))}
       >
         {`${brand} - ${name}`}
       </span>
@@ -93,7 +90,7 @@ export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name,
             <span className="buy-now-text">Buy now</span>
           </button>
           {showShareButtonOnCard && <ShareButton
-            productLink={buildProductLink()}
+            productLink={buildFullTobaccoPageLink(productId, brand, name, line, weight, FRONTEND_URL)}
             onClickAdditionalAction={() => {
               if (!bottomHintState.isShown) {
                 dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))
@@ -105,7 +102,7 @@ export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name,
         showShareButtonOnCard ? (
           <div className="detailed-button-container">
             <ShareButton
-              productLink={buildProductLink()}
+              productLink={buildFullTobaccoPageLink(productId, brand, name, line, weight, FRONTEND_URL)}
               onClickAdditionalAction={() => {
                 if (!bottomHintState.isShown) {
                   dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))

@@ -252,7 +252,7 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
             )}
             <div
               ref={containerRef}
-              className={distanceFromBottom === 0 ? "full-prod-descr-mob-f" : stock === 0 ? 'full-prod-descr-mob-l' : "full-prod-descr-mob"}
+              className={"full-prod-descr-mob"}
               style={{overflow: 'auto'}}
             >
               {fullDescription}

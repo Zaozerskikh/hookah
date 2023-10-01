@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import './ProductCard.css';
 import MoreButton from "../more_button/MoreButton";
 import StandardButton from "../standart_button/StandartButton";
@@ -16,21 +16,28 @@ import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintR
 import ShareButton from "./share_button/ShareButton";
 import {FRONTEND_URL} from "../../../env/env";
 import ImageWrapper from "../image_wrapper/ImageWrapper";
+import {buildFullTobaccoPageLink, buildTobaccoLink} from "../../pages/tobacco_page/TobaccoOperations";
+import {useNavigate} from "react-router-dom";
+import MoreButtonInverted from "../more_button/MoreButtonInverted";
 
-const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weight, description, price, discountPrice, image , fullDescription, stock, tags}) => {
+interface ProductCardProps extends ProductInfo {
+  invertedColors ? : boolean,
+  openFullPage ? : boolean
+}
+const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
+                                                   weight, description, price, discountPrice,
+                                                   image , fullDescription, stock, tags,
+                                                   invertedColors, openFullPage}) => {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const bottomHintState = useSelector((state: RootState) => state.bottomHint);
 
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1264px)'
   })
-
-   const buildProductLink = useCallback((): string => {
-     return `${FRONTEND_URL}/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
-   }, [name, productId, brand, line, weight]);
 
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
@@ -50,8 +57,6 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
       document.body.style.overflowX = 'hidden';
     };
   }, [isDetailedViewOpened]);
-
-
 
   const renderDesktop = () => {
     return(
@@ -101,7 +106,7 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
                   right: '64px',
                 }}>
                   <ShareButton
-                    productLink={buildProductLink()}
+                    productLink={buildFullTobaccoPageLink(productId, brand, name, line, weight, FRONTEND_URL)}
                     onClickAdditionalAction={() => {
                       if (!bottomHintState.isShown) {
                         dispatch(setBottomHintState(true, 'The link has been copied! You can share it with your friends 😎'))
@@ -152,45 +157,94 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
           src={image}
           alt={name}
           className="product-image"
-          onClick={() => setDetailedViewOpened(true)}
+          onClick={() => {
+            if (openFullPage) {
+              navigate(buildTobaccoLink(productId, brand, name, line, weight))
+            } else {
+              setDetailedViewOpened(true)
+            }
+          }}
         />
         <div className="product-card-text">
           <span
             className="product-name"
-            onClick={() => setDetailedViewOpened(true)}
+            onClick={() => {
+              if (openFullPage) {
+                navigate(buildTobaccoLink(productId, brand, name, line, weight))
+              } else {
+                setDetailedViewOpened(true)
+              }
+            }}
             style={{
-              fontSize: `${name.length > 20 ? 18 : 22}px`
+              fontSize: `${name.length > 20 ? 18 : 22}px`,
+              color: invertedColors ? 'white' : "black"
             }}
           >
             {`${brand} – ${name} (${line}) ${weight}G`}
           </span>
           <span
-            onClick={() => setDetailedViewOpened(true)}
+            onClick={() => {
+              if (openFullPage) {
+                navigate(buildTobaccoLink(productId, brand, name, line, weight))
+              } else {
+                setDetailedViewOpened(true)
+              }
+            }}
             className="product-description">{description}
           </span>
           <div className="product-price-wrapper">
             {stock !== 0 && discountPrice && discountPrice !== price && <span className={`product-price-before-discount`}>{price.toFixed(2)}€</span>}
-            <span className={`product-price ${stock === 0 ? 'soldout' : ''}`}>{discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€</span>
+            <span
+              className={`product-price ${stock === 0 ? 'soldout' : ''}`}
+              style={{
+                color: invertedColors ? stock === 0 ? '#CFD5DB' : 'white' : stock === 0 ? '#CFD5DB' : "black"
+              }}
+            >
+              {discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€
+            </span>
           </div>
         </div>
         <div className="button-container">
           {stock !== 0 ? (
             purchasedCount === 0
               ? (
-                <StandardButton
-                  text="Buy"
-                  onClickAction={() => dispatch(incrementProductCount(productId))}
-                  buttonStyle={{
-                    width: '148px',
-                    height: '48px',
-                    borderRadius: '24px 0 0 24px',
-                  }}
-                />
+                invertedColors ? (
+                  <MoreButton
+                    showText={true}
+                    dontShowIcon={true}
+                    text="Buy"
+                    buttonStyle={{
+                      width: '148px',
+                      height: '48px',
+                      borderRadius: '24px 0 0 24px',
+                      backgroundColor: 'white',
+                    }}
+                    textStyle={{
+                      marginBottom: '3px'
+                    }}
+                    onHoverColor="#EAEBF0"
+                    onClickAction={() => dispatch(incrementProductCount(productId))}
+                  />
+                ) : (
+                  <StandardButton
+                    text="Buy"
+                    onClickAction={() => dispatch(incrementProductCount(productId))}
+                    buttonStyle={{
+                      width: '148px',
+                      height: '48px',
+                      borderRadius: '24px 0 0 24px',
+                    }}
+                  />
+                )
               )
               : (
                 <CounterButton
                   counterState={purchasedCount}
-                  isDark={false}
+                  isDark={invertedColors}
+                  wrapperStyle={ invertedColors ? {
+                    backgroundColor: '#2C2D2E',
+                    borderColor: '#2C2D2E'
+                  } : {}}
                   onPlusClickAction={() => {
                     dispatch(incrementProductCount(productId))
                   }}
@@ -202,18 +256,37 @@ const ProductCard: React.FC<ProductInfo> = ({ productId, name, brand,line, weigh
           ) : (
             <span className="soldout-text">Soldout</span>
           )}
-          <MoreButton
-            showText={false}
-            buttonStyle={{
-              backgroundColor:
-                purchasedCount === 0
-                  ? '#EAEBF0'
-                  : "transparent",
-              width: '64px',
-              height: '48px'
-            }}
-            onClickAction={() => setDetailedViewOpened(true)}
-          />
+          {invertedColors ? (
+            <MoreButtonInverted
+              onClickAction={() => {
+                if (openFullPage) {
+                  navigate(buildTobaccoLink(productId, brand, name, line, weight))
+                } else {
+                  setDetailedViewOpened(true)
+                }
+              }}
+              isTransparent={purchasedCount === 0}
+            />
+          ) : (
+            <MoreButton
+              showText={false}
+              buttonStyle={{
+                backgroundColor:
+                  purchasedCount === 0
+                    ? '#EAEBF0'
+                    : "transparent",
+                width: '64px',
+                height: '48px'
+              }}
+              onClickAction={() => {
+                if (openFullPage) {
+                  navigate(buildTobaccoLink(productId, brand, name, line, weight))
+                } else {
+                  setDetailedViewOpened(true)
+                }
+              }}
+            />
+          )}
         </div>
       </div>
     )

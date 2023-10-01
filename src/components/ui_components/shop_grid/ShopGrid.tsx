@@ -11,9 +11,11 @@ interface ShopGridProps {
   showAllCatalogButton: boolean;
   products: ProductInfo[],
   isMobile ? : boolean;
+  invertedColors ? : boolean,
+  openProductDetailedPagesInsteadOfCards ? : boolean
 }
 
-const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products, isMobile}) => {
+const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products, isMobile, invertedColors, openProductDetailedPagesInsteadOfCards}) => {
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1264px)'
   })
@@ -121,6 +123,8 @@ const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products, isMo
                 fullDescription={product.fullDescription}
                 stock={product.stock}
                 tags={product.tags}
+                openFullPage={openProductDetailedPagesInsteadOfCards}
+                invertedColors={invertedColors}
               />
             ))
           }

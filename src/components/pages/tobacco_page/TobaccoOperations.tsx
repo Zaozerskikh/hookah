@@ -87,6 +87,29 @@ export const applySearchString = (searchString: string, productsToApply: Product
 
   return moveSoldoutToEnd([...namesMatches, ...brandMatches, ...descriptionMatches])
 }
+
+export const getSuggestions = (suggestionsCount: number, products: ProductInfo[], currProductId: string): ProductInfo[] => {
+  const possibleSuggestions = products.filter(p => p.stock > 0 && p.productId !== currProductId);
+
+  if (possibleSuggestions.length >= suggestionsCount) {
+    return possibleSuggestions
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map((item) => item.value)
+      .slice(0, suggestionsCount);
+  } else {
+    return possibleSuggestions;
+  }
+}
+
+export const buildTobaccoLink = (productId: string, brand: string, name: string, line: string, weight: number) => {
+  return `/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
+}
+
+export const buildFullTobaccoPageLink = (productId: string, brand: string, name: string, line: string, weight: number, frontendPrefix: string) => {
+  return `${frontendPrefix}/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
+}
+
 export const moveSoldoutToEnd = (products: ProductInfo[]): ProductInfo[] => {
   const inStock = products.filter(x => x.stock !== 0)
   const soldout = products.filter(x => x.stock === 0)

@@ -1,5 +1,5 @@
 import './DetailedProductPage.css'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
@@ -9,6 +9,8 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import MoreButton from "../../ui_components/more_button/MoreButton";
 import {useMediaQuery} from "react-responsive";
+import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
+import {getSuggestions} from "../tobacco_page/TobaccoOperations";
 
 const DetailedProductPage: React.FC = () => {
   const navigate = useNavigate()
@@ -26,9 +28,11 @@ const DetailedProductPage: React.FC = () => {
 
     const product = Products.find(p => p.productId === productId)
     if (product) {
+      setLoading(true)
       setTimeout(() => {
         setCurrProduct(product)
-      }, 2000)
+        window.scrollTo({ top: 0 });
+      }, 1000)
     } else {
       navigate(RoutePaths.NOT_FOUND)
     }
@@ -41,6 +45,12 @@ const DetailedProductPage: React.FC = () => {
     }
   }, [currProduct]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      document.body.classList.remove('hidden');
+    }, 600)
+  }, []);
+
   useState(() => {
     window.scrollTo({ top: 0 });
   })
@@ -48,6 +58,10 @@ const DetailedProductPage: React.FC = () => {
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1264px)'
   })
+
+  const suggestions = useMemo(() => {
+    return getSuggestions(4, Products, productInfo.split('-')[0]);
+  }, [productInfo]);
 
   return(
     <div
@@ -73,7 +87,7 @@ const DetailedProductPage: React.FC = () => {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: '40px'
+              gap: '64px'
             }}
           >
             <div
@@ -115,7 +129,8 @@ const DetailedProductPage: React.FC = () => {
                 src={currProduct.image}
                 style={{
                   width: isDesktopOrLaptop ? '384px' : '284px',
-                  height:  isDesktopOrLaptop ? '476px' : '347px'
+                  height:  isDesktopOrLaptop ? '476px' : '347px',
+                  marginBottom: '20px'
                 }}
                 alt="tobacco-img"
               />
@@ -123,11 +138,19 @@ const DetailedProductPage: React.FC = () => {
             <div
               style={{
                 display: 'flex',
+                flexDirection: 'column',
                 width: "100%",
                 alignItems:'center',
-                justifyContent:'center'
+                justifyContent:'center',
+                gap: '40px'
               }}
             >
+              <ShopGrid
+                showAllCatalogButton={false}
+                products={isDesktopOrLaptop || suggestions?.length < 4 ? suggestions : suggestions.slice(0, Math.max(suggestions.length - 1, 3))}
+                invertedColors={true}
+                openProductDetailedPagesInsteadOfCards={true}
+              />
               <MoreButton
                 showText={true}
                 text="We have a lot more"

@@ -20,7 +20,7 @@ const ReturnToCartButton: React.FC<ReturnToCartButtonProps> = ({ onClickAction }
         gap: '10px',
         alignSelf: 'stretch',
         flexDirection: 'row',
-        backgroundColor: isHovered ? "var(--auxiliary-smoke-gray)" : 'white',
+        backgroundColor: isHovered ? "var(--auxiliary-light-gray)" : 'white',
         transition: "all .5s ease",
         WebkitTransition: "all .5s ease",
         MozTransition: "all .5s ease",
