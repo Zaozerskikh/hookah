@@ -29,7 +29,7 @@ const MoreButton: React.FC<MoreButtonProps> =
       cursor: isHovered ? 'pointer' : undefined,
       width: '64px',
       height: '48px',
-      color: '#EAEBF0',
+      color: 'white',
       borderRadius: '0 24px 24px 0',
       border: 'none',
       outline: 'none',

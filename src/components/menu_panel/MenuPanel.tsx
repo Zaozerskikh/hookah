@@ -17,7 +17,7 @@ import BurgerButton from "./mobile/burger_button/BurgerButton";
 import {useDispatch, useSelector} from "react-redux";
 import {setIsBurgerShown} from "../../redux/burger_button_reducer/BurgerButtonReducer";
 import {RootState} from "../../redux/Store";
-import {getActualCart} from "../../redux/cart_reducer/CartOperations";
+import {getActualCart} from "../../models/CartOperations";
 
 const MenuPanel: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)

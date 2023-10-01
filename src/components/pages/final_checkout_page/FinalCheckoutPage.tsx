@@ -29,12 +29,13 @@ import {
   getActualCart,
   getFullAmountWithDiscount,
   getFullAmountWithoutDiscount
-} from "../../../redux/cart_reducer/CartOperations";
+} from "../../../models/CartOperations";
 import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintReducer";
 import {useMediaQuery} from "react-responsive";
 import ReturnToCartButton from "./return_to_cart_button/ReturnToCartButton";
 import {setIsCheckoutWindowShown} from "../../../redux/product_detailed_view_reducer/CheckoutWindowReducer";
 import {setIsLastProductWarningShown} from "../../../redux/last_product_warning_reducer/LastProductWarningReducer";
+import {isSoldout} from "../../../models/TobaccoOperations";
 
 
 const CheckoutState = {
@@ -351,6 +352,7 @@ const FinalCheckoutPage: React.FC = () => {
                       <CounterButton
                         counterState={productCount}
                         isDark={false}
+                        disabledPlus={isSoldout(product.stock, cartState, productId)}
                         onPlusClickAction={() => dispatch(incrementProductCount(productId))}
                         onMinusClickAction={() => {
                           if (actualCart.length > 1 || productCount > 1) {

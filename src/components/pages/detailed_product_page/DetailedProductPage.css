@@ -1,0 +1,22 @@
+.full-tobacco-page-mob {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-right: 16px;
+    padding-left: 16px;
+    margin-top: 58px;
+    padding-top: 16px;
+    width: 100%;
+    background-color: black;
+}
+
+.full-tobacco-page-mob .head {
+    color: var(--main-white, #FFF);
+
+    /* Mobile/H2 */
+    font-family: Unbounded-600, serif;
+    font-size: 19px;
+    font-style: normal;
+    line-height: 125%; /* 23.75px */
+    align-self: stretch;
+}

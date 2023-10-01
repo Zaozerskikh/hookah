@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import './ProductCard.css';
 import MoreButton from "../more_button/MoreButton";
 import StandardButton from "../standart_button/StandartButton";
@@ -16,9 +16,16 @@ import {setBottomHintState} from "../../../redux/bottom_hint_reducer/BottomHintR
 import ShareButton from "./share_button/ShareButton";
 import {FRONTEND_URL} from "../../../env/env";
 import ImageWrapper from "../image_wrapper/ImageWrapper";
-import {buildFullTobaccoPageLink, buildTobaccoLink} from "../../pages/tobacco_page/TobaccoOperations";
+import {
+  buildFullTobaccoPageLink,
+  buildTobaccoLink,
+  isDiscount,
+  isLast,
+  isSoldout
+} from "../../../models/TobaccoOperations";
 import {useNavigate} from "react-router-dom";
 import MoreButtonInverted from "../more_button/MoreButtonInverted";
+import ProductTagsRow from "../product_tags/ProductTagsRow";
 
 interface ProductCardProps extends ProductInfo {
   invertedColors ? : boolean,
@@ -28,12 +35,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
                                                    weight, description, price, discountPrice,
                                                    image , fullDescription, stock, tags,
                                                    invertedColors, openFullPage}) => {
-  const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
-  const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const [isDetailedViewOpened, setDetailedViewOpened] = useState<boolean>(false);
   const dispatch = useDispatch();
   const navigate = useNavigate()
+
+  const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
   const bottomHintState = useSelector((state: RootState) => state.bottomHint);
+
+  const cartState = useSelector((state: RootState) => state.cart);
+  const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
 
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1264px)'
@@ -58,26 +68,42 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
     };
   }, [isDetailedViewOpened]);
 
+
+  const soldout = useMemo(() => {
+    return isSoldout(stock, cartState, productId)
+  }, [cartState, productId, stock])
+
+  const last = useMemo(() => {
+    return isLast(stock, cartState, productId)
+  }, [cartState, productId, stock])
+
+  const discount = useMemo(() => {
+    return isDiscount(price, discountPrice)
+  }, [price, discountPrice])
+
   const renderDesktop = () => {
     return(
       <div className="product-card-container">
-        {
-          <div
-            style={{
-              position:'absolute',
-              top: '16px',
-              left: '16px',
-              display: "flex",
-              flexDirection:'row',
-              gap: '8px',
-            }}
-          >
-            {stock === 0 && <span className="soldout-detailed">Soldout</span>}
-            {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
-            {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-            {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
-          </div>
-        }
+        <ProductTagsRow
+          tags={tags}
+          isSoldout={soldout}
+          isLast={last}
+          isDiscount={discount}
+          optionalWrapperStyle={{
+            position: 'absolute',
+            top: '16px',
+            left: '16px',
+            gap: '8px',
+            flexWrap: 'wrap',
+          }}
+          optionalOnClickAction={() => {
+            if (openFullPage) {
+              navigate(buildTobaccoLink(productId, brand, name, line, weight))
+            } else {
+              setDetailedViewOpened(true)
+            }
+          }}
+        />
         {isDetailedViewOpened && (
           <>
             <div
@@ -126,6 +152,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
                     purchasedCount={purchasedCount}
                     weight={weight}
                     optionalTags={tags}
+                    isDiscount={discount}
+                    isSoldout={soldout}
+                    isLast={last}
                   />
                   <div className={`containerwrapper`}>
                     <div className="heheboi"/>
@@ -193,11 +222,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
             className="product-description">{description}
           </span>
           <div className="product-price-wrapper">
-            {stock !== 0 && discountPrice && discountPrice !== price && <span className={`product-price-before-discount`}>{price.toFixed(2)}€</span>}
+            {discount
+              && <span className={`product-price-before-discount`}>{price.toFixed(2)}€</span>
+            }
             <span
-              className={`product-price ${stock === 0 ? 'soldout' : ''}`}
+              className={`product-price ${soldout ? 'soldout' : ''}`}
               style={{
-                color: invertedColors ? stock === 0 ? '#CFD5DB' : 'white' : stock === 0 ? '#CFD5DB' : "black"
+                color: invertedColors ? soldout? '#CFD5DB' : 'white' : soldout ? '#CFD5DB' : "black"
               }}
             >
               {discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€
@@ -205,7 +236,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
           </div>
         </div>
         <div className="button-container">
-          {stock !== 0 ? (
+          {!soldout ? (
             purchasedCount === 0
               ? (
                 invertedColors ? (
@@ -254,7 +285,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
                 />
               )
           ) : (
-            <span className="soldout-text">Soldout</span>
+            purchasedCount === 0 ? (
+              <span className="soldout-text">Soldout</span>
+            ) : (
+              <CounterButton
+                counterState={purchasedCount}
+                isDark={invertedColors}
+                disabledPlus={true}
+                wrapperStyle={ invertedColors ? {
+                  backgroundColor: '#2C2D2E',
+                  borderColor: '#2C2D2E'
+                } : {}}
+                onMinusClickAction={() => {
+                  dispatch(decrementProductCount(productId))
+                }}
+              />
+            )
           )}
           {invertedColors ? (
             <MoreButtonInverted
@@ -310,30 +356,43 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
           fullDescription={fullDescription}
           stock={stock}
           tags={tags}
+          isSoldout={soldout}
+          isDiscount={discount}
+          isLast={last}
         />
-        <div
-          style={{
-            position:'absolute',
+        <ProductTagsRow
+          tags={tags}
+          isSoldout={soldout}
+          isLast={last}
+          isDiscount={discount}
+          isMobile={true}
+          optionalWrapperStyle={{
+            position: 'absolute',
             top: '8px',
             left: '8px',
-            display: "flex",
-            flexDirection:'row',
-            flexWrap:'wrap',
-            gap: '6px'
+            gap: '6px',
+            flexWrap: 'wrap',
           }}
-          onClick={() => setDetailedViewOpened(true)}
-        >
-          {stock === 0 && <span className="soldout-detailed-mobile">Soldout</span>}
-          {stock === 1 && <span className="tag-detailed-mobile" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
-          {discountPrice && discountPrice !== price && <span className="tag-detailed-mobile" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-          {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed-mobile" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
-        </div>
+          optionalOnClickAction={() => {
+            if (openFullPage) {
+              navigate(buildTobaccoLink(productId, brand, name, line, weight))
+            } else {
+              setDetailedViewOpened(true)
+            }
+          }}
+        />
         <ImageWrapper
           xRatio={608}
           yRatio={760}
         >
           <img
-            onClick={() => setDetailedViewOpened(true)}
+            onClick={() => {
+              if (openFullPage) {
+                navigate(buildTobaccoLink(productId, brand, name, line, weight))
+              } else {
+                setDetailedViewOpened(true)
+              }
+            }}
             src={image}
             alt={name}
             className="product-image-mobile"
@@ -346,7 +405,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
         </ImageWrapper>
         <div
           className="product-card-product-info-mobile"
-          onClick={() => setDetailedViewOpened(true)}
+          onClick={() => {
+            if (openFullPage) {
+              navigate(buildTobaccoLink(productId, brand, name, line, weight))
+            } else {
+              setDetailedViewOpened(true)
+            }
+          }}
         >
           <span
             className="product-name-mobile"
@@ -357,12 +422,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
             className="product-description-mobile">{description}
           </span>
           <div className="product-price-wrapper-mobile">
-            {stock !== 0 && discountPrice && discountPrice !== price && <span className={`product-price-before-discount-mobile`}>{price.toFixed(2)}€</span>}
-            <span className={`product-price-mobile ${stock === 0 ? 'soldout' : ''}`}>{discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€</span>
+            {discount
+              && <span className={`product-price-before-discount-mobile`}>{price.toFixed(2)}€</span>
+            }
+            <span className={`product-price-mobile ${soldout? 'soldout' : ''}`}>{discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€</span>
           </div>
         </div>
         <div className="button-container-mobile">
-          {stock !== 0 ? (
+          {!soldout ? (
             purchasedCount === 0
               ? (
                 <StandardButton
@@ -390,7 +457,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
                 />
               )
           ) : (
-            <span className="soldout-text">Soldout</span>
+            purchasedCount === 0 ? (
+              <span className="soldout-text">Soldout</span>
+            ) : (
+              <CounterButton
+                isMobile={true}
+                counterState={purchasedCount}
+                isDark={false}
+                disabledPlus={true}
+                onPlusClickAction={() => {
+                  dispatch(incrementProductCount(productId))
+                }}
+                onMinusClickAction={() => {
+                  dispatch(decrementProductCount(productId))
+                }}
+              />
+            )
           )}
           <MoreButton
             showText={false}
@@ -406,7 +488,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
               left: '6px'
             }}
             isMobile={true}
-            onClickAction={() => setDetailedViewOpened(true)}
+            onClickAction={() => {
+              if (openFullPage) {
+                navigate(buildTobaccoLink(productId, brand, name, line, weight))
+              } else {
+                setDetailedViewOpened(true)
+              }
+            }}
           />
         </div>
       </div>

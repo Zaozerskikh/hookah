@@ -9,8 +9,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../redux/Store";
 import {useNavigate} from "react-router-dom";
 import {FRONTEND_URL} from "../../../../env/env";
-import {ProductTag} from "../../../../content/Products";
-import {buildFullTobaccoPageLink, buildTobaccoLink} from "../../../pages/tobacco_page/TobaccoOperations";
+import {buildFullTobaccoPageLink, buildTobaccoLink} from "../../../../models/TobaccoOperations";
+import ProductTagsRow from "../../product_tags/ProductTagsRow";
 
 interface ProductInfoProps {
   productId: string;
@@ -25,9 +25,15 @@ interface ProductInfoProps {
   optionalTags ? : string[];
   showOptionalTags ? : boolean;
   showShareButtonOnCard ? : boolean;
+  isSoldout: boolean;
+  isLast: boolean;
+  isDiscount: boolean;
 }
 
-export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name, brand, line, price, discountPrice, stock, purchasedCount, weight, optionalTags, showShareButtonOnCard}) => {
+export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name, brand, line,
+                                                                price, discountPrice,
+                                                                purchasedCount, weight, optionalTags,
+                                                                showShareButtonOnCard, isDiscount, isLast, isSoldout}) => {
   const bottomHintState = useSelector((state: RootState) => state.bottomHint);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -62,19 +68,19 @@ export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name,
           <span className="detailed-view-brand-line">{discountPrice ? discountPrice : price}€</span>
         </div>
       </div>
-      {(stock === 0 || stock === 1 || (optionalTags && optionalTags.includes(ProductTag.NEW)) || (discountPrice && discountPrice !== price)) && (
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', marginBottom: '24px'}}>
-          {stock === 0 && <span className="soldout-detailed">Soldout</span>}
-          {stock === 1 && <span className="tag-detailed" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
-          {discountPrice && discountPrice !== price && <span className="tag-detailed" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-          {optionalTags && optionalTags.includes(ProductTag.NEW) && <span className="tag-detailed" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
-        </div>
-      )}
-      {stock !== 0 ? (
+      <ProductTagsRow
+        tags={optionalTags}
+        isSoldout={isSoldout}
+        isLast={isLast}
+        isDiscount={isDiscount}
+        optionalWrapperStyle={{ marginBottom: '24px'}}
+      />
+      {(!isSoldout || purchasedCount !== 0) ? (
         <div className="detailed-button-container">
           <CounterButton
             counterState={purchasedCount}
             isDark={true}
+            disabledPlus={isSoldout}
             onPlusClickAction={() => dispatch(incrementProductCount(productId))}
             onMinusClickAction={() => dispatch(decrementProductCount(productId))}
           />

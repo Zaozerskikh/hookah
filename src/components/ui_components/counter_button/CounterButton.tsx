@@ -14,12 +14,13 @@ interface CounterButtonProps {
   onMinusClickAction? : (...args: any) => any
   wrapperStyle? : React.CSSProperties,
   counterStyle? : React.CSSProperties,
+  disabledPlus ? : boolean;
 }
 
 const CounterButton: React.FC<CounterButtonProps> =
   ({ counterState, isDark,
      onPlusClickAction, onMinusClickAction, isMobile,
-     counterStyle , wrapperStyle, isFramed}) => {
+     counterStyle , wrapperStyle, isFramed, disabledPlus}) => {
     const [isPlusHovered, setPlusHovered] = useState(false);
     const [isMinusHovered, setMinusHovered] = useState(false);
     const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
@@ -107,7 +108,11 @@ const CounterButton: React.FC<CounterButtonProps> =
         </button>
         <span style={parsedCounterStyle}>{counterState}</span>
         <button
-          onClick={onPlusClickAction}
+          onClick={() => {
+            if (!disabledPlus) {
+              onPlusClickAction()
+            }
+          }}
           onMouseEnter={() => {
             if (!isTouchable) {
               setPlusHovered(true)
@@ -123,18 +128,31 @@ const CounterButton: React.FC<CounterButtonProps> =
           onTouchCancel={() => setPlusHovered(false)}
           style={buttonStyle}
         >
-          <img
-            src={isDark ? whitePlusIcon : blackPlusIcon}
-            style={isPlusHovered
-              ? isMobile
-                ? {height: '28px', width: '28px', cursor: 'pointer', ...iconStyle}
-                : {height: '30px', width: '30px', cursor: 'pointer', ...iconStyle}
-              : isMobile
-                ? {height: '22px', width: '22px', ...iconStyle}
-                : {height: '24px', width: '24px', ...iconStyle}
-            }
-            alt="plus-icon"
-          />
+          {!disabledPlus ? (
+            <img
+              src={isDark ? whitePlusIcon : blackPlusIcon}
+              style={isPlusHovered
+                ? isMobile
+                  ? {height: '28px', width: '28px', cursor: 'pointer', ...iconStyle}
+                  : {height: '30px', width: '30px', cursor: 'pointer', ...iconStyle}
+                : isMobile
+                  ? {height: '22px', width: '22px', ...iconStyle}
+                  : {height: '24px', width: '24px', ...iconStyle}
+              }
+              alt="plus-icon"
+            />
+          ) : (
+            isDark ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M11 13V20H13V13H20V11H13V4H11V11H4V13H11Z" fill="#909398"/>
+              </svg>
+
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M11 13V20H13V13H20V11H13V4H11V11H4V13H11Z" fill="#909398"/>
+              </svg>
+            )
+          )}
         </button>
       </div>
     )

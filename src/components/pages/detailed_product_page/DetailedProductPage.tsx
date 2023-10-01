@@ -10,7 +10,8 @@ import {RootState} from "../../../redux/Store";
 import MoreButton from "../../ui_components/more_button/MoreButton";
 import {useMediaQuery} from "react-responsive";
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
-import {getSuggestions} from "../tobacco_page/TobaccoOperations";
+import {getSuggestions, isDiscount, isLast, isSoldout} from "../../../models/TobaccoOperations";
+import ProductTagsRow from "../../ui_components/product_tags/ProductTagsRow";
 
 const DetailedProductPage: React.FC = () => {
   const navigate = useNavigate()
@@ -18,6 +19,34 @@ const DetailedProductPage: React.FC = () => {
   const [isLoading, setLoading] = useState(true)
   const [currProduct, setCurrProduct] = useState<ProductInfo>(undefined)
   const purchasedCount = useSelector((state: RootState) => state.cart[productInfo.split('-')[0]]) || 0;
+  const cartState = useSelector((state: RootState) => state.cart);
+
+  const soldout = useMemo(() => {
+    if (currProduct) {
+      return isSoldout(currProduct.stock, cartState, currProduct.productId)
+    }
+    else {
+      return false
+    }
+  }, [cartState, currProduct])
+
+  const last = useMemo(() => {
+    if (currProduct) {
+      return isLast(currProduct.stock, cartState, currProduct.productId)
+    }
+    else {
+      return false
+    }
+  }, [cartState, currProduct])
+
+  const discount = useMemo(() => {
+    if (currProduct) {
+      return isDiscount(currProduct.price, currProduct.discountPrice)
+    }
+    else {
+      return false
+    }
+  }, [currProduct])
 
   useEffect(() => {
     const productId = productInfo.split('-')[0]
@@ -59,129 +88,155 @@ const DetailedProductPage: React.FC = () => {
     query: '(min-width: 1264px)'
   })
 
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
+
   const suggestions = useMemo(() => {
     return getSuggestions(4, Products, productInfo.split('-')[0]);
   }, [productInfo]);
 
-  return(
-    <div
-      style={{
-        minHeight: `${Math.max(window.innerHeight - 692, 300)}px`,
-        width: isDesktopOrLaptop ? '1264px' : '948px',
-        display: "flex",
-        backgroundColor: 'var(--main-black)',
-        justifyContent: 'center',
-        marginTop: '32px',
-        marginBottom: '160px'
-      }}
-    >
-      {isLoading ? (
-        <LoadingIcon/>
-      ) : (
-        <div
-          style={{
-            width: isDesktopOrLaptop ? '1264px' : '948px',
-          }}
-        >
+  const renderDesktop = () => {
+    return(
+      <div
+        style={{
+          minHeight: `${Math.max(window.innerHeight - 692, 300)}px`,
+          width: isDesktopOrLaptop ? '1264px' : '948px',
+          display: "flex",
+          backgroundColor: 'var(--main-black)',
+          justifyContent: 'center',
+          marginTop: '32px',
+          marginBottom: '160px'
+        }}
+      >
+        {isLoading ? (
+          <LoadingIcon/>
+        ) : (
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: '64px'
+              width: isDesktopOrLaptop ? '1264px' : '948px',
             }}
           >
             <div
               style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between'
+                display: "flex",
+                flexDirection: "column",
+                gap: '64px'
               }}
             >
               <div
-                style={{ width: isDesktopOrLaptop ? '782px' : 'calc(782px - 216px)', display: 'flex', flexDirection: 'column', gap: '16px'}}
-              >
-                <ProductInfoOnCard
-                  productId={currProduct.productId}
-                  name={currProduct.name}
-                  brand={currProduct.brand}
-                  line={currProduct.line}
-                  price={currProduct.price}
-                  discountPrice={currProduct.discountPrice}
-                  stock={currProduct.stock}
-                  purchasedCount={purchasedCount}
-                  weight={currProduct.weight}
-                  showOptionalTags={true}
-                  optionalTags={currProduct.tags}
-                  showShareButtonOnCard={true}
-                />
-                <div
-                  style={{
-                    color: 'var(--auxiliary-light-gray)',
-                    fontFamily: 'Monsterrat-400, serif',
-                    fontSize: '16px',
-                    lineHeight: '144%'
-                  }}
-                >
-                  {currProduct.fullDescription}
-                </div>
-              </div>
-              <img
-                src={currProduct.image}
                 style={{
-                  width: isDesktopOrLaptop ? '384px' : '284px',
-                  height:  isDesktopOrLaptop ? '476px' : '347px',
-                  marginBottom: '20px'
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between'
                 }}
-                alt="tobacco-img"
-              />
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                width: "100%",
-                alignItems:'center',
-                justifyContent:'center',
-                gap: '40px'
-              }}
-            >
-              <ShopGrid
-                showAllCatalogButton={false}
-                products={isDesktopOrLaptop || suggestions?.length < 4 ? suggestions : suggestions.slice(0, Math.max(suggestions.length - 1, 3))}
-                invertedColors={true}
-                openProductDetailedPagesInsteadOfCards={true}
-              />
-              <MoreButton
-                showText={true}
-                text="We have a lot more"
-                buttonStyle={{
-                  width: '298px',
-                  height: '48px',
-                  display:'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: 'white',
-                  gap:'0px',
-                  borderRadius: '24px',
-                  paddingLeft:'20px'
+              >
+                <div
+                  style={{ width: isDesktopOrLaptop ? '782px' : 'calc(782px - 216px)', display: 'flex', flexDirection: 'column', gap: '16px'}}
+                >
+                  <ProductInfoOnCard
+                    productId={currProduct.productId}
+                    name={currProduct.name}
+                    brand={currProduct.brand}
+                    line={currProduct.line}
+                    price={currProduct.price}
+                    discountPrice={currProduct.discountPrice}
+                    stock={currProduct.stock}
+                    purchasedCount={purchasedCount}
+                    weight={currProduct.weight}
+                    showOptionalTags={true}
+                    optionalTags={currProduct.tags}
+                    showShareButtonOnCard={true}
+                    isDiscount={discount}
+                    isSoldout={soldout}
+                    isLast={last}
+                  />
+                  <div
+                    style={{
+                      color: 'var(--auxiliary-light-gray)',
+                      fontFamily: 'Monsterrat-400, serif',
+                      fontSize: '16px',
+                      lineHeight: '144%'
+                    }}
+                  >
+                    {currProduct.fullDescription}
+                  </div>
+                </div>
+                <img
+                  src={currProduct.image}
+                  style={{
+                    width: isDesktopOrLaptop ? '384px' : '284px',
+                    height:  isDesktopOrLaptop ? '476px' : '347px',
+                    marginBottom: '20px'
+                  }}
+                  alt="tobacco-img"
+                />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: "100%",
+                  alignItems:'center',
+                  justifyContent:'center',
+                  gap: '40px'
                 }}
-                textStyle={{
-                  fontFamily: 'Monsterrat-600, serif',
-                  fontSize: '22px',
-                  lineHeight: '144%',
-                }}
-                iconStyle={{
-                  marginLeft: '-10px'
-                }}
-                onHoverColor="#EAEBF0"
-                onClickAction={() => navigate(RoutePaths.TOBACCO)}
-              />
+              >
+                <ShopGrid
+                  showAllCatalogButton={false}
+                  products={isDesktopOrLaptop || suggestions?.length < 4 ? suggestions : suggestions.slice(0, Math.max(suggestions.length - 1, 3))}
+                  invertedColors={true}
+                  openProductDetailedPagesInsteadOfCards={true}
+                />
+                <MoreButton
+                  showText={true}
+                  text="We have a lot more"
+                  buttonStyle={{
+                    width: '298px',
+                    height: '48px',
+                    display:'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: 'white',
+                    gap:'0px',
+                    borderRadius: '24px',
+                    paddingLeft:'20px'
+                  }}
+                  textStyle={{
+                    fontFamily: 'Monsterrat-600, serif',
+                    fontSize: '22px',
+                    lineHeight: '144%',
+                  }}
+                  iconStyle={{
+                    marginLeft: '-10px'
+                  }}
+                  onHoverColor="#EAEBF0"
+                  onClickAction={() => navigate(RoutePaths.TOBACCO)}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
-  )
+        )}
+      </div>
+    )
+  }
+
+  const renderMobile = () => {
+    return(
+      <div className="full-tobacco-page-mob">
+        <div className="head">{currProduct?.brand} - {currProduct?.name}</div>
+        <ProductTagsRow
+          tags={currProduct?.tags}
+          isSoldout={soldout}
+          isLast={last}
+          isDiscount={discount}
+          isMobile={true}
+        />
+      </div>
+    )
+  }
+
+  return(isMobile ? renderMobile() : renderDesktop())
 }
 
 export default DetailedProductPage

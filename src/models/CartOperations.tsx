@@ -1,8 +1,13 @@
-import {Products} from "../../content/Products";
+import {Products} from "../content/Products";
 
 export const getProductsCountInCart = (cart: Record<string, number>): number => {
   return Object.values(cart).reduce((acc, value) => acc + value, 0)
 }
+
+export const getProductCountInCartById = (cart: Record<string, number>, productId: string): number => {
+  return cart[productId] || 0;
+}
+
 export const getActualCart = (cart: Record<string, number>): [string, number][] => {
   return Object
     .entries(cart)

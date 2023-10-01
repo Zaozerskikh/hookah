@@ -1,8 +1,40 @@
-import {ProductBrand, ProductInfo} from "../../../content/Products";
-import {TagState} from "./search_tag/price_and_weight_tag/PriceAndWeightTag";
+import {ProductBrand, ProductInfo, ProductTag} from "../content/Products"
+import {TagState} from "../components/pages/tobacco_page/search_tag/price_and_weight_tag/PriceAndWeightTag";
 
 export const getActualPrice = (product: ProductInfo): number => {
   return product.discountPrice ? product.discountPrice : product.price
+}
+
+export const getActualTags = (product: ProductInfo): string[] => {
+  const tags: string[] = []
+
+  if (product.stock === 0) {
+    tags.push(ProductTag.SOLDOUT)
+  }
+
+  if (product.stock === 1) {
+    tags.push(ProductTag.LAST)
+  }
+
+  if (product.discountPrice && product.discountPrice !== product.price) {
+    tags.push(ProductTag.SALE)
+  }
+
+  return [...tags, ...product.tags]
+}
+
+export const isSoldout = (stock: number, cart: Record<string, number>, productId: string): boolean => {
+  const countInCart = cart[productId] || 0
+  return stock - countInCart <= 0;
+}
+
+export const isLast = (stock: number, cart: Record<string, number>, productId: string): boolean => {
+  const countInCart = cart[productId] || 0
+  return stock - countInCart === 1;
+}
+
+export const isDiscount = (price: number,discountPrice: number): boolean => {
+  return discountPrice && discountPrice !== price
 }
 
 export const filterByOneBrand = (brand: string, productsToApply: ProductInfo[]): ProductInfo[] => {

@@ -18,11 +18,12 @@ import {
   getActualCart,
   getFullAmountWithDiscount,
   getProductsCountInCart
-} from "../../../redux/cart_reducer/CartOperations";
+} from "../../../models/CartOperations";
 import {useMediaQuery} from "react-responsive";
 import BottomSlider from "../bottom_slider/BottomSlider";
 import ContinueOrderingButton from "../../pages/final_checkout_page/continue_ordering_button/ContinueOrderingButton";
 import {setIsLastProductWarningShown} from "../../../redux/last_product_warning_reducer/LastProductWarningReducer";
+import {isSoldout} from "../../../models/TobaccoOperations";
 
 const CartButton: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)
@@ -132,6 +133,7 @@ const CartButton: React.FC = () => {
                               isDark={true}
                               onPlusClickAction={() => dispatch(incrementProductCount(key))}
                               onMinusClickAction={() => dispatch(decrementProductCount(key))}
+                              disabledPlus={isSoldout(product.stock, cartState, product.productId)}
                             />
                           </div>
                           <div className="total-price-info">{((product.discountPrice ? product.discountPrice : product.price) * value).toFixed(2)}€</div>
@@ -416,6 +418,7 @@ const CartButton: React.FC = () => {
                           <CounterButton
                             counterState={productCount}
                             isDark={true}
+                            disabledPlus={isSoldout(product.stock, cartState, product.productId)}
                             onPlusClickAction={() => dispatch(incrementProductCount(productId))}
                             onMinusClickAction={() => {
                               if (actualCart.length > 1 || productCount > 1 || location.pathname !== RoutePaths.FINAL_CHECKOUT) {

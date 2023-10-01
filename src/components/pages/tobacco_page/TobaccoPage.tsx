@@ -19,7 +19,7 @@ import {
   applySortingTags,
   filterByOneBrand,
   moveSoldoutToEnd
-} from "./TobaccoOperations";
+} from "../../../models/TobaccoOperations";
 
 export const PRODUCTS_COUNT_ON_A_PAGE = 4;
 const PAGES_BEFORE_MORE_BUTTON = 5;

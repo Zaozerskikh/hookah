@@ -1,9 +1,9 @@
 import './ProductViewMobile.css'
-import { useSpring, animated } from '@react-spring/web'
-import { useDrag } from '@use-gesture/react'
-import type { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
+import {animated, useSpring} from '@react-spring/web'
+import {useDrag} from '@use-gesture/react'
+import type {ReactDOMAttributes} from '@use-gesture/react/dist/declarations/src/types';
 import React, {useCallback, useEffect, useRef, useState} from "react";
-import {ProductInfo, ProductTag} from "../../../../content/Products";
+import {ProductInfo} from "../../../../content/Products";
 import CounterButton from "../../counter_button/CounterButton";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../redux/Store";
@@ -15,14 +15,18 @@ import CloseButton from "../../close_button/CloseButton";
 import ShareButton from "../share_button/ShareButton";
 import {FRONTEND_URL} from "../../../../env/env";
 import {setBottomHintState} from "../../../../redux/bottom_hint_reducer/BottomHintReducer";
+import ProductTagsRow from "../../product_tags/ProductTagsRow";
 
 interface ProductViewMobileProps extends ProductInfo {
   onClick: (...args: any) => void;
   isOpened: boolean;
+  isSoldout: boolean;
+  isLast: boolean;
+  isDiscount: boolean;
 }
 const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productId, name, tags, weight,
-     description, fullDescription, stock, image,
-     price, discountPrice, line, brand, isOpened })=> {
+     description, fullDescription, image,
+     price, discountPrice, line, brand, isOpened , isDiscount, isLast, isSoldout})=> {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -172,23 +176,18 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
           <div style={{ width: '100%', display: "flex", flexDirection: 'column', alignItems: 'center', gap: '16px'}}>
             <div className="bottom-grad"/>
             <div className="bottom-tricky-div"/>
-            {(stock === 0 || stock === 1 || (tags && tags.includes(ProductTag.NEW)) || (discountPrice && discountPrice !== price)) && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection:'row',
-                  flexWrap:'wrap',
-                  gap: '6px',
-                  width: '100%',
-                  paddingTop: '17px',
-                }}
-              >
-                {stock === 0 && <span className="soldout-detailed-mobile">Soldout</span>}
-                {stock === 1 && <span className="tag-detailed-mobile" style={{ backgroundColor: '#FF8A00'}}>Last title</span>}
-                {discountPrice && discountPrice !== price && <span className="tag-detailed-mobile" style={{ backgroundColor: '#22CE5D'}}>Sale</span>}
-                {tags && tags.includes(ProductTag.NEW) && <span className="tag-detailed-mobile" style={{ backgroundColor: '#BC4FFF'}}>New</span>}
-              </div>
-            )}
+            <ProductTagsRow
+              tags={tags}
+              isSoldout={isSoldout}
+              isLast={isLast}
+              isDiscount={isDiscount}
+              isMobile={true}
+              optionalWrapperStyle={{
+                gap: '6px',
+                flexWrap: 'wrap',
+                width: '100%'
+              }}
+            />
             <div className="detailed-view-description-container-mobile">
               <div>
                 <span className="detailed-view-brand-line-info-mobile">Brand: </span>
@@ -200,7 +199,7 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
               </div>
               <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', position: 'relative'}}>
                 <span className="detailed-view-brand-line-info-mobile-base">Price per pack: </span>
-                {discountPrice && discountPrice !== price && (
+                {isDiscount && (
                   <span
                     className="detailed-view-brand-line-info-mobile"
                     style={{ textDecoration: 'line-through'}}
@@ -211,10 +210,10 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
                 <span className="detailed-view-brand-line-mobile">
                   {discountPrice ? discountPrice : price}€
                 </span>
-                {stock === 0 && <div className="top-grad"/>}
+                {isSoldout && <div className="top-grad"/>}
               </div>
             </div>
-            {stock !== 0 && (
+            {(!isSoldout || purchasedCount !== 0) && (
               <div style={{paddingBottom: '4px', display: 'flex', width: '100%', flexDirection: 'row', gap: '8px', position: 'relative'}}>
                 <MoreButton
                   showText={true}
@@ -241,6 +240,7 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
                 />
                 <CounterButton
                   counterState={purchasedCount}
+                  disabledPlus={isSoldout}
                   isDark={true}
                   isMobile={true}
                   wrapperStyle={{ minWidth: '89px', width: undefined}}
