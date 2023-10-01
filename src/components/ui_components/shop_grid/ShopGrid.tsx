@@ -57,6 +57,8 @@ const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products, isMo
                 fullDescription={product.fullDescription}
                 stock={product.stock}
                 tags={product.tags}
+                openFullPage={openProductDetailedPagesInsteadOfCards}
+                invertedColors={invertedColors}
               />
             ))
           }

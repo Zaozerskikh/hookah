@@ -6,6 +6,7 @@
     padding-left: 16px;
     margin-top: 58px;
     padding-top: 16px;
+    gap: 16px;
     width: 100%;
     background-color: black;
 }
@@ -19,4 +20,43 @@
     font-style: normal;
     line-height: 125%; /* 23.75px */
     align-self: stretch;
+}
+
+.full-tobacco-page-mob .prod-img {
+    width: 160px;
+    height: 200px;
+    flex-shrink: 0;
+    align-self: center;
+    display: flex;
+}
+
+.full-tobacco-page-mob .info-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-tobacco-page-mob .info-wrapper .info-h {
+    color: var(--auxiliary-light-gray, #EAEBF0);
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    line-height: 144%; /* 23.04px */
+}
+
+.full-tobacco-page-mob .info-wrapper .info-c {
+    color: var(--main-white, #FFF);
+    font-family: Monsterrat-600, serif;
+    font-size: 16px;
+    line-height: 144%;
+}
+
+.full-tobacco-page-mob .descr {
+    color: var(--main-white, #FFF);
+
+    /* Mobile/Main text */
+    font-family: Monsterrat-500, serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 144%; /* 23.04px */
+    align-self: stretch;
+    margin-bottom: 108px;
 }

@@ -5,13 +5,15 @@ import {RoutePaths} from "../../../routes/RoutePaths";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
 import {ProductInfo, Products} from "../../../content/Products";
 import ProductInfoOnCard from "../../ui_components/product_card/product_info/ProductInfoOnCard";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
 import MoreButton from "../../ui_components/more_button/MoreButton";
 import {useMediaQuery} from "react-responsive";
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
 import {getSuggestions, isDiscount, isLast, isSoldout} from "../../../models/TobaccoOperations";
 import ProductTagsRow from "../../ui_components/product_tags/ProductTagsRow";
+import {decrementProductCount, incrementProductCount} from "../../../redux/cart_reducer/CartReducer";
+import CounterButton from "../../ui_components/counter_button/CounterButton";
 
 const DetailedProductPage: React.FC = () => {
   const navigate = useNavigate()
@@ -20,6 +22,7 @@ const DetailedProductPage: React.FC = () => {
   const [currProduct, setCurrProduct] = useState<ProductInfo>(undefined)
   const purchasedCount = useSelector((state: RootState) => state.cart[productInfo.split('-')[0]]) || 0;
   const cartState = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch()
 
   const soldout = useMemo(() => {
     if (currProduct) {
@@ -223,15 +226,122 @@ const DetailedProductPage: React.FC = () => {
 
   const renderMobile = () => {
     return(
-      <div className="full-tobacco-page-mob">
-        <div className="head">{currProduct?.brand} - {currProduct?.name}</div>
-        <ProductTagsRow
-          tags={currProduct?.tags}
-          isSoldout={soldout}
-          isLast={last}
-          isDiscount={discount}
-          isMobile={true}
-        />
+      <div className="full-tobacco-page-mob" style={{ justifyContent: isLoading ? 'center' : undefined, minHeight: window.innerHeight - 100}}>
+        {isLoading ? (
+          <LoadingIcon isMobile={true}/>
+        ) : (
+          <>
+            <div className="head">{currProduct?.brand} - {currProduct?.name}</div>
+            <ProductTagsRow
+              tags={currProduct?.tags}
+              isSoldout={soldout}
+              isLast={last}
+              isDiscount={discount}
+              isMobile={true}
+            />
+            <img src={currProduct?.image} alt="p" className="prod-img"/>
+            <div className="info-wrapper">
+              <div style={{ display: 'flex', flexDirection: 'row', gap: '4px'}}>
+                <div className="info-h">Brand: </div>
+                <div className="info-c">{currProduct?.brand}</div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row', gap: '4px'}}>
+                <div className="info-h">Line: </div>
+                <div className="info-c">{currProduct?.line}</div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row', gap: '8px'}}>
+                <div className="info-h">{`Price per pack (${currProduct?.weight}G): `}</div>
+                {discount && (
+                  <div
+                    className="info-h"
+                    style={{ textDecoration: 'line-through'}}
+                  >
+                    {currProduct?.price}€
+                  </div>
+                )}
+                <div className="info-c">
+                  {discount ? currProduct?.discountPrice : currProduct?.price}€
+                </div>
+              </div>
+            </div>
+            <div style={{ marginTop: '8px', marginBottom: '8px'}}>
+              {(!soldout || purchasedCount !== 0) && (
+                <div style={{paddingBottom: '4px', display: 'flex', width: '100%', flexDirection: 'row', gap: '8px', position: 'relative'}}>
+                  <MoreButton
+                    showText={true}
+                    isMobile={true}
+                    dontShowIcon={true}
+                    text="Buy now"
+                    buttonStyle={{
+                      width: '100%',
+                      borderRadius: '20px',
+                      height: '40px'
+                    }}
+                    textStyle={{
+                      fontFamily: 'Monsterrat-600, serif',
+                      fontSize: '16px',
+                      lineHeight: '144%',
+                      textAlign: 'center'
+                    }}
+                    onClickAction={() => {
+                      if (purchasedCount === 0) {
+                        dispatch(incrementProductCount(currProduct?.productId))
+                      }
+                      navigate(RoutePaths.FINAL_CHECKOUT)
+                    }}
+                  />
+                  <CounterButton
+                    counterState={purchasedCount}
+                    disabledPlus={soldout}
+                    isDark={true}
+                    isMobile={true}
+                    wrapperStyle={{ minWidth: '89px', width: undefined}}
+                    onPlusClickAction={() => dispatch(incrementProductCount(currProduct?.productId))}
+                    onMinusClickAction={() => dispatch(decrementProductCount(currProduct?.productId))}
+                  />
+                </div>
+              )}
+            </div>
+            <div className="descr">
+              {currProduct?.fullDescription}
+            </div>
+            <ShopGrid
+              showAllCatalogButton={false}
+              isMobile={true}
+              invertedColors={true}
+              products={suggestions?.length > 1 ? suggestions.slice(0, 2) : suggestions.slice(0, suggestions.length)}
+            />
+            <MoreButton
+              showText={true}
+              isMobile={true}
+              text="We have a lot more"
+              buttonStyle={{
+                width: '100%',
+                height: '40px',
+                display:'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'white',
+                gap:'0px',
+                borderRadius: '20px',
+                paddingLeft: '20px',
+                marginTop: '24px',
+                marginBottom: '128px'
+              }}
+              textStyle={{
+                fontFamily: 'Monsterrat-600, serif',
+                fontSize: '16px',
+                lineHeight: '144%',
+                marginLeft: '10px'
+              }}
+              iconStyle={{
+                marginRight: '10px'
+              }}
+              onHoverColor="#EAEBF0"
+              onClickAction={() => navigate(RoutePaths.TOBACCO)}
+            />
+          </>
+        )}
       </div>
     )
   }

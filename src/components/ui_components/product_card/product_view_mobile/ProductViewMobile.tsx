@@ -2,7 +2,7 @@ import './ProductViewMobile.css'
 import {animated, useSpring} from '@react-spring/web'
 import {useDrag} from '@use-gesture/react'
 import type {ReactDOMAttributes} from '@use-gesture/react/dist/declarations/src/types';
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {ProductInfo} from "../../../../content/Products";
 import CounterButton from "../../counter_button/CounterButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,6 +16,7 @@ import ShareButton from "../share_button/ShareButton";
 import {FRONTEND_URL} from "../../../../env/env";
 import {setBottomHintState} from "../../../../redux/bottom_hint_reducer/BottomHintReducer";
 import ProductTagsRow from "../../product_tags/ProductTagsRow";
+import {buildTobaccoLink} from "../../../../models/TobaccoOperations";
 
 interface ProductViewMobileProps extends ProductInfo {
   onClick: (...args: any) => void;
@@ -60,27 +61,6 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
   const buildProductLink = useCallback((): string => {
     return `${FRONTEND_URL}/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
   }, [name, productId, brand, line, weight]);
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [distanceFromBottom, setDistanceFromBottom] = useState<number | null>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const container = containerRef.current;
-
-      if (container) {
-        const distance = container.scrollHeight - container.scrollTop - container.clientHeight;
-        setDistanceFromBottom(distance);
-      }
-    };
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     if (isOpened) {
@@ -170,7 +150,12 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
               <svg width="56" height="5" viewBox="0 0 56 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="56" height="5" rx="2.5" fill="#909398"/>
               </svg>
-              <h2 className="product-header">{`${brand} - ${name}`}</h2>
+              <h2
+                className="product-header"
+                onClick={() => navigate(buildTobaccoLink(productId, brand, name, line, weight))}
+              >
+                {`${brand} - ${name}`}
+              </h2>
             </div>
           </animated.div>
           <div style={{ width: '100%', display: "flex", flexDirection: 'column', alignItems: 'center', gap: '16px'}}>
@@ -251,7 +236,6 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
               </div>
             )}
             <div
-              ref={containerRef}
               className={"full-prod-descr-mob"}
               style={{overflow: 'auto'}}
             >

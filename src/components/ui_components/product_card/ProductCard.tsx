@@ -289,6 +289,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
               <span className="soldout-text">Soldout</span>
             ) : (
               <CounterButton
+                isGray={invertedColors}
                 counterState={purchasedCount}
                 isDark={invertedColors}
                 disabledPlus={true}
@@ -415,6 +416,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
         >
           <span
             className="product-name-mobile"
+            style={{ color: invertedColors ? 'white' : 'black'}}
           >
             {`${brand} – ${name} (${line}) ${weight}G`}
           </span>
@@ -422,38 +424,73 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
             className="product-description-mobile">{description}
           </span>
           <div className="product-price-wrapper-mobile">
-            {discount
-              && <span className={`product-price-before-discount-mobile`}>{price.toFixed(2)}€</span>
-            }
-            <span className={`product-price-mobile ${soldout? 'soldout' : ''}`}>{discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€</span>
+            {discount && (
+              <span
+                className={`product-price-before-discount-mobile`}
+              >
+                {price.toFixed(2)}€
+              </span>
+            )}
+            <span
+              className={`product-price-mobile ${soldout? 'soldout' : ''}`}
+              style={{
+                color: invertedColors ? soldout? '#CFD5DB' : 'white' : soldout ? '#CFD5DB' : "black"
+              }}
+            >
+              {discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€
+            </span>
           </div>
         </div>
         <div className="button-container-mobile">
           {!soldout ? (
             purchasedCount === 0
               ? (
-                <StandardButton
-                  text="Buy"
-                  onClickAction={() => dispatch(incrementProductCount(productId))}
-                  buttonStyle={{
-                    height: '40px',
-                    width: '100%',
-                    borderRadius: '20px 0px 0px 20px'
-                  }}
-                  isMobile={true}
-                />
+                invertedColors ? (
+                  <MoreButton
+                    showText={true}
+                    dontShowIcon={true}
+                    isMobile={true}
+                    text="Buy"
+                    buttonStyle={{
+                      width: '102px',
+                      height: '40px',
+                      borderRadius: '24px 0 0 24px',
+                      backgroundColor: 'white',
+                    }}
+                    textStyle={{
+                      marginBottom: '3px'
+                    }}
+                    onHoverColor="#EAEBF0"
+                    onClickAction={() => dispatch(incrementProductCount(productId))}
+                  />
+                ) : (
+                  <StandardButton
+                    text="Buy"
+                    onClickAction={() => dispatch(incrementProductCount(productId))}
+                    buttonStyle={{
+                      height: '40px',
+                      width: '100%',
+                      borderRadius: '20px 0px 0px 20px'
+                    }}
+                    isMobile={true}
+                  />
+                )
               )
               : (
                 <CounterButton
                   isMobile={true}
                   counterState={purchasedCount}
-                  isDark={false}
+                  isDark={invertedColors}
                   onPlusClickAction={() => {
                     dispatch(incrementProductCount(productId))
                   }}
                   onMinusClickAction={() => {
                     dispatch(decrementProductCount(productId))
                   }}
+                  wrapperStyle={ invertedColors ? {
+                    backgroundColor: '#2C2D2E',
+                    borderColor: '#2C2D2E'
+                  } : {}}
                 />
               )
           ) : (
@@ -461,9 +498,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
               <span className="soldout-text">Soldout</span>
             ) : (
               <CounterButton
+                isGray={invertedColors}
                 isMobile={true}
                 counterState={purchasedCount}
-                isDark={false}
+                isDark={invertedColors}
                 disabledPlus={true}
                 onPlusClickAction={() => {
                   dispatch(incrementProductCount(productId))
@@ -471,31 +509,49 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
                 onMinusClickAction={() => {
                   dispatch(decrementProductCount(productId))
                 }}
+                wrapperStyle={ invertedColors ? {
+                  backgroundColor: '#2C2D2E',
+                  borderColor: '#2C2D2E'
+                } : {}}
               />
             )
           )}
-          <MoreButton
-            showText={false}
-            buttonStyle={{
-              height: '40px',
-              width: '48px',
-              backgroundColor:
-                purchasedCount === 0
-                  ? '#EAEBF0'
-                  : "transparent",
-            }}
-            iconStyle={{
-              left: '6px'
-            }}
-            isMobile={true}
-            onClickAction={() => {
-              if (openFullPage) {
-                navigate(buildTobaccoLink(productId, brand, name, line, weight))
-              } else {
-                setDetailedViewOpened(true)
-              }
-            }}
-          />
+          {invertedColors ? (
+            <MoreButtonInverted
+              isMobile={true}
+              onClickAction={() => {
+                if (openFullPage) {
+                  navigate(buildTobaccoLink(productId, brand, name, line, weight))
+                } else {
+                  setDetailedViewOpened(true)
+                }
+              }}
+              isTransparent={purchasedCount === 0}
+            />
+          ) : (
+            <MoreButton
+              showText={false}
+              buttonStyle={{
+                height: '40px',
+                width: '48px',
+                backgroundColor:
+                  purchasedCount === 0
+                    ? '#EAEBF0'
+                    : "transparent",
+              }}
+              iconStyle={{
+                left: '6px'
+              }}
+              isMobile={true}
+              onClickAction={() => {
+                if (openFullPage) {
+                  navigate(buildTobaccoLink(productId, brand, name, line, weight))
+                } else {
+                  setDetailedViewOpened(true)
+                }
+              }}
+            />
+          )}
         </div>
       </div>
     )

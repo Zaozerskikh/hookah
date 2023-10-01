@@ -7,7 +7,8 @@ import {useMediaQuery} from "react-responsive";
 
 interface CounterButtonProps {
   counterState: number
-  isDark: boolean
+  isDark: boolean,
+  isGray ? : boolean,
   isFramed ? : boolean
   isMobile ? : boolean;
   onPlusClickAction? : (...args: any) => any
@@ -18,7 +19,7 @@ interface CounterButtonProps {
 }
 
 const CounterButton: React.FC<CounterButtonProps> =
-  ({ counterState, isDark,
+  ({ counterState, isDark, isGray,
      onPlusClickAction, onMinusClickAction, isMobile,
      counterStyle , wrapperStyle, isFramed, disabledPlus}) => {
     const [isPlusHovered, setPlusHovered] = useState(false);
@@ -148,9 +149,16 @@ const CounterButton: React.FC<CounterButtonProps> =
               </svg>
 
             ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M11 13V20H13V13H20V11H13V4H11V11H4V13H11Z" fill="#909398"/>
-              </svg>
+              isGray ? (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M11 13V20H13V13H20V11H13V4H11V11H4V13H11Z" fill="#909398"/>
+                </svg>
+
+              ) : (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M11 13V20H13V13H20V11H13V4H11V11H4V13H11Z" fill="#909398"/>
+                </svg>
+              )
             )
           )}
         </button>

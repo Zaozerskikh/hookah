@@ -42,8 +42,8 @@ const MoreButtonInverted: React.FC<MoreButtonInvertedProps> = ({ onClickAction, 
         }
       }}
       style={{
-        width:'64px',
-        height: '48px',
+        width: isMobile ? '44px' : '64px',
+        height: isMobile ? '40px' : '48px',
         borderRadius: '0px 24px 24px 0px',
         display: 'flex',
         alignItems: 'center',
@@ -53,6 +53,7 @@ const MoreButtonInverted: React.FC<MoreButtonInvertedProps> = ({ onClickAction, 
         transition: "all .3s ease",
         WebkitTransition: "all .3s ease",
         MozTransition: "all .3s ease",
+        flexShrink: 0,
         ...buttonStyle,
         backgroundColor: isTransparent ? (isClicked ? '#424446' : isHovered ? '#4E5052' : '#2C2D2E') : 'transparent',
       }}
@@ -61,11 +62,11 @@ const MoreButtonInverted: React.FC<MoreButtonInvertedProps> = ({ onClickAction, 
         src={whiteMoreIconArrow}
         alt="more-icon"
         style={{
-          width: '26px',
-          height: '26px',
+          width: isMobile ? '22px' : '26px',
+          height: isMobile ? '22px' : '26px',
           position: "absolute",
-          top: '10px',
-          right: '18px'
+          top: isMobile ? '8px' : '10px',
+          right: isMobile ? '10px' : '18px'
         }}
       />
       <img
@@ -73,10 +74,10 @@ const MoreButtonInverted: React.FC<MoreButtonInvertedProps> = ({ onClickAction, 
         src={whiteMoreIconBase}
         alt="more-icon"
         style={{
-          top: '10px',
+          top: isMobile ? '6px' : '10px',
           opacity: 1,
           position: 'absolute',
-          right: '17px',
+          right: isMobile ? '11px' : '17px',
           width: !isMobile
             ? (isHovered ? '33px' : '26px')
             : (isHovered ?  '27px' : '23px'),
