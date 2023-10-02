@@ -86,8 +86,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
       <div className="product-card-container">
         <ProductTagsRow
           tags={tags}
-          isSoldout={soldout}
-          isLast={last}
+          isSoldout={stock === 0}
+          isLast={stock === 1}
           isDiscount={discount}
           optionalWrapperStyle={{
             position: 'absolute',
@@ -226,9 +226,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
               && <span className={`product-price-before-discount`}>{price.toFixed(2)}€</span>
             }
             <span
-              className={`product-price ${soldout ? 'soldout' : ''}`}
+              className={`product-price ${stock === 0 ? 'soldout' : ''}`}
               style={{
-                color: invertedColors ? soldout? '#CFD5DB' : 'white' : soldout ? '#CFD5DB' : "black"
+                color: invertedColors ? stock === 0 ? '#CFD5DB' : 'white' : stock === 0 ? '#CFD5DB' : "black"
               }}
             >
               {discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€
@@ -363,8 +363,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
         />
         <ProductTagsRow
           tags={tags}
-          isSoldout={soldout}
-          isLast={last}
+          isSoldout={stock === 0}
+          isLast={stock === 1}
           isDiscount={discount}
           isMobile={true}
           optionalWrapperStyle={{
@@ -432,9 +432,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
               </span>
             )}
             <span
-              className={`product-price-mobile ${soldout? 'soldout' : ''}`}
+              className={`product-price-mobile ${stock === 0 ? 'soldout' : ''}`}
               style={{
-                color: invertedColors ? soldout? '#CFD5DB' : 'white' : soldout ? '#CFD5DB' : "black"
+                color: invertedColors ? stock === 0 ? '#CFD5DB' : 'white' : stock === 0 ? '#CFD5DB' : "black"
               }}
             >
               {discountPrice ? discountPrice.toFixed(2) : price.toFixed(2)}€

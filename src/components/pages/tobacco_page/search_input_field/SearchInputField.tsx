@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import CloseButton from "../../../ui_components/close_button/CloseButton";
 
 interface SearchInputFieldProps {
@@ -15,16 +15,20 @@ const SearchInputField: React.FC<SearchInputFieldProps> = ({ inputValue, onInput
     onInputChange(newValue);
   };
 
+  useEffect(() => {
+    console.log(isFocused)
+  }, [isFocused]);
+
   return(
     <>
       {!(!inputValue || (inputValue && inputValue.length === 0)) && (<CloseButton
         isMobile={isMobile}
-        changeColorOnHover={true}
+        changeColorOnHover={false}
         onClickColor='#909398'
         iconSize={10}
         onClickAction={() => onInputChange('')}
         buttonStyle={{
-          backgroundColor: '#EAEBF0',
+          backgroundColor: 'transparent',
           zIndex: 999,
           position: "absolute",
           right: '52px',
@@ -51,14 +55,23 @@ const SearchInputField: React.FC<SearchInputFieldProps> = ({ inputValue, onInput
           right: '45px',
           color: isFocused ? 'black' : '#909398',
           width: isMobile ? 'calc(100% - 84px)' : '137px',
-          marginTop: isFocused ? '1px': undefined,
-          height: !isMobile ? (isFocused ? '21px' : '23px') : (isFocused ? '18px' : '20px'),
+          height: !isMobile ? '20px' : '16px',
           fontFamily: 'Monsterrat-500, serif',
           fontSize: isMobile ? '12px' : '16px',
           fontStyle: 'normal',
           lineHeight: '144%',
           backgroundColor: '#EAEBF0',
-          border: 'none',
+          borderColor: isFocused ? 'black' : '#EAEBF0',
+          borderWidth: '2px',
+          borderStyle: 'solid',
+          borderBottomWidth: '2px',
+          borderBottomColor: isFocused ? 'black' : '#EAEBF0',
+          borderBottomStyle: 'solid',
+          borderRightStyle: 'solid',
+          borderTopStyle: 'solid',
+          borderLeftStyle: 'solid',
+          outline: 'none',
+          boxShadow: 'none',
           borderRadius: '16px 0px 0px 16px',
         }}
         value={inputValue}

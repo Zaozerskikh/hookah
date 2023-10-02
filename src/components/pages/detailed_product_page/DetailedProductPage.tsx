@@ -234,8 +234,8 @@ const DetailedProductPage: React.FC = () => {
             <div className="head">{currProduct?.brand} - {currProduct?.name}</div>
             <ProductTagsRow
               tags={currProduct?.tags}
-              isSoldout={soldout}
-              isLast={last}
+              isSoldout={currProduct?.stock === 0}
+              isLast={currProduct?.stock === 1}
               isDiscount={discount}
               isMobile={true}
             />

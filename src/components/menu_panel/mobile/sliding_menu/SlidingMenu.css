@@ -13,6 +13,10 @@
     padding: 48px 0;
 }
 
+.menu-internal-wrapper {
+
+}
+
 .menu.open {
     right: 0;
 }
@@ -91,7 +95,6 @@
     width: calc(100% - 16px);
     align-items: flex-end;
     gap: 16px;
-    margin-top: 136px;
 }
 
 .menu .link-mobile-menu {

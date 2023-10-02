@@ -31,7 +31,7 @@ interface ProductInfoProps {
 }
 
 export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name, brand, line,
-                                                                price, discountPrice,
+                                                                price, discountPrice, stock,
                                                                 purchasedCount, weight, optionalTags,
                                                                 showShareButtonOnCard, isDiscount, isLast, isSoldout}) => {
   const bottomHintState = useSelector((state: RootState) => state.bottomHint);
@@ -70,8 +70,8 @@ export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name,
       </div>
       <ProductTagsRow
         tags={optionalTags}
-        isSoldout={isSoldout}
-        isLast={isLast}
+        isSoldout={stock === 0}
+        isLast={stock === 1}
         isDiscount={isDiscount}
         optionalWrapperStyle={{ marginBottom: '24px'}}
       />

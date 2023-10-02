@@ -32,7 +32,16 @@ const SlidingMenu: React.FC = () => {
         <SocialLinkMobile commonIcon={whatsappWhite} clickedIcon={whatsappWhite} link={ExternalLinks.WHATSAPP} />
         <SocialLinkMobile commonIcon={instWhite} clickedIcon={instWhite} link={ExternalLinks.INSTAGRAM} />
       </div>
-      <div className="links-wrapper-mobile-menu" onClick={() => dispatch(setIsBurgerShown(false))}>
+      <div
+        className="links-wrapper-mobile-menu"
+        onClick={() => dispatch(setIsBurgerShown(false))}
+        style={{
+          marginTop: `${Math.min(136, window.innerHeight - 618)}px`
+        }}
+      >
+        <Link className="link-mobile-menu" to={RoutePaths.HOME} >
+          home
+        </Link>
         <Link className="link-mobile-menu" to={RoutePaths.TOBACCO} >
           tobacco
         </Link>

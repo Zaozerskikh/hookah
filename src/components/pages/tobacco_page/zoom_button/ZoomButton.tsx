@@ -52,8 +52,8 @@ const ZoomButton: React.FC<ZoomButtonProps> = ({ onClickAction, isMobile }) => {
         src={zoomIcon}
         alt="zoom"
         style={{
-          width: !isHovered ? '20px' : '24px',
-          height: !isHovered ? '20px' : '24px',
+          width: !isHovered ? '22px' : '26px',
+          height: !isHovered ? '22px' : '26px',
           marginRight: '2px',
           transition: "all .2s ease",
           WebkitTransition: "all .2s ease",

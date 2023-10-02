@@ -76,7 +76,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAddition
             width: isMobile ? '16px' : '18px',
             position: 'absolute',
             left: isMobile ? '4px' : '6px',
-            top: isMobile ?'1px' : '2px'
+            top: isMobile ? '1px' : '2px'
           }}
         />
         <img
@@ -87,7 +87,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAddition
             top: isMobile ? '3px' : '5px',
             left: isMobile ? '11px' : '14px',
             height: isHovered ? isMobile ? '15px' : '17px' : '12px',
-            width: isMobile ? '2px' : '2.5px',
+            width: isMobile ? '2px' : '2px',
             transition: "all .2s ease",
             WebkitTransition: "all .2s ease",
             MozTransition: "all .2s ease",
@@ -100,7 +100,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ productLink , onClickAddition
             position: 'absolute',
             top: isMobile ? '16px' : '18.75px',
             left: isMobile ? '4px' : '5px',
-            width: isMobile ? '18px' : '20px'
+            width: isMobile ? '16px' : '20px'
           }}
         />
       </div>

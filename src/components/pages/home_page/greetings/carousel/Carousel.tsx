@@ -38,7 +38,6 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
 
     window.addEventListener('resize', updateWidth);
     updateWidth();
-    console.log(window.devicePixelRatio + 'xcefvrg')
 
     return () => {
       window.removeEventListener('resize', updateWidth);

@@ -1,5 +1,5 @@
 import './TobaccoPage.css'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import BrandSearchTag from "./search_tag/brand_tag/BrandSearchTag";
 import CloseButton from "../../ui_components/close_button/CloseButton";
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
@@ -32,38 +32,56 @@ interface TobaccoPageProps {
 }
 
 const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDescription, tobaccoName, headerEmoji }) => {
-  // main content management
-  const [isLoading, setLoading] = useState(false);
+  // current shown products
   const [filteredProducts, setFilteredProducts] = useState(Products)
+  const filteredProductsRef = useRef(filteredProducts)
+  useEffect(() => {
+    filteredProductsRef.current = filteredProducts
+  }, [filteredProducts]);
+
+
+  // initial sort by brand management (specified brand pages)
+  const initialSortByBrandRef = useRef(initialSortByBrand)
+  useEffect(() => {
+    initialSortByBrandRef.current = initialSortByBrand
+    if (!initialSortByBrand) {
+      setFilteredProducts(moveSoldoutToEnd(Products))
+    } else {
+      setFilteredProducts(filterByOneBrand(initialSortByBrand, Products))
+    }
+  }, [initialSortByBrand])
+
+
+  // loading or not
+  const [isLoading, setLoading] = useState(false);
+
+
+  // pagination management
   const [currPageNumber, setCurrPageNumber] = useState(1)
   const [totalPageCount, setTotalPageCount] = useState(0)
+
   const [currLastPageNumberShown, setCurrLastPageNumberShown] = useState(PAGES_BEFORE_MORE_BUTTON)
-
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-width: 1264px)'
-  })
-  const height = window.innerHeight
-
-  const isMobile = useMediaQuery({
-    query: '(max-width: 1000px)'
-  })
-
   useEffect(() => {
     setTotalPageCount(Math.ceil(filteredProducts.length / PRODUCTS_COUNT_ON_A_PAGE))
   }, [filteredProducts])
 
-  // search field
+
+  // responsive layout management
+  const height = window.innerHeight
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1264px)'
+  })
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
+
+
+  // search field (search by string) management
   const [searchString, setSearchString] = useState('');
   const onSearchStringChanged = (value: string) => {
     setUseTags(false)
     setSearchString(value);
   };
-
-  useEffect(() => {
-    if (!initialSortByBrand) {
-      setFilteredProducts(moveSoldoutToEnd(Products))
-    }
-  }, [initialSortByBrand])
 
   const filterBySearchString = () => {
     if (searchString.length > 0) {
@@ -78,11 +96,18 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
       setElementTagActive(false)
 
       setTimeout(() => {
-        setFilteredProducts(applySearchString(searchString, Products))
+        setFilteredProducts(applySearchString(searchString, initialSortByBrand ? filterByOneBrand(initialSortByBrand, Products) : Products))
         setLoading(false)
       }, 500)
     }
   }
+
+  useEffect(() => {
+    if (searchString.length === 0) {
+      setUseTags(true)
+    }
+  }, [searchString]);
+
 
   // tags
   const [useTags, setUseTags] = useState(false)
@@ -109,7 +134,10 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
         setFilteredProducts(
           applyFilteringTags(
             darkSideTagActive, tangiersTagActive, elementSideTagActive,
-            musthaveTagActive, fumariTagActive, Products
+            musthaveTagActive, fumariTagActive,
+            initialSortByBrandRef.current
+              ? filterByOneBrand(initialSortByBrandRef.current , Products)
+              : Products
           )
         )
         setTimeout(() => {
@@ -124,12 +152,6 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
     tangiersTagActive, fumariTagActive, useTags
   ])
 
-  useEffect(() => {
-    if (searchString.length === 0 && !initialSortByBrand) {
-      setUseTags(true)
-    }
-  }, [searchString, initialSortByBrand]);
-
   const clearAllBrandTags = () => {
     setTangiersTagActive(false)
     setFumariTagActive(false)
@@ -140,33 +162,27 @@ const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDe
     setWeightTagState(TagState.TURNED_OFF)
     setPriceTagState(TagState.TURNED_OFF)
     setUseTags(true)
-    setFilteredProducts(Products)
+    setFilteredProducts(initialSortByBrand ? filterByOneBrand(initialSortByBrand, Products) : Products)
   }
-
-  // window & scroll
-  useState(() => {
-    window.scrollTo({ top: 0 });
-  })
 
   useEffect(() => {
     if (weightTagState === TagState.ASCENDING || weightTagState === TagState.DESCENDING) {
       setPriceTagState(TagState.TURNED_OFF)
-      setFilteredProducts(applySortingTags(weightTagState, undefined, filteredProducts))
+      setFilteredProducts(applySortingTags(weightTagState, undefined, filteredProductsRef.current))
     }
   }, [weightTagState]);
 
   useEffect(() => {
     if (priceTagState === TagState.ASCENDING || priceTagState === TagState.DESCENDING) {
       setWeightTagState(TagState.TURNED_OFF)
-      setFilteredProducts(applySortingTags(undefined, priceTagState, filteredProducts))
+      setFilteredProducts(applySortingTags(undefined, priceTagState, filteredProductsRef.current))
     }
   }, [priceTagState]);
 
-  useEffect(() => {
-    if (initialSortByBrand) {
-      setFilteredProducts(filterByOneBrand(initialSortByBrand, Products))
-    }
-  }, [initialSortByBrand]);
+  // window & scroll
+  useState(() => {
+    window.scrollTo({ top: 0 });
+  })
 
   const renderDesktop = () => {
     return(

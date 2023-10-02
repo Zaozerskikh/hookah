@@ -25,7 +25,7 @@ interface ProductViewMobileProps extends ProductInfo {
   isLast: boolean;
   isDiscount: boolean;
 }
-const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productId, name, tags, weight,
+const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productId, stock, name, tags, weight,
      description, fullDescription, image,
      price, discountPrice, line, brand, isOpened , isDiscount, isLast, isSoldout})=> {
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
@@ -163,8 +163,8 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
             <div className="bottom-tricky-div"/>
             <ProductTagsRow
               tags={tags}
-              isSoldout={isSoldout}
-              isLast={isLast}
+              isSoldout={stock === 0}
+              isLast={stock === 1}
               isDiscount={isDiscount}
               isMobile={true}
               optionalWrapperStyle={{
