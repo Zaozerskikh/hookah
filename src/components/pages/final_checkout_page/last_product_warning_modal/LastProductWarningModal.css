@@ -17,7 +17,7 @@
 }
 
 .last-product-warning-container.open {
-    z-index: 9998 !important;
+    z-index: 9999 !important;
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.7);
     transition: opacity 0.3s;
@@ -73,7 +73,7 @@
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
-    z-index: 9999 !important;
+    z-index: 999999999999 !important;
     box-shadow: 1px 1px 30px 0 rgba(0, 0, 0, 0.50);
 }
 
@@ -92,7 +92,7 @@
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
-    z-index: 9999 !important;
+    z-index: 9999999999 !important;
 }
 
 .lpw-header {

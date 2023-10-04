@@ -275,6 +275,7 @@ export const Products: ProductInfo[] = [
     price: 79.99,
     image: cereal34,
     stock: 5,
+    tags: [ProductTag.NEW]
   },
   {
     productId: '19',

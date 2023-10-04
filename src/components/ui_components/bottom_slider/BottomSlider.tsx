@@ -1,93 +1,85 @@
 import React, {useEffect, useState} from "react";
-import {animated, useSpring} from "@react-spring/web";
-import {useDrag} from "@use-gesture/react";
-import {ReactDOMAttributes} from "@use-gesture/react/dist/declarations/src/types";
 import './BottomSlider.css'
+import Sheet from 'react-modal-sheet';
+import CloseButton from "../close_button/CloseButton";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../redux/Store";
 
 
-interface BottomSliderProps {
+interface BottomSliderProps extends React.PropsWithChildren {
   isOpened: boolean;
   onCloseAction: (...args: any) => any;
-  threshold: number;
-  maxRelativeHeight: number;
-  gestureZoneChild ? : React.ReactNode
-  mainZoneChild ? : React.ReactNode
+  maxRelativeHeight ? : number;
+  marginTop ? : number;
+  showShareButton ? : boolean;
+  showCloseButton ? : boolean;
 }
 
-const BottomSlider: React.FC<BottomSliderProps> = ({ isOpened, onCloseAction, threshold, gestureZoneChild, mainZoneChild, maxRelativeHeight}) => {
-  const [{ x, y }, api] = useSpring(() => ({
-    x: 0, y: 0,
-    config: {
-      tension: 201,
-      friction: 20,
-      duration: 300,
-    },
-  }))
-  const [zIdx, setZIdx] = useState(-9999)
+const BottomSlider: React.FC<BottomSliderProps> = ({ isOpened, showCloseButton, marginTop, onCloseAction, children, maxRelativeHeight}) => {
+  const [closeBtnZidx, setCloseBtnZidx] = useState(10000000)
+  const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
 
   useEffect(() => {
-    if (isOpened) {
-      setZIdx(9999)
-    } else {
+    if (!isOpened || !showCloseButton) {
       setTimeout(() => {
-        setZIdx(-9999)
+        setCloseBtnZidx(-10000000000)
       }, 200)
+    } else {
+      setCloseBtnZidx(1000000000000)
     }
-  }, [api, isOpened])
-
-  const bind = useDrag(({ down, movement: [mx, my] }) => {
-    if (my > 5) {
-      document.body.classList.add('hidden');
-      onCloseAction()
-    }
-  }) as unknown as (...args: any[]) => ReactDOMAttributes;
+  }, [isOpened, showCloseButton]);
 
   useEffect(() => {
-    if (!isOpened) {
-      setTimeout(() => {
-        document.body.classList.remove('hidden');
-      }, 300)
-    }
-  }, [isOpened]);
+    const styleElement = document.createElement('style');
+    const cssRule = `
+      .react-modal-sheet-backdrop {
+        background-color: ${isCheckoutOpened ? 'rgba(0, 0, 0, 0.7) !important' : 'transparent !important'};
+        backdrop-filter: ${isCheckoutOpened ? 'blur(2px) opacity(1) !important' : 'none !important'};
+      }
+    `;
 
-  return(
-    <div
-      className={"bottom-slider-wrapper"}
-      style={{
-        zIndex: zIdx,
-        backdropFilter: isOpened ? 'blur(2px) opacity(1)' : 'blur(2px) opacity(0)',
-        backgroundColor: isOpened ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
-      }}
-    >
-      <div className={`bottom-slider-info-wrapper ${isOpened ? 'open' : ''}`} style={{maxHeight: window.innerHeight - 128}}>
-        <animated.div {...bind()} style={{ x, y }} >
-          <div
-            style={{
-              position: "relative",
-              display: "flex",
-              flexDirection: 'column',
-              gap: '16px',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: window.innerWidth - 32,
-              backgroundColor: 'black',
-              paddingTop: '16px',
-              zIndex: '9999',
-              marginBottom: '-3px',
-              borderRadius: '22px 22px 0px 0px',
-              boxShadow: '1px 1px 30px 0px rgba(0, 0, 0, 0.50)',
-            }}
-          >
-            <svg width="56" height="5" viewBox="0 0 56 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="56" height="5" rx="2.5" fill="#909398"/>
-            </svg>
-            {gestureZoneChild}
-          </div>
-        </animated.div>
-        {mainZoneChild}
-      </div>
-    </div>
-  )
+    styleElement.appendChild(document.createTextNode(cssRule));
+    document.head.appendChild(styleElement);
+  }, [isCheckoutOpened]);
+
+  return (
+    <>
+      {isCheckoutOpened && <div style={{ position: 'fixed', width: window.innerWidth, height: window.innerHeight * 100, display: 'flex', zIndex: '99999', backgroundColor: 'transparent'}}/>}
+      <CloseButton
+        changeColorOnHover={false}
+        onClickColor={'white'}
+        iconSize={17}
+        onClickAction={onCloseAction}
+        isMobile={true}
+        buttonStyle={{
+          position: 'fixed',
+          top: '24px',
+          right: '16px',
+          width: '42px',
+          height: '42px',
+          zIndex: closeBtnZidx,
+          transition: "all .2s ease",
+          WebkitTransition: "all .2s ease",
+          MozTransition: "all .2s ease",
+          opacity: isOpened && showCloseButton ? 1 : 0,
+        }}
+      />
+      <Sheet
+        isOpen={isOpened}
+        onClose={onCloseAction}
+        snapPoints={[maxRelativeHeight ? window.innerHeight * maxRelativeHeight : window.innerHeight - marginTop, 0]}
+        detent="content-height"
+      >
+        <Sheet.Container>
+          <Sheet.Header />
+          <Sheet.Content>
+            {children}
+          </Sheet.Content>
+        </Sheet.Container>
+        <Sheet.Backdrop />
+      </Sheet>
+    </>
+  );
 }
 
 export default BottomSlider;

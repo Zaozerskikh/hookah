@@ -339,15 +339,14 @@ const CartButton: React.FC = () => {
     return(
       <>
         <BottomSlider
+          showCloseButton={!lastProductWarningState.isShown}
           isOpened={isCheckoutOpened}
-          maxRelativeHeight={0.85}
+          marginTop={90}
           onCloseAction={() => {
             dispatch(setIsCheckoutWindowShown(false))
             dispatch(setIsLastProductWarningShown(false, '0'))
           }}
-          threshold={9}
-          gestureZoneChild={(<div style={{height: '0px', width: '100%'}}/>)}
-          mainZoneChild={(
+          children={(
             <>
               <div className="ur-order-span-mobile">Your Order</div>
               <div className="products-container-mobile">
@@ -362,18 +361,6 @@ const CartButton: React.FC = () => {
                     MozTransition: "all .2s ease"
                   }}
                 >
-                  {!lastProductWarningState.isShown && <CloseButton
-                    changeColorOnHover={false}
-                    onClickColor={'white'}
-                    iconSize={17}
-                    onClickAction={() => dispatch(setIsCheckoutWindowShown(false))}
-                    isMobile={true}
-                    buttonStyle={{
-                      top: 0,
-                      width: '42px',
-                      height: '42px',
-                    }}
-                  />}
                 </div>
                 {
                   actualCart.map(([productId, productCount]) => {
