@@ -14,6 +14,7 @@ import {setBottomHintState} from "../../../../redux/bottom_hint_reducer/BottomHi
 import ProductTagsRow from "../../product_tags/ProductTagsRow";
 import {buildTobaccoLink} from "../../../../models/TobaccoOperations";
 import BottomSlider from "../../bottom_slider/BottomSlider";
+import CloseButton from "../../close_button/CloseButton";
 
 interface ProductViewMobileProps extends ProductInfo {
   onClick: (...args: any) => void;
@@ -29,16 +30,32 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [zIdx, setZIdx] = useState(-9999)
+  const [isOpenedDelayed, setIsOpenedDelayed] = useState(false)
+
 
   useEffect(() => {
-    if (isOpened) {
-      setZIdx(9999)
+    if (isOpenedDelayed) {
+      setTimeout(() => {
+        setZIdx(9999)
+      }, 50)
     } else {
       setTimeout(() => {
         setZIdx(-9999)
-      }, 500)
+      }, 50)
     }
-  }, [isOpened])
+  }, [isOpenedDelayed])
+
+  useEffect(() => {
+    if (isOpened) {
+      setTimeout(() => {
+        setIsOpenedDelayed(true)
+      }, 20)
+    } else {
+      setTimeout(() => {
+        setIsOpenedDelayed(false)
+      }, 20)
+    }
+  }, [isOpened]);
 
   const buildProductLink = useCallback((): string => {
     return `${FRONTEND_URL}/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
@@ -55,142 +72,165 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
   }, [isOpened]);
 
   return (
-    <>
-      <div
-        style={{
-          position: "fixed",
-          top: '24px',
-          left: '16px',
-          zIndex: zIdx * 1000000,
-          opacity: isOpened ? 1 : 0,
-          transition: "all .2s ease",
-          WebkitTransition: "all .2s ease",
-          MozTransition: "all .2s ease",
-        }}
-      >
-        <ShareButton
-          productLink={buildProductLink()}
+    isOpened && (
+      <>
+        <CloseButton
+          changeColorOnHover={false}
+          onClickColor={'white'}
+          iconSize={17}
+          onClickAction={onClick}
           isMobile={true}
-          onClickAdditionalAction={() => dispatch(setBottomHintState(true, 'The link has been copied!</br>You can share it with your friends 😎'))}
+          buttonStyle={{
+            position: 'fixed',
+            top: '24px',
+            right: '16px',
+            width: '42px',
+            height: '42px',
+            zIndex: zIdx * 1000000,
+            transition: "all .2s ease",
+            WebkitTransition: "all .2s ease",
+            MozTransition: "all .2s ease",
+            opacity: isOpenedDelayed ? 1 : 0,
+          }}
         />
-      </div>
-      <BottomSlider
-        isOpened={isOpened}
-        onCloseAction={onClick}
-        maxRelativeHeight={0.75}
-        showCloseButton={true}
-      >
-        <div className="product-view-mobile-wrapper" style={{ width: '100%', display: "flex", flexDirection: 'column', alignItems: 'center', gap: '16px'}}>
-          <h2
-            className="product-header"
-            onClick={() => navigate(buildTobaccoLink(productId, brand, name, line, weight))}
-          >
-            {`${brand} - ${name}`}
-          </h2>
-          <div className="bottom-grad"/>
-          <div className="bottom-tricky-div"/>
-          <ProductTagsRow
-            tags={tags}
-            isSoldout={stock === 0}
-            isLast={stock === 1}
-            isDiscount={isDiscount}
-            isMobile={true}
-            optionalWrapperStyle={{
-              gap: '6px',
-              flexWrap: 'wrap',
-              width: '100%'
-            }}
-          />
-          <div className="detailed-view-description-container-mobile">
-            <div>
-              <span className="detailed-view-brand-line-info-mobile">Brand: </span>
-              <span className="detailed-view-brand-line-mobile">{brand}</span>
-            </div>
-            <div>
-              <span className="detailed-view-brand-line-info-mobile">Line: </span>
-              <span className="detailed-view-brand-line-mobile">{line}</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', position: 'relative'}}>
-              <span className="detailed-view-brand-line-info-mobile-base">Price per pack: </span>
-              {isDiscount && (
-                <span
-                  className="detailed-view-brand-line-info-mobile"
-                  style={{ textDecoration: 'line-through'}}
-                >
-                    {price}€
-                  </span>
-              )}
-              <span className="detailed-view-brand-line-mobile">
-                  {discountPrice ? discountPrice : price}€
-                </span>
-              {isSoldout && <div className="top-grad"/>}
-            </div>
-          </div>
-          {(!isSoldout || purchasedCount !== 0) && (
-            <div style={{paddingBottom: '4px', display: 'flex', width: '100%', flexDirection: 'row', gap: '8px', position: 'relative'}}>
-              <MoreButton
-                showText={true}
-                isMobile={true}
-                dontShowIcon={true}
-                text="Buy now"
-                buttonStyle={{
-                  width: '100%',
-                  borderRadius: '20px',
-                  height: '40px'
-                }}
-                textStyle={{
-                  fontFamily: 'Monsterrat-600, serif',
-                  fontSize: '16px',
-                  lineHeight: '144%',
-                  textAlign: 'center'
-                }}
-                onClickAction={() => {
-                  if (purchasedCount === 0) {
-                    dispatch(incrementProductCount(productId))
-                  }
-                  navigate(RoutePaths.FINAL_CHECKOUT)
-                }}
-              />
-              <CounterButton
-                counterState={purchasedCount}
-                disabledPlus={isSoldout}
-                isDark={true}
-                isMobile={true}
-                wrapperStyle={{ minWidth: '89px', width: undefined}}
-                onPlusClickAction={() => dispatch(incrementProductCount(productId))}
-                onMinusClickAction={() => dispatch(decrementProductCount(productId))}
-              />
-              <div className="top-grad"/>
-            </div>
-          )}
-          <div
-            className={"full-prod-descr-mob"}
-            style={{overflow: 'auto'}}
-          >
-            {fullDescription}
-          </div>
-        </div>
-      </BottomSlider>
-      <div className={"product-view-mobile-wrapper-img"} style={{zIndex: isOpened ? 99999 : -99999}}>
         <div
-          className={isOpened ? 'img-wrpr-opened' : 'img-wrpr'}
           style={{
-            position: "relative",
-            width: '100%',
-            height: '100%',
+            position: "fixed",
+            top: '24px',
+            left: '16px',
+            zIndex: zIdx * 1000000,
+            opacity: isOpenedDelayed ? 1 : 0,
+            transition: "all .2s ease",
+            WebkitTransition: "all .2s ease",
+            MozTransition: "all .2s ease",
           }}
         >
-          <img
-            style={{
-              position: "absolute",
-              width: '100%',
-              height: 'auto',
-            }}
-            src={image} alt='p'
+          <ShareButton
+            productLink={buildProductLink()}
+            isMobile={true}
+            onClickAdditionalAction={() => dispatch(setBottomHintState(true, 'The link has been copied!</br>You can share it with your friends 😎'))}
           />
         </div>
-      </div>
-    </>
+        <BottomSlider
+          isOpened={isOpenedDelayed}
+          onCloseAction={onClick}
+          maxRelativeHeight={0.75}
+          showCloseButton={false}
+        >
+          <div className="product-view-mobile-wrapper" style={{ width: '100%', display: "flex", flexDirection: 'column', alignItems: 'center', gap: '16px'}}>
+            <h2
+              className="product-header"
+              onClick={() => navigate(buildTobaccoLink(productId, brand, name, line, weight))}
+            >
+              {`${brand} - ${name}`}
+            </h2>
+            <div className="bottom-grad"/>
+            <div className="bottom-tricky-div"/>
+            <ProductTagsRow
+              tags={tags}
+              isSoldout={stock === 0}
+              isLast={stock === 1}
+              isDiscount={isDiscount}
+              isMobile={true}
+              optionalWrapperStyle={{
+                gap: '6px',
+                flexWrap: 'wrap',
+                width: '100%'
+              }}
+            />
+            <div className="detailed-view-description-container-mobile">
+              <div>
+                <span className="detailed-view-brand-line-info-mobile">Brand: </span>
+                <span className="detailed-view-brand-line-mobile">{brand}</span>
+              </div>
+              <div>
+                <span className="detailed-view-brand-line-info-mobile">Line: </span>
+                <span className="detailed-view-brand-line-mobile">{line}</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', position: 'relative'}}>
+                <span className="detailed-view-brand-line-info-mobile-base">Price per pack: </span>
+                {isDiscount && (
+                  <span
+                    className="detailed-view-brand-line-info-mobile"
+                    style={{ textDecoration: 'line-through'}}
+                  >
+                    {price}€
+                  </span>
+                )}
+                <span className="detailed-view-brand-line-mobile">
+                  {discountPrice ? discountPrice : price}€
+                </span>
+                {isSoldout && <div className="top-grad"/>}
+              </div>
+            </div>
+            {(!isSoldout || purchasedCount !== 0) && (
+              <div style={{paddingBottom: '4px', display: 'flex', width: '100%', flexDirection: 'row', gap: '8px', position: 'relative'}}>
+                <MoreButton
+                  showText={true}
+                  isMobile={true}
+                  dontShowIcon={true}
+                  text="Buy now"
+                  buttonStyle={{
+                    width: '100%',
+                    borderRadius: '20px',
+                    height: '40px'
+                  }}
+                  textStyle={{
+                    fontFamily: 'Monsterrat-600, serif',
+                    fontSize: '16px',
+                    lineHeight: '144%',
+                    textAlign: 'center'
+                  }}
+                  onClickAction={() => {
+                    if (purchasedCount === 0) {
+                      dispatch(incrementProductCount(productId))
+                    }
+                    navigate(RoutePaths.FINAL_CHECKOUT)
+                  }}
+                />
+                <CounterButton
+                  counterState={purchasedCount}
+                  disabledPlus={isSoldout}
+                  isDark={true}
+                  isMobile={true}
+                  wrapperStyle={{ minWidth: '89px', width: undefined}}
+                  onPlusClickAction={() => dispatch(incrementProductCount(productId))}
+                  onMinusClickAction={() => dispatch(decrementProductCount(productId))}
+                />
+                <div className="top-grad"/>
+              </div>
+            )}
+            <div
+              className={"full-prod-descr-mob"}
+              style={{overflow: 'auto'}}
+            >
+              {fullDescription}
+            </div>
+          </div>
+        </BottomSlider>
+        <div className={"product-view-mobile-wrapper-img"} style={{zIndex: isOpened ? 99999 : -99999}}>
+          <div
+            className={isOpenedDelayed ? 'img-wrpr-opened' : 'img-wrpr'}
+            style={{
+              position: "relative",
+              width: window.innerWidth,
+              height:window.innerHeight * 10000,
+              backdropFilter: 'blur(2px) opacity(1)',
+              backgroundColor: 'rgba(0, 0, 0, 0.7)'
+            }}
+          >
+            <img
+              style={{
+                position: "absolute",
+                width: '100%',
+                height: 'auto',
+              }}
+              src={image} alt='p'
+            />
+          </div>
+        </div>
+      </>
+    )
   )
 }
 

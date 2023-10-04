@@ -45,10 +45,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
   const cartState = useSelector((state: RootState) => state.cart);
   const purchasedCount = useSelector((state: RootState) => state.cart[productId]) || 0;
 
-  const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-width: 1264px)'
-  })
-
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
   })
@@ -119,17 +115,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
                 }
               }}
             >
-              <div className="detailed-view-card" style={{marginTop: isDesktopOrLaptop ? '0px' : '24px'}}>
+              <div className="detailed-view-card">
                 <CloseButton
                   onClickAction={() => setDetailedViewOpened(false)}
                   iconSize={20}
                   changeColorOnHover={true}
                   onClickColor="#d1d1d9"
+                  buttonStyle={{
+                    position: "absolute",
+                    top: window.innerHeight > 660 ? '-64px' : '16px',
+                    right: window.innerHeight <= 660 ? '16px' : 0,
+                  }}
                 />
                 <div style={{
                   position: "absolute",
-                  top: '-64px',
-                  right: '64px',
+                  top: window.innerHeight > 660  ? '-64px' : '16px',
+                  right: window.innerHeight > 660  ? '64px' : '80px',
                 }}>
                   <ShareButton
                     productLink={buildFullTobaccoPageLink(productId, brand, name, line, weight, FRONTEND_URL)}

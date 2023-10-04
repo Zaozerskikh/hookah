@@ -1,7 +1,7 @@
 import './SlidingMenu.css'
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../redux/Store";
-import React from "react";
+import React, {useEffect} from "react";
 import floatingClouds from "../../../../assets/icons/decorations/floating_clouds_test_2.png";
 import instWhite from '../../../../assets/icons/socials/instagram_logo_ffffff.png'
 import whatsappWhite from '../../../../assets/icons/socials/whatsapp_logo_ffffff.png'
@@ -11,11 +11,22 @@ import ExternalLinks from "../../../../routes/ExternalLinks";
 import {Link} from "react-router-dom";
 import {RoutePaths} from "../../../../routes/RoutePaths";
 import {setIsBurgerShown} from "../../../../redux/burger_button_reducer/BurgerButtonReducer";
+import {useMediaQuery} from "react-responsive";
 
 
 const SlidingMenu: React.FC = () => {
   const isBorgerOpened = useSelector((state: RootState) => state.burger.isOpened)
   const dispatch = useDispatch()
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)'
+  })
+
+  useEffect(() => {
+    if (!isMobile) {
+      dispatch(setIsBurgerShown(false))
+    }
+  }, [dispatch, isMobile]);
 
   return(
     <div className={`menu ${isBorgerOpened ? 'open' : ''}`}>

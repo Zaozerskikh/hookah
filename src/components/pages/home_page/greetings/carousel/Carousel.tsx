@@ -4,6 +4,7 @@ import Boop from "../boop/Boop";
 import {useDrag} from "@use-gesture/react";
 import {ReactDOMAttributes} from "@use-gesture/react/dist/declarations/src/types";
 import { animated } from "react-spring";
+import {useMediaQuery} from "react-responsive";
 
 export interface CarouselItem {
   item: string;
@@ -20,6 +21,7 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
   const [isSwipingPaused, setIsSwipingPaused] = useState(false);
   const [textCarouselWidth, setTextCarouselWidth] = useState(window.innerWidth - 64);
   const [canSwipe, setCanSwipe] = useState(false)
+  const isTouchable = useMediaQuery({ query: '(pointer: coarse)' });
 
   useEffect(() => {
     if (!canSwipe) {
@@ -45,7 +47,7 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
   }, [isMobile]);
 
   const bind = useDrag(({ down, movement: [mx, my] }) => {
-    if (mx < -5 && canSwipe && isMobile) {
+    if (mx < -5 && canSwipe && isTouchable) {
       moveNext()
     }
   }) as unknown as (...args: any[]) => ReactDOMAttributes;
@@ -71,10 +73,10 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
   });
 
   useEffect(() => {
-    if (isMobile) {
+    if (isTouchable) {
       setIsSwipingPaused(false)
     }
-  }, [isMobile]);
+  }, [isTouchable]);
 
 
   const determineStyle = useCallback((index: number, showAnimation: boolean) => {
@@ -103,26 +105,26 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
         style={{
           top: isMobile ? '0' : '64px',
           right: isMobile ? undefined : '-1186px',
-          left: !isMobile ? undefined : '1002px'
+          left: !isMobile ? undefined : '1002px',
         }}
         onMouseEnter={() => {
-          if (!isMobile) {
+          if (!isTouchable) {
             setIsSwipingPaused(true)}
         }}
         onMouseLeave={() => {
-          if (!isMobile) {
+          if (!isTouchable) {
             setIsSwipingPaused(false)}
         }}
         onMouseDown={() => {
-          if (isMobile) {
+          if (isTouchable) {
             setIsSwipingPaused(true)}
         }}
         onMouseUp={() => {
-          if (isMobile) {
+          if (isTouchable) {
             setIsSwipingPaused(false)}
         }}
         onTouchStart={() => {
-          if (isMobile) {
+          if (isTouchable) {
             setIsSwipingPaused(false)}
         }}
       >
@@ -143,7 +145,7 @@ const Carousel: React.FC<CarouselProps> = ({ items , isMobile, longestKey}) => {
                     transition: "all .5s ease",
                     WebkitTransition: "all .5s ease",
                     MozTransition: "all .5s ease",
-                    width: isMobile ? `${textCarouselWidth - 32}px` : '784px'
+                    width: isMobile ? `${textCarouselWidth - 32}px` : '784px',
                   }}
                 >
                   <Boop

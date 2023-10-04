@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import './LastProductWarningModal.css'
 import StandardButton from "../../../ui_components/standart_button/StandartButton";
 import MoreButton from "../../../ui_components/more_button/MoreButton";
@@ -55,9 +55,6 @@ const LastProductWarningModal: React.FC<LastProductWarningModalProps> =
     )
   }
 
-    useEffect(() => {
-      console.log(isShown)
-    }, [isShown]);
 
   const renderMobile = () => {
     return(
