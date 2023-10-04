@@ -30,6 +30,18 @@ const BottomSlider: React.FC<BottomSliderProps> = ({ isOpened, showCloseButton, 
   }, [isOpened, showCloseButton]);
 
   useEffect(() => {
+    const handleResize = () => {
+      onCloseAction()
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+  useEffect(() => {
     const styleElement = document.createElement('style');
     const cssRule = `
       .react-modal-sheet-backdrop {
