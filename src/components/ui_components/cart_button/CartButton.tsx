@@ -4,7 +4,6 @@ import {RootState} from "../../../redux/Store";
 import cartIcon from './../../../assets/icons/cart_button/cart.png'
 import hangerIcon from './../../../assets/icons/cart_button/hang.png'
 import './CartButton.css'
-import {Products} from "../../../content/Products";
 import CloseButton from "../close_button/CloseButton";
 import Scrollbar from "react-scrollbars-custom";
 import CounterButton from "../counter_button/CounterButton";
@@ -37,6 +36,7 @@ const CartButton: React.FC = () => {
   const navigate = useNavigate()
 
   const lastProductWarningState= useSelector((state: RootState) => state.lastProductWarning)
+  const Products = useSelector((state: RootState) => state.productArray)
 
   const isMobile = useMediaQuery({
     query: '(max-width: 1000px)'
@@ -159,7 +159,7 @@ const CartButton: React.FC = () => {
                 </div>
               </Scrollbar>
             </div>
-            <div className="total-total-amount-info">{`Total Amount: ${getFullAmountWithDiscount(cartState).toFixed(2)}€`}</div>
+            <div className="total-total-amount-info">{`Total Amount: ${getFullAmountWithDiscount(Products, cartState).toFixed(2)}€`}</div>
             <div style={{
               display: 'flex',
               flexDirection: 'row',
@@ -327,7 +327,7 @@ const CartButton: React.FC = () => {
                 opacity: isHovered ? 1 : 0
               }}
             >
-              <span className="info-text">{Math.ceil(getFullAmountWithDiscount(cartState))}€</span>
+              <span className="info-text">{Math.ceil(getFullAmountWithDiscount(Products, cartState))}€</span>
             </div>
           </div>
         </div>
@@ -342,6 +342,7 @@ const CartButton: React.FC = () => {
           showCloseButton={!lastProductWarningState.isShown}
           isOpened={isCheckoutOpened}
           marginTop={90}
+          fitContent={true}
           onCloseAction={() => {
             dispatch(setIsCheckoutWindowShown(false))
             dispatch(setIsLastProductWarningShown(false, '0'))
@@ -364,6 +365,7 @@ const CartButton: React.FC = () => {
                 </div>
                 {
                   actualCart.map(([productId, productCount]) => {
+                    console.log(productId)
                     const product = Products.find(p => p.productId === productId)
                     return(
                       <div className="order-item-container-mobile" key={productId}>
@@ -429,7 +431,7 @@ const CartButton: React.FC = () => {
                 <MoreButton
                   showText={true}
                   isMobile={true}
-                  text={location.pathname === RoutePaths.FINAL_CHECKOUT ? 'Continue ordering' : `Checkout ${getFullAmountWithDiscount(cartState).toFixed(2)}€`}
+                  text={location.pathname === RoutePaths.FINAL_CHECKOUT ? 'Continue ordering' : `Checkout ${getFullAmountWithDiscount(Products, cartState).toFixed(2)}€`}
                   buttonStyle={{
                     width: '100%',
                     borderRadius: '20px',
@@ -536,13 +538,13 @@ const CartButton: React.FC = () => {
               }}
             />
           </div>
-          <span className="product-amount-text">{getFullAmountWithDiscount(cartState).toFixed(2)}€</span>
+          <span className="product-amount-text">{getFullAmountWithDiscount(Products, cartState).toFixed(2)}€</span>
         </div>
       </>
     )
   }
 
-  return(isMobile ? renderMobile() : renderDesktop())
+  return(Products ? (isMobile ? renderMobile() : renderDesktop()) : <div/>)
 }
 
 export default CartButton;

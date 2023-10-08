@@ -8,19 +8,17 @@ export interface NewsInfo {
   newsId: string,
   image: string;
   name: string;
-  shortNameInCard: string;
   description: string;
-  date: Date;
+  date: string;
   fullText: string;
 }
 
-export const News: NewsInfo[] = [
+export const NewsMock: NewsInfo[] = [
   {
     newsId: '1',
-    date: new Date(),
+    date: new Date().toString(),
     image: choosingHookahBowlNewsImage,
     name: "Choosing the Right Hookah Bowl:</br>  A Comprehensive Guide",
-    shortNameInCard: "Choosing the Right Hookah Bowl:</br>  A Comprehensive Guide",
     description: "Enhance your hookah experience with our guide on choosing the ideal hookah bowl. Explore factors like material, size, and design for a perfect smoking session. \n Materials, size, depth and others",
     fullText:   'The hookah, also known as a water pipe or shisha, has been a popular method of smoking flavored tobacco for centuries. One of the key components of a hookah setup is the bowl, where the tobacco mixture is placed and heated. Choosing the right hookah bowl is essential for an enjoyable and smooth smoking experience. In this guide, we’ll walk you through the factors to consider when selecting the perfect hookah bowl.</p>' +
       '<p><b>1. Material:</b> Hookah bowls are commonly made from various materials, including clay, ceramic, glass, and silicone. Each material offers a different smoking experience. Clay and ceramic bowls are known for their heat retention, which helps distribute heat evenly to the tobacco. Glass bowls provide a visually appealing smoking experience and are easy to clean. Silicone bowls are durable and heat-resistant, making them a great option for frequent use.</p>' +
@@ -32,10 +30,9 @@ export const News: NewsInfo[] = [
   },
   {
     newsId: '2',
-    date: new Date(),
+    date: new Date().toString(),
     image: howToChooseHookahImage,
     name: "How to Choose a Hookah:</br> Tips and Recommendations for True Enthusiasts",
-    shortNameInCard: "How to Choose a Hookah:</br> Tips and Recommendations for True Enthusiasts",
     description: "Discover the perfect hookah for your taste and style. Our guide offers tips on choosing the right type, size, and materials. Enjoy memorable hookah sessions with friends and family. Buy...",
     fullText: '<p><b>Introduction:</b> The hookah, also known as a water pipe or shisha, is an ancient Arabic invention that has gained popularity in many countries and cultures worldwide. With its unique flavors and social appeal, the hookah attracts a diverse community of enthusiasts. However, amidst the multitude of hookah options available in the market, selecting the right one can be a challenging task. In this article, we will provide you with a guide on choosing the perfect hookah that will cater to your needs and preferences.</p>' +
       '<p><b>1) Type of Hookah:</b> The first decision you need to make is the type of hookah you want to purchase. There are various types of hookahs, such as the classic hookah, single-hose or multi-hose models, portable hookahs, and more. The classic hookah remains the most popular and traditional choice, but if you plan to enjoy hookah sessions with friends, multi-hose models might be worth considering.</p>' +
@@ -47,10 +44,9 @@ export const News: NewsInfo[] = [
   },
   {
     newsId: '3',
-    date: new Date(),
+    date: new Date().toString(),
     image: guideToCoconutImage,
     name: "The Ultimate Guide to Coconut Charcoal for Hookahs: Types, Production, and Benefits",
-    shortNameInCard: "The Ultimate Guide to Coconut Charcoal for Hookahs: Types, Production, and Benefits",
     description: "Discover the best coconut charcoal for hookahs! Enjoy pure tobacco flavors with even heat distribution and long-lasting performance. A hookah lover's ultimate choice.",
     fullText: '<p>Imagine sitting outdoors with your friends, enjoying a hookah session, savoring the delightful taste of tobacco, and engaging in a serene conversation. But have you ever wondered where the coal for your hookah actually comes from or how it\'s made? Today, we\'ll delve into that fascinating process.</p>' +
       '<p>Specialized shops offer a wide array of tobacco, charcoal, and hookah accessories, providing hundreds of options that might overwhelm beginners. If you desire a clean and enjoyable hookah experience, it\'s essential not only to invest in high-quality tobacco but also to gain some basic knowledge about hookahs. One crucial aspect that significantly influences the pipe\'s taste is the choice of charcoal.</p>' +
@@ -75,10 +71,9 @@ export const News: NewsInfo[] = [
   },
   {
     newsId: '4',
-    date: new Date(),
+    date: new Date().toString(),
     image: news4Image,
-    shortNameInCard: "Caring for Hookah Bowls: Maintaining Quality </br> and Enjoyment of Hookah Sessions",
-    name: "Caring for Hookah Bowls: Maintaining Quality and Enjoyment of Hookah Sessions",
+    name: "Caring for Hookah Bowls: Maintaining Quality </br> and Enjoyment of Hookah Sessions",
     description: "Enhance hookah enjoyment with proper care. Learn how to clean and preserve hookah bowls for fresh, unforgettable smoking sessions. Expert tips and maintenance techniques.",
     fullText: '<p>A hookah is not only about pleasure but also an art. To ensure each hookah session brings you unparalleled enjoyment, it is essential to properly care for your hookah bowls. In this article, we will share some valuable tips on how to best care for your bowls, preserving their quality and infusing unique aromas into your smoking experience.</p>' +
       '<p><b>Regular Cleaning - Key to Fresh Taste</b></p>' +
@@ -95,9 +90,8 @@ export const News: NewsInfo[] = [
   },
   {
     newsId: '5',
-    date: new Date(),
+    date: new Date().toString(),
     image: news5Image,
-    shortNameInCard: "Additions to the assortment </br>of tobaccos: MustHave, Element, Tangiers, Fumari",
     name: "Additions to the assortment </br>of tobaccos: MustHave, Element, Tangiers, Fumari",
     description: "New flavors and tobaccos now available at Hookah PT online store! Discover MustHave, Fumari, DarkSide, Element, and Tangiers for unique and indulgent hookah experiences.",
     fullText: '<p>Great news for all hookah enthusiasts! Hookah PT online store is excited to announce the arrival of new exciting flavors and tobaccos. We now proudly offer a range of renowned brands including MustHave, Fumari, DarkSide, Element, and Tangiers.</p>' +

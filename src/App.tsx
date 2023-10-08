@@ -26,6 +26,7 @@ import {useMediaQuery} from "react-responsive";
 import {setIsWarningShown} from "./redux/warning_reducer/WarningReducer";
 import './index.css'
 import {setIsBurgerShown} from "./redux/burger_button_reducer/BurgerButtonReducer";
+import ContentfulDataFetcherComponent from "./components/fetch_components/ContentfulDataFetcherComponent";
 
 const App: React.FC = () => {
   const isBorgerOpened = useSelector((state: RootState) => state.burger.isOpened)
@@ -80,6 +81,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <ContentfulDataFetcherComponent dev={true}/>
       <div
         style={{
           width:'100%',

@@ -9,6 +9,10 @@ import burgerReducer, {BurgerState} from "./burger_button_reducer/BurgerButtonRe
 import lastProductWarningReducer, {
   LastProductWarningState
 } from "./last_product_warning_reducer/LastProductWarningReducer";
+import {ProductInfo} from "../content/Products";
+import productArrayReducer from "./product_array_reducer/ProductArrayReducer";
+import newsArrayReducer from "./news_reducer/NewsReducer";
+import {NewsInfo} from "../content/News";
 
 const rootReducer = combineReducers({
   warning: warningReducer,
@@ -16,7 +20,9 @@ const rootReducer = combineReducers({
   productDetailedView: checkoutWindowReducer,
   bottomHint: bottomHintReducer,
   burger: burgerReducer,
-  lastProductWarning: lastProductWarningReducer
+  lastProductWarning: lastProductWarningReducer,
+  productArray: productArrayReducer,
+  newsArray: newsArrayReducer,
 });
 
 export type RootState = {
@@ -25,11 +31,19 @@ export type RootState = {
   productDetailedView: CheckoutWindowState,
   bottomHint: BottomHintState,
   burger: BurgerState,
-  lastProductWarning: LastProductWarningState
+  lastProductWarning: LastProductWarningState,
+  productArray: ProductInfo[],
+  newsArray: NewsInfo[]
 };
 
 const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['UPDATE_NEWS_ARRAY'],
+      },
+    }),
 });
 
 export default store;

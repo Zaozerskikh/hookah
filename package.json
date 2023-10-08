@@ -17,6 +17,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-redux": "^7.1.26",
     "@use-gesture/react": "^10.3.0",
+    "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

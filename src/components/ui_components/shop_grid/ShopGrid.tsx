@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import StandardButton from "../standart_button/StandartButton";
 import {ProductInfo} from "../../../content/Products";
 import {useMediaQuery} from "react-responsive";
+import LoadingIcon from "../loading/LoadingIcon";
 
 interface ShopGridProps {
   showAllCatalogButton: boolean;
@@ -151,7 +152,7 @@ const ShopGrid: React.FC<ShopGridProps> = ({showAllCatalogButton, products, isMo
     )
   }
 
-  return(isMobile ? renderMobile() : renderDesktop())
+  return(products ? (isMobile ? renderMobile() : renderDesktop()) : <LoadingIcon isMobile={isMobile}/>)
 }
 
 export default ShopGrid;

@@ -10,12 +10,14 @@ interface BottomSliderProps extends React.PropsWithChildren {
   isOpened: boolean;
   onCloseAction: (...args: any) => any;
   maxRelativeHeight ? : number;
+  maxAbsoluteHeight ? : number;
+  fitContent ? : boolean;
   marginTop ? : number;
   showShareButton ? : boolean;
   showCloseButton ? : boolean;
 }
 
-const BottomSlider: React.FC<BottomSliderProps> = ({ isOpened, showCloseButton, marginTop, onCloseAction, children, maxRelativeHeight}) => {
+const BottomSlider: React.FC<BottomSliderProps> = ({ isOpened, showCloseButton, marginTop, onCloseAction, children, maxAbsoluteHeight, maxRelativeHeight, fitContent}) => {
   const [closeBtnZidx, setCloseBtnZidx] = useState(10000000)
   const isCheckoutOpened = useSelector((state: RootState) => state.productDetailedView.isVisible)
 
@@ -79,8 +81,8 @@ const BottomSlider: React.FC<BottomSliderProps> = ({ isOpened, showCloseButton, 
       <Sheet
         isOpen={isOpened}
         onClose={onCloseAction}
-        snapPoints={[maxRelativeHeight ? window.innerHeight * maxRelativeHeight : window.innerHeight - marginTop, 0]}
-        detent="content-height"
+        detent={fitContent ? "content-height" : undefined}
+        snapPoints={[!maxAbsoluteHeight ? (maxRelativeHeight ? window.innerHeight * maxRelativeHeight : window.innerHeight - marginTop) : maxAbsoluteHeight, 0]}
       >
         <Sheet.Container>
           <Sheet.Header />

@@ -1,5 +1,5 @@
 import './ProductViewMobile.css'
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {ProductInfo} from "../../../../content/Products";
 import CounterButton from "../../counter_button/CounterButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -31,7 +31,27 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
   const navigate = useNavigate()
   const [zIdx, setZIdx] = useState(-9999)
   const [isOpenedDelayed, setIsOpenedDelayed] = useState(false)
+  const descrRef = useRef<HTMLDivElement | null>(null)
+  const [descrHeight, setDescrHeight] = useState<number | null>();
 
+  const headRef = useRef<HTMLDivElement | null>(null)
+  const [headHeight, setHeadHeight] = useState<number | null>();
+
+  useEffect(() => {
+    if (descrRef.current) {
+      if (descrRef.current.offsetHeight) {
+        setDescrHeight(descrRef.current?.offsetHeight);
+      }
+    }
+  }, [descrRef, isOpenedDelayed]);
+
+  useEffect(() => {
+    if (headRef.current) {
+      if (headRef.current.offsetHeight) {
+        setHeadHeight(headRef.current?.offsetHeight);
+      }
+    }
+  }, [headRef, isOpenedDelayed]);
 
   useEffect(() => {
     if (isOpenedDelayed) {
@@ -49,13 +69,29 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
     if (isOpened) {
       setTimeout(() => {
         setIsOpenedDelayed(true)
-      }, 20)
+      }, 100)
     } else {
       setTimeout(() => {
         setIsOpenedDelayed(false)
-      }, 20)
+      }, 100)
     }
   }, [isOpened]);
+
+  const formatDescriptionFunc = (description: string) => {
+    if (!description.startsWith('<')) {
+      description = '<p></p>' + description
+    }
+
+    if (!description.endsWith('>')) {
+      description += '<p></p>'
+    }
+
+    return description
+  }
+
+  const formattedDescription = useMemo(() => {
+    return formatDescriptionFunc(fullDescription)
+  }, [fullDescription])
 
   const buildProductLink = useCallback((): string => {
     return `${FRONTEND_URL}/product/${productId}-${brand.toLowerCase().replace(' ', '-')}-${name.toLowerCase().replace(' ', '-')}-${line.toLowerCase().replace(' ', '-')}-${weight.toString()}g`;
@@ -71,6 +107,14 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
     }
   }, [isOpened]);
 
+  useEffect(() => {
+    console.log("DESCR: " + descrHeight);
+  }, [descrHeight]);
+
+  useEffect(() => {
+    console.log("HEAD: " + headHeight);
+  }, [headHeight]);
+
   return (
     isOpened && (
       <>
@@ -78,7 +122,10 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
           changeColorOnHover={false}
           onClickColor={'white'}
           iconSize={17}
-          onClickAction={onClick}
+          onClickAction={() => {
+            setIsOpenedDelayed(false)
+            setTimeout(() => onClick(), 200)
+          }}
           isMobile={true}
           buttonStyle={{
             position: 'fixed',
@@ -112,12 +159,12 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
           />
         </div>
         <BottomSlider
+          maxAbsoluteHeight={descrHeight && headHeight ? Math.min(window.innerHeight * 0.7, descrHeight + headHeight + 72) : window.innerHeight * 0.7}
           isOpened={isOpenedDelayed}
           onCloseAction={onClick}
-          maxRelativeHeight={0.75}
           showCloseButton={false}
         >
-          <div className="product-view-mobile-wrapper" style={{ width: '100%', display: "flex", flexDirection: 'column', alignItems: 'center', gap: '16px'}}>
+          <div ref={headRef} className="product-view-mobile-wrapper" style={{ width: '100%', display: "flex", flexDirection: 'column', alignItems: 'center', gap: '16px'}}>
             <h2
               className="product-header"
               onClick={() => navigate(buildTobaccoLink(productId, brand, name, line, weight))}
@@ -148,7 +195,7 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
                 <span className="detailed-view-brand-line-mobile">{line}</span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', position: 'relative'}}>
-                <span className="detailed-view-brand-line-info-mobile-base">Price per pack: </span>
+                <span className="detailed-view-brand-line-info-mobile-base">Price per pack ({weight}G): </span>
                 {isDiscount && (
                   <span
                     className="detailed-view-brand-line-info-mobile"
@@ -164,7 +211,7 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
               </div>
             </div>
             {(!isSoldout || purchasedCount !== 0) && (
-              <div style={{paddingBottom: '4px', display: 'flex', width: '100%', flexDirection: 'row', gap: '8px', position: 'relative'}}>
+              <div style={{boxSizing: 'border-box', paddingBottom: '4px', display: 'flex', width: '100%', flexDirection: 'row', gap: '8px', position: 'relative'}}>
                 <MoreButton
                   showText={true}
                   isMobile={true}
@@ -200,12 +247,16 @@ const ProductViewMobile: React.FC<ProductViewMobileProps> = ({ onClick, productI
                 <div className="top-grad"/>
               </div>
             )}
+          </div>
+          <div
+            className="full-prod-descr-mob-wr"
+            style={{overflow: 'scroll', height: Math.min(window.innerHeight * 0.7 - 200, descrHeight + 5)}}
+          >
             <div
               className={"full-prod-descr-mob"}
-              style={{overflow: 'auto'}}
-            >
-              {fullDescription}
-            </div>
+              dangerouslySetInnerHTML={{ __html: formattedDescription}}
+              ref={descrRef}
+            />
           </div>
         </BottomSlider>
         <div className={"product-view-mobile-wrapper-img"} style={{zIndex: isOpened ? 99999 : -99999}}>

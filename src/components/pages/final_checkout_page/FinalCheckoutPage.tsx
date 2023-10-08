@@ -6,7 +6,6 @@ import StandardButton from "../../ui_components/standart_button/StandartButton";
 import PromocodeButton from "./promocode_button/PromocodeButton";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
-import {Products} from "../../../content/Products";
 import CounterButton from "../../ui_components/counter_button/CounterButton";
 import {
   clearCart,
@@ -64,13 +63,14 @@ const FinalCheckoutPage: React.FC = () => {
   const cartState = useSelector((state: RootState) => state.cart)
   const [actualCart, setActualCart] = useState(getActualCart(cartState))
   const lastProductWarningState= useSelector((state: RootState) => state.lastProductWarning)
+  const Products = useSelector((state: RootState) => state.productArray)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
     setActualCart(getActualCart(cartState))
-    setCommonDiscount(getFullAmountWithoutDiscount(cartState) - getFullAmountWithDiscount(cartState))
+    setCommonDiscount(getFullAmountWithoutDiscount(Products, cartState) - getFullAmountWithDiscount(Products, cartState))
   }, [cartState])
 
   useEffect(() => {
@@ -111,7 +111,7 @@ const FinalCheckoutPage: React.FC = () => {
   }, [dispatch, isPromocodeButtonClicked, promocode]);
 
   const getTotalPrice = useCallback(() => {
-    return getFullAmountWithDiscount(cartState)
+    return getFullAmountWithDiscount(Products, cartState)
   }, [cartState]);
 
   useEffect(() => {
@@ -317,7 +317,7 @@ const FinalCheckoutPage: React.FC = () => {
                 <span
                   className="total-item-amount-without-discount"
                   dangerouslySetInnerHTML={{
-                    __html: `${(getFullAmountWithoutDiscount(cartState) + deliveryPrice).toFixed(2)}€`
+                    __html: `${(getFullAmountWithoutDiscount(Products, cartState) + deliveryPrice).toFixed(2)}€`
                   }}
                   style={{
                     display: 'block',
@@ -325,7 +325,7 @@ const FinalCheckoutPage: React.FC = () => {
                     overflow: 'hidden',
                   }}
                 />
-                <span className="black-info">{(getFullAmountWithoutDiscount(cartState) - commonDiscount - promocodeDiscount + deliveryPrice).toFixed(2)}€</span>
+                <span className="black-info">{(getFullAmountWithoutDiscount(Products, cartState) - commonDiscount - promocodeDiscount + deliveryPrice).toFixed(2)}€</span>
               </div>
             </div>
             {
@@ -542,7 +542,7 @@ const FinalCheckoutPage: React.FC = () => {
               <span
                 className="total-item-amount-without-discount-mobile"
                 dangerouslySetInnerHTML={{
-                  __html: `${(getFullAmountWithoutDiscount(cartState) + deliveryPrice).toFixed(2)}€`
+                  __html: `${(getFullAmountWithoutDiscount(Products, cartState) + deliveryPrice).toFixed(2)}€`
                 }}
                 style={{
                   display: 'block',
@@ -550,7 +550,7 @@ const FinalCheckoutPage: React.FC = () => {
                   overflow: 'hidden',
                 }}
               />
-              <span className="black-info-mobile">{(getFullAmountWithoutDiscount(cartState) - commonDiscount - promocodeDiscount + deliveryPrice).toFixed(2)}€</span>
+              <span className="black-info-mobile">{(getFullAmountWithoutDiscount(Products, cartState) - commonDiscount - promocodeDiscount + deliveryPrice).toFixed(2)}€</span>
             </div>
           </div>
           <div className="buttons-wrapper-final">

@@ -3,7 +3,6 @@ import React, {useEffect, useRef, useState} from "react";
 import BrandSearchTag from "./search_tag/brand_tag/BrandSearchTag";
 import CloseButton from "../../ui_components/close_button/CloseButton";
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
-import {Products} from "../../../content/Products";
 import ZoomButton from "./zoom_button/ZoomButton";
 import SearchInputField from "./search_input_field/SearchInputField";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
@@ -20,6 +19,8 @@ import {
   filterByOneBrand,
   moveSoldoutToEnd
 } from "../../../models/TobaccoOperations";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../redux/Store";
 
 export const PRODUCTS_COUNT_ON_A_PAGE = 4;
 const PAGES_BEFORE_MORE_BUTTON = 5;
@@ -33,6 +34,7 @@ interface TobaccoPageProps {
 
 const TobaccoPage: React.FC<TobaccoPageProps> = ({ initialSortByBrand, tobaccoDescription, tobaccoName, headerEmoji }) => {
   // current shown products
+  const Products = useSelector((state: RootState) => state.productArray)
   const [filteredProducts, setFilteredProducts] = useState(Products)
   const filteredProductsRef = useRef(filteredProducts)
   useEffect(() => {

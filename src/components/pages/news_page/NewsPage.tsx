@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import './NewsPage.css'
-import {News} from "../../../content/News";
 import NewsCard from "../../ui_components/news_card/NewsCard";
 import {useMediaQuery} from "react-responsive";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../redux/Store";
 
 const NewsPage: React.FC = () => {
+  const News = useSelector((state: RootState) => state.newsArray)
   useState(() => {
     window.scrollTo({ top: 0 });
   })
@@ -56,9 +58,9 @@ const NewsPage: React.FC = () => {
                   key={idx}
                   newsId={news.newsId}
                   image={news.image}
-                  name={news.name}
+                  shortNameInCard={news.name}
                   description={news.description}
-                  shortNameInCard={news.shortNameInCard}
+                  name={news.name.replaceAll("</br>", '')}
                   date={news.date}
                 />
               ))
@@ -82,9 +84,9 @@ const NewsPage: React.FC = () => {
                 key={idx}
                 newsId={news.newsId}
                 image={news.image}
-                name={news.name}
+                shortNameInCard={news.name}
                 description={news.description}
-                shortNameInCard={news.shortNameInCard}
+                name={news.name.replaceAll("</br>", '')}
                 date={news.date}
                 isMobile={true}
               />

@@ -8,13 +8,16 @@ import musthaveLogo from '../../../assets/icons/partners/musthave_logo.png'
 import tangiersLogo from '../../../assets/icons/partners/tangiers_logo.png'
 import ShopGrid from "../../ui_components/shop_grid/ShopGrid";
 import NewsSection from "./news_section/NewsSection";
-import {Products, productsOnTheMain} from "../../../content/Products";
 import PartnersLogo from "./partners_logo/PartnersLogo";
 import ExternalLinks from "../../../routes/ExternalLinks";
 import Greeting from "./greetings/Greeting";
 import {useMediaQuery} from "react-responsive";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../redux/Store";
 
 const HomePage: React.FC = () => {
+  const Products = useSelector((state: RootState) => state.productArray)
+
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1264px)'
   })
@@ -47,11 +50,12 @@ const HomePage: React.FC = () => {
           <FloatingClouds />
         </div>
         <ShopGrid
-          products={productsOnTheMain.map(productId =>
-            Products.find(product =>
-              product.productId === productId
-            )
-          )}
+          // products={productsOnTheMain.map(productId =>
+          //   Products.find(product =>
+          //     product.productId === productId
+          //   )
+          // )}
+          products={Products}
           showAllCatalogButton={true}
         />
         <NewsSection/>
@@ -85,11 +89,12 @@ const HomePage: React.FC = () => {
       <div style={{ display: "flex", flexDirection: 'column', width: 'calc(100% - 32px)', paddingRight: '16px', paddingLeft: '16px', paddingTop: '76px', paddingBottom: '128px', gap: '76px'}}>
         <Greeting/>
         <ShopGrid
-          products={productsOnTheMain.map(productId =>
-            Products.find(product =>
-              product.productId === productId
-            )
-          )}
+          // products={productsOnTheMain.map(productId =>
+          //   Products.find(product =>
+          //     product.productId === productId
+          //   )
+          // )}
+          products={Products}
           showAllCatalogButton={true}
           isMobile={true}
         />

@@ -8,7 +8,7 @@ interface NewsCardProps {
   newsId: string;
   image: string;
   name: string;
-  date: Date;
+  date: string;
   description: string;
   shortNameInCard: string;
   isMobile ? : boolean;
@@ -16,6 +16,7 @@ interface NewsCardProps {
 
 const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description, date, shortNameInCard, isMobile}) => {
   const navigate = useNavigate();
+  const formattedDate = new Date(date)
 
   const openNews = () => {
     navigate(RoutePaths.NEWS_DETAILED.replace(':id', newsId));
@@ -47,7 +48,7 @@ const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description, dat
             fontStyle: 'normal'
           }}
         >
-          {`${date.getDate().toString().length === 1 ? '0' + date.getDate() : date.getDate()}-${date.getMonth().toString().length === 1 ? '0' + date.getMonth() : date.getMonth()}-${date.getFullYear()}`}
+          {`${formattedDate.getDate().toString().length === 1 ? '0' + formattedDate.getDate() : formattedDate.getDate()}-${formattedDate.getMonth().toString().length === 1 ? '0' + formattedDate.getMonth() : formattedDate.getMonth()}-${formattedDate.getFullYear()}`}
         </span>
         </div>
         <img
@@ -118,7 +119,7 @@ const NewsCard: React.FC<NewsCardProps> = ({newsId,image, name, description, dat
                 fontStyle: 'normal'
               }}
             >
-              {`${date.getDate().toString().length === 1 ? '0' + date.getDate() : date.getDate()}-${date.getMonth().toString().length === 1 ? '0' + date.getMonth() : date.getMonth()}-${date.getFullYear()}`}
+              {`${formattedDate.getDate().toString().length === 1 ? '0' + formattedDate.getDate() : formattedDate.getDate()}-${formattedDate.getMonth().toString().length === 1 ? '0' + formattedDate.getMonth() : formattedDate.getMonth()}-${formattedDate.getFullYear()}`}
             </span>
           </div>
         </div>

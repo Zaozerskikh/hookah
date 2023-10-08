@@ -3,7 +3,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {RoutePaths} from "../../../routes/RoutePaths";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
-import {ProductInfo, Products} from "../../../content/Products";
+import {ProductInfo} from "../../../content/Products";
 import ProductInfoOnCard from "../../ui_components/product_card/product_info/ProductInfoOnCard";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/Store";
@@ -16,6 +16,7 @@ import {decrementProductCount, incrementProductCount} from "../../../redux/cart_
 import CounterButton from "../../ui_components/counter_button/CounterButton";
 
 const DetailedProductPage: React.FC = () => {
+  const Products = useSelector((state: RootState) => state.productArray)
   const navigate = useNavigate()
   const { productInfo } = useParams<{ productInfo: string }>();
   const [isLoading, setLoading] = useState(true)

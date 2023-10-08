@@ -174,7 +174,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ productId, name, brand,line,
                         },
                       }}
                     >
-                      <span className="test">{fullDescription}</span>
+                      <span className="test" dangerouslySetInnerHTML={{ __html: fullDescription}}/>
                     </Scrollbar>
                   </div>
                 </div>

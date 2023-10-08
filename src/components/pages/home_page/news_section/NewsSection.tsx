@@ -4,13 +4,16 @@ import NewsCard from "../../../ui_components/news_card/NewsCard";
 import {RoutePaths} from "../../../../routes/RoutePaths";
 import {Link} from "react-router-dom";
 import StandardButton from "../../../ui_components/standart_button/StandartButton";
-import {News} from "../../../../content/News";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../redux/Store";
 
 interface NewsSectionProps {
   isMobile ? : boolean;
 }
 
 const NewsSection: React.FC<NewsSectionProps> = ({ isMobile }) => {
+  const News = useSelector((state: RootState) => state.newsArray)
+
   const renderDesktop = () => {
     return(
       <div className="news-section-container">
@@ -18,11 +21,11 @@ const NewsSection: React.FC<NewsSectionProps> = ({ isMobile }) => {
           {
             News.map((news, idx) => (
               <NewsCard
-                shortNameInCard={news.shortNameInCard}
+                shortNameInCard={news.name}
                 key={idx}
                 newsId={news.newsId}
                 image={news.image}
-                name={news.name}
+                name={news.name.replaceAll("</br>", '')}
                 description={news.description}
                 date={news.date}
               />
@@ -61,10 +64,10 @@ const NewsSection: React.FC<NewsSectionProps> = ({ isMobile }) => {
               >
                 <NewsCard
                   isMobile={true}
-                  shortNameInCard={news.shortNameInCard}
+                  shortNameInCard={news.name}
                   newsId={news.newsId}
                   image={news.image}
-                  name={news.name}
+                  name={news.name.replaceAll("</br>", '')}
                   description={news.description}
                   date={news.date}
                 />

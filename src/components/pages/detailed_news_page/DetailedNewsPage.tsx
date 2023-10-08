@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {News} from "../../../content/News";
 import './DetailedNewsPage.css'
 import StandardButton from "../../ui_components/standart_button/StandartButton";
 import {RoutePaths} from "../../../routes/RoutePaths";
 import LoadingIcon from "../../ui_components/loading/LoadingIcon";
 import {useMediaQuery} from "react-responsive";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../redux/Store";
 
 const DetailedNewsPage: React.FC = () => {
+  const News = useSelector((state: RootState) => state.newsArray)
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>();
   const [article, setArticle] = useState(News.find(news => news.newsId === id));
@@ -37,7 +39,7 @@ const DetailedNewsPage: React.FC = () => {
           <div className="header-container">
             <span className="header-text" dangerouslySetInnerHTML={{ __html: article.name }} />
             <span className="header-date">
-          {`${article.date.getDate()}-${article.date.getMonth()}-${article.date.getFullYear()}`}
+          {`${new Date(article.date).getDate()}-${new Date(article.date).getMonth()}-${new Date(article.date).getFullYear()}`}
         </span>
           </div>
           <img src={article.image} alt={"news-img"} className="image"/>
@@ -72,7 +74,7 @@ const DetailedNewsPage: React.FC = () => {
               {article.name.replaceAll('</br>', '')}
             </div>
             <div className="article-date-mobile">
-              {`${article.date.getDate()}-${article.date.getMonth()}-${article.date.getFullYear()}`}
+              {`${new Date(article.date).getDate()}-${new Date(article.date).getMonth()}-${new Date(article.date).getFullYear()}`}
             </div>
           </div>
           <img

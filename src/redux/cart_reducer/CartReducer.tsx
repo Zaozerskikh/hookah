@@ -1,20 +1,10 @@
-import { ProductInfo, Products } from "../../content/Products";
-
 export const LocalStorageCartFields = {
   CART_STATE: 'CART_STATE'
 }
 
 const storedState = JSON.parse(localStorage.getItem(LocalStorageCartFields.CART_STATE) || '{}');
 
-const initialProductMap: Record<string, number> = Products.reduce(
-  (acc, product: ProductInfo) => {
-    acc[product.productId] = 0;
-    return acc;
-  },
-  {}
-);
-
-const initialState = storedState || initialProductMap;
+const initialState = storedState;
 
 const CartActions = {
   INCREMENT_PRODUCT_COUNT: 'INCREMENT_PRODUCT_COUNT',
@@ -68,7 +58,7 @@ const cartReducer = (
       newState ={}
       break;
     default:
-      break;
+      return state;
   }
 
   localStorage.setItem(LocalStorageCartFields.CART_STATE, JSON.stringify(newState));

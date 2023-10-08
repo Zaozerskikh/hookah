@@ -56,7 +56,7 @@ export const ProductInfoOnCard: React.FC<ProductInfoProps> = ({ productId, name,
           <span className="detailed-view-brand-line">{line}</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'row', gap: '8px'}}>
-          <span className="detailed-view-brand-line-info">Price per pack: </span>
+          <span className="detailed-view-brand-line-info">Price per pack ({weight}G): </span>
           {discountPrice && discountPrice !== price && (
             <span
               className="detailed-view-brand-line-info"
